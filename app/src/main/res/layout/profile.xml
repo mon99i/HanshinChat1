@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profileLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:background="#E8D9FF"
+    >
+<LinearLayout
+    android:padding="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageView
+    android:id="@+id/profileImageView"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/userimage"/>
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:hint="내정보요~"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:gravity="right"
+        android:src="@drawable/ic_action_name" />
+
+</LinearLayout>
+    <LinearLayout
+        android:padding="30dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+    <Button
+        android:id="@+id/profileEdit"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/solid_button"
+        android:text="프로필 편집"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/typeSet"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/solid_button"
+        android:text="이상형 설정"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/simulation"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/solid_button"
+        android:text="소개팅 시물레이션"
+        android:textSize="20dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#D1B2FF">
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홈"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="방목록"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="게시판"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="채팅"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="프로필"/>
+    </LinearLayout>
+</LinearLayout>

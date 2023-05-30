@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "432787975145",
+    "project_id": "hanshinchat1",
+    "storage_bucket": "hanshinchat1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432787975145:android:5cfa8fd467a3dbb673b978",
+        "android_client_info": {
+          "package_name": "com.example.hanshinchat1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432787975145-7phumadme5stc5g742lqfv04k7tdfurd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanshinchat1",
+            "certificate_hash": "951d4c12cc72bd8501f3faaa627add973f24c3b0"
+          }
+        },
+        {
+          "client_id": "432787975145-atrfjn70mth1h70dbcljhvqamb9pvoi9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanshinchat1",
+            "certificate_hash": "b31a7e08efc8f8ab2823bd2ecff2d877ddd05dcd"
+          }
+        },
+        {
+          "client_id": "432787975145-k7hin6nr8j60o0iddktq04g95u7i2p1s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanshinchat1",
+            "certificate_hash": "3713f280cb5f2382a3698291a06ba89d8997c78e"
+          }
+        },
+        {
+          "client_id": "432787975145-rm3nb8dphgjqe48uhk8frnsfng1taojh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanshinchat1",
+            "certificate_hash": "1328dca3f1e0225675b2d13ec822253e96f59269"
+          }
+        },
+        {
+          "client_id": "432787975145-ugo64qsd0gc3ia2acf7uo0thhmml6smv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanshinchat1",
+            "certificate_hash": "2a7698240d43f50673903e5267a2f0407df7444a"
+          }
+        },
+        {
+          "client_id": "432787975145-8ihbj74tl5t9b1vpck5rv13t33uh9cog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOJaICL27NN7BailQWNWmLAfGTVYkOOZo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432787975145-8ihbj74tl5t9b1vpck5rv13t33uh9cog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
