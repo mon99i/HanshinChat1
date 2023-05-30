@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.firebase.auth.FirebaseAuth;
 
-// 깃
 public class MainActivity extends AppCompatActivity {
     private Button logoutBtn;
     private Button chatBtn;
