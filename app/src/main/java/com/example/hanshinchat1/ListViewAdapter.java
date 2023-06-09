@@ -10,12 +10,6 @@ import android.widget.TextView;
 import com.example.hanshinchat1.R.layout;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import kotlin.Metadata;
-import kotlin.jvm.internal.Intrinsics;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 //@Metadata(
 //        mv = {1, 8, 0},

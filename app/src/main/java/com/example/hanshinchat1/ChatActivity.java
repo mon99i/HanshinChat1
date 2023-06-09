@@ -108,7 +108,7 @@ public class ChatActivity extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(homeIntent);
                 finish();
             }

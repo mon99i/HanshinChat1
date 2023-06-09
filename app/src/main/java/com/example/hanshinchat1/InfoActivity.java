@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class InfoActivity extends AppCompatActivity {
 
-    MainActivity mainActivity;
+    HomeActivity homeActivity;
     ChatActivity chatActivity;
     ListActivity listActivity;
 
@@ -18,7 +18,7 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information);
 
-        mainActivity = new MainActivity();
+        homeActivity = new HomeActivity();
         chatActivity = new ChatActivity();
         listActivity = new ListActivity();
 
@@ -31,7 +31,7 @@ public class InfoActivity extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(homeIntent);
                 finish();
             }
