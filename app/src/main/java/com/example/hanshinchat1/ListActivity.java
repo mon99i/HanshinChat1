@@ -1,10 +1,11 @@
 package com.example.hanshinchat1;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ListActivity extends AppCompatActivity {
@@ -22,6 +23,44 @@ public class ListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
 
+        ImageButton homeBtn = findViewById(R.id.home);
+        ImageButton roomBtn = findViewById(R.id.room);
+        ImageButton chatBtn = findViewById(R.id.chat);
+        ImageButton postBtn = findViewById(R.id.post);
+        ImageButton infoBtn = findViewById(R.id.info);
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
+        });
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(chatIntent);
+                finish();
+            }
+        });
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent postIntent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(postIntent);
+                finish();
+            }
+        });
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent infoIntent = new Intent(getApplicationContext(), InfoActivity.class);
+                startActivity(infoIntent);
+                finish();
+            }
+        });
 
     }
 }
