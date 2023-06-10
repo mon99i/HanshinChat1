@@ -1,28 +1,91 @@
 package com.example.hanshinchat1;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class InfoActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-    HomeActivity homeActivity;
-    ChatActivity chatActivity;
-    ListActivity listActivity;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+public class InfoActivity extends MainActivity{
+
+    /*FirebaseAuth mAuth;
+    FirebaseUser user;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    FirebaseStorage storage;
+    StorageReference storageRef;
+    ImageView profile;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information);
+        checkCurrentUser();
+        checkProfileExist();
 
-        homeActivity = new HomeActivity();
-        chatActivity = new ChatActivity();
-        listActivity = new ListActivity();
+        clickBoard();
+        clickChat();
+        clickRoom();
+        clickHome();
 
-        ImageButton homeBtn = findViewById(R.id.home);
+        /*database=FirebaseDatabase.getInstance();
+        myRef=database.getReference();
+        storage=FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        mAuth=FirebaseAuth.getInstance();
+        user=mAuth.getCurrentUser();
+
+        profile=(ImageView)findViewById(R.id.profile);
+
+        myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    UserInfo userInfo=snapshot.getValue(UserInfo.class);
+                    String Url=userInfo.getPhotoUrl();
+                    Uri imageUri=Uri.parse(Url);
+
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        // 비트맵 사용
+                        profile.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                   // profile.setImageURI(imageUri);
+                }
+                else  Toast.makeText(getApplicationContext(), "개같은오류!!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
+       /* ImageButton homeBtn = findViewById(R.id.home);
         ImageButton roomBtn = findViewById(R.id.room);
         ImageButton chatBtn = findViewById(R.id.chat);
         ImageButton postBtn = findViewById(R.id.post);
@@ -59,7 +122,7 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(infoIntent);
                 finish();
             }
-        });
+        });*/
 
 
         // 하단바 Fragment 상속해서 사용할때 쓸 코드
