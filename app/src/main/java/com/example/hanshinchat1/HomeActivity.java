@@ -65,6 +65,45 @@ public class HomeActivity extends MainActivity {
                 }
         });
 
+        ImageButton homeBtn = findViewById(R.id.home);
+        ImageButton roomBtn = findViewById(R.id.room);
+        ImageButton chatBtn = findViewById(R.id.chat);
+        ImageButton postBtn = findViewById(R.id.post);
+        ImageButton infoBtn = findViewById(R.id.info);
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
+        });
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(chatIntent);
+                finish();
+            }
+        });
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent postIntent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(postIntent);
+                finish();
+            }
+        });
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent infoIntent = new Intent(getApplicationContext(), InfoActivity.class);
+                startActivity(infoIntent);
+                finish();
+            }
+        });
+
 
     }
     /*protected void signOut() {
@@ -75,7 +114,7 @@ public class HomeActivity extends MainActivity {
                     mAuth.signOut();
                     Toast.makeText(getApplicationContext(), R.string.success_logout, Toast.LENGTH_SHORT).show();
 
-                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class    );
+                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
                     // ...
                 });
