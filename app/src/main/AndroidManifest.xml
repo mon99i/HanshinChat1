@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name=".InfoActivity"
+            android:name=".ProfileActivity"
             android:exported="false">
         </activity>
 

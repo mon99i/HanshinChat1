@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".InfoActivity">
+    tools:context=".ProfileActivity">
 
     <LinearLayout
         android:id="@+id/top_view"
@@ -19,7 +19,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/baseline_info_black_24_xml"
+                    android:src="@drawable/baseline_profile_black_24_xml"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"/>
 
@@ -169,7 +169,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_info_black_24_xml"/>
+            android:background="@drawable/baseline_profile_black_24_xml"/>
 
     </LinearLayout>
 
