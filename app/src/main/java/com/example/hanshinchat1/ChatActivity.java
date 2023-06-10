@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends MainActivity {
 
     private RecyclerView mRecyclerView;
     public RecyclerView.Adapter mAdapter;
@@ -39,12 +39,19 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+/*
         ImageButton homeBtn = findViewById(R.id.home);
         ImageButton roomBtn = findViewById(R.id.room);
         ImageButton chatBtn = findViewById(R.id.chat);
         ImageButton postBtn = findViewById(R.id.post);
-        ImageButton infoBtn = findViewById(R.id.info);
+        ImageButton infoBtn = findViewById(R.id.info);*/
+
+        checkCurrentUser();
+        checkProfileExist();
+        clickBoard();
+        clickHome();
+        clickProfile();
+        clickRoom();
 
         Button_send = findViewById(R.id.Button_send);
         EditText_chat = findViewById(R.id.EditText_chat);
@@ -105,7 +112,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
+        /*homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -136,6 +143,6 @@ public class ChatActivity extends AppCompatActivity {
                 startActivity(infoIntent);
                 finish();
             }
-        });
+        });*/
     }
 }

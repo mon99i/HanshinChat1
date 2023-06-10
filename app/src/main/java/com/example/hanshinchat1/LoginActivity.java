@@ -29,23 +29,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MainActivity{
 
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
-    private FirebaseAuth mAuth;   //파이어베이스 인증 객체
+   /* private FirebaseAuth mAuth;   //파이어베이스 인증 객체
     private GoogleSignInClient mGoogleSignInClient;  // 구글api클라이언트
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private GoogleSignInAccount gsa;  // 구글 계정
-    // ...
+    private FirebaseAuth.AuthStateListener authStateListener;
 
-
+*/
     private SignInButton googleLogin;
     private Button logoutBtn;
 
-    //private FirebaseAuth.AuthStateListener authStateListener;
+
+
 
 
     private boolean showOneTapUI = true;
@@ -56,21 +57,26 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         // Initialize Firebase Auth
 
-        database=FirebaseDatabase.getInstance();
-        myRef= database.getReference();
-
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mAuth = FirebaseAuth.getInstance();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         googleLogin = (SignInButton)findViewById(R.id.signInBtn);
         logoutBtn=(Button)findViewById(R.id.logoutBtn);
+
+
+
+       if(user !=null){
+            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+            startActivity(intent);
+        }
+
+
 
         googleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,31 +97,12 @@ public class LoginActivity extends AppCompatActivity {
                 }*/
                 signIn();
 
-
-
             }
         });
         logoutBtn = findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(view -> {
             signOut(); //로그아웃
         });
-
-
-       /* authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user!=null){
-                    //로그인
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else{
-                    //로그아웃
-                }
-            }
-        };*/
 
 
     }
@@ -159,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        Toast.makeText(LoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.success_login, Toast.LENGTH_SHORT).show();
 
                         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -168,8 +155,8 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        Toast.makeText(LoginActivity.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
-                        updateUI(null);
+                        Toast.makeText(getApplicationContext(), R.string.failed_login, Toast.LENGTH_SHORT).show();
+
                     }
                 });
     }
@@ -180,9 +167,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
-        DatabaseReference usersRef= myRef.child("users");
-        if(checkHanshin(user)==true){
-                usersRef.child(user.getUid());
+        DatabaseReference usersRef= myRef.child("users").child(user.getUid());
+        if(checkHanshin()==true){
+
+            {
                 usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -208,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
             }
+        }
 
         else{
             Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
@@ -217,10 +206,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkHanshin(FirebaseUser user) {                    //한신대생 확인
-
+    protected boolean checkHanshin() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // Name, email address, and profile photo Url
 
             String email = user.getEmail();
 
@@ -233,12 +221,15 @@ public class LoginActivity extends AppCompatActivity {
                 // 이메일이 hs@ac.kr과 일치하지 않는 경우 처리할 작업 수행
                 return false;
             }
+
         }
-        return false;
+        else return false;
+
     }
 
-    /* 로그아웃 */
-    private void signOut() {
+    /* 로그아웃 *//*
+    public void signOut() {
+
 
 
         mGoogleSignInClient.signOut()
@@ -248,24 +239,10 @@ public class LoginActivity extends AppCompatActivity {
                     // ...
                 });
         gsa = null;
-    }
+    }*/
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
-        // mAuth.addAuthStateListener(authStateListener);
 
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // mAuth.removeAuthStateListener(authStateListener);
-    }
 
     // [START onactivityresult]
 

@@ -38,19 +38,19 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class SetProfileActivity extends AppCompatActivity {
+public class SetProfileActivity extends MainActivity {
 
     //private static final String TAG = "ProfileActivity";
     private static final int CAMERA= 100;
     private static final int GALLERY = 101;
-    GoogleSignInClient mGoogleSignInClient;
+    /*GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount gsa;
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseStorage storage;
-    StorageReference storageRef;
+    StorageReference storageRef;*/
     Button getPhotoBtn;
     Button captureBtn;
 
@@ -63,12 +63,14 @@ public class SetProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_1);
         // Create a storage reference from our app
-        database=FirebaseDatabase.getInstance();
+       /* database=FirebaseDatabase.getInstance();
         myRef=database.getReference();
         storage=FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
+        user=mAuth.getCurrentUser();*/
+        checkCurrentUser();
+
 
         getPhotoBtn=(Button)findViewById(R.id.getPhotoBtn);
         captureBtn=(Button)findViewById(R.id.captureBtn);
@@ -95,6 +97,7 @@ public class SetProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DatabaseReference usersRef=myRef.child("users").child(user.getUid());
                 UserInfo userInfo=new UserInfo();
+
 
                 storageRef.child("profile.jpg/"+user.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override

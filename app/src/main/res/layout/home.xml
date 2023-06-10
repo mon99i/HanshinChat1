@@ -48,14 +48,14 @@
         <Button
             android:id="@+id/logoutBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </Button>
+            android:layout_height="wrap_content"
+            android:text="로그아웃"></Button>
 
         <Button
             android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </Button>
+            android:layout_height="wrap_content"
+            android:text="정보삭제"></Button>
 
     </LinearLayout>
 

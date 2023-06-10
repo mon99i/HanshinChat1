@@ -53,6 +53,7 @@
         tools:ignore="DuplicateIds">
 
         <ImageView
+            android:id="@+id/profile"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_margin="40dp"

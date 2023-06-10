@@ -26,33 +26,24 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends MainActivity {
 
     Button deleteBtn;
     Button logoutBtn2;
-    GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInAccount gsa;
-    FirebaseAuth mAuth;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+        checkCurrentUser();
+       checkProfileExist();
 
+        clickBoard();
+        clickChat();
+        clickProfile();
+        clickRoom();
 
-        mAuth=FirebaseAuth.getInstance();
-        FirebaseUser user=mAuth.getCurrentUser();
-
-        database=FirebaseDatabase.getInstance();
-        myRef=database.getReference();
 
         deleteBtn=(Button)findViewById(R.id.deleteBtn);
         logoutBtn2=(Button)findViewById(R.id.logoutBtn);
@@ -61,7 +52,8 @@ public class HomeActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteUserInfo();
+                    deleteUser();
+
                 }
         });
 
@@ -114,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-    private void signOut() {
+    /*protected void signOut() {
 
 
         mGoogleSignInClient.signOut()
@@ -130,10 +122,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
-    private void deleteUserInfo() {
+   /* private void deleteUerInfo() {
         // [START delete_user]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -161,18 +153,9 @@ public class HomeActivity extends AppCompatActivity {
                         // ...
                     }
                 });
-    }
+    }*/
 
 
 
-    private void revokeAccess() {  //g회원 사  ??
-        mAuth.signOut();
-        mGoogleSignInClient.revokeAccess()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
 
-                    }
-                });
-    }
 }
