@@ -1,12 +1,20 @@
 package com.example.hanshinchat1;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +26,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,45 +48,41 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SetProfileActivity extends MainActivity {
 
-    //private static final String TAG = "ProfileActivity";
-    private static final int CAMERA= 100;
-    private static final int GALLERY = 101;
-    /*GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInAccount gsa;
-    FirebaseAuth mAuth;
-    FirebaseUser user;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
-    FirebaseStorage storage;
-    StorageReference storageRef;*/
+    private static final String TAG = "SetProfileActivity";
+    private static final int REQUEST_PERMISSION = 50;
+    private static final int REQUEST_CAMERA = 100;
+    private String currentPhotoPath;
+    private static final int REQUEST_GALLERY = 101;
+
     Button getPhotoBtn;
     Button captureBtn;
 
     Button saveBtn;
 
     ImageView image;
+    private Bitmap imageBitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_1);
-        // Create a storage reference from our app
-       /* database=FirebaseDatabase.getInstance();
-        myRef=database.getReference();
-        storage=FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();*/
+
         checkCurrentUser();
+        checkPermission();
 
-
-        getPhotoBtn=(Button)findViewById(R.id.getPhotoBtn);
-        captureBtn=(Button)findViewById(R.id.captureBtn);
-        saveBtn=(Button)findViewById(R.id.saveBtn);
-        image=(ImageView)findViewById(R.id.image);
+        getPhotoBtn = (Button) findViewById(R.id.getPhotoBtn);
+        captureBtn = (Button) findViewById(R.id.captureBtn);
+        saveBtn = (Button) findViewById(R.id.saveBtn);
+        image = (ImageView) findViewById(R.id.image);
 
         getPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +94,8 @@ public class SetProfileActivity extends MainActivity {
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //uploadPhoto();
+
+
                 openCamera();
             }
         });
@@ -95,39 +103,9 @@ public class SetProfileActivity extends MainActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference usersRef=myRef.child("users").child(user.getUid());
-                UserInfo userInfo=new UserInfo();
-
-
-                storageRef.child("profile.jpg/"+user.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Got the download URL for 'users/me/profile.png'
-                        String Url=uri.toString();
-                        userInfo.setPhotoUrl(Url);
-
-
-                        // [START rtdb_write_new_user_task]
-                        usersRef.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Intent intent = new Intent(getApplicationContext(), SetProfileActivity2.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                        Toast.makeText(getApplicationContext(), "사진등록하세요!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                uploadFileToStorageAndDatabase();
             }
         });
-
 
 
     }
@@ -135,106 +113,84 @@ public class SetProfileActivity extends MainActivity {
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-
-        startActivityForResult(intent, GALLERY);
+        startActivityForResult(intent, REQUEST_GALLERY);
 
     }
 
-    private void openCamera(){
+    private void openCamera() {
 
-        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,CAMERA);
 
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+
+        /*Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {   // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.hanshinchat1.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_CAMERA);
+            }
+
+        }*/
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-       /* if(requestCode==CAMERA &&requestCode==RESULT_OK){
 
-                // Bundle로 데이터를 입력
-                Bundle extras = data.getExtras();
+        switch (requestCode) {
+            case REQUEST_CAMERA:
+                if (resultCode == RESULT_OK) {
 
-                // Bitmap으로 컨버전
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    Bundle extras = data.getExtras();
+                    imageBitmap = (Bitmap) extras.get("data");
 
-                // 이미지뷰에 Bitmap으로 이미지를 입력
-                image.setImageBitmap(imageBitmap);
+                    image.setImageBitmap(imageBitmap);
 
-                // Google Sign In failed, update UI appropriatel
-
-        }*/
-        switch(requestCode){
-            case CAMERA:
-                // Bundle로 데이터를 입력
-                Bundle extras = data.getExtras();
-
-                // Bitmap으로 컨버전
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-                // 이미지뷰에 Bitmap으로 이미지를 입력
-                image.setImageBitmap(imageBitmap);
-                uploadCammeraFile();
-
+                }
                 break;
 
-                // Google Sign In failed, update UI appropriatel
-            case GALLERY:
-                Uri imageUri = data.getData();
+            case REQUEST_GALLERY:
+                if (resultCode == RESULT_OK) {
+                    Uri imageUri = data.getData();
 
-                // 이미지 뷰에 사진 설정하기
-                image.setImageURI(imageUri);
+                    InputStream inputStream = null;
+                    try {
+                        inputStream = getContentResolver().openInputStream(imageUri);
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                    imageBitmap = BitmapFactory.decodeStream(inputStream);
+                    image.setImageBitmap(imageBitmap);
+                    // 이미지 뷰에 사진 설정하기
+                    //image.setImageURI(imageUri);
 
-                uploadGalleryFile(imageUri);
-                // Firebase Storage에 사진 업로드하기
-              //  uploadImageToFirebase(imageUri);
+                    //uploadGalleryFile(imageUri);
 
-
+                }
                 break;
+
 
         }
 
     }
 
-    private void uploadGalleryFile(Uri imageUri){
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
+    private void uploadFileToStorageAndDatabase() {
 
-
-        UploadTask uploadTask = profileRef.putFile(imageUri);
-        // 업로드 상태 모니터링 및 완료 리스너 추가
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // 업로드 성공 시, 이미지의 다운로드 URL 가져오기
-                profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri downloadUri) {
-                        // 파이어베이스 스토리지에 업로드된 이미지의 다운로드 URL 사용하기
-                        String imageUrl = downloadUri.toString();
-                        Toast.makeText(getApplicationContext(), "사진 업로드 성공!", Toast.LENGTH_SHORT).show();
-                        // 다운로드 URL을 사용하여 추가 작업 수행
-                        // 예를 들면, 데이터베이스에 이미지 URL 저장하기 등
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // 업로드 실패 시, 실패 처리 코드 작성
-                Toast.makeText(getApplicationContext(), "사진 업로드 실패!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
-    private void uploadCammeraFile(){
-
-
-
-        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
-
-
+        UserInfo userInfo = new UserInfo();
+        StorageReference profileRef = storageRef.child("profile.jpg/" + user.getUid());
+        DatabaseReference usersRef = myRef.child("users").child(user.getUid());
 
         image.setDrawingCacheEnabled(true);
         image.buildDrawingCache();
@@ -244,23 +200,144 @@ public class SetProfileActivity extends MainActivity {
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = profileRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                Toast.makeText(getApplicationContext(), "사진 업로드 실패!", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        //스토리지에 사진 업로드
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "사진 업로드 성공!", Toast.LENGTH_SHORT).show();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
+                //스토리지에서 사진 다운로드
+                profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        String imageUrl = uri.toString();
+                        userInfo.setPhotoUrl(imageUrl);
+
+                        usersRef.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Intent intent = new Intent(getApplicationContext(), SetProfileActivity2.class);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "사진 등록 성공!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "스토리지에서 사진 다운로드 실패");
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "사진 등록하세요!", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "스토리지에 사진 업로드 실패");
             }
         });
+
     }
 
 
+    public void checkPermission() {
+        int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA);
+        /*int permissionRead = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE);
+        int permissionWrite = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);*/
+
+        //권한이 없으면 권한 요청
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (permissionCamera != PackageManager.PERMISSION_GRANTED /*||
+                    permissionRead != PackageManager.PERMISSION_GRANTED ||
+                    permissionWrite != PackageManager.PERMISSION_GRANTED*/
+            ) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CAMERA)) {
+                    Toast.makeText(this, "카메라 촬영을 위해 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+                }
+
+
+                ActivityCompat.requestPermissions(this, new String[]{
+                        android.Manifest.permission.CAMERA/*, android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE*/}, REQUEST_PERMISSION);
+
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_PERMISSION: {
+                // 권한이 취소되면 result 배열은 비어있다.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(this, "권한 확인", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Toast.makeText(this, "권한 없음", Toast.LENGTH_LONG).show();
+                }
+            }
+            break;
+        }
+    }
+
+
+    /*
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+        }
+        File image = File.createTempFile(
+                imageFileName,  *//* prefix *//*
+                ".jpg",         *//* suffix *//*
+                storageDir      *//* directory *//*
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+*/
+
+    /*public static Bitmap rotatedBitmap(String imagePath) {
+        try {
+            ExifInterface exifInterface = new ExifInterface(imagePath);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+
+            Matrix matrix = new Matrix();
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_NORMAL:
+                    matrix.postRotate(180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    matrix.postRotate(270);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    matrix.postRotate(180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    matrix.postRotate(90);
+                    break;
+                default:
+                    return BitmapFactory.decodeFile(imagePath);
+            }
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
 
 
 }

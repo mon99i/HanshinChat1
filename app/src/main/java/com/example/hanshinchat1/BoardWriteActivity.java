@@ -21,7 +21,7 @@ public class BoardWriteActivity extends MainActivity{
         setContentView(R.layout.board_write);
 
         checkCurrentUser();
-        checkProfileExist();
+
         clickChat();
         clickHome();
         clickRoom();

@@ -1,104 +1,81 @@
 package com.example.hanshinchat1;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ProfileActivity extends MainActivity{
 
-    /*FirebaseAuth mAuth;
-    FirebaseUser user;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
-    FirebaseStorage storage;
-    StorageReference storageRef;
-    ImageView profile;*/
+    private static final String TAG = "ProfileActivity";
+    ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information);
         checkCurrentUser();
-        checkProfileExist();
+
 
         clickBoard();
         clickChat();
         clickRoom();
         clickHome();
 
-        /*database=FirebaseDatabase.getInstance();
-        myRef=database.getReference();
-        storage=FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
-
         profile=(ImageView)findViewById(R.id.profile);
 
+/*
+        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext())
+                        .load(uri)
+                        .into(profile);
+                //profile.setImageURI(uri);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "프로필 안뜸!", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+        
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     UserInfo userInfo=snapshot.getValue(UserInfo.class);
-                    String Url=userInfo.getPhotoUrl();
-                    Uri imageUri=Uri.parse(Url);
-
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        // 비트맵 사용
-                        profile.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                   // profile.setImageURI(imageUri);
+                    String imageUrl=userInfo.getPhotoUrl();
+                    Uri imageUri=Uri.parse(imageUrl);
+                    Glide.with(getApplicationContext())
+                            .load(imageUri)
+                            .into(profile);
+                 
                 }
-                else  Toast.makeText(getApplicationContext(), "개같은오류!!", Toast.LENGTH_SHORT).show();
+                else Log.d(TAG, "onDataChange: 데이터없음");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
 
-       /* ImageButton homeBtn = findViewById(R.id.home);
-        ImageButton roomBtn = findViewById(R.id.room);
-        ImageButton chatBtn = findViewById(R.id.chat);
-        ImageButton postBtn = findViewById(R.id.post);
-        ImageButton infoBtn = findViewById(R.id.info);
-
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        });
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                startActivity(chatIntent);
-                finish();
-            }
-        });
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postIntent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(postIntent);
-                finish();
-            }
-        });
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent infoIntent = new Intent(getApplicationContext(), InfoActivity.class);
-                startActivity(infoIntent);
-                finish();
-            }
-        });*/
 
 
         // 하단바 Fragment 상속해서 사용할때 쓸 코드

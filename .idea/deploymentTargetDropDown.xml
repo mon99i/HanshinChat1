@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\tlan8\.android\avd\ChattingApp_Pixel_2_API_31.avd" />
+            <value value="C:\Users\tlan8\.android\avd\ChattingApp2_Pixel_2_API_31.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-06-09T16:00:46.877519800Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-06-25T14:05:21.418745900Z" />
   </component>
 </project>

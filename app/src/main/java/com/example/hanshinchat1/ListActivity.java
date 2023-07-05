@@ -19,9 +19,6 @@ public class ListActivity extends MainActivity {
         setContentView(R.layout.board_list);
 
         checkCurrentUser();
-        checkProfileExist();
-
-
         clickChat();
         clickHome();
         clickProfile();
