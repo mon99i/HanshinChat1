@@ -26,7 +26,7 @@ public class ProfileActivity extends MainActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.information);
+        setContentView(R.layout.profile);
         checkCurrentUser();
 
 
@@ -35,7 +35,7 @@ public class ProfileActivity extends MainActivity{
         clickRoom();
         clickHome();
 
-        profile=(ImageView)findViewById(R.id.profile);
+        profile=(ImageView)findViewById(R.id.profileImage);
 
 /*
         StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());

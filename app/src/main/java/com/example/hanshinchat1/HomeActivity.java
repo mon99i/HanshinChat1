@@ -8,48 +8,35 @@ import android.widget.ImageButton;
 
 public class HomeActivity extends MainActivity {
 
-    Button deleteBtn;
-    Button logoutBtn2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
         checkCurrentUser();
-       checkProfileExist();
+        checkProfileExist();
 
         clickBoard();
         clickChat();
         clickProfile();
         clickRoom();
 
-
-        deleteBtn=(Button)findViewById(R.id.deleteBtn);
-        logoutBtn2=(Button)findViewById(R.id.logoutBtn);
-
-
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteUser();
-
-                }
-        });
-
-        logoutBtn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    signOut();
-
-                }
-        });
-
         ImageButton homeBtn = findViewById(R.id.home);
         ImageButton roomBtn = findViewById(R.id.room);
         ImageButton chatBtn = findViewById(R.id.chat);
         ImageButton postBtn = findViewById(R.id.post);
         ImageButton infoBtn = findViewById(R.id.info);
+
+        ImageButton menuBtn = findViewById(R.id.menu);
+
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent menuIntent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(menuIntent);
+                finish();
+            }
+        });
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
