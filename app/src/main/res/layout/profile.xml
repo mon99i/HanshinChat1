@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#F5EEFF">
@@ -44,12 +44,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1450px"
+        android:layout_height="555dp"
         android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="550px"
+        android:layout_height="230dp"
         android:layout_weight="1"
         tools:ignore="DuplicateIds">
 
@@ -68,7 +68,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="900px"
+        android:layout_height="370dp"
         android:layout_weight="2"
         android:id="@+id/containers">
 
@@ -78,13 +78,13 @@
             android:layout_height="70dp"
             android:text="프로필 편집"
             android:textSize="20sp"
-            android:background="#F5EEFF"
+            android:backgroundTint="#BFA0ED"
             android:layout_margin="60dp"
             app:elevation="10dp"
             android:translationZ="10dp"
             android:stateListAnimator="@null"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/ideal_type_button"
@@ -92,7 +92,7 @@
             android:layout_height="70dp"
             android:text="이상형 설정"
             android:textSize="20sp"
-            android:background="#F5EEFF"
+            android:backgroundTint="#BFA0ED"
             android:layout_margin="150dp"
             app:elevation="10dp"
             android:translationZ="10dp"
@@ -106,7 +106,7 @@
             android:layout_height="70dp"
             android:text="소개팅 시뮬레이션"
             android:textSize="20sp"
-            android:background="#F5EEFF"
+            android:backgroundTint="#BFA0ED"
             android:layout_margin="240dp"
             app:elevation="10dp"
             android:translationZ="10dp"

@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#F5EEFF">
@@ -43,8 +43,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1450px"
-        android:orientation="vertical">
+        android:layout_height="535dp"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <EditText
             android:id="@+id/edit_nickname"
@@ -68,10 +69,11 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="저 장"/>
+            android:layout_gravity="bottom|right"
+            android:text="저 장"
+            android:backgroundTint="#BFA0ED"/>
 
     </LinearLayout>
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".RoomActivity"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+    <TextView
+        android:drawableStart="@drawable/baseline_room_black_24_xml"
+        android:drawablePadding="10dp"
+        android:id="@+id/room_name_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="방 이름으로 검색하기"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/findRoomSearchBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="검색"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
+
+</LinearLayout>

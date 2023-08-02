@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#F5EEFF">
@@ -38,15 +38,18 @@
             android:src="@drawable/baseline_menu_black_24"/>
     </LinearLayout>
 
-<ScrollView
+    <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="1450px"
+    android:layout_height="540dp"
     android:fillViewport="true">
+
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</ScrollView>
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
+
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/bottom_navigation"

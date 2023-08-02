@@ -96,6 +96,10 @@
             android:exported="false">
         </activity>
 
+        <activity
+            android:name=".MakeRoomActivity"
+            android:exported="false">
+        </activity>
 
     </application>
 

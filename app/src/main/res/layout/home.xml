@@ -36,9 +36,9 @@
         <ImageButton
             android:id="@+id/menu"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="right"
-            android:src="@drawable/baseline_menu_black_24" />
+            android:src="@drawable/baseline_menu_black_24"/>
     </LinearLayout>
 
     <ScrollView
