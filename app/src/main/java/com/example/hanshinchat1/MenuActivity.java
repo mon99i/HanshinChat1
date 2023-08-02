@@ -16,18 +16,14 @@ public class MenuActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        checkCurrentUser();
-        checkProfileExist();
-
-        clickBoard();
-        clickChat();
-        clickProfile();
+        clickHome();
         clickRoom();
-
+        clickChat();
+        clickBoard();
+        clickProfile();
 
         deleteBtn=(Button)findViewById(R.id.deleteBtn);
         logoutBtn2=(Button)findViewById(R.id.logoutBtn);
-
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,46 +40,6 @@ public class MenuActivity extends MainActivity {
 
             }
         });
-
-        ImageButton homeBtn = findViewById(R.id.home);
-        ImageButton roomBtn = findViewById(R.id.room);
-        ImageButton chatBtn = findViewById(R.id.chat);
-        ImageButton postBtn = findViewById(R.id.post);
-        ImageButton infoBtn = findViewById(R.id.info);
-
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        });
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                startActivity(chatIntent);
-                finish();
-            }
-        });
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postIntent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(postIntent);
-                finish();
-            }
-        });
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent infoIntent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(infoIntent);
-                finish();
-            }
-        });
-
 
     }
 }

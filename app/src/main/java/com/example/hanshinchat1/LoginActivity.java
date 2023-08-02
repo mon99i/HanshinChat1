@@ -45,10 +45,6 @@ public class LoginActivity extends MainActivity{
     private SignInButton googleLogin;
     private Button logoutBtn;
 
-
-
-
-
     private boolean showOneTapUI = true;
 
     @Override
@@ -56,7 +52,6 @@ public class LoginActivity extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         // Initialize Firebase Auth
-
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -68,8 +63,6 @@ public class LoginActivity extends MainActivity{
 
         googleLogin = (SignInButton)findViewById(R.id.signInBtn);
         logoutBtn=(Button)findViewById(R.id.logoutBtn);
-
-
 
        if(user !=null){
             Intent intent = new Intent(getApplicationContext(),HomeActivity.class);

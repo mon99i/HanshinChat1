@@ -1,8 +1,12 @@
 package com.example.hanshinchat1;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,39 +25,22 @@ import com.google.firebase.storage.StorageReference;
 public class ProfileActivity extends MainActivity{
 
     private static final String TAG = "ProfileActivity";
-    ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-        checkCurrentUser();
 
-
-        clickBoard();
-        clickChat();
-        clickRoom();
+        clickMenu();
         clickHome();
+        clickRoom();
+        clickChat();
+        clickBoard();
+        clickProfile();
 
-        profile=(ImageView)findViewById(R.id.profileImage);
+        ImageView profile = (ImageView) findViewById(R.id.profileImage);
 
-/*
-        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext())
-                        .load(uri)
-                        .into(profile);
-                //profile.setImageURI(uri);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "프로필 안뜸!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
         
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,34 +63,32 @@ public class ProfileActivity extends MainActivity{
             }
         });
 
-
-
-        // 하단바 Fragment 상속해서 사용할때 쓸 코드
-
-//        //기본화면 설정, MainActivity xml 만든 후 넣기
-//         //getSupportFragmentManager().beginTransaction().replace(R.id.top_view, mainActivity).commit;
-//
-//        NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationview);
-//        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                switch (item.getItemId()){
-////                    case R.id.home:
-////                        getSupportFragmentManager().beginTransaction().replace(R.id.top_view,mainActivity).commit();
-////                    case R.id.room:
-////                        getSupportFragmentManager().beginTransaction().replace(R.id.top_view,mainActivity).commit();
-//                    case R.id.post:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.top_view,listActivity).commit();
-//                    case R.id.chat:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.top_view,chatActivity).commit();
-////                    case R.id.info:
-////                        getSupportFragmentManager().beginTransaction().replace(R.id.top_view,mainActivity).commit();
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
-
+        profileEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
+
+// 프로필 이미지 삽입 다른 코드
+/*
+        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext())
+                        .load(uri)
+                        .into(profile);
+                //profile.setImageURI(uri);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "프로필 안뜸!", Toast.LENGTH_SHORT).show();
+            }
+        }); */

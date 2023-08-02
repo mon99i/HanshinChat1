@@ -2,8 +2,10 @@ package com.example.hanshinchat1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,25 +22,12 @@ public class BoardWriteActivity extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_write);
 
-        checkCurrentUser();
-
-        clickChat();
+        clickMenu();
         clickHome();
         clickRoom();
+        clickChat();
+        clickBoard();
         clickProfile();
-
-        writeUploadBtn = (Button) findViewById(R.id.writeUploadBtn);
-        writeUploadBtn.setOnClickListener(view -> {
-
-            writeText = (EditText) findViewById(R.id.writeTextArea);
-            // Write a message to the database
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("board");
-
-            myRef.push().setValue(new ListViewItem(writeText.getText().toString()));
-            startActivity(new Intent(view.getContext(), ListActivity.class));
-
-        });
 
     }
 }

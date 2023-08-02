@@ -39,19 +39,13 @@ public class ChatActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-/*
-        ImageButton homeBtn = findViewById(R.id.home);
-        ImageButton roomBtn = findViewById(R.id.room);
-        ImageButton chatBtn = findViewById(R.id.chat);
-        ImageButton postBtn = findViewById(R.id.post);
-        ImageButton infoBtn = findViewById(R.id.info);*/
 
-        checkCurrentUser();
-        checkProfileExist();
-        clickBoard();
+        clickMenu();
         clickHome();
-        clickProfile();
         clickRoom();
+        clickChat();
+        clickBoard();
+        clickProfile();
 
         Button_send = findViewById(R.id.Button_send);
         EditText_chat = findViewById(R.id.EditText_chat);
@@ -70,6 +64,7 @@ public class ChatActivity extends MainActivity {
                 }
             }
         });
+
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -111,38 +106,5 @@ public class ChatActivity extends MainActivity {
 
             }
         });
-
-        /*homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        });
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                startActivity(chatIntent);
-                finish();
-            }
-        });
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent postIntent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(postIntent);
-                finish();
-            }
-        });
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent infoIntent = new Intent(getApplicationContext(), InfoActivity.class);
-                startActivity(infoIntent);
-                finish();
-            }
-        });*/
     }
 }

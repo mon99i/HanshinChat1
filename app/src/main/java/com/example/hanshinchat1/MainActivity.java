@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                         finish();
 
                     }
-
                 }
 
                 @Override
@@ -167,6 +166,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    protected void clickMenu() {
+        ImageButton menuBtn = findViewById(R.id.menu);
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
     protected void clickHome() {
         ImageButton homeBtn = findViewById(R.id.home);
@@ -185,24 +195,12 @@ public class MainActivity extends AppCompatActivity {
         roomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-    }
-
-    protected void clickBoard() {
-        ImageButton boardBtn = findViewById(R.id.post);
-        boardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     protected void clickChat() {
@@ -211,6 +209,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    protected void clickBoard() {
+        ImageButton boardBtn = findViewById(R.id.post);
+        boardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -228,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onStart() {

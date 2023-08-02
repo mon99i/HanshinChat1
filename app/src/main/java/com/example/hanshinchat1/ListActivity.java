@@ -18,16 +18,17 @@ public class ListActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_list);
 
-        checkCurrentUser();
-        clickChat();
+        clickMenu();
         clickHome();
-        clickProfile();
         clickRoom();
+        clickChat();
+        clickBoard();
+        clickProfile();
+
         adapter = new ListViewAdapter();
 
         listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
-
 
     }
 }

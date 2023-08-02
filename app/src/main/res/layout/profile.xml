@@ -34,9 +34,10 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/menu"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_gravity="right"
             android:src="@drawable/baseline_menu_black_24"/>
     </LinearLayout>
@@ -161,7 +162,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_post_black_24_xml"/>
+            android:background="@drawable/baseline_board_black_24_xml"/>
         <ImageButton
             android:id="@+id/info"
             android:layout_width="0dp"

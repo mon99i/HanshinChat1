@@ -52,7 +52,6 @@ public class SetProfileActivity2 extends MainActivity {
         major = (EditText) findViewById(R.id.major);
         saveBtn = (Button) findViewById(R.id.saveBtn);
 
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -129,7 +129,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_post_black_24_xml"/>
+            android:background="@drawable/baseline_board_black_24_xml"/>
         <ImageButton
             android:id="@+id/info"
             android:layout_width="0dp"
