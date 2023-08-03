@@ -101,6 +101,76 @@
             android:exported="false">
         </activity>
 
+        <activity
+            android:name=".SetProfile2NameActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile3GenderActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile4AgeActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile5StudentIdActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile6DepartmentActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile7HeightActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile8ReligionActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile9addressActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile10SmokingActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile11DrinkingActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile12InterestActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile13PersonalityActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile14IdealTypeActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile15CompleteActivity"
+            android:exported="false">
+        </activity>
+
     </application>
 
 </manifest>

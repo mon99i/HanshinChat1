@@ -128,10 +128,14 @@
             android:layout_marginBottom="50px"/>
 
         <TextView
+            android:drawableStart="@drawable/baseline_room_black_24_xml"
+            android:layout_gravity="center"
+            android:drawablePadding="10dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="맞춤 추천"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:textColor="#000000"/>
 
         <Button
             android:id="@+id/mbti_matching"
@@ -139,7 +143,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="MBTI 매칭"/>
+            android:text="MBTI 매칭"
+            android:backgroundTint="#BFA0ED"/>
 
         <Button
             android:id="@+id/ideal_type_matching"
@@ -147,7 +152,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="이상형 매칭"/>
+            android:text="이상형 매칭"
+            android:backgroundTint="#BFA0ED"/>
 
         <Button
             android:id="@+id/friend_around_matching"
@@ -155,7 +161,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="내 주변 친구"/>
+            android:text="내 주변 친구"
+            android:backgroundTint="#BFA0ED"/>
 
         <Button
             android:id="@+id/top_user_matching"
@@ -163,7 +170,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="상위 5% 매칭"/>
+            android:text="상위 5% 매칭"
+            android:backgroundTint="#BFA0ED"/>
 
         <View
             android:background="#000000"

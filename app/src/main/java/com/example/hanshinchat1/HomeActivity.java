@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class HomeActivity extends MainActivity {
@@ -32,7 +31,9 @@ public class HomeActivity extends MainActivity {
         mbtiMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
