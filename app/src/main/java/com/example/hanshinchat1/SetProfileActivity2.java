@@ -71,6 +71,7 @@ public class SetProfileActivity2 extends MainActivity {
                 if (dataSnapshot.exists()) {
                     UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
 
+
                     String strNickName = nickname.getText().toString();
                     String strMajor = major.getText().toString();
                     String strHobby = hobby.getText().toString();
@@ -80,6 +81,7 @@ public class SetProfileActivity2 extends MainActivity {
                     userInfo.setMajor(strMajor);
                     userInfo.setHobby(strHobby);
                     userInfo.setMbti(strMbti);
+                    userInfo.setUid(user.getUid());
 
 
                     // 업데이트된 UserInfo 객체를 실시간 데이터베이스에 저장

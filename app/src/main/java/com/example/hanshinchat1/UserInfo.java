@@ -1,8 +1,8 @@
 package com.example.hanshinchat1;
 
-import android.net.Uri;
+import java.io.Serializable;
 
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     public UserInfo(){}
 
@@ -16,7 +16,17 @@ public class UserInfo {
         this.photoUrl = photoUrl;
     }
 
+    private String uid;
     private String nickName;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     private String hobby;
     private String mbti;
 

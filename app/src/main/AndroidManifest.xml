@@ -55,6 +55,21 @@
             android:name=".ChatActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".ChatRoomActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".ChattingActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".AddChatRoomActivity"
+            android:exported="false">
+        </activity>
+
 
         <activity
             android:name=".ListActivity"

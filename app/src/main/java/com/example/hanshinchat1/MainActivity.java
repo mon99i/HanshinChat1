@@ -208,12 +208,14 @@ public class MainActivity extends AppCompatActivity {
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
+                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
+
 
     protected void clickBoard() {
         ImageButton boardBtn = findViewById(R.id.post);

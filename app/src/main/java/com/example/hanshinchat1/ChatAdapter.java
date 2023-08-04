@@ -22,8 +22,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         public MyViewHolder(View v) {
             super(v);
-            TextView_nickname = v.findViewById(R.id.TextView_nickname);
-            TextView_msg = v.findViewById(R.id.TextView_msg);
+           /* TextView_nickname = v.findViewById(R.id.TextView_nickname);
+            TextView_msg = v.findViewById(R.id.TextView_msg);*/
             rootView = v;
         }
     }
@@ -36,7 +36,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     @Override
     public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_chat, parent, false);
+                .inflate(R.layout.row_mychat, parent, false);
         return new MyViewHolder(v);
     }
 
