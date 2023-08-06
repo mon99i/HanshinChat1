@@ -17,7 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
@@ -125,7 +132,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             String sendDate = message.getSended_date();
 
             txt_Message.setText(message.getContent());
-            txt_date.setText(getDateText(sendDate));
+            txt_date.setText(getKoreanDateText(sendDate));
 
             if (message.isConfirmed()) {
                 txtIsShown.setVisibility(View.GONE);
@@ -136,27 +143,22 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             setShown(position);
         }
 
-        String getDateText(String sendDate) {
-            String dateText = "";
-            String timeString = "";
+        String getKoreanDateText(String sendDate){
+            LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
-            if (sendDate != null && !sendDate.isEmpty()) {
-                timeString = sendDate.substring(8, 12);
-                String hour = timeString.substring(0, 2);
-                String minute = timeString.substring(2, 4);
+            // 시간 포맷 지정
+            String amPmText = currentTime.getHour() < 12 ?
+                    "오전" : "오후";
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
+                    .appendPattern(" hh:mm")
+                    .toFormatter();
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
+            String koreanDateText= currentTime.format(formatter);
 
-                String timeFormat = "%02d:%02d";
-
-                if (Integer.parseInt(hour) > 11) {
-                    dateText += "오후 ";
-                    dateText += String.format(timeFormat, Integer.parseInt(hour) - 12, Integer.parseInt(minute));
-                } else {
-                    dateText += "오전 ";
-                    dateText += String.format(timeFormat, Integer.parseInt(hour), Integer.parseInt(minute));
-                }
-            }
-            return dateText;
+            return koreanDateText;
         }
+
 
         void setShown(int position) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
@@ -187,7 +189,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             String sendDate = message.getSended_date();
 
             txt_message.setText(message.getContent());
-            txt_date.setText(getDateText(sendDate));
+            txt_date.setText(getKoreanDateText(sendDate));
 
             if (message.isConfirmed()) {
                 txt_isShown.setVisibility(View.GONE);
@@ -196,7 +198,23 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
         }
 
-        String getDateText(String sendDate) {
+        String getKoreanDateText(String sendDate){
+            LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+
+            // 시간 포맷 지정
+            String amPmText = currentTime.getHour() < 12 ?
+                    "오전" : "오후";
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
+                    .appendPattern(" hh:mm")
+                    .toFormatter();
+            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
+            String koreanDateText= currentTime.format(formatter);
+
+            return koreanDateText;
+        }
+
+       /* String getDateText(String sendDate) {
             String dateText = "";
             String timeString = "";
 
@@ -216,6 +234,9 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
             }
             return dateText;
-        }
+        }*/
+
+
+
     }
 }

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     protected void checkProfileExist() {   //프로필 존재유무 확인
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = myRef.child("users").child(user.getUid());
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
 
         /*
         DatabaseReference usersRef = myRef.child("users").child(user.getUid());
@@ -249,6 +252,13 @@ public class MainActivity extends AppCompatActivity {
         //updateUI(currentUser);
         // mAuth.addAuthStateListener(authStateListener);
 
+    }
+    @Override
+    public void onBackPressed() { //뒤로버튼 누를시
+        Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(intent);
+        finish();
+        //signOut();
     }
 
     @Override

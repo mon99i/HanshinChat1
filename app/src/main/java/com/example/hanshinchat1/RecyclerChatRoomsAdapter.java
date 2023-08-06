@@ -1,6 +1,8 @@
 package com.example.hanshinchat1;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -105,7 +109,9 @@ if (adapter != null) {
                             holder.chatRoomKey = data.getKey();
                             holder.opponentUser = data.getValue(UserInfo.class);
                             holder.txt_nickname.setText(data.getValue(UserInfo.class).getNickName());
-
+                            String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
+                            Uri imageUri=Uri.parse(imageUrl);
+                            Glide.with(context).load(imageUri).into(holder.profile);
 
 
                         }
@@ -115,6 +121,9 @@ if (adapter != null) {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+
+
+
 
 
         holder.background.setOnClickListener(new View.OnClickListener() {

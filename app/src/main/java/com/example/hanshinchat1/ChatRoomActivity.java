@@ -63,8 +63,5 @@ public class ChatRoomActivity extends MainActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        signOut();
-    }
+
 }
