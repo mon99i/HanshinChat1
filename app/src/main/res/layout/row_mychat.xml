@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/my_txt_isShown"
+        android:id="@+id/opponent_txt_isShown"
         android:layout_width="4dp"
         android:layout_height="23dp"
         android:layout_marginEnd="10dp"

@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,42 +34,28 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
     private ArrayList<ChatRoom> chatRooms;
     private ArrayList<String> chatRoomKeys;
     private String myUid;
-    //private RecyclerView recyclerView;
-
-/*
-    RecyclerView recyclerView = findViewById(R.id.recycler_view); // 리사이클러뷰를 찾아옵니다.
-    RecyclerView.Adapter adapter = recyclerView.getAdapter(); // 현재 어댑터를 가져옵니다.
-
-if (adapter != null) {
-        // 어댑터가 설정되어 있다면 실행할 코드
-        // 예를 들어 어댑터의 데이터를 갱신하거나 다른 조작을 수행할 수 있습니다.
-    } else {
-        // 어댑터가 설정되어 있지 않을 때 실행할 코드
-        // 예를 들어 어댑터를 설정하는 작업을 수행할 수 있습니다.
-    }*/
 
     private static final String TAG="RecyclerChatRoomsAdapter";
 
-    public RecyclerChatRoomsAdapter(Context context) {
+    public RecyclerChatRoomsAdapter(Context context) {    //어댑터 생성자
         this.context = context;
         chatRooms = new ArrayList<>();
         chatRoomKeys = new ArrayList<>();
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //recyclerView = ((ChatRoomActivity) context).findViewById(R.id.recycler_chatrooms);
         setupAllUserList();
     }
 
-    private void setupAllUserList() {
+    private void setupAllUserList() {       //현재 user가 채팅하는 목록나열?
        FirebaseDatabase.getInstance().getReference().child("chatRooms")
-                .orderByChild("users/" + myUid).equalTo(true)
+                .orderByChild("users/" + myUid).equalTo(true)     //현재 유저가 이용중인 채팅룸, 즉 myUid 가 true인 채팅룸 나열
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        chatRooms.clear();
-                        chatRoomKeys.clear();
+                        chatRooms.clear();                  //채팅룸 ArrayList 초기화
+                        chatRoomKeys.clear();               //채팅룸 키 ArrayList 초기화
                         for (DataSnapshot data : snapshot.getChildren()) {
-                            chatRooms.add(data.getValue(ChatRoom.class));
-                            chatRoomKeys.add(data.getKey());
+                            chatRooms.add(data.getValue(ChatRoom.class));    //my uid가 true인 방 객체를, 채팅룸 ArrayList에 추가
+                            chatRoomKeys.add(data.getKey());                 //my uid가 true인 방 uid를, 채팅룸 키 ArrayList에 추가
                         }
                         notifyDataSetChanged();
                     }
@@ -80,33 +67,37 @@ if (adapter != null) {
     }
 
     @NonNull
-    @Override
+    @Override      //각각의 리사이클러뷰(row_chatroom.xml)에대한 뷰홀더 생성
     public RecyclerChatRoomsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_chatroom, parent, false);
         return new RecyclerChatRoomsAdapter.ViewHolder(view);
     }
 
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {   //holder은 리사이클뷰의 하나하나인듯?
+    @Override   //뷰홀더에 새로운 데이터 매칭
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         List<String> userIdList = new ArrayList<>(chatRooms.get(position).getUsers().keySet());
+        //리스트에 현재 user가 속한 방안의 모든 유저 키(uid) 저장
+
         final int currentPosition = holder.getAdapterPosition();
         String opponent = "";
-        for (String userId : userIdList) {
+        for (String userId : userIdList) {    // oppnentId 구하기
             if (!userId.equals(myUid)) {
                 opponent = userId;
                 break;
             }
         }
 
-
+        // users데이터베이스 아래에 uid가 opponenId와 같은것을 조회하는 쿼리
         FirebaseDatabase.getInstance().getReference().child("users")
                 .orderByChild("uid").equalTo(opponent)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
+
                             holder.chatRoomKey = data.getKey();
+
                             holder.opponentUser = data.getValue(UserInfo.class);
                             holder.txt_nickname.setText(data.getValue(UserInfo.class).getNickName());
                             String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
@@ -126,7 +117,7 @@ if (adapter != null) {
 
 
 
-        holder.background.setOnClickListener(new View.OnClickListener() {
+        holder.background.setOnClickListener(new View.OnClickListener() {  //홀더누르면 각각의 채팅방으로 이동
             @Override
             public void onClick(View view) {
                 try {
@@ -134,7 +125,7 @@ if (adapter != null) {
                     Intent intent = new Intent(context, ChattingActivity.class);
                     intent.putExtra("ChatRoom", chatRooms.get(currentPosition));
                     intent.putExtra("Opponent", holder.opponentUser);
-                    intent.putExtra("ChatRoomKey", chatRoomKeys.get(currentPosition));
+                    intent.putExtra("ChatRoomKey", chatRoomKeys.get(currentPosition));   //채팅방 키 넘기기
                     context.startActivity(intent);
                     ((AppCompatActivity) context).finish();
                 } catch (Exception e) {
@@ -144,7 +135,7 @@ if (adapter != null) {
             }
         });
 
-        if (chatRooms.get(position).getMessages().size() > 0) {
+        if (chatRooms.get(position).getMessages().size() > 0) {  //메세지 기록있으면 채팅방list에서 볼수있게끔
             setupLastMessageAndDate(holder, position);
             setupMessageCount(holder, position);
         }
@@ -182,9 +173,12 @@ if (adapter != null) {
 
     private String getLastMessageTimeString(String lastTimeString) {
         try {
-            LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
+
+            LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+            //LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
             int messageMonth = Integer.parseInt(lastTimeString.substring(4, 6));
             int messageDate = Integer.parseInt(lastTimeString.substring(6, 8));
             int messageHour = Integer.parseInt(lastTimeString.substring(8, 10));

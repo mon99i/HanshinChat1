@@ -1,6 +1,7 @@
 package com.example.hanshinchat1;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,13 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
@@ -48,7 +48,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
         getMessages();
     }
 
-    private void getMessages() {
+    private void getMessages() {   //데이터베이스에 추가된 메세지 가져오기
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").child(chatRoomKey).child("messages");
 
@@ -124,12 +124,14 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             profile=itemView.findViewById(R.id.opponent_profile);
             txt_Message = itemView.findViewById(R.id.opponent_txt_message);
             txt_date = itemView.findViewById(R.id.opponent_txt_date);
-            //txtIsShown = itemView.findViewById(R.id.txtIsShown);
+            txtIsShown = itemView.findViewById(R.id.opponent_txt_isShown);
+
         }
 
         void bind(int position) {
             Message message = messages.get(position);
             String sendDate = message.getSended_date();
+            opponentUid=message.getSenderUid();
 
             txt_Message.setText(message.getContent());
             txt_date.setText(getKoreanDateText(sendDate));
@@ -139,9 +141,25 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             } else {
                 txtIsShown.setVisibility(View.VISIBLE);
             }
+           FirebaseDatabase.getInstance().getReference().child("users").child(opponentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String imageUrl=snapshot.getValue(UserInfo.class).getPhotoUrl();
+                    Uri imageUri=Uri.parse(imageUrl);
+                    Glide.with(context).load(imageUri).into(profile);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
             setShown(position);
         }
+
+
 
         String getKoreanDateText(String sendDate){
             LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
@@ -181,7 +199,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             background = itemView.findViewById(R.id.myChatBackground);
             txt_message = itemView.findViewById(R.id.my_txt_message);
             txt_date = itemView.findViewById(R.id.my_txt_date);
-            txt_isShown = itemView.findViewById(R.id.my_txt_isShown);
+            txt_isShown = itemView.findViewById(R.id.opponent_txt_isShown);
         }
 
         void bind(int position) {

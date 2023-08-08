@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.TimeZone;
 
 public class ChattingActivity extends MainActivity {
@@ -53,7 +55,7 @@ public class ChattingActivity extends MainActivity {
         setupChatRooms();
     }
 
-    private void initializeProperty() {
+    private void initializeProperty() {  //chatroomActivity에서 받아옴
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         chatRoom = (ChatRoom) getIntent().getSerializableExtra("ChatRoom");
@@ -86,6 +88,8 @@ public class ChattingActivity extends MainActivity {
         });
     }
 
+
+    //받아온 chatRoomKey가 있으면 리사이클러뷰 설정하고, 없으면 만들기
     private void setupChatRooms() {
         if (chatRoomKey == null || chatRoomKey.isEmpty()) {
             setupChatRoomKey();
@@ -95,7 +99,7 @@ public class ChattingActivity extends MainActivity {
         }
     }
 
-    private void setupChatRoomKey() {
+    private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성,,?
         FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + opponentUser.getUid()).equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +120,7 @@ public class ChattingActivity extends MainActivity {
                 });
     }
 
-    private void putMessage() {
+    private void putMessage() {          //데이터베이스에 메세지 넣고, 저장된 데이터를 다시 리사이클러뷰에 보이게하는거임
         try {
             Message message = new Message(myUid, getDateTimeString(), edt_message.getText().toString());
             FirebaseDatabase.getInstance().getReference().child("chatRooms")
@@ -138,17 +142,18 @@ public class ChattingActivity extends MainActivity {
 
     private String getDateTimeString() {
         try {
-            LocalDateTime localDateTime = LocalDateTime.now();
-            localDateTime.atZone(TimeZone.getDefault().toZoneId());
+            LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
             return localDateTime.format(dateTimeFormatter).toString();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("getTimeError");
         }
+
     }
 
-    private void setupRecycler() {
+    private void setupRecycler() {  //리사이클러뷰에 어댑터 설정
         recycler_chatting.setLayoutManager(new LinearLayoutManager(this));
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
