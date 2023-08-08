@@ -11,6 +11,7 @@ public class MenuActivity extends MainActivity {
     Button deleteBtn;
     Button logoutBtn2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

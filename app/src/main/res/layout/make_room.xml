@@ -16,6 +16,132 @@
         android:layout_margin="10dp"
         android:gravity="center">
 
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="방 제목:"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:layout_below="@id/participants_spinner"/>
+
+        <EditText
+            android:id="@+id/edt_roomTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="방 제목을 입력하세요."
+            android:layout_below="@id/title_label"/>
+        <TextView
+            android:id="@+id/category_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카테고리 선택:"
+            android:layout_marginBottom="8dp"
+            android:textSize="18sp"/>
+
+        <RadioGroup
+            android:id="@+id/category_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/category_label">
+
+            <RadioButton
+                android:id="@+id/chatting_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="과팅"/>
+
+            <RadioButton
+                android:id="@+id/meeting_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미팅"/>
+
+            <RadioButton
+                android:id="@+id/lunch_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="밥팅"/>
+
+            <RadioButton
+                android:id="@+id/other_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기타"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/gender_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성별:"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:layout_below="@id/category_radio_group"/>
+
+        <RadioGroup
+            android:id="@+id/gender_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/gender_label">
+
+            <RadioButton
+                android:id="@+id/male_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남성"/>
+
+            <RadioButton
+                android:id="@+id/female_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여성"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/participants_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인원수:"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:layout_below="@id/gender_radio_group"/>
+
+        <Spinner
+            android:id="@+id/participants_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/participants_label"
+            android:layout_marginTop="8dp"/>
+
+
+        <TextView
+            android:id="@+id/department_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="학과:"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:layout_below="@id/edt_roomTitle"/>
+
+
+        <Spinner
+            android:id="@+id/department_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/participants_label"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btn_makeRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="방 생성"
+            android:layout_marginTop="16dp"
+            android:onClick="onCreateButtonClick"
+            android:layout_below="@id/department_spinner"/>
     </LinearLayout>
 
     <LinearLayout

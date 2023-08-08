@@ -171,7 +171,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
         }
     }
 
-    private String getLastMessageTimeString(String lastTimeString) {
+    private String getLastMessageTimeString(String lastTimeString) {    //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
         try {
 
 

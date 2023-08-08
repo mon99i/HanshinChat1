@@ -12,12 +12,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.w3c.dom.Text;
 
 public class RoomActivity extends MainActivity {
 
     Dialog findRoomDialog;
     Dialog findRoomDialog2;
+
+    RecyclerView recycler_meetRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class RoomActivity extends MainActivity {
         Button makeRoom = findViewById(R.id.make_room);
         Button findRoom = findViewById(R.id.find_room);
         Button findRoom2 = findViewById(R.id.find_room2);
+        recycler_meetRooms=findViewById(R.id.recycler_meetRooms);
 
         findRoomDialog = new Dialog(RoomActivity.this);
         findRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);

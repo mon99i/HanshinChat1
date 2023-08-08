@@ -148,7 +148,6 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
         context.startActivity(intent);
         ((AppCompatActivity) context).finish();
     }
-
     @Override
     public int getItemCount() {
         return users.size();
