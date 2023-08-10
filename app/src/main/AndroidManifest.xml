@@ -167,7 +167,12 @@
         </activity>
 
         <activity
-            android:name=".SetProfile15CompleteActivity"
+            android:name=".SetProfile15MbtiActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".SetProfile16CompleteActivity"
             android:exported="false">
         </activity>
 

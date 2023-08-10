@@ -5,20 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SetProfile14IdealTypeActivity extends MainActivity {
+public class SetProfile16CompleteActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_14_idealtype);
+        setContentView(R.layout.set_profile_16_complete);
 
-        Button nextBtn = findViewById(R.id.set_idealtype_next);
+        Button nextBtn = findViewById(R.id.set_complete_next);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetProfile15MbtiActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

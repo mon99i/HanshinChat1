@@ -6,34 +6,73 @@ public class UserInfo {
 
     public UserInfo(){}
 
-    public UserInfo(String nickName, String hobby, String mbti, String displayName, int age, String major, String photoUrl) {
-        this.nickName = nickName;
+    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String hobby, String mbti, String displayName, String major, String photoUrl) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.studentId = studentId;
+        this.department = department;
+        this.height = height;
         this.hobby = hobby;
         this.mbti = mbti;
         this.displayName = displayName;
-        this.age = age;
         this.major = major;
         this.photoUrl = photoUrl;
     }
 
-    private String nickName;
+    private String name;
+    private String gender;
+    private Integer age;
+    private Integer studentId;
+    private String department;
+    private Integer height;
     private String hobby;
     private String mbti;
 
     private String displayName;
 
-    private int age;
-
     private String major;
 
     private static String photoUrl;
 
-    public String getNickName() {
-        return nickName;
+    public String getName() { return name; }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public String getGender() { return gender; }
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getDepartment() { return department; }
+
+    public void setDepartment(String department){
+        this.department = department;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public String getHobby() {
@@ -58,14 +97,6 @@ public class UserInfo {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getMajor() {

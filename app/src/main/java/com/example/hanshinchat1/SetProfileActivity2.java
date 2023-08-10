@@ -26,7 +26,7 @@ public class SetProfileActivity2 extends MainActivity {
     FirebaseUser user;
     FirebaseDatabase database;
     DatabaseReference myRef;*/
-    EditText nickname;
+    EditText name;
     EditText hobby;
     EditText mbti;
 
@@ -46,7 +46,7 @@ public class SetProfileActivity2 extends MainActivity {
         mAuth=FirebaseAuth.getInstance();
         user=mAuth.getCurrentUser();*/
 
-        nickname = (EditText) findViewById(R.id.nickname);
+        name = (EditText) findViewById(R.id.name);
         hobby = (EditText) findViewById(R.id.hobby);
         mbti = (EditText) findViewById(R.id.mbti);
         major = (EditText) findViewById(R.id.major);
@@ -71,12 +71,12 @@ public class SetProfileActivity2 extends MainActivity {
                 if (dataSnapshot.exists()) {
                     UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
 
-                    String strNickName = nickname.getText().toString();
+                    String strName = name.getText().toString();
                     String strMajor = major.getText().toString();
                     String strHobby = hobby.getText().toString();
                     String strMbti = mbti.getText().toString();
                     // UserInfo 객체 업데이트
-                    userInfo.setNickName(strNickName);
+                    userInfo.setName(strName);
                     userInfo.setMajor(strMajor);
                     userInfo.setHobby(strHobby);
                     userInfo.setMbti(strMbti);
