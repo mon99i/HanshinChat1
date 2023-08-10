@@ -80,6 +80,7 @@ public class SetProfileActivity2 extends MainActivity {
                     userInfo.setMajor(strMajor);
                     userInfo.setHobby(strHobby);
                     userInfo.setMbti(strMbti);
+                    userInfo.setUid(user.getUid());
 
 
                     // 업데이트된 UserInfo 객체를 실시간 데이터베이스에 저장

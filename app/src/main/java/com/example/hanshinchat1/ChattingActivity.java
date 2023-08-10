@@ -69,7 +69,7 @@ public class ChattingActivity extends MainActivity {
         edt_message = findViewById(R.id.edt_message);
         btn_submit = findViewById(R.id.btn_submit);
         chatting_txt_nickname = findViewById(R.id.chatting_txt_nickname);
-        chatting_txt_nickname.setText(opponentUser != null ? opponentUser.getNickName() : "");
+        chatting_txt_nickname.setText(opponentUser != null ? opponentUser.getName() : "");
     }
 
     private void initializeListener() {

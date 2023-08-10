@@ -1,8 +1,9 @@
 package com.example.hanshinchat1;
 
 import android.net.Uri;
+import java.io.Serializable;
 
-public class UserInfo {
+public class UserInfo implements Serializable{
 
     public UserInfo(){}
 
@@ -20,6 +21,7 @@ public class UserInfo {
         this.photoUrl = photoUrl;
     }
 
+    private String uid;
     private String name;
     private String gender;
     private Integer age;
@@ -35,6 +37,13 @@ public class UserInfo {
 
     private static String photoUrl;
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
     public String getName() { return name; }
     public void setName(String name) {
         this.name = name;
