@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     protected void checkProfileExist() {   //프로필 존재유무 확인
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = myRef.child("users").child(user.getUid());
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
 
         /*
         DatabaseReference usersRef = myRef.child("users").child(user.getUid());
@@ -208,12 +211,14 @@ public class MainActivity extends AppCompatActivity {
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
+                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
+
 
     protected void clickBoard() {
         ImageButton boardBtn = findViewById(R.id.post);
@@ -247,6 +252,13 @@ public class MainActivity extends AppCompatActivity {
         //updateUI(currentUser);
         // mAuth.addAuthStateListener(authStateListener);
 
+    }
+    @Override
+    public void onBackPressed() { //뒤로버튼 누를시
+        Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(intent);
+        finish();
+        //signOut();
     }
 
     @Override

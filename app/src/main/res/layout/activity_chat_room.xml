@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoomActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <LinearLayout
         android:id="@+id/top_view"
@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_room_black_24_xml"
+            android:src="@drawable/baseline_chat_black_24_xml"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
 
@@ -26,12 +26,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="방 목록"/>
+            android:text="채팅방"/>
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
+        <ImageButton
+            android:id="@+id/btn_addChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/addchat"
+            tools:layout_editor_absoluteX="78dp"
+            tools:layout_editor_absoluteY="32dp" />
 
         <ImageButton
             android:id="@+id/menu"
@@ -43,58 +53,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center">
+        android:layout_height="1450px"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/make_room"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
-            android:text="방 만들기"
-            android:textSize="13dp"
-            android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
+        <androidx.recyclerview.widget.RecyclerView
 
-        <Button
-            android:id="@+id/find_room"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
-            android:text="방 찾기"
-            android:textSize="13dp"
-            android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
-
-        <Button
-            android:id="@+id/find_room2"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
-            android:text="카테고리 찾기"
-            android:textSize="13dp"
-            android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/recycler_chatrooms"
             android:layout_width="match_parent"
             android:layout_height="480dp"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:layout_margin="10dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_meetRooms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                />
-
-        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottom_navigation"
@@ -108,36 +79,42 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_home_black_24_xml"/>
+            android:background="@drawable/baseline_home_black_24_xml"
+            android:foreground="?attr/selectableItemBackground" />
+
         <ImageButton
             android:id="@+id/room"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_room_black_24_xml"/>
+            android:background="@drawable/baseline_room_black_24_xml"
+            android:foreground="?attr/selectableItemBackground" />
+
         <ImageButton
             android:id="@+id/chat"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_chat_black_24_xml"/>
+            android:background="@drawable/baseline_chat_black_24_xml"
+            android:foreground="?attr/selectableItemBackground" />
+
         <ImageButton
             android:id="@+id/post"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_board_black_24_xml"/>
+            android:background="@drawable/baseline_board_black_24_xml"
+            android:foreground="?attr/selectableItemBackground" />
+
         <ImageButton
             android:id="@+id/info"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_profile_black_24_xml"/>
+            android:background="@drawable/baseline_profile_black_24_xml"
+            android:foreground="?attr/selectableItemBackground" />
+
     </LinearLayout>
 
 </LinearLayout>
+
