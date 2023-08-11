@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class SetProfile5StudentIdActivity extends MainActivity {
+public class    SetProfile5StudentIdActivity extends MainActivity {
 
     EditText studentId;
 

@@ -21,7 +21,7 @@ public class RoomActivity extends MainActivity {
     Dialog findRoomDialog;
     Dialog findRoomDialog2;
 
-    RecyclerView recycler_meetRooms;
+    RecyclerView recycler_matchRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +35,12 @@ public class RoomActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
+        setUpRecycler();
 
         Button makeRoom = findViewById(R.id.make_room);
         Button findRoom = findViewById(R.id.find_room);
         Button findRoom2 = findViewById(R.id.find_room2);
-        recycler_meetRooms=findViewById(R.id.recycler_meetRooms);
+        recycler_matchRooms=findViewById(R.id.recycler_matchRooms);
 
         findRoomDialog = new Dialog(RoomActivity.this);
         findRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
@@ -129,5 +130,8 @@ public class RoomActivity extends MainActivity {
                 });
             }
         });
+    }
+
+    private void setUpRecycler() {
     }
 }

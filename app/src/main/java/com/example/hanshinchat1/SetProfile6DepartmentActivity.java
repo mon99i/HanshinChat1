@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SetProfile6DepartmentActivity extends MainActivity {
@@ -34,15 +35,18 @@ public class SetProfile6DepartmentActivity extends MainActivity {
         department = (TextView) findViewById(R.id.department);
 
         Spinner spinner = findViewById(R.id.department_spinner);
+        String[] spinnerList = {"컴퓨터공학", "물리학", "영문영문과", "전자공학"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (List<String>) spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
 
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                department.setText((CharSequence) spinner);
+                String selectedDepartment = spinnerList[position];
+                department.setText(selectedDepartment);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

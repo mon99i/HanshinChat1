@@ -146,7 +146,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
            FirebaseDatabase.getInstance().getReference().child("users").child(opponentUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    txt_nickname.setText(snapshot.getValue(UserInfo.class).getNickName());
+                    txt_nickname.setText(snapshot.getValue(UserInfo.class).getName());
                     String imageUrl=snapshot.getValue(UserInfo.class).getPhotoUrl();
                     Uri imageUri=Uri.parse(imageUrl);
                     Glide.with(context).load(imageUri).into(profile);

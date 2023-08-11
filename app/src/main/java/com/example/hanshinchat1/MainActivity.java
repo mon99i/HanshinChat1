@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     protected void getGoogleCredentials() {
         String googleIdToken = "";
         // [START auth_google_cred]

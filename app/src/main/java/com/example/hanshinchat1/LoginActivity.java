@@ -168,7 +168,8 @@ public class LoginActivity extends MainActivity{
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            // 사용자의 프로필이 이미 존재하므로 HomeActivity로 이동
+                            // 사용자의 프로필이 이미 존재하므로 HomeActivity로 이동   수정필요
+                            //dataSnapshot.getValue(UserInfo.class).equals(null);
                             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                             startActivity(intent);
                             finish();
@@ -233,8 +234,6 @@ public class LoginActivity extends MainActivity{
                 });
         gsa = null;
     }*/
-
-
 
 
     // [START onactivityresult]

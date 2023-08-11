@@ -99,7 +99,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             holder.chatRoomKey = data.getKey();
 
                             holder.opponentUser = data.getValue(UserInfo.class);
-                            holder.txt_nickname.setText(data.getValue(UserInfo.class).getNickName());
+                            holder.txt_nickname.setText(data.getValue(UserInfo.class).getName());
                             String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
                             Uri imageUri=Uri.parse(imageUrl);
                             Glide.with(context).load(imageUri).into(holder.profile);

@@ -11,9 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class MakeRoomActivity extends MainActivity {
 
@@ -24,6 +30,12 @@ public class MakeRoomActivity extends MainActivity {
     Button btn_makeRoom;;
     Spinner participants_Spinner;
     Spinner department_Spinner;
+
+    String selectedGender;
+    String selectedCategory;
+    RadioButton radioButton;
+
+
 
 
 
@@ -39,6 +51,7 @@ public class MakeRoomActivity extends MainActivity {
 
         clickProfile();
         initializeView();
+        initializeListener();
 
         participants_Spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -97,17 +110,81 @@ public class MakeRoomActivity extends MainActivity {
             @Override
             public void onClick(View v) {
 
-
-                //makeRoom();
-                Intent intent=new Intent(getApplicationContext(),RoomActivity.class);
-                startActivity(intent);
-                finish();
-
+                makeRoom();
             }
         });
+
+        gender_radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.female_radio_button:
+                        radioButton=findViewById(R.id.female_radio_button);
+                        selectedGender=radioButton.getText().toString();
+
+                        break;
+                    case R.id.male_radio_button:
+                        radioButton=findViewById(R.id.male_radio_button);
+                        selectedGender=radioButton.getText().toString();
+                        break;
+                }
+            }
+        });
+
+        cateogry_radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.meeting_radio_button:
+                        radioButton=findViewById(R.id.meeting_radio_button);
+                        selectedCategory=radioButton.getText().toString();
+                    break;
+                    case R.id.groupMeeting_radio_button:
+                        radioButton=findViewById(R.id.groupMeeting_radio_button);
+                        selectedCategory=radioButton.getText().toString();
+                        break;
+                    case R.id.lunch_radio_button:
+                        radioButton=findViewById(R.id.lunch_radio_button);
+                        selectedCategory=radioButton.getText().toString();
+                        break;
+                    case R.id.other_radio_button:
+                        radioButton=findViewById(R.id.other_radio_button);
+                        selectedCategory=radioButton.getText().toString();
+                        break;
+
+                }
+            }
+        });
+
     }
 
     private void makeRoom() {
+
+        participants_Spinner=findViewById(R.id.participants_spinner);
+        department_Spinner=findViewById(R.id.department_spinner);
+
+        edt_roomTitle=findViewById(R.id.edt_roomTitle);
+        cateogry_radio_group=findViewById(R.id.category_radio_group);
+        gender_radio_group=findViewById(R.id.gender_radio_group);
+
+        MatchInfo matchInfo=new MatchInfo();
+        matchInfo.setNum(participants_Spinner.getSelectedItem().toString());
+        matchInfo.setDepartment(department_Spinner.getSelectedItem().toString());
+        matchInfo.setTitle(edt_roomTitle.getText().toString());
+        matchInfo.setGender(selectedGender);
+        matchInfo.setCategory(selectedCategory);
+
+        MatchRoom matchRoom=new MatchRoom(user.getUid(),null,matchInfo);
+
+        myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent=new Intent(getApplicationContext(),RoomActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
 
 
