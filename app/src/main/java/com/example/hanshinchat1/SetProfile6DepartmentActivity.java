@@ -66,6 +66,7 @@ public class SetProfile6DepartmentActivity extends MainActivity {
                             if (!strDepartment.isEmpty()) {
                                 try {
                                     userInfo.setDepartment(strDepartment);
+                                    userInfo.setUid(user.getUid());
                                     usersRef.setValue(userInfo);
 
                                     Intent intent = new Intent(getApplicationContext(), SetProfile7HeightActivity.class);

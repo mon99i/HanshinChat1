@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class MatchRoom {
 
-    protected String host;
-    protected Map<String,Guest> guests;
-    protected MatchInfo matchInfo;
+    private String host;
+    private Map<String,Guest> guests;
+    private MatchInfo matchInfo;
 
     public MatchRoom(String host, Map<String, Guest> guests, MatchInfo matchInfo) {
         this.host = host;
@@ -42,4 +42,6 @@ public class MatchRoom {
     public void setMatchInfo(MatchInfo matchInfo) {
         this.matchInfo = matchInfo;
     }
+
+
 }

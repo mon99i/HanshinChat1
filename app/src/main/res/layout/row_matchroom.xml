@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chatRoomBackground"
+    android:id="@+id/matchRoomBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_row_room_layout"
@@ -24,7 +24,7 @@
 -->
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_roomCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_roomTitle"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"

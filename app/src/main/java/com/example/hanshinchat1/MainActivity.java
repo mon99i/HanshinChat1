@@ -1,14 +1,26 @@
 package com.example.hanshinchat1;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,11 +37,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class MainActivity extends AppCompatActivity {
 
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -42,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount gsa;
 
+    private static final String TAG = "MainActivity";
 
     protected void checkCurrentUser() {     //현재 사용자 확인
         // [START check_current_user]
@@ -133,6 +150,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });*/
     }
+
+
+
 
     protected void signOut() {
 
@@ -267,6 +287,84 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         // mAuth.removeAuthStateListener(authStateListener);
     }
+
+    protected void checkMatchRequest(){
+        /*FirebaseDatabase.getInstance().getReference().child("chatRooms")
+                .orderByChild("users/" + myUid).equalTo(true)
+
+        Query query=FirebaseDatabase.getInstance().getReference().child("matchRooms");
+*/
+
+        FirebaseDatabase.getInstance().getReference().child("matchRooms")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item:snapshot.getChildren()){
+                            String hostUid=item.getValue(MatchRoom.class).getHost();
+
+                            for(DataSnapshot subItem:item.child("guest").getChildren()){
+                                Boolean request= (Boolean) subItem.child("request").getValue();
+
+                                if (user.getUid().equals(hostUid) && request.equals(true)) {
+                                    showAlertDialog();
+
+                                }
+                            }
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Log.d(TAG, "checkRequest3onCancelled: ");
+                    }
+                });
+
+    }
+
+    protected void showAlertDialog(){
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View alert_dialog= inflater.inflate(R.layout.alert_dialog, null);
+
+        // 커스텀 레이아웃의 버튼 설정
+        Button declineButton = alert_dialog.findViewById(R.id.declineButton);
+        Button acceptButton = alert_dialog.findViewById(R.id.acceptButton);
+
+        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(alert_dialog);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+        //alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  //투명하게
+
+        // 거절 버튼 클릭 이벤트 처리
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                // 거절 동작 처리
+            }
+        });
+
+        // 수락 버튼 클릭 이벤트 처리
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                // 수락 동작 처리
+            }
+        });/**/
+        // 다이얼로그 표시
+        alertDialog.show();
+    }
+
+
+
     /* authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
