@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -73,7 +74,7 @@
 
 
         <activity
-            android:name=".ListActivity"
+            android:name=".board.BoardActivity"
             android:exported="false">
         </activity>
 
@@ -83,7 +84,17 @@
         </activity>
 
         <activity
-            android:name=".BoardWriteActivity"
+            android:name=".board.BoardWriteActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".board.ListActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".board.BoardEditActivity"
             android:exported="false">
         </activity>
 
