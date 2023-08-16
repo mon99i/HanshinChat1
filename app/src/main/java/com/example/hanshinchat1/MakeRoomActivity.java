@@ -1,20 +1,15 @@
 package com.example.hanshinchat1;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -167,14 +162,16 @@ public class MakeRoomActivity extends MainActivity {
         cateogry_radio_group=findViewById(R.id.category_radio_group);
         gender_radio_group=findViewById(R.id.gender_radio_group);
 
-        MatchInfo matchInfo=new MatchInfo();
-        matchInfo.setNum(participants_Spinner.getSelectedItem().toString());
-        matchInfo.setDepartment(department_Spinner.getSelectedItem().toString());
-        matchInfo.setTitle(edt_roomTitle.getText().toString());
-        matchInfo.setGender(selectedGender);
-        matchInfo.setCategory(selectedCategory);
+        RoomInfo roomInfo =new RoomInfo();
+        roomInfo.setHost(user.getUid());
+        roomInfo.setNum(participants_Spinner.getSelectedItem().toString());
+        roomInfo.setDepartment(department_Spinner.getSelectedItem().toString());
+        roomInfo.setTitle(edt_roomTitle.getText().toString());
+        roomInfo.setGender(selectedGender);
+        roomInfo.setCategory(selectedCategory);
 
-        MatchRoom matchRoom=new MatchRoom(user.getUid(),null,matchInfo);
+        MatchRoom matchRoom=new MatchRoom(roomInfo,null);
+
 
         myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

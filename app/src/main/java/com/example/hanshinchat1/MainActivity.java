@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,7 +83,7 @@ public abstract class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = myRef.child("users").child(user.getUid());
 
-        if(user!=null){
+        if (user != null) {
 
             usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -105,7 +106,6 @@ public abstract class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
 
 
     }
@@ -150,8 +150,6 @@ public abstract class MainActivity extends AppCompatActivity {
                     }
                 });*/
     }
-
-
 
 
     protected void signOut() {
@@ -274,9 +272,10 @@ public abstract class MainActivity extends AppCompatActivity {
         // mAuth.addAuthStateListener(authStateListener);
 
     }
+
     @Override
     public void onBackPressed() { //뒤로버튼 누를시
-        Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
         finish();
         //signOut();
@@ -288,50 +287,43 @@ public abstract class MainActivity extends AppCompatActivity {
         // mAuth.removeAuthStateListener(authStateListener);
     }
 
-    protected void checkMatchRequest(){
-        /*FirebaseDatabase.getInstance().getReference().child("chatRooms")
-                .orderByChild("users/" + myUid).equalTo(true)
-
-        Query query=FirebaseDatabase.getInstance().getReference().child("matchRooms");
-*/
+    protected void checkMatchRequest() {
 
         FirebaseDatabase.getInstance().getReference().child("matchRooms")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .orderByChild("roomInfo/host").equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot item:snapshot.getChildren()){
-                            String hostUid=item.getValue(MatchRoom.class).getHost();
+                       for(DataSnapshot item:snapshot.getChildren()){
+                           for(DataSnapshot subItem:item.child("matchInfo").getChildren()){
+                               Boolean request=subItem.getValue(MatchInfo.class).getRequest();
+                               if(request.equals(true)){
+                                   showAlertDialog();
+                               }
 
-                            for(DataSnapshot subItem:item.child("guest").getChildren()){
-                                Boolean request= (Boolean) subItem.child("request").getValue();
+                            /*   if (user.getUid().equals(hostUid) && request.equals(true)) {
+                                   showAlertDialog();
 
-                                if (user.getUid().equals(hostUid) && request.equals(true)) {
-                                    showAlertDialog();
-
-                                }
-                            }
-
-
-                        }
+                               }*/
+                           }
+                       }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
-                        Log.d(TAG, "checkRequest3onCancelled: ");
                     }
                 });
 
     }
 
-    protected void showAlertDialog(){
+    protected void showAlertDialog() {
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View alert_dialog= inflater.inflate(R.layout.alert_dialog, null);
+        View alert_dialog = inflater.inflate(R.layout.alert_dialog, null);
 
         // 커스텀 레이아웃의 버튼 설정
-        Button declineButton = alert_dialog.findViewById(R.id.declineButton);
         Button acceptButton = alert_dialog.findViewById(R.id.acceptButton);
+        Button declineButton = alert_dialog.findViewById(R.id.declineButton);
 
         // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -342,26 +334,46 @@ public abstract class MainActivity extends AppCompatActivity {
         alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
         //alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  //투명하게
 
-        // 거절 버튼 클릭 이벤트 처리
-        declineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                // 거절 동작 처리
-            }
-        });
 
         // 수락 버튼 클릭 이벤트 처리
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateMatchState(true);
+
                 alertDialog.dismiss();
                 // 수락 동작 처리
             }
         });/**/
+
+        // 거절 버튼 클릭 이벤트 처리
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateMatchState(false);
+
+                alertDialog.dismiss();
+                // 거절 동작 처리
+            }
+        });
+
         // 다이얼로그 표시
         alertDialog.show();
     }
+
+
+    private void updateMatchState(boolean b) {
+        if(b==true){
+
+        }
+        else{
+
+        }
+    }
+
+
+
 
 
 
