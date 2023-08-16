@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -73,7 +72,7 @@
 
 
         <activity
-            android:name=".board.BoardActivity"
+            android:name=".ListActivity"
             android:exported="false">
         </activity>
 
@@ -83,17 +82,7 @@
         </activity>
 
         <activity
-            android:name=".board.BoardWriteActivity"
-            android:exported="false">
-        </activity>
-
-        <activity
-            android:name=".board.ListActivity"
-            android:exported="false">
-        </activity>
-
-        <activity
-            android:name=".board.BoardEditActivity"
+            android:name=".BoardWriteActivity"
             android:exported="false">
         </activity>
 

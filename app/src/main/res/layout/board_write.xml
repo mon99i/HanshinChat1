@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".board.BoardWriteActivity"
+    tools:context=".BoardWriteActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -46,32 +46,16 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
     <EditText
-        android:hint="제목"
-        android:id="@+id/writeTitleArea"
-        android:layout_marginTop="15dp"
+        android:hint="내용"
+        android:id="@+id/writeTextArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-        <EditText
-            android:hint="내용"
-            android:id="@+id/writeContentArea"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"/>
-
-        <ImageView
-            android:id="@+id/imageArea"
-            android:src="@drawable/addchat"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"/>
 
     <Button
         android:id="@+id/writeUploadBtn"
         android:text="글쓰기"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
