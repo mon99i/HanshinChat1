@@ -117,6 +117,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         private ImageView profile;
         private TextView txtIsShown;
+        private TextView txt_nickname;
 
         OtherMessageViewHolder(View itemView) {
             super(itemView);
@@ -125,14 +126,13 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             txt_Message = itemView.findViewById(R.id.opponent_txt_message);
             txt_date = itemView.findViewById(R.id.opponent_txt_date);
             txtIsShown = itemView.findViewById(R.id.opponent_txt_isShown);
+            txt_nickname = itemView.findViewById(R.id.row_opponent_nickname);
 
         }
 
         void bind(int position) {
             Message message = messages.get(position);
             String sendDate = message.getSended_date();
-            opponentUid=message.getSenderUid();
-
             txt_Message.setText(message.getContent());
             txt_date.setText(getKoreanDateText(sendDate));
 
@@ -141,12 +141,16 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             } else {
                 txtIsShown.setVisibility(View.VISIBLE);
             }
+
+            opponentUid=message.getSenderUid();
            FirebaseDatabase.getInstance().getReference().child("users").child(opponentUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    txt_nickname.setText(snapshot.getValue(UserInfo.class).getName());
                     String imageUrl=snapshot.getValue(UserInfo.class).getPhotoUrl();
                     Uri imageUri=Uri.parse(imageUrl);
                     Glide.with(context).load(imageUri).into(profile);
+
 
                 }
 
@@ -161,7 +165,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
 
-        String getKoreanDateText(String sendDate){
+        String getKoreanDateText(String sendDate){                   //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
             LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
             // 시간 포맷 지정
@@ -216,7 +220,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
         }
 
-        String getKoreanDateText(String sendDate){
+        String getKoreanDateText(String sendDate){                               //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
             LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
             // 시간 포맷 지정

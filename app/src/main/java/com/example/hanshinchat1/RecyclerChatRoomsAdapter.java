@@ -99,7 +99,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             holder.chatRoomKey = data.getKey();
 
                             holder.opponentUser = data.getValue(UserInfo.class);
-                            holder.txt_nickname.setText(data.getValue(UserInfo.class).getNickName());
+                            holder.txt_nickname.setText(data.getValue(UserInfo.class).getName());
                             String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
                             Uri imageUri=Uri.parse(imageUrl);
                             Glide.with(context).load(imageUri).into(holder.profile);
@@ -171,7 +171,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
         }
     }
 
-    private String getLastMessageTimeString(String lastTimeString) {
+    private String getLastMessageTimeString(String lastTimeString) {    //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
         try {
 
 

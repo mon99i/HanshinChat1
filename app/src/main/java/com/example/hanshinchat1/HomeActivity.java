@@ -3,15 +3,28 @@ package com.example.hanshinchat1;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 public class HomeActivity extends MainActivity {
 
+
+    private final String CHANNEL_ID = "my_notification_chanel";
+    static final int NOTIFICATION_ID = 1001;
+    private static final String TEXT_REPLY = "text_reply";
+
+    private static final String TAG="채널생성실패";
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
@@ -22,18 +35,22 @@ public class HomeActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
+        checkMatchRequest();
 
         Button mbtiMatching = findViewById(R.id.mbti_matching);
         Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
         Button friendAroundMatching = findViewById(R.id.friend_around_matching);
         Button topUserMatching = findViewById(R.id.top_user_matching);
 
+
         mbtiMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
+                showAlertDialog();
+
             }
         });
 
@@ -95,23 +112,76 @@ public class HomeActivity extends MainActivity {
         });
 
     }
-    /*protected void signOut() {
 
 
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, task -> {
-                    mAuth.signOut();
-                    Toast.makeText(getApplicationContext(), R.string.success_logout, Toast.LENGTH_SHORT).show();
+    //나중에쓸수있음
+  /*  private void showNotification() {
+        createNotificationChannel();  // notificatio 채널 생성
 
-                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
-                    startActivity(intent);
-                    // ...
-                });
-        gsa = null;
+        RemoteViews remoteView= new RemoteViews(getPackageName(), R.layout.notification);
+
+        // "수락" 버튼 클릭 시 실행될 Intent 및 PendingIntent 설정
+        Intent acceptIntent = new Intent(this, MyBroadcastReceiver.class);
+        acceptIntent.setAction("ACTION_ACCEPT");
+        PendingIntent acceptPendingIntent =
+                PendingIntent.getBroadcast(this, 0, acceptIntent, PendingIntent.FLAG_MUTABLE);
+        remoteView.setOnClickPendingIntent(R.id.acceptButton,acceptPendingIntent);
+
+        // "거절" 버튼 클릭 시 실행될 Intent 및 PendingIntent 설정
+        Intent declineIntent=new Intent(this,MyBroadcastReceiver.class);
+        declineIntent.setAction("ACTION_DECLINE");
+        PendingIntent declinePendingIntent=
+                PendingIntent.getBroadcast(this,0,declineIntent,PendingIntent.FLAG_MUTABLE);
+        remoteView.setOnClickPendingIntent(R.id.declineButton,declinePendingIntent);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.notification_icon)
+                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setCustomContentView(remoteView);
+
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Log.d(TAG, "showNotification: 실패");
+            return;
+        }
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+
+    }
+
+    private void createNotificationChannel(){  //채널 먼저 생성해야함
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //String channelId = "my_channel_id";
+            CharSequence channelName = "My Channel";   //채널이름
+            String channelDescription = "My custom notification channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, channelName, importance); // Notification 채널 생성
+            channel.setDescription(channelDescription);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            //Log.d(TAG, "createNotificationChannel: 성공");
+        }
+
+    }
 
 
 
-    }*/
+
+*/
+
+
 
 
    /* private void deleteUerInfo() {

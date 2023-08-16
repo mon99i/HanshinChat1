@@ -49,8 +49,7 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 users.clear();
-
-                for (DataSnapshot data : snapshot.getChildren()) {
+               /* for (DataSnapshot data : snapshot.getChildren()) {
                     UserInfo item = data.getValue(UserInfo.class);
                     if (item != null && item.getUid().equals(myUid)) {
                         currentUser = item; // 전체 사용자 목록에서 현재 사용자는 제외
@@ -59,7 +58,20 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
                         allUsers.add(item); // 전체 사용자 목록에 추가
                     }
                 }
-                users = (ArrayList<UserInfo>) allUsers.clone();
+                users = (ArrayList<UserInfo>) allUsers.clone();*/
+
+                for(DataSnapshot data : snapshot.getChildren()){
+                    UserInfo item=data.getValue(UserInfo.class);
+                    if(item!=null&&data.getKey().equals(myUid)){
+                        currentUser=item;
+                    }
+                    else if(item!=null) {
+                        allUsers.add(item);
+                    }
+                }
+                users= (ArrayList<UserInfo>) allUsers.clone();
+
+
                 notifyDataSetChanged(); // 화면 업데이트
             }
 
@@ -75,7 +87,7 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
         } else {
             ArrayList<UserInfo> matchedList = new ArrayList<>();
             for (UserInfo user : allUsers) {
-                if (user.getNickName() != null && user.getNickName().contains(target)) {
+                if (user.getName() != null && user.getName().contains(target)) {
                     matchedList.add(user); // 검색어 포함된 항목 불러오기
                 }
             }
@@ -98,7 +110,7 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserInfo user = users.get(holder.getAdapterPosition());
-        holder.txt_nickname.setText(user.getNickName());
+        holder.txt_nickname.setText(user.getName());
         holder.background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,7 +160,6 @@ public class RecyclerUsersAdapter extends RecyclerView.Adapter<RecyclerUsersAdap
         context.startActivity(intent);
         ((AppCompatActivity) context).finish();
     }
-
     @Override
     public int getItemCount() {
         return users.size();
