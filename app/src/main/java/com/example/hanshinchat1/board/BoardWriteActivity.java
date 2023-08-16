@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -47,23 +48,29 @@ public class BoardWriteActivity extends MainActivity {
 
             @Override
             public void onClick(View v) {
-//                EditText writeTitle = findViewById(R.id.writeTitleArea);
-//                EditText writeContent = findViewById(R.id.writeContentArea);
+                String title = writeTitle.getText().toString().trim();
+                String content = writeContent.getText().toString().trim();
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("board");
+                if (title.isEmpty() || content.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "제목과 내용을 입력하세요!", Toast.LENGTH_SHORT).show();
 
-                String key = myRef.push().getKey();
-                myRef.child(key).setValue(new ListViewItem(writeTitle.getText().toString(), writeContent.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
+                } else {
 
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class );
-                startActivity(intent);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("board");
 
-                if(isImageUpload == true) {
-                    imageUpload(key);
+                    String key = myRef.push().getKey();
+                    myRef.child(key).setValue(new ListViewItem(writeTitle.getText().toString(), writeContent.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
+
+                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                    startActivity(intent);
+
+                    if (isImageUpload == true) {
+                        imageUpload(key);
+                    }
+
+                    finish();
                 }
-
-                finish();
             }
         });
 
