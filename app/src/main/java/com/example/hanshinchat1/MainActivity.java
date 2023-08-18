@@ -6,6 +6,8 @@ import android.app.Notification;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -15,10 +17,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -325,19 +329,39 @@ public abstract class MainActivity extends AppCompatActivity {
         View alert_dialog = inflater.inflate(R.layout.alert_dialog, null);
 
         // 커스텀 레이아웃의 버튼 설정
-        Button acceptButton = alert_dialog.findViewById(R.id.acceptButton);
+        ConstraintLayout layout=alert_dialog.findViewById(R.id.alert_layout);
+      /*  Button acceptButton = alert_dialog.findViewById(R.id.acceptButton);
         Button declineButton = alert_dialog.findViewById(R.id.declineButton);
-
+*/
         // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(alert_dialog);
 
+
+
         final AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
         alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-        //alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  //투명하게
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
+        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 
+
+        // 다이얼로그 표시
+        alertDialog.show();
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(getApplicationContext(), DetermineMatchActivity.class);
+                startActivity(intent);
+                finish();
+                //showMatchInfo();
+            }
+        });
+
+/*
         // 수락 버튼 클릭 이벤트 처리
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -347,7 +371,7 @@ public abstract class MainActivity extends AppCompatActivity {
                 alertDialog.dismiss();
                 // 수락 동작 처리
             }
-        });/**/
+        });*//**//*
 
         // 거절 버튼 클릭 이벤트 처리
         declineButton.setOnClickListener(new View.OnClickListener() {
@@ -359,10 +383,87 @@ public abstract class MainActivity extends AppCompatActivity {
                 alertDialog.dismiss();
                 // 거절 동작 처리
             }
+        });*/
+
+      /*  alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                // 여기에 다이얼로그가 닫힐 때 실행되어야 할 코드를 작성합니다.
+                // 버튼 외의 특정 이벤트를 처리합니다.
+            }
+        });*/
+
+
+
+    }
+
+    private void showMatchInfo() {
+
+        Intent intent=new Intent(getApplicationContext(),DetermineMatchActivity.class);
+        ArrayList<String> matchInfoList=new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("matchRooms").orderByChild("roomInfo/host")
+                .equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item : snapshot.getChildren()){
+                    for(DataSnapshot subItem : item.child("matchInfo").getChildren()){
+                        String requestUid;
+                        Boolean request=subItem.getValue(MatchInfo.class).getRequest();
+                        if(request.equals(true)){
+                            requestUid=subItem.getKey();
+                            matchInfoList.add(requestUid);
+                        }
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
 
-        // 다이얼로그 표시
-        alertDialog.show();
+        for(String uid:matchInfoList){
+            FirebaseDatabase.getInstance().getReference().child("users").orderByChild("uid")
+                    .equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot item:snapshot.getChildren()){
+                               UserInfo userInfo=item.getValue(UserInfo.class);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }
+
+     /*   FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot item:snapshot.getChildren()){
+                    if(item.getKey()== matchInfoList.get())
+                }
+
+                for(String uid:matchInfoList){
+                    for(DataSnapshot item:snapshot.getChildren()){
+                        if(item)
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+*/
+
     }
 
 
