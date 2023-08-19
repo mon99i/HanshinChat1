@@ -2,60 +2,34 @@ package com.example.hanshinchat1;
 
 public class MatchInfo {
 
+    private Boolean request;
 
-    protected String title;
-    protected String category;
-    protected String num;
-    protected String department;
+    public MatchInfo(){
+        request=false;
+        approved=false;
+    };
 
-    public MatchInfo(String title, String category, String num, String department, String gender) {
-        this.title = title;
-        this.category = category;
-        this.num = num;
-        this.department = department;
-        this.gender = gender;
-    }
-    public MatchInfo(){};
 
-    public String getTitle() {
-        return title;
+    public MatchInfo(Boolean request, Boolean approved) {
+        this.request = request;
+        this.approved = approved;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Boolean getRequest() {
+        return request;
     }
 
-    public String getCategory() {
-        return category;
+    public void setRequest(Boolean request) {
+        this.request = request;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public Boolean getApproved() {
+        return approved;
     }
 
-    public String getNum() {
-        return num;
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 
-    public void setNum(String num) {
-        this.num = num;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    protected String gender;
+    private Boolean approved;
 }

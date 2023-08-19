@@ -5,41 +5,31 @@ import java.util.Map;
 
 public class MatchRoom {
 
-    protected String host;
-    protected Map<String,Guest> guests;
-    protected MatchInfo matchInfo;
+    private RoomInfo roomInfo;
 
-    public MatchRoom(String host, Map<String, Guest> guests, MatchInfo matchInfo) {
-        this.host = host;
-        this.guests = guests;
-        this.matchInfo = matchInfo;
-    }
-    public MatchRoom(){
-        guests=new HashMap<>();
-        matchInfo=new MatchInfo();
+    private Map<String,MatchInfo> matchInfo;
+
+
+    public MatchRoom(){};
+
+    public RoomInfo getRoomInfo() {
+        return roomInfo;
     }
 
-    public String getHost() {
-        return host;
+    public void setRoomInfo(RoomInfo roomInfo) {
+        this.roomInfo = roomInfo;
     }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public Map<String, Guest> getGuests() {
-        return guests;
-    }
-
-    public void setGuests(Map<String, Guest> guests) {
-        this.guests = guests;
-    }
-
-    public MatchInfo getMatchInfo() {
+    public Map<String, MatchInfo> getMatchInfo() {
         return matchInfo;
     }
 
-    public void setMatchInfo(MatchInfo matchInfo) {
+    public void setMatchInfo(Map<String, MatchInfo> matchInfo) {
+        this.matchInfo = matchInfo;
+    }
+
+    public MatchRoom(RoomInfo roomInfo, Map<String, MatchInfo> matchInfo) {
+        this.roomInfo = roomInfo;
         this.matchInfo = matchInfo;
     }
 }
