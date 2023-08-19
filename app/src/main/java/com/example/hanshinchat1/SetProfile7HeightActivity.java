@@ -3,8 +3,11 @@ package com.example.hanshinchat1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,20 +17,42 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SetProfile7HeightActivity extends MainActivity {
 
-    EditText studentId;
+    TextView height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_5_studentid);
+        setContentView(R.layout.set_profile_7_height);
 
-        Button nextBtn = findViewById(R.id.set_studentid_next);
+        Button nextBtn = findViewById(R.id.set_height_next);
 
-        studentId = (EditText) findViewById(R.id.student_id);
+        height = (TextView) findViewById(R.id.height);
 
+        Spinner spinner = findViewById(R.id.height_spinner);
+        String[] spinnerList = getResources().getStringArray(R.array.키);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedDepartment = spinnerList[position];
+                height.setText(selectedDepartment);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                height.setText("키 선택");
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,26 +62,22 @@ public class SetProfile7HeightActivity extends MainActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                            String strHeight = height.getText().toString();
+                            if (!strHeight.isEmpty()) {
+                                try {
+                                    Integer intHeight = Integer.valueOf(strHeight);
+                                    userInfo.setHeight(intHeight);
+                                    usersRef.setValue(userInfo);
 
-                            String studentIdString = studentId.getText().toString();
-                            if (!studentIdString.isEmpty()) {
-                                if (studentIdString.length() == 9) {
-                                    try {
-                                        Integer intStudentId = Integer.valueOf(studentIdString);
-                                        userInfo.setStudentId(intStudentId);
-                                        usersRef.setValue(userInfo);
-                                        Intent intent = new Intent(getApplicationContext(), SetProfile6DepartmentActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                                    } catch (NumberFormatException e) {
-                                        Toast.makeText(getApplicationContext(), "올바른 학번을 입력해주세요", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "학번은 9자리여야 합니다", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile8ReligionActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                                } catch (NumberFormatException e) {
+                                    Toast.makeText(getApplicationContext(), "올바른 키를 선택해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "학번을 입력해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "키를 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
@@ -73,7 +94,6 @@ public class SetProfile7HeightActivity extends MainActivity {
                 });
             }
         });
-
 
     }
 }

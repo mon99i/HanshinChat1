@@ -35,7 +35,7 @@ public class SetProfile6DepartmentActivity extends MainActivity {
         department = (TextView) findViewById(R.id.department);
 
         Spinner spinner = findViewById(R.id.department_spinner);
-        String[] spinnerList = {"컴퓨터공학", "물리학", "영문영문과", "전자공학"};
+        String[] spinnerList = getResources().getStringArray(R.array.학과);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -73,10 +73,10 @@ public class SetProfile6DepartmentActivity extends MainActivity {
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 키를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 학과를 선택해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "키를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "학과를 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();

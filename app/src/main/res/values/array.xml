@@ -6,7 +6,7 @@
         <item>한국사학과</item>
         <item>독일어문화학과</item>
         <item>종교문화학과</item>
-        <item>디지털영상문화콘테츠학과</item>
+        <item>디지털영상문화콘텐츠학과</item>
         <item>영미문화학과</item>
         <item>문예창작학과</item>
         <item>철학과</item>
@@ -101,6 +101,37 @@
         <item>199</item>
         <item>200</item>
         <item>201~</item>
+    </string-array>
 
+    <string-array name="종교">
+        <item>무교</item>
+        <item>불교</item>
+        <item>개신교</item>
+        <item>천주교</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="지역">
+        <item></item>
+    </string-array>
+
+    <string-array name="mbti">
+        <item>ESFP</item>
+        <item>ESFJ</item>
+        <item>ESTP</item>
+        <item>ESTJ</item>
+        <item>ENFP</item>
+        <item>ENFJ</item>
+        <item>ENTP</item>
+        <item>ENTJ</item>
+        <item>ISFP</item>
+        <item>ISFJ</item>
+        <item>ISTP</item>
+        <item>ISTJ</item>
+        <item>INFP</item>
+        <item>INFJ</item>
+        <item>INTP</item>
+        <item>INTJ</item>
+        <item>MB어쩌구는 모르겠네요</item>
     </string-array>
 </resources>
