@@ -22,14 +22,21 @@
 
         <Spinner
             android:layout_margin="10dp"
-            android:id="@+id/religion_spinner"
+            android:id="@+id/first_address_spinner"
             android:spinnerMode="dialog"
-            android:entries="@array/지역"
+            android:entries="@array/도"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/second_address_spinner"
+            android:spinnerMode="dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/religion"
+            android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="10dp"

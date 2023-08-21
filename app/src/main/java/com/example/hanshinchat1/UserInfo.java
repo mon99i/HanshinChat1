@@ -7,7 +7,7 @@ public class UserInfo implements Serializable{
 
     public UserInfo(){}
 
-    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String religion, String hobby, String mbti, String displayName, String major, String photoUrl) {
+    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String religion, String address, String hobby, String mbti, String displayName, String major, String photoUrl) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -15,6 +15,7 @@ public class UserInfo implements Serializable{
         this.department = department;
         this.height = height;
         this.religion = religion;
+        this.address = address;
         this.hobby = hobby;
         this.mbti = mbti;
         this.displayName = displayName;
@@ -30,6 +31,7 @@ public class UserInfo implements Serializable{
     private String department;
     private Integer height;
     private String religion;
+    private String address;
     private String hobby;
     private String mbti;
 
@@ -88,6 +90,12 @@ public class UserInfo implements Serializable{
 
     public void setReligion(String religion){
         this.religion = religion;
+    }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getHobby() {
