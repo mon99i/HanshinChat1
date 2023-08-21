@@ -59,6 +59,7 @@ public class SetProfile9addressActivity extends MainActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_second = adspin2.getItem(i).toString();
+                            address.setText(choice_first + " " + choice_second);
                         }
 
                         @Override
