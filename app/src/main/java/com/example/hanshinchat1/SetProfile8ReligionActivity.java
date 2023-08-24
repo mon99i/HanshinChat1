@@ -68,7 +68,7 @@ public class SetProfile8ReligionActivity extends MainActivity {
                                     userInfo.setReligion(strReligion);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile8ReligionActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile9addressActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

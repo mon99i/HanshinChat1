@@ -59,7 +59,9 @@ public class HomeActivity extends MainActivity {
         idealTypeMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
