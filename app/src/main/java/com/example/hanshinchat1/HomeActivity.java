@@ -51,7 +51,7 @@ public class HomeActivity extends MainActivity {
                 /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
                 startActivity(intent);
                 finish();*/
-                showAlertDialog();
+                ;
 
             }
         });

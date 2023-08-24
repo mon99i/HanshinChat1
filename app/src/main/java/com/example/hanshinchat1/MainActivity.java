@@ -1,34 +1,22 @@
 package com.example.hanshinchat1;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Notification;
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 
-import com.example.hanshinchat1.board.BoardActivity;
 import com.example.hanshinchat1.board.ListActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -44,14 +32,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class MainActivity extends AppCompatActivity {
 
@@ -65,6 +50,12 @@ public abstract class MainActivity extends AppCompatActivity {
     StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount gsa;
+
+    ArrayList<String> requestedUidList;
+    ArrayList<UserInfo> requestedUserInfoList;
+
+    ArrayList<String> matchRoomKeyList;
+    ArrayList<MatchRoom> matchRoomList;
 
     private static final String TAG = "MainActivity";
 
@@ -281,7 +272,7 @@ public abstract class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() { //뒤로버튼 누를시
+    public void onBackPressed() { //뒤로버튼 전페이지
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
         finish();
@@ -295,24 +286,41 @@ public abstract class MainActivity extends AppCompatActivity {
     }
 
     protected void checkMatchRequest() {
+        requestedUidList = new ArrayList<>();
+        requestedUserInfoList=new ArrayList<>();
+        matchRoomKeyList=new ArrayList<>();
+        matchRoomList=new ArrayList<>();
 
+        //내가 만든 방을 기준으로 조회
         FirebaseDatabase.getInstance().getReference().child("matchRooms")
                 .orderByChild("roomInfo/host").equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       for(DataSnapshot item:snapshot.getChildren()){
-                           for(DataSnapshot subItem:item.child("matchInfo").getChildren()){
-                               Boolean request=subItem.getValue(MatchInfo.class).getRequest();
-                               if(request.equals(true)){
-                                   showAlertDialog();
-                               }
+                        int requestCount=0;
 
-                            /*   if (user.getUid().equals(hostUid) && request.equals(true)) {
-                                   showAlertDialog();
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            Log.d(TAG, "onDataChange: "+requestCount);
+                            for (DataSnapshot subItem : item.child("matchInfo").getChildren()) {
+                                Boolean request = subItem.getValue(MatchInfo.class).getRequest();
+                                Boolean confirmed=subItem.getValue(MatchInfo.class).getConfirmed();
 
-                               }*/
-                           }
-                       }
+                                if (request.equals(true)&&confirmed.equals(false)) {  //요청이들어온후 요청확인이 안된경우의 request수 계산
+                                    requestCount++;
+                                    requestedUidList.add(subItem.getKey());  //요청이 들어온 uid 리스트에 저장
+                                    matchRoomKeyList.add(item.getKey());     //요청이 들어올때마다 해당 방 키 리스트에저장
+                                    matchRoomList.add(item.getValue(MatchRoom.class));
+                                    //showAlertDialog();
+                                }
+                            }
+                        }
+                        if(requestCount>0){  //요청이 한개라도 들어온 방에 alertDialog
+                            Log.d(TAG, "request수 "+requestCount);
+                            showAlertDialog();
+
+                        }
+                        Log.d(TAG, "omatchRoomKEy: "+matchRoomKeyList.size());
                     }
 
                     @Override
@@ -324,12 +332,11 @@ public abstract class MainActivity extends AppCompatActivity {
     }
 
     protected void showAlertDialog() {
-
         LayoutInflater inflater = LayoutInflater.from(this);
         View alert_dialog = inflater.inflate(R.layout.alert_dialog, null);
 
         // 커스텀 레이아웃의 버튼 설정
-        ConstraintLayout layout=alert_dialog.findViewById(R.id.alert_layout);
+        ConstraintLayout layout = alert_dialog.findViewById(R.id.alert_layout);
       /*  Button acceptButton = alert_dialog.findViewById(R.id.acceptButton);
         Button declineButton = alert_dialog.findViewById(R.id.declineButton);
 */
@@ -337,15 +344,11 @@ public abstract class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(alert_dialog);
 
-
-
         final AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
         alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
         //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-
 
         // 다이얼로그 표시
         alertDialog.show();
@@ -353,11 +356,8 @@ public abstract class MainActivity extends AppCompatActivity {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent=new Intent(getApplicationContext(), DetermineMatchActivity.class);
-                startActivity(intent);
-                finish();
-                //showMatchInfo();
+                alertDialog.dismiss();
+                showMatchInfo();
             }
         });
 
@@ -394,29 +394,32 @@ public abstract class MainActivity extends AppCompatActivity {
         });*/
 
 
-
     }
 
     private void showMatchInfo() {
-
-        Intent intent=new Intent(getApplicationContext(),DetermineMatchActivity.class);
-        ArrayList<String> matchInfoList=new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("matchRooms").orderByChild("roomInfo/host")
-                .equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item : snapshot.getChildren()){
-                    for(DataSnapshot subItem : item.child("matchInfo").getChildren()){
-                        String requestUid;
-                        Boolean request=subItem.getValue(MatchInfo.class).getRequest();
-                        if(request.equals(true)){
-                            requestUid=subItem.getKey();
-                            matchInfoList.add(requestUid);
-                        }
+                for (String uid : requestedUidList) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        if (item.getKey().equals(uid)) {
+                            UserInfo userInfo = item.getValue(UserInfo.class);
+                            requestedUserInfoList.add(userInfo);
+                            Log.d(TAG, "userInfoList성공 size : " + requestedUserInfoList.size());
 
+                        }
                     }
 
+
                 }
+                Intent intent = new Intent(getApplicationContext(), ShowMatchInfoActivity.class);
+                intent.putExtra("requestedUidList", requestedUidList);
+                intent.putExtra("userInfoList", requestedUserInfoList);
+                intent.putExtra("matchRoomKeyList", matchRoomKeyList);
+                intent.putExtra("matchRoomList", matchRoomList);
+
+                startActivity(intent);
+
             }
 
             @Override
@@ -424,54 +427,14 @@ public abstract class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        for(String uid:matchInfoList){
-            FirebaseDatabase.getInstance().getReference().child("users").orderByChild("uid")
-                    .equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot item:snapshot.getChildren()){
-                               UserInfo userInfo=item.getValue(UserInfo.class);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-        }
-
-     /*   FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot item:snapshot.getChildren()){
-                    if(item.getKey()== matchInfoList.get())
-                }
-
-                for(String uid:matchInfoList){
-                    for(DataSnapshot item:snapshot.getChildren()){
-                        if(item)
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-*/
 
     }
 
 
     private void updateMatchState(boolean b) {
-        if(b==true){
+        if (b == true) {
 
-        }
-        else{
+        } else {
 
         }
     }

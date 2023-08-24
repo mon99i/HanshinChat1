@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/determine_txt_gender"
+        android:id="@+id/showMatch_txt_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="208dp"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/determine_txt_age"
+        android:id="@+id/showMatch_txt_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -24,10 +24,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/determine_txt_department" />
+        app:layout_constraintTop_toBottomOf="@+id/showMatch_txt_department" />
 
     <TextView
-        android:id="@+id/determine_txt_hobby"
+        android:id="@+id/showMatch_txt_hobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -35,10 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/determine_txt_age" />
+        app:layout_constraintTop_toBottomOf="@+id/showMatch_txt_age" />
 
     <TextView
-        android:id="@+id/determine_txt_department"
+        android:id="@+id/showMatch_txt_department"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/determine_txt_gender" />
+        app:layout_constraintTop_toBottomOf="@+id/showMatch_txt_gender" />
 
     <TextView
         android:id="@+id/textView18"
@@ -57,20 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/determine_txt_hobby" />
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/alert_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/showMatch_txt_hobby" />
 
     <TextView
-        android:id="@+id/determine_txt_name"
+        android:id="@+id/showMatch_txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -80,31 +70,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/declineButton"
-        style="@style/TextAppearance.Compat.Notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="552dp"
-        android:backgroundTint="#BFA0ED"
-        android:text="거절"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/acceptButton"
-        style="@style/TextAppearance.Compat.Notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="552dp"
-        android:backgroundTint="#BFA0ED"
-        android:text="수락"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.343"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -129,6 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageView
+        android:id="@+id/showMatch_image"
         android:layout_width="94dp"
         android:layout_height="105dp"
         android:layout_marginTop="64dp"
@@ -169,6 +135,7 @@
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

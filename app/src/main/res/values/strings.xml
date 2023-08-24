@@ -21,5 +21,7 @@
     <string name="set_profile_idealType">이상형 순위를 골라주세요!</string>
     <string name="set_profile_mbti">마지막 질문입니다!\n당신의 MBTI 유형을 선택해 주세요.</string>
     <string name="set_profile_complete">프로필 입력이 완료되었어요!\n\n이제 상대를 찾으러 가볼까요?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -76,7 +76,7 @@
             android:gravity="start|center_vertical"
             android:linksClickable="true"
             android:maxLines="2"
-            android:text="안녕하세요."
+            android:text="대화를 나눠봐요!!."
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

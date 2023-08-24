@@ -58,6 +58,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             chatRoomKeys.add(data.getKey());                 //my uid가 true인 방 uid를, 채팅룸 키 ArrayList에 추가
                         }
                         notifyDataSetChanged();
+
                     }
 
                     @Override
