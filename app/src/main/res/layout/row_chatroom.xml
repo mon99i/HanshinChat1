@@ -10,9 +10,8 @@
 
     <ImageView
         android:id="@+id/room_profile"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:padding="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile2"
@@ -26,7 +25,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="오전 10:23"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FF4400"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,24 +45,26 @@
 
     <TextView
         android:id="@+id/room_txt_nickname"
-        android:layout_width="134dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:text="몽키"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintStart_toEndOf="@+id/room_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/room_profile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="200dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/room_profile"
-        app:layout_constraintTop_toBottomOf="@+id/room_txt_nickname"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.795">
 
         <TextView
             android:id="@+id/room_txt_message"
@@ -76,12 +75,11 @@
             android:gravity="start|center_vertical"
             android:linksClickable="true"
             android:maxLines="2"
-            android:text="대화를 나눠봐요!!."
+            android:text="대화를 나눠보세요!"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

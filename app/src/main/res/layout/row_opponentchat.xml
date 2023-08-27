@@ -10,20 +10,22 @@
 
     <ImageView
         android:id="@+id/opponent_profile"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:padding="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/opponent_txt_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:autoLink="web"
         android:background="@drawable/background_talk_mine"
         android:gravity="start|center_vertical"
@@ -34,7 +36,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/opponent_profile"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row_opponent_nickname"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -67,12 +69,13 @@
         android:id="@+id/row_opponent_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
         android:text="몽몽"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/opponent_profile"
         app:layout_constraintStart_toEndOf="@+id/opponent_profile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.047" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

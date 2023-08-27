@@ -114,27 +114,27 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         String matchKey = matchKeyList.get(position);
 
         String hostUid = matchRoom.getRoomInfo().getHost();
-        String currentUid = FirebaseAuth.getInstance().getUid();
+        String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if (!currentUid.equals(hostUid) && matchRoom != null) {   //방만든애가 자기가 만든 방에 요청 안되게
-            //Map<String,MatchInfo> matchInfo=new HashMap<>();
-            MatchInfo matchInfo = new MatchInfo(true, null,null);
-            FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
-                    .child("matchInfo").child(currentUid).setValue(matchInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(context, "매칭 요청 성공", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onComplete: 요청성공");
-                        }
-                    });
-            /*DatabaseReference reguestRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey).child("guests123").child("gg");
-            reguestRef.child("request").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+        DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
+                .child("matchInfo").child(currentUid);
+        if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
+            matchInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {  //매칭정보가 없을때 매칭요청가능하게, 이미 요청내역이 있을 경우 요청불가.
                 @Override
-                public void onComplete(@NonNull Task<Void> task) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.getValue(MatchInfo.class) == null) {
+                        MatchInfo matchInfo = new MatchInfo(true, null, null);
+                        matchInfoRef.setValue(matchInfo);
+                        Toast.makeText(context, "매칭 요청 완료!!", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(context, "이미 요청 하였습니다!", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });*/
-        } else Toast.makeText(context, "내가 만든 방!", Toast.LENGTH_SHORT).show();
+            });
+        } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
     }
 
 

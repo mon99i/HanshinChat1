@@ -414,7 +414,7 @@ public abstract class MainActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(getApplicationContext(), ShowMatchInfoActivity.class);
                 intent.putExtra("requestedUidList", requestedUidList);
-                intent.putExtra("userInfoList", requestedUserInfoList);
+                intent.putExtra("requestedUserInfoList", requestedUserInfoList);
                 intent.putExtra("matchRoomKeyList", matchRoomKeyList);
                 intent.putExtra("matchRoomList", matchRoomList);
 

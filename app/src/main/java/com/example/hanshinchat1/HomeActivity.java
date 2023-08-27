@@ -37,7 +37,6 @@ public class HomeActivity extends MainActivity {
         clickProfile();
         checkMatchRequest();
         checkProfileExist();
-        checkProfileExist();
 
         Button mbtiMatching = findViewById(R.id.mbti_matching);
         Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
