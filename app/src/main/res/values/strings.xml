@@ -23,5 +23,7 @@
     <string name="set_profile_complete">프로필 입력이 완료되었어요!\n\n이제 상대를 찾으러 가볼까요?</string>
     <string name="set_profile_form">체형은 어떠하신가요?</string>
     <string name="set_profile_grade">몇학년 인가요?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,18 +1,31 @@
 package com.example.hanshinchat1;
 
-public class MatchInfo {
+import java.io.Serializable;
+
+public class MatchInfo implements Serializable {
+
+    private Boolean confirmed;
 
     private Boolean request;
 
     public MatchInfo(){
         request=false;
         approved=false;
+        confirmed=false;
     };
 
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
 
-    public MatchInfo(Boolean request, Boolean approved) {
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public MatchInfo(Boolean request, Boolean approved, Boolean confirmed) {
         this.request = request;
         this.approved = approved;
+        this.confirmed= confirmed;
     }
 
     public Boolean getRequest() {

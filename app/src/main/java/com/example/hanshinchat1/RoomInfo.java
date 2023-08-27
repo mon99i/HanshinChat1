@@ -1,6 +1,8 @@
 package com.example.hanshinchat1;
 
-public class RoomInfo {
+import java.io.Serializable;
+
+public class RoomInfo implements Serializable {
 
 
     private String title;

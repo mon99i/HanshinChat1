@@ -1,6 +1,7 @@
 package com.example.hanshinchat1;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.service.autofill.FieldClassification;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +62,19 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     }
 
                 }
+
+                /*for (DataSnapshot item : snapshot.getChildren()) {    //생각해볼거
+                    if (item.child("matchInfo").getValue(MatchInfo.class) == null) {
+                        matchRoomsList.add(item.getValue(MatchRoom.class));
+
+                    }
+                }
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    for (DataSnapshot subItem : item.child("matchInfo").getChildren()){
+                        subItem.getValue(MatchInfo.class).getApproved();
+                    }
+                }*/
+
                 notifyDataSetChanged();
             }
 
@@ -94,6 +108,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             }
         });
     }
+
     private void requestMatch(int position) {
         MatchRoom matchRoom = matchRoomsList.get(position);
         String matchKey = matchKeyList.get(position);
@@ -103,7 +118,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
         if (!currentUid.equals(hostUid) && matchRoom != null) {   //방만든애가 자기가 만든 방에 요청 안되게
             //Map<String,MatchInfo> matchInfo=new HashMap<>();
-            MatchInfo matchInfo=new MatchInfo(true,null);
+            MatchInfo matchInfo = new MatchInfo(true, null,null);
             FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
                     .child("matchInfo").child(currentUid).setValue(matchInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
