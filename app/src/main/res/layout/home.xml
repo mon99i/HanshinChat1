@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100px"
-            android:text="오늘의 추천"
+            android:text="오늘의 매칭"
             android:gravity="center"
             android:textSize="20dp"
             android:textColor="#000000"
@@ -170,7 +170,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="상위 5% 매칭"
+            android:text="TOP 5 매칭"
             android:backgroundTint="#BFA0ED"/>
 
         <View

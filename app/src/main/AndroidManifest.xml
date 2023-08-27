@@ -140,6 +140,12 @@
         <activity
             android:name=".SetProfile16CompleteActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".SetProfile17FormActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".SetProfile18GradeActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>

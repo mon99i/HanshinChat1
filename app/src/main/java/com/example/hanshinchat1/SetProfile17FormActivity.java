@@ -20,22 +20,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SetProfile6DepartmentActivity extends MainActivity {
+public class SetProfile17FormActivity extends MainActivity {
 
-    TextView department;
+    TextView form;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_6_department);
+        setContentView(R.layout.set_profile_17_form);
 
-        Button nextBtn = findViewById(R.id.set_department_next);
+        Button nextBtn = findViewById(R.id.set_form_next);
 
-        department = (TextView) findViewById(R.id.department);
+        form = (TextView) findViewById(R.id.form);
 
-        Spinner spinner = findViewById(R.id.department_spinner);
-        String[] spinnerList = getResources().getStringArray(R.array.학과);
+        Spinner spinner = findViewById(R.id.form_spinner);
+        String[] spinnerList = getResources().getStringArray(R.array.체형);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -44,14 +44,15 @@ public class SetProfile6DepartmentActivity extends MainActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDepartment = spinnerList[position];
-                department.setText(selectedDepartment);
+                String selectedForm = spinnerList[position];
+                form.setText(selectedForm);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                department.setText("학과 선택");
+                form.setText("체형 선택");
             }
         });
+
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,22 +62,22 @@ public class SetProfile6DepartmentActivity extends MainActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                            String strDepartment = department.getText().toString();
-                            if (!strDepartment.isEmpty()) {
+                            String strForm = form.getText().toString();
+                            if (!strForm.isEmpty()) {
                                 try {
-                                    userInfo.setDepartment(strDepartment);
+                                    userInfo.setForm(strForm);
                                     userInfo.setUid(user.getUid());
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile7HeightActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile8ReligionActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 체형을 선택해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "체형을 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();

@@ -69,7 +69,7 @@ public class SetProfile7HeightActivity extends MainActivity {
                                     userInfo.setHeight(intHeight);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile8ReligionActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile17FormActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".SetProfile13PersonalityActivity">
+    tools:context=".SetProfile18GradeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,26 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/set_profile_personality"
+            android:text="@string/set_profile_grade"
             android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <ScrollView
+        <EditText
+            android:id="@+id/grade"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/personalityCheckBoxLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </ScrollView>
-
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:hint="1" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/set_personality_next"
+        android:id="@+id/set_grade_next"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|right"

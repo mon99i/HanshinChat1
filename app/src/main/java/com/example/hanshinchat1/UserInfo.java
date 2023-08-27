@@ -7,7 +7,8 @@ public class UserInfo implements Serializable{
 
     public UserInfo(){}
 
-    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String religion, String address, String smoking, String drinking, String hobby, String mbti, String displayName, String major, String photoUrl) {
+    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String religion, String address, String smoking, String drinking,
+                    String interest, String personality, String form, int grade, String hobby, String mbti, String idealTypeFirst, String idealTypeSecond, String displayName, String major, String photoUrl) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -18,9 +19,15 @@ public class UserInfo implements Serializable{
         this.address = address;
         this.smoking = smoking;
         this.drinking = drinking;
+        this.interest = interest;
+        this.personality = personality;
+        this.form = form;
+        this.grade = grade;
+        this.idealTypeFirst = idealTypeFirst;
+        this.idealTypeSecond = idealTypeSecond;
 
-        this.hobby = hobby;
         this.mbti = mbti;
+        this.hobby = hobby;
         this.displayName = displayName;
         this.major = major;
         this.photoUrl = photoUrl;
@@ -37,10 +44,14 @@ public class UserInfo implements Serializable{
     private String address;
     private String smoking;
     private String drinking;
-
-    private String hobby;
+    private String interest;
+    private String personality;
+    private String form;
+    private Integer grade;
     private String mbti;
-
+    private String idealTypeFirst;
+    private String idealTypeSecond;
+    private String hobby;
     private String displayName;
 
     private String major;
@@ -70,6 +81,14 @@ public class UserInfo implements Serializable{
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 
     public Integer getStudentId() {
@@ -110,21 +129,40 @@ public class UserInfo implements Serializable{
     public String getDrinking() { return drinking; }
     public void setDrinking(String drinking) { this.drinking = drinking; }
 
+    public String getInterest() { return interest; }
+    public void setInterest(String interest) { this.interest = interest; }
 
-    public String getHobby() {
-        return hobby;
+    public String getPersonality() {
+        return personality;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setPersonality(String personality) {
+        this.personality = personality;
     }
 
+    public String getForm() { return form; }
+    public void setForm(String form){
+        this.form = form;
+    }
     public String getMbti() {
         return mbti;
     }
 
     public void setMbti(String mbti) {
         this.mbti = mbti;
+    }
+
+    public String getIdealTypeFirst() { return idealTypeFirst; }
+
+    public void setIdealTypeFirst(String idealTypeFirst){ this.idealTypeFirst = idealTypeFirst; }
+
+    public String getIdealTypeSecond() { return idealTypeSecond; }
+
+    public void setIdealTypeSecond(String idealTypeSecond){ this.idealTypeSecond = idealTypeSecond; }
+    public String getHobby() { return hobby; }
+
+    public void setHobby(String hobby){
+        this.hobby = hobby;
     }
 
     public String getDisplayName() {

@@ -3,11 +3,8 @@ package com.example.hanshinchat1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,41 +14,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SetProfile18GradeActivity extends MainActivity {
 
-public class SetProfile6DepartmentActivity extends MainActivity {
-
-    TextView department;
+    EditText grade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_6_department);
+        setContentView(R.layout.set_profile_18_grade);
 
-        Button nextBtn = findViewById(R.id.set_department_next);
+        Button nextBtn = findViewById(R.id.set_grade_next);
 
-        department = (TextView) findViewById(R.id.department);
+        grade = (EditText) findViewById(R.id.grade);
 
-        Spinner spinner = findViewById(R.id.department_spinner);
-        String[] spinnerList = getResources().getStringArray(R.array.학과);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDepartment = spinnerList[position];
-                department.setText(selectedDepartment);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                department.setText("학과 선택");
-            }
-        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,22 +37,23 @@ public class SetProfile6DepartmentActivity extends MainActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                            String strDepartment = department.getText().toString();
-                            if (!strDepartment.isEmpty()) {
+
+                            String strGrade = grade.getText().toString();
+                            if (!strGrade.isEmpty()) {
                                 try {
-                                    userInfo.setDepartment(strDepartment);
-                                    userInfo.setUid(user.getUid());
+                                    Integer intGrade = Integer.valueOf(strGrade);
+                                    userInfo.setGrade(intGrade);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile7HeightActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile5StudentIdActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();

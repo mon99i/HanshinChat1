@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="80dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,6 +19,73 @@
             android:text="@string/set_profile_idealType"
             android:textSize="30sp"
             android:textColor="#000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1순위" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/first_idealtype_spinner1"
+            android:entries="@array/이상형조건1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/first_idealtype_spinner2"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2순위" />
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/second_idealtype_spinner1"
+            android:entries="@array/이상형조건1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/second_idealtype_spinner2"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/ideal_first"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="1순위 선택"
+            android:textSize="20sp"
+            android:gravity="left|center" />
+        <TextView
+            android:id="@+id/ideal_second"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="2순위 선택"
+            android:textSize="20sp"
+            android:gravity="left|center" />
 
     </LinearLayout>
 

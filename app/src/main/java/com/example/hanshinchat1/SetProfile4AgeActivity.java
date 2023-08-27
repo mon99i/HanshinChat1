@@ -45,7 +45,7 @@ public class SetProfile4AgeActivity extends MainActivity {
                                     userInfo.setAge(intAge);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile5StudentIdActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile18GradeActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

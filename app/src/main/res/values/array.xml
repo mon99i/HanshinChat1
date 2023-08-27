@@ -415,4 +415,133 @@
         <item>화순군</item>
     </string-array>
 
+    <string-array name="체형">
+        <item>마른</item>
+        <item>보통</item>
+        <item>통통</item>
+        <item>탄탄</item>
+    </string-array>
+
+    <string-array name="관심사">
+        <item>영화</item>
+        <item>넷플릭스</item>
+        <item>드라마 정주행</item>
+        <item>TV예능</item>
+        <item>홈카페</item>
+        <item>카페</item>
+        <item>코인노래방</item>
+        <item>음주</item>
+        <item>수다</item>
+        <item>쇼핑</item>
+        <item>독서</item>
+        <item>맛집탐방</item>
+        <item>여행</item>
+        <item>야구보기</item>
+        <item>축구보기</item>
+        <item>등산</item>
+        <item>러닝</item>
+        <item>산책</item>
+        <item>댄스</item>
+        <item>골프</item>
+        <item>헬스</item>
+        <item>필라테스</item>
+        <item>홈트</item>
+        <item>클라이밍</item>
+        <item>자전거라이딩</item>
+        <item>캠핑</item>
+        <item>볼링</item>
+        <item>당구</item>
+        <item>공부</item>
+        <item>카공</item>
+        <item>자격증따기</item>
+        <item>외국어공부</item>
+        <item>원데이클래스</item>
+        <item>멍때리기</item>
+        <item>요리</item>
+        <item>그림그리기</item>
+        <item>반려식물</item>
+        <item>음악듣기</item>
+        <item>악기연주</item>
+        <item>k-pop</item>
+        <item>사진찍기</item>
+        <item>웹툰</item>
+        <item>게임</item>
+        <item>음악듣기</item>
+        <item>드라이브</item>
+        <item>애완동물 산책</item>
+        <item>전시회 관람</item>
+    </string-array>
+
+    <string-array name="성격">
+        <item>활발한</item>
+        <item>조용한</item>
+        <item>애교가넘치는</item>
+        <item>어른스러운</item>
+        <item>열정적인</item>
+        <item>침착한</item>
+        <item>또라이같은</item>
+        <item>예의바른</item>
+        <item>유머러스한</item>
+        <item>진지한</item>
+        <item>자신감 넘치는</item>
+        <item>허세없는</item>
+        <item>엉뚱한</item>
+        <item>지적인</item>
+        <item>성실한</item>
+        <item>자유로운</item>
+        <item>감성적인</item>
+        <item>꼼꼼한</item>
+        <item>논리적인</item>
+        <item>즉흥적인</item>
+        <item>소심한</item>
+        <item>쿨한</item>
+    </string-array>
+
+    <string-array name="음주">
+        <item>매일</item>
+        <item>안 마심</item>
+        <item>주 1~2회</item>
+        <item>주 3회 이상</item>
+        <item>한 달에 한 두 번</item>
+    </string-array>
+
+    <string-array name="이상형조건1">
+        <item>키</item>
+        <item>나이</item>
+        <item>학년</item>
+        <item>학과</item>
+        <item>종교</item>
+        <item>거주지</item>
+        <item>흡연여부</item>
+        <item>음주여부</item>
+        <item>관심사</item>
+        <item>성격</item>
+        <item>MBTI</item>
+    </string-array>
+
+    <string-array name="나이">
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30이상</item>
+    </string-array>
+
+    <string-array name="학년">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="YN">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
 </resources>
