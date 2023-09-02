@@ -81,9 +81,6 @@
             android:name=".SetProfileActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".SetProfileActivity2"
-            android:exported="false"></activity>
-        <activity
             android:name=".MainActivity"
             android:exported="false"></activity>
         <activity

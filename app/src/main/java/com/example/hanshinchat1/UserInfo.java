@@ -7,8 +7,9 @@ public class UserInfo implements Serializable{
 
     public UserInfo(){}
 
-    public UserInfo(String name, String gender, int age, int studentId, String department, int height, String religion, String address, String smoking, String drinking,
-                    String interest, String personality, String form, int grade, String hobby, String mbti, String idealTypeFirst, String idealTypeSecond, String displayName, String major, String photoUrl) {
+    public UserInfo(String name, String gender, int age, int studentId, String department, int height,
+                    String religion, String address, String smoking, String drinking, String interest,
+                    String personality, String form, int grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -25,11 +26,7 @@ public class UserInfo implements Serializable{
         this.grade = grade;
         this.idealTypeFirst = idealTypeFirst;
         this.idealTypeSecond = idealTypeSecond;
-
         this.mbti = mbti;
-        this.hobby = hobby;
-        this.displayName = displayName;
-        this.major = major;
         this.photoUrl = photoUrl;
     }
 
@@ -51,12 +48,7 @@ public class UserInfo implements Serializable{
     private String mbti;
     private String idealTypeFirst;
     private String idealTypeSecond;
-    private String hobby;
-    private String displayName;
-
-    private String major;
-
-    private static String photoUrl;
+    private String photoUrl;
 
     public String getUid() {
         return uid;
@@ -159,27 +151,6 @@ public class UserInfo implements Serializable{
     public String getIdealTypeSecond() { return idealTypeSecond; }
 
     public void setIdealTypeSecond(String idealTypeSecond){ this.idealTypeSecond = idealTypeSecond; }
-    public String getHobby() { return hobby; }
-
-    public void setHobby(String hobby){
-        this.hobby = hobby;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
 
     public String getPhotoUrl() {
         return photoUrl;

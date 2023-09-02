@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#F5EEFF">
@@ -43,11 +43,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1450px">
+        android:layout_height="555dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1450px"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="30dp">
 

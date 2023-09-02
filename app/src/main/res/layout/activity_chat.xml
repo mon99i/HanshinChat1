@@ -43,37 +43,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1450px"
+        android:layout_height="555dp"
         android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        android:layout_margin="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:layout_margin="10dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/EditText_chat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <EditText
+                android:id="@+id/EditText_chat"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/Button_send"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:text="SEND" />
+            <Button
+                android:id="@+id/Button_send"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:text="SEND" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottom_navigation"
