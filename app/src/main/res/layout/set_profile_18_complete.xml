@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/height_progress"
+            android:id="@+id/complete_progress"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"
@@ -21,7 +21,7 @@
             android:progressBackgroundTint="#FFFFFF"
             android:progressTint="#FF69B4"
             android:max="18"
-            android:progress="2"/>
+            android:progress="18"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -32,13 +32,17 @@
             android:textColor="#000000"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/set_complete_next"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|right"
-        android:text="다음"
-        android:layout_margin="20dp"
-        android:backgroundTint="#BFA0ED" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/set_complete"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="완료"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
 
 </LinearLayout>

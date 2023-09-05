@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/height_progress"
+            android:id="@+id/name_progress"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"

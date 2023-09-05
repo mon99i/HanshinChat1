@@ -51,7 +51,7 @@ public class HomeActivity extends MainActivity {
         idealTypeMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetProfile8HeightActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
                 startActivity(intent);
                 finish();
             }

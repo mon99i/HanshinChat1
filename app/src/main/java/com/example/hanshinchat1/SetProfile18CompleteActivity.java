@@ -13,7 +13,7 @@ public class SetProfile18CompleteActivity extends MainActivity {
 
         setContentView(R.layout.set_profile_18_complete);
 
-        Button nextBtn = findViewById(R.id.set_complete_next);
+        Button nextBtn = findViewById(R.id.set_complete);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

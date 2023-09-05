@@ -32,7 +32,7 @@ public class SetProfile17IdealTypeActivity extends MainActivity {
 
         setContentView(R.layout.set_profile_17_idealtype);
 
-        Button nextBtn = findViewById(R.id.set_idealtype_next);
+        Button nextBtn = findViewById(R.id.set_ideal_type_next);
 
         idealFirst = (TextView) findViewById(R.id.ideal_first);
         idealSecond = (TextView) findViewById(R.id.ideal_second);
