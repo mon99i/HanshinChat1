@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SetProfile16CompleteActivity extends MainActivity {
+public class SetProfile18CompleteActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_16_complete);
+        setContentView(R.layout.set_profile_18_complete);
 
         Button nextBtn = findViewById(R.id.set_complete_next);
 

@@ -17,10 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SetProfile8ReligionActivity extends MainActivity {
+public class SetProfile11ReligionActivity extends MainActivity {
 
     TextView religion;
 
@@ -28,7 +25,7 @@ public class SetProfile8ReligionActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_8_religion);
+        setContentView(R.layout.set_profile_11_religion);
 
         Button nextBtn = findViewById(R.id.set_religion_next);
 
@@ -68,7 +65,7 @@ public class SetProfile8ReligionActivity extends MainActivity {
                                     userInfo.setReligion(strReligion);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile9addressActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile10addressActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

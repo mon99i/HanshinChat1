@@ -14,18 +14,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class SetProfile10SmokingActivity extends MainActivity {
-    AppCompatRadioButton setProfileSmokingY, setProfileSmokingN;
+public class SetProfile13DrinkingActivity extends MainActivity {
+    AppCompatRadioButton setProfileDrinkingY, setProfileDrinkingN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.set_profile_10_smoking);
+        setContentView(R.layout.set_profile_13_drinking);
 
-        Button nextBtn = findViewById(R.id.set_smoking_next);
+        Button nextBtn = findViewById(R.id.set_drinking_next);
 
-        setProfileSmokingY = findViewById(R.id.set_profile_smoking_y);
-        setProfileSmokingN = findViewById(R.id.set_profile_smoking_n);
+        setProfileDrinkingY = findViewById(R.id.set_profile_drinking_y);
+        setProfileDrinkingN = findViewById(R.id.set_profile_drinking_n);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -36,23 +36,23 @@ public class SetProfile10SmokingActivity extends MainActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
-                            if(setProfileSmokingY.isChecked()){
+                            if(setProfileDrinkingY.isChecked()){
                                 UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                                String strSmoking = "네";
-                                userInfo.setSmoking(strSmoking);
+                                String strDrinking = "네";
+                                userInfo.setDrinking(strDrinking);
                                 usersRef.setValue(userInfo);
 
-                                Intent intent = new Intent(getApplicationContext(), SetProfile11DrinkingActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                            } else if (setProfileSmokingN.isChecked()) {
+                            } else if (setProfileDrinkingN.isChecked()) {
                                 UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                                String strSmoking = "아니오";
-                                userInfo.setSmoking(strSmoking);
+                                String strDrinking = "아니오";
+                                userInfo.setDrinking(strDrinking);
                                 usersRef.setValue(userInfo);
 
-                                Intent intent = new Intent(getApplicationContext(), SetProfile11DrinkingActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);

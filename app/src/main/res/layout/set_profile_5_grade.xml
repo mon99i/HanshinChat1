@@ -5,36 +5,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".SetProfile12InterestActivity">
+    tools:context=".SetProfile5GradeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/height_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="2"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/set_profile_interest"
-            android:textSize="28sp"
+            android:text="@string/set_profile_grade"
+            android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <ScrollView
+        <EditText
+            android:id="@+id/grade"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/checkBoxLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </ScrollView>
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:hint="1" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/set_interest_next"
+        android:id="@+id/set_grade_next"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|right"

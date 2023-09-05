@@ -14,19 +14,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class    SetProfile5StudentIdActivity extends MainActivity {
+public class SetProfile5GradeActivity extends MainActivity {
 
-    EditText studentId;
+    EditText grade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_5_studentid);
+        setContentView(R.layout.set_profile_5_grade);
 
-        Button nextBtn = findViewById(R.id.set_studentid_next);
+        Button nextBtn = findViewById(R.id.set_grade_next);
 
-        studentId = (EditText) findViewById(R.id.student_id);
+        grade = (EditText) findViewById(R.id.grade);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,25 +38,22 @@ public class    SetProfile5StudentIdActivity extends MainActivity {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
 
-                            String strStudentId = studentId.getText().toString();
-                            if (!strStudentId.isEmpty()) {
-                                if (strStudentId.length() == 9) {
-                                    try {
-                                        Integer intStudentId = Integer.valueOf(strStudentId);
-                                        userInfo.setStudentId(intStudentId);
-                                        usersRef.setValue(userInfo);
-                                        Intent intent = new Intent(getApplicationContext(), SetProfile6DepartmentActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                                    } catch (NumberFormatException e) {
-                                        Toast.makeText(getApplicationContext(), "올바른 학번을 입력해주세요", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "학번은 9자리여야 합니다", Toast.LENGTH_SHORT).show();
+                            String strGrade = grade.getText().toString();
+                            if (!strGrade.isEmpty()) {
+                                try {
+                                    Integer intGrade = Integer.valueOf(strGrade);
+                                    userInfo.setGrade(intGrade);
+                                    usersRef.setValue(userInfo);
+
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile6StudentIdActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                                } catch (NumberFormatException e) {
+                                    Toast.makeText(getApplicationContext(), "올바른 학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "학번을 입력해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
@@ -73,7 +70,6 @@ public class    SetProfile5StudentIdActivity extends MainActivity {
                 });
             }
         });
-
 
     }
 }

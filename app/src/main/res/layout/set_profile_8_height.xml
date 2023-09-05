@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".SetProfile2NameActivity">
+    tools:context=".SetProfile8HeightActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,35 +21,36 @@
             android:progressBackgroundTint="#FFFFFF"
             android:progressTint="#FF69B4"
             android:max="18"
-            android:progress="2"/>
+            android:progress="7"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/set_profile_name"
+            android:text="@string/set_profile_height"
             android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:hint="홍길동" />
+        <NumberPicker
+            android:id="@+id/height_number_picker"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:theme="@style/NumberPickerTheme"
+            android:orientation="vertical" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
-            android:id="@+id/set_name_next"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="다음"
-            android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED" />
+    <Button
+        android:id="@+id/set_height_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="다음"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:backgroundTint="#BFA0ED" />
     </LinearLayout>
-
 </LinearLayout>

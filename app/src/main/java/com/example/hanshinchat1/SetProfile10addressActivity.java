@@ -17,10 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SetProfile9addressActivity extends MainActivity {
+public class SetProfile10addressActivity extends MainActivity {
 
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String choice_first="";
@@ -32,7 +29,7 @@ public class SetProfile9addressActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_9_address);
+        setContentView(R.layout.set_profile_10_address);
 
         Button nextBtn = findViewById(R.id.set_address_next);
 
@@ -51,7 +48,7 @@ public class SetProfile9addressActivity extends MainActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adspin1.getItem(i).equals("서울특별시")) {
                     choice_first = "서울특별시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.서울특별시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.서울특별시, android.R.layout.simple_spinner_dropdown_item);
 
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
@@ -69,7 +66,7 @@ public class SetProfile9addressActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("부산광역시")) {
                     choice_first = "부산광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.부산광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.부산광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,7 +84,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("대구광역시")) {
                     choice_first = "대구광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.대구광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.대구광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -105,7 +102,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("인천광역시")) {
                     choice_first = "인천광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.인천광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.인천광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -123,7 +120,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("대전광역시")) {
                     choice_first = "대전광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.대전광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.대전광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -141,7 +138,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("광주광역시")) {
                     choice_first = "광주광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.광주광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.광주광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -159,7 +156,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("울산광역시")) {
                     choice_first = "울산광역시";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.울산광역시, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.울산광역시, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -177,7 +174,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("경기도")) {
                     choice_first = "경기도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.경기도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.경기도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -195,7 +192,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("충청남도")) {
                     choice_first = "충청남도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.충청남도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.충청남도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -213,7 +210,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("충청북도")) {
                     choice_first = "충청북도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.충청북도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.충청북도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -231,7 +228,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("강원도")) {
                     choice_first = "강원도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.강원도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.강원도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -249,7 +246,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("경상북도")) {
                     choice_first = "경상북도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.경상북도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.경상북도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -267,7 +264,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("경상남도")) {
                     choice_first = "경상남도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.경상남도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.경상남도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -285,7 +282,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("전라북도")) {
                     choice_first = "전라북도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.전라북도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.전라북도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -303,7 +300,7 @@ public class SetProfile9addressActivity extends MainActivity {
                 }
                 else if (adspin1.getItem(i).equals("전라남도")) {
                     choice_first = "전라남도";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile9addressActivity.this, R.array.전라남도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile10addressActivity.this, R.array.전라남도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -343,7 +340,7 @@ public class SetProfile9addressActivity extends MainActivity {
                                     userInfo.setAddress(strAddress);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile10SmokingActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile12SmokingActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

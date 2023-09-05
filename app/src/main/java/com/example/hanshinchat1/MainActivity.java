@@ -91,7 +91,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), SetProfileActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
                         startActivity(intent);
                         finish();
 

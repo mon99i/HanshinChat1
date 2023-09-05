@@ -6,6 +6,7 @@
     <string name="success_logout">로그아웃 되었습니다</string>
     <string name="status_login">이미 로그인 되어있습니다</string>
 
+    <string name="set_profile_photo">사진을 등록해주세요!</string>
     <string name="set_profile_name">이름을\n입력해주세요!</string>
     <string name="set_profile_gender">남자인가요,\n여자인가요?</string>
     <string name="set_profile_age">나이가 어떻게 되시나요?</string>

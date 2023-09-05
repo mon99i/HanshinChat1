@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,40 +16,30 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SetProfile7DepartmentActivity extends MainActivity {
 
-public class SetProfile7HeightActivity extends MainActivity {
-
-    TextView height;
+    private String selectedDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_7_height);
+        setContentView(R.layout.set_profile_7_department);
 
-        Button nextBtn = findViewById(R.id.set_height_next);
+        Button nextBtn = findViewById(R.id.set_department_next);
+        Spinner spinner = findViewById(R.id.department_spinner);
 
-        height = (TextView) findViewById(R.id.height);
-
-        Spinner spinner = findViewById(R.id.height_spinner);
-        String[] spinnerList = getResources().getStringArray(R.array.키);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.학과, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDepartment = spinnerList[position];
-                height.setText(selectedDepartment);
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedDepartment = parentView.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                height.setText("키 선택");
+                // 아무것도 선택되지 않았을 때 처리
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,22 +51,22 @@ public class SetProfile7HeightActivity extends MainActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                            String strHeight = height.getText().toString();
-                            if (!strHeight.isEmpty()) {
+                            selectedDepartment = spinner.getSelectedItem().toString();
+                            if (!selectedDepartment.isEmpty()) {
                                 try {
-                                    Integer intHeight = Integer.valueOf(strHeight);
-                                    userInfo.setHeight(intHeight);
+                                    userInfo.setDepartment(selectedDepartment);
+                                    userInfo.setUid(user.getUid());
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile17FormActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile8HeightActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 키를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 학과를 선택해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "키를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "학과를 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();

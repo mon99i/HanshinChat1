@@ -17,10 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SetProfile14IdealTypeActivity extends MainActivity {
+public class SetProfile17IdealTypeActivity extends MainActivity {
 
     ArrayAdapter<CharSequence> adspin1, adspin2, adspin3, adspin4;
     String choice_first="";
@@ -33,7 +30,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_14_idealtype);
+        setContentView(R.layout.set_profile_17_idealtype);
 
         Button nextBtn = findViewById(R.id.set_idealtype_next);
 
@@ -59,7 +56,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adspin1.getItem(i).equals("키")) {
                     choice_first = "키";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.키, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.키, android.R.layout.simple_spinner_dropdown_item);
 
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
@@ -77,7 +74,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("나이")) {
                     choice_first = "나이";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.나이, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.나이, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -94,7 +91,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("학년")) {
                     choice_first = "학년";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.학년, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.학년, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,7 +108,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("학과")) {
                     choice_first = "학과";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.학과, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.학과, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -128,7 +125,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("종교")) {
                     choice_first = "종교";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.종교, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.종교, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -145,7 +142,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("거주지")) {
                     choice_first = "거주지";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.도, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -163,7 +160,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("흡연여부")) {
                     choice_first = "흡연여부";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -180,7 +177,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("음주여부")) {
                     choice_first = "음주여부";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -197,7 +194,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("관심사")) {
                     choice_first = "관심사";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.관심사, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.관심사, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -214,7 +211,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("성격")) {
                     choice_first = "성격";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.성격, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.성격, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -231,7 +228,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin1.getItem(i).equals("MBTI")) {
                     choice_first = "MBTI";
-                    adspin2 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.mbti, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.mbti, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin2.setAdapter(adspin2);
                     spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -259,7 +256,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (adspin3.getItem(i).equals("키")) {
                     choice_third = "키";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.키, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.키, android.R.layout.simple_spinner_dropdown_item);
 
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
@@ -277,7 +274,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("나이")) {
                     choice_third = "나이";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.나이, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.나이, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -294,7 +291,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("학년")) {
                     choice_third = "학년";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.학년, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.학년, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -311,7 +308,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("학과")) {
                     choice_third = "학과";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.학과, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.학과, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -328,7 +325,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("종교")) {
                     choice_third = "종교";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.종교, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.종교, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -345,7 +342,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("거주지")) {
                     choice_third = "거주지";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.도, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.도, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -362,7 +359,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("흡연여부")) {
                     choice_third = "흡연여부";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -379,7 +376,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("음주여부")) {
                     choice_third = "음주여부";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.YN, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -396,7 +393,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("관심사")) {
                     choice_third = "관심사";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.관심사, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.관심사, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -413,7 +410,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("성격")) {
                     choice_third = "성격";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.성격, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.성격, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -430,7 +427,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                     });
                 } else if (adspin3.getItem(i).equals("MBTI")) {
                     choice_third = "MBTI";
-                    adspin4 = ArrayAdapter.createFromResource(SetProfile14IdealTypeActivity.this, R.array.mbti, android.R.layout.simple_spinner_dropdown_item);
+                    adspin4 = ArrayAdapter.createFromResource(SetProfile17IdealTypeActivity.this, R.array.mbti, android.R.layout.simple_spinner_dropdown_item);
                     adspin4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin4.setAdapter(adspin4);
                     spin4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -470,7 +467,7 @@ public class SetProfile14IdealTypeActivity extends MainActivity {
                                     userInfo.setIdealTypeSecond(strSecIdealType);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile15MbtiActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile16MbtiActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
