@@ -76,4 +76,10 @@ public class SetProfile6StudentIdActivity extends MainActivity {
 
 
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile5GradeActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

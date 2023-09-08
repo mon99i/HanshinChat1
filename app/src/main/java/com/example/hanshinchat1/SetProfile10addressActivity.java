@@ -340,7 +340,7 @@ public class SetProfile10addressActivity extends MainActivity {
                                     userInfo.setAddress(strAddress);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile12SmokingActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile11ReligionActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -366,5 +366,11 @@ public class SetProfile10addressActivity extends MainActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile9FormActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

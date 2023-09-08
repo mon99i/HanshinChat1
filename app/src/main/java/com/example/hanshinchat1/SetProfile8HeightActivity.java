@@ -61,7 +61,7 @@ public class SetProfile8HeightActivity extends MainActivity {
                                     userInfo.setUid(user.getUid());
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile11ReligionActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile9FormActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

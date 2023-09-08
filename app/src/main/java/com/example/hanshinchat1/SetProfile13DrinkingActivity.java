@@ -90,4 +90,10 @@ public class SetProfile13DrinkingActivity extends MainActivity {
                 break;
         }
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile12SmokingActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

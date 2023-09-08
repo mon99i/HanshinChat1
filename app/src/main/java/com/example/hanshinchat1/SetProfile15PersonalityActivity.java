@@ -87,7 +87,7 @@ public class SetProfile15PersonalityActivity extends MainActivity {
                                 userInfo.setUid(user.getUid());
                                 usersRef.setValue(userInfo);
 
-                                Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), SetProfile16MbtiActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -109,5 +109,11 @@ public class SetProfile15PersonalityActivity extends MainActivity {
                 });
             }
         });
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

@@ -90,4 +90,10 @@ public class SetProfile3GenderActivity extends MainActivity {
                 break;
         }
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

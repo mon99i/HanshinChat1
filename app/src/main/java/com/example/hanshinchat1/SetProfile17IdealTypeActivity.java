@@ -467,7 +467,7 @@ public class SetProfile17IdealTypeActivity extends MainActivity {
                                     userInfo.setIdealTypeSecond(strSecIdealType);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile16MbtiActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile18CompleteActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -495,5 +495,11 @@ public class SetProfile17IdealTypeActivity extends MainActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile16MbtiActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

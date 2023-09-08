@@ -90,4 +90,10 @@ public class SetProfile12SmokingActivity extends MainActivity {
                 break;
         }
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile11ReligionActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

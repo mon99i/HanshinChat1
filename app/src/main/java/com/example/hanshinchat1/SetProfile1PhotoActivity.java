@@ -316,7 +316,11 @@ public class SetProfile1PhotoActivity extends MainActivity {
             return null;
         }
     }*/
-
-
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }
 

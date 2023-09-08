@@ -65,7 +65,7 @@ public class SetProfile11ReligionActivity extends MainActivity {
                                     userInfo.setReligion(strReligion);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile10addressActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile12SmokingActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -91,5 +91,11 @@ public class SetProfile11ReligionActivity extends MainActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile10addressActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

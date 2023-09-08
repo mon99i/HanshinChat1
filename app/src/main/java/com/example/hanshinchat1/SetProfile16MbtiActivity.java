@@ -65,7 +65,7 @@ public class SetProfile16MbtiActivity extends MainActivity {
                                     userInfo.setMbti(strMbti);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile18CompleteActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -91,5 +91,11 @@ public class SetProfile16MbtiActivity extends MainActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile15PersonalityActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

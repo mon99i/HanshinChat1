@@ -72,4 +72,10 @@ public class SetProfile4AgeActivity extends MainActivity {
         });
 
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile3GenderActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }

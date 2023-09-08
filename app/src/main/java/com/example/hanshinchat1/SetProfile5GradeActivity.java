@@ -72,4 +72,10 @@ public class SetProfile5GradeActivity extends MainActivity {
         });
 
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+    }
 }
