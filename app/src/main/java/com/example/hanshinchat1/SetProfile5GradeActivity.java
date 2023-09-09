@@ -14,19 +14,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class SetProfile4AgeActivity extends MainActivity {
+public class SetProfile5GradeActivity extends MainActivity {
 
-    EditText age;
+    EditText grade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_4_age);
+        setContentView(R.layout.set_profile_5_grade);
 
-        Button nextBtn = findViewById(R.id.set_age_next);
+        Button nextBtn = findViewById(R.id.set_grade_next);
 
-        age = (EditText) findViewById(R.id.age);
+        grade = (EditText) findViewById(R.id.grade);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,22 +38,22 @@ public class SetProfile4AgeActivity extends MainActivity {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
 
-                            String strAge = age.getText().toString();
-                            if (!strAge.isEmpty()) {
+                            String strGrade = grade.getText().toString();
+                            if (!strGrade.isEmpty()) {
                                 try {
-                                    Integer intAge = Integer.valueOf(strAge);
-                                    userInfo.setAge(intAge);
+                                    Integer intGrade = Integer.valueOf(strGrade);
+                                    userInfo.setGrade(intGrade);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile5GradeActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile6StudentIdActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 나이를 입력해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "나이를 입력해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
@@ -73,7 +73,7 @@ public class SetProfile4AgeActivity extends MainActivity {
 
     }
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SetProfile3GenderActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);

@@ -475,14 +475,14 @@
     <string-array name="성격">
         <item>활발한</item>
         <item>조용한</item>
-        <item>애교가넘치는</item>
+        <item>애교가 넘치는</item>
         <item>어른스러운</item>
         <item>열정적인</item>
         <item>침착한</item>
         <item>또라이같은</item>
         <item>예의바른</item>
         <item>유머러스한</item>
-        <item>진지한</item>
+        <item>소심한</item>
         <item>자신감 넘치는</item>
         <item>허세없는</item>
         <item>엉뚱한</item>
@@ -493,8 +493,6 @@
         <item>꼼꼼한</item>
         <item>논리적인</item>
         <item>즉흥적인</item>
-        <item>소심한</item>
-        <item>쿨한</item>
     </string-array>
 
     <string-array name="음주">

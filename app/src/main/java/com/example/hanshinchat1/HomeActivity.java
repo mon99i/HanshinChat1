@@ -14,8 +14,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class HomeActivity extends MainActivity {
 
 
@@ -39,7 +37,6 @@ public class HomeActivity extends MainActivity {
         clickProfile();
         checkMatchRequest();
         checkProfileExist();
-
 
         Button mbtiMatching = findViewById(R.id.mbti_matching);
         Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
@@ -116,7 +113,6 @@ public class HomeActivity extends MainActivity {
         });
 
     }
-
 
 
     //나중에쓸수있음

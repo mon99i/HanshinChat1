@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".SetProfile7DepartmentActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/form_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="9"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_profile_form"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/form_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <GridLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/form_radio_btn_1"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="마른"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+
+            <RadioButton
+                android:id="@+id/form_radio_btn_2"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="통통"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+            <RadioButton
+                android:id="@+id/form_radio_btn_3"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="탄탄"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+            <RadioButton
+                android:id="@+id/form_radio_btn_4"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="평범"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+        </GridLayout>
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/set_form_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="다음"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
+</LinearLayout>

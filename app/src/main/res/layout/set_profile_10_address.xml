@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".SetProfile2NameActivity">
+    tools:context=".SetProfile10AddressActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/name_progress"
+            android:id="@+id/address_progress"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"
@@ -21,29 +22,45 @@
             android:progressBackgroundTint="#FFFFFF"
             android:progressTint="#FF69B4"
             android:max="18"
-            android:progress="2"/>
+            android:progress="10"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/set_profile_name"
+            android:text="@string/set_profile_address"
             android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <EditText
-            android:id="@+id/name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:hint="홍길동" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <NumberPicker
+                android:id="@+id/first_address_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_marginEnd="8dp" />
+
+            <NumberPicker
+                android:id="@+id/second_address_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:descendantFocusability="blocksDescendants" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
-            android:id="@+id/set_name_next"
+            android:id="@+id/set_address_next"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="다음"

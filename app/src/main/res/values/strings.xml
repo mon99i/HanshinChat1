@@ -6,6 +6,7 @@
     <string name="success_logout">로그아웃 되었습니다</string>
     <string name="status_login">이미 로그인 되어있습니다</string>
 
+    <string name="set_profile_photo">사진을 등록해주세요!</string>
     <string name="set_profile_name">이름을\n입력해주세요!</string>
     <string name="set_profile_gender">남자인가요,\n여자인가요?</string>
     <string name="set_profile_age">나이가 어떻게 되시나요?</string>
@@ -18,8 +19,8 @@
     <string name="set_profile_drinking">음주를 즐기시나요?</string>
     <string name="set_profile_interest">어떤 관심사를 갖고 계신가요?</string>
     <string name="set_profile_personality">본인의 성격은 어떠한가요?</string>
-    <string name="set_profile_idealType">이상형 순위를 골라주세요!</string>
-    <string name="set_profile_mbti">마지막 질문입니다!\n당신의 MBTI 유형을 선택해 주세요.</string>
+    <string name="set_profile_idealType">마지막 질문입니다!\n이상형 순위를 골라주세요!</string>
+    <string name="set_profile_mbti">당신의 MBTI 유형을 선택해 주세요.</string>
     <string name="set_profile_complete">프로필 입력이 완료되었어요!\n\n이제 상대를 찾으러 가볼까요?</string>
     <string name="set_profile_form">체형은 어떠하신가요?</string>
     <string name="set_profile_grade">몇학년 인가요?</string>

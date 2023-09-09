@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".SetProfile3GenderActivity">
+    tools:context=".SetProfile15PersonalityActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/gender_progress"
+            android:id="@+id/personality_progress"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"
@@ -21,42 +21,27 @@
             android:progressBackgroundTint="#FFFFFF"
             android:progressTint="#FF69B4"
             android:max="18"
-            android:progress="3"/>
+            android:progress="15"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/set_profile_gender"
+            android:text="@string/set_profile_personality"
             android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <RadioGroup
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/set_profile_gender_male"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:background="@drawable/set_profile_gender_male_selector"
-                    android:onClick="onRadioButtonClicked"
-                    android:button="@null"
-                    android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/personality_checkbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/set_profile_gender_female"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:background="@drawable/set_profile_gender_female_selector"
-                    android:onClick="onRadioButtonClicked"
-                    android:button="@null"
-                    android:layout_weight="1"/>
-        </RadioGroup>
+        </ScrollView>
 
     </LinearLayout>
 
@@ -64,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
-            android:id="@+id/set_gender_next"
+            android:id="@+id/set_personality_next"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="다음"

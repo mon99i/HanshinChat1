@@ -3,8 +3,11 @@ package com.example.hanshinchat1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,20 +17,39 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class SetProfile4AgeActivity extends MainActivity {
+public class SetProfile16MbtiActivity extends MainActivity {
 
-    EditText age;
+    TextView mbti;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.set_profile_4_age);
+        setContentView(R.layout.set_profile_16_mbti);
 
-        Button nextBtn = findViewById(R.id.set_age_next);
+        Button nextBtn = findViewById(R.id.set_mbti_next);
 
-        age = (EditText) findViewById(R.id.age);
+        mbti = (TextView) findViewById(R.id.mbti);
 
+        Spinner spinner = findViewById(R.id.mbti_spinner);
+        String[] spinnerList = getResources().getStringArray(R.array.mbti);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedDepartment = spinnerList[position];
+                mbti.setText(selectedDepartment);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mbti.setText("MBTI 선택");
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,23 +59,21 @@ public class SetProfile4AgeActivity extends MainActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
-
-                            String strAge = age.getText().toString();
-                            if (!strAge.isEmpty()) {
+                            String strMbti = mbti.getText().toString();
+                            if (!strMbti.isEmpty()) {
                                 try {
-                                    Integer intAge = Integer.valueOf(strAge);
-                                    userInfo.setAge(intAge);
+                                    userInfo.setMbti(strMbti);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile5GradeActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 나이를 입력해주세요", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "올바른 MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "나이를 입력해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
@@ -73,7 +93,7 @@ public class SetProfile4AgeActivity extends MainActivity {
 
     }
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SetProfile3GenderActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SetProfile15PersonalityActivity.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);

@@ -55,7 +55,6 @@ public class MatchFragment extends Fragment {
         TextView gender = view.findViewById(R.id.showMatch_txt_gender);
         TextView department = view.findViewById(R.id.showMatch_txt_department);
         TextView age = view.findViewById(R.id.showMatch_txt_age);
-        TextView hobby = view.findViewById(R.id.showMatch_txt_hobby);
         TextView name = view.findViewById(R.id.showMatch_txt_name);
         ImageView image = view.findViewById(R.id.showMatch_image);
 
@@ -69,8 +68,6 @@ public class MatchFragment extends Fragment {
         gender.setText( userInfo.getGender());
         department.setText( userInfo.getDepartment());
         age.setText( userInfo.getAge().toString());
-        hobby.setText( userInfo.getHobby());
-
 
         return view;
     }

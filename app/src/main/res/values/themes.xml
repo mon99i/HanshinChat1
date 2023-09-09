@@ -12,8 +12,14 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
 
-        <!-- Customize your theme here. -->
+    <style name="NumberPickerTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textSize">25sp</item>
+        <item name="editTextBackground">@color/gray</item>
     </style>
 
 
