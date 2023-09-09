@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends MainActivity {
 
 
@@ -38,6 +40,7 @@ public class HomeActivity extends MainActivity {
         checkMatchRequest();
         checkProfileExist();
 
+
         Button mbtiMatching = findViewById(R.id.mbti_matching);
         Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
         Button friendAroundMatching = findViewById(R.id.friend_around_matching);
@@ -56,7 +59,7 @@ public class HomeActivity extends MainActivity {
         idealTypeMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -113,6 +116,7 @@ public class HomeActivity extends MainActivity {
         });
 
     }
+
 
 
     //나중에쓸수있음

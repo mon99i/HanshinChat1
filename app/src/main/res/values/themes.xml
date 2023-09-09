@@ -15,4 +15,11 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="CustomRadioButton" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorAccent">@color/purple_100</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>
