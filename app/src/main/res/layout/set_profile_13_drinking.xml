@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="100dp"
         android:orientation="vertical">
 
         <ProgressBar
@@ -31,42 +31,85 @@
             android:textSize="30sp"
             android:textColor="#000000"/>
 
-        <RadioGroup
-            android:id="@+id/smoking"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/set_profile_drinking_y"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:text="네"
-                android:textSize="30dp"
-                android:onClick="onRadioButtonClicked"
-                android:button="@null"
-                android:gravity="center"
-                android:layout_weight="1"/>
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/set_profile_drinking_n"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:text="아니오"
-                android:textSize="30dp"
-                android:onClick="onRadioButtonClicked"
-                android:gravity="center"
-                android:button="@null"
-                android:layout_weight="1"/>
-        </RadioGroup>
-
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/drinking_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <GridLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="16dp">
+
+            <RadioButton
+                android:id="@+id/drinking_radio_btn_1"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="안 마심"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+
+            <RadioButton
+                android:id="@+id/drinking_radio_btn_2"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="거의 매일"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+            <RadioButton
+                android:id="@+id/drinking_radio_btn_3"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="주 1~2번"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+            <RadioButton
+                android:id="@+id/drinking_radio_btn_4"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="주 3회 이상"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+            <RadioButton
+                android:id="@+id/drinking_radio_btn_5"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="한 달에 1~2번"
+                android:textSize="16sp"
+                android:button="@null"
+                android:background="@drawable/radio_button_border" />
+
+        </GridLayout>
+    </RadioGroup>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/set_drinking_next"
             android:layout_width="match_parent"
@@ -76,5 +119,4 @@
             android:layout_margin="10dp"
             android:backgroundTint="#BFA0ED" />
     </LinearLayout>
-
 </LinearLayout>

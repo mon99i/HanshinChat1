@@ -2,12 +2,14 @@ package com.example.hanshinchat1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.text.TextUtils; // 추가된 import 문
 
 import androidx.annotation.NonNull;
 
@@ -33,7 +35,7 @@ public class SetProfile14InterestActivity extends MainActivity {
         setContentView(R.layout.set_profile_14_interest);
 
         Button nextBtn = findViewById(R.id.set_interest_next);
-        LinearLayout checkBoxLayout = findViewById(R.id.checkBoxLayout);
+        LinearLayout checkBoxLayout = findViewById(R.id.interest_checkbox_layout);
 
         // 수정된 부분
         LinearLayout currentLinearLayout = null;
@@ -42,9 +44,10 @@ public class SetProfile14InterestActivity extends MainActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         checkBoxParams.weight = 1;
+        checkBoxParams.setMargins(2, 2, 2, 2);
 
         for (int i = 0; i < interestArray.length; i++) {
-            final String currentInterest = interestArray[i]; // final 변수로 선언
+            final String currentInterest = interestArray[i];
 
             if (i % 4 == 0) {
                 currentLinearLayout = new LinearLayout(this);
@@ -55,24 +58,27 @@ public class SetProfile14InterestActivity extends MainActivity {
             CheckBox checkBox = new CheckBox(this);
             checkBox.setText(currentInterest);
             checkBox.setLayoutParams(checkBoxParams);
+            checkBox.setBackgroundResource(R.drawable.button_border);
+            checkBox.setButtonDrawable(null);
+            checkBox.setGravity(Gravity.CENTER);
+
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (selectedInterests.size() < MAX_INTERESTS) {
-                            selectedInterests.add(currentInterest); // final 변수 사용
+                            selectedInterests.add(currentInterest);
                         } else {
                             checkBox.setChecked(false);
                             Toast.makeText(getApplicationContext(), "최대 " + MAX_INTERESTS + "개까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        selectedInterests.remove(currentInterest); // final 변수 사용
+                        selectedInterests.remove(currentInterest);
                     }
                 }
             });
             currentLinearLayout.addView(checkBox);
         }
-
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +90,12 @@ public class SetProfile14InterestActivity extends MainActivity {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
                             if (!selectedInterests.isEmpty()) {
-                                userInfo.setInterest(String.valueOf(selectedInterests));
+
+                                String interestsAsString = TextUtils.join(", ", selectedInterests);
+
+                                usersRef.child("interest").setValue(interestsAsString);
+
+                                userInfo.setInterest(interestsAsString);
                                 userInfo.setUid(user.getUid());
                                 usersRef.setValue(userInfo);
 
@@ -111,6 +122,7 @@ public class SetProfile14InterestActivity extends MainActivity {
             }
         });
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SetProfile13DrinkingActivity.class);
         startActivity(intent);

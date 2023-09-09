@@ -20,22 +20,25 @@ public class SetProfile9FormActivity extends MainActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
 
+    private RadioButton selectedRadioButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_9_form);
 
         radioGroup = findViewById(R.id.form_radio_group);
-        radioButton1 = findViewById(R.id.radioButton1);
-        radioButton2 = findViewById(R.id.radioButton2);
-        radioButton3 = findViewById(R.id.radioButton3);
-        radioButton4 = findViewById(R.id.radioButton4);
+        radioButton1 = findViewById(R.id.form_radio_btn_1);
+        radioButton2 = findViewById(R.id.form_radio_btn_2);
+        radioButton3 = findViewById(R.id.form_radio_btn_3);
+        radioButton4 = findViewById(R.id.form_radio_btn_4);
 
         Button nextBtn = findViewById(R.id.set_form_next);
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedRadioButton = radioButton1;
                 radioButton1.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -46,6 +49,7 @@ public class SetProfile9FormActivity extends MainActivity {
         radioButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedRadioButton = radioButton2;
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -56,6 +60,7 @@ public class SetProfile9FormActivity extends MainActivity {
         radioButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedRadioButton = radioButton3;
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_checked);
@@ -66,6 +71,7 @@ public class SetProfile9FormActivity extends MainActivity {
         radioButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedRadioButton = radioButton4;
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -73,16 +79,20 @@ public class SetProfile9FormActivity extends MainActivity {
             }
         });
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+                selectedRadioButton = findViewById(selectedRadioButtonId);
+
+            }
+        });
+
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
-
-                if (selectedRadioButtonId != -1) {
-                    RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
-                    String selectedForm = selectedRadioButton.getText().toString();
-
+                if (selectedRadioButton != null) {
                     DatabaseReference usersRef = myRef.child("users").child(user.getUid());
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -90,11 +100,12 @@ public class SetProfile9FormActivity extends MainActivity {
                             if (snapshot.exists()) {
                                 UserInfo userInfo = snapshot.getValue(UserInfo.class);
 
+                                String selectedForm = selectedRadioButton.getText().toString();
                                 userInfo.setForm(selectedForm);
                                 userInfo.setUid(user.getUid());
                                 usersRef.setValue(userInfo);
 
-                                Intent intent = new Intent(getApplicationContext(), SetProfile10addressActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), SetProfile10AddressActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -111,6 +122,8 @@ public class SetProfile9FormActivity extends MainActivity {
                             Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } else {
+                    Toast.makeText(getApplicationContext(), "체형을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
         });

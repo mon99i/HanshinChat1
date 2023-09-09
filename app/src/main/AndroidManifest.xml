@@ -114,7 +114,7 @@
             android:name=".SetProfile11ReligionActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".SetProfile10addressActivity"
+            android:name=".SetProfile10AddressActivity"
             android:exported="false"></activity>
         <activity
             android:name=".SetProfile12SmokingActivity"

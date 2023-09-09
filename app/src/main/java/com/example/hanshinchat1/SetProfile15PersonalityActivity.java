@@ -2,12 +2,14 @@ package com.example.hanshinchat1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.text.TextUtils; // 추가된 import 문
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +24,8 @@ import java.util.List;
 public class SetProfile15PersonalityActivity extends MainActivity {
 
     private List<String> selectedPersonality = new ArrayList<>();
-    private static final int MAX_PERSONALITY = 5;
+
+    private static final int MAX_PERSONALITY = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,45 +36,50 @@ public class SetProfile15PersonalityActivity extends MainActivity {
         setContentView(R.layout.set_profile_15_personality);
 
         Button nextBtn = findViewById(R.id.set_personality_next);
-        LinearLayout personalityCheckBoxLayout = findViewById(R.id.personalityCheckBoxLayout);
+        LinearLayout checkBoxLayout = findViewById(R.id.personality_checkbox_layout);
 
+        // 수정된 부분
         LinearLayout currentLinearLayout = null;
         LinearLayout.LayoutParams checkBoxParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         checkBoxParams.weight = 1;
+        checkBoxParams.setMargins(2, 2, 2, 2);
 
         for (int i = 0; i < personalityArray.length; i++) {
-            final String currentInterest = personalityArray[i];
+            final String currentPersonality = personalityArray[i];
 
             if (i % 4 == 0) {
                 currentLinearLayout = new LinearLayout(this);
                 currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                personalityCheckBoxLayout.addView(currentLinearLayout);
+                checkBoxLayout.addView(currentLinearLayout);
             }
 
             CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(currentInterest);
+            checkBox.setText(currentPersonality);
             checkBox.setLayoutParams(checkBoxParams);
+            checkBox.setBackgroundResource(R.drawable.button_border);
+            checkBox.setButtonDrawable(null);
+            checkBox.setGravity(Gravity.CENTER);
+
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         if (selectedPersonality.size() < MAX_PERSONALITY) {
-                            selectedPersonality.add(currentInterest);
+                            selectedPersonality.add(currentPersonality);
                         } else {
                             checkBox.setChecked(false);
                             Toast.makeText(getApplicationContext(), "최대 " + MAX_PERSONALITY + "개까지 선택 가능합니다.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        selectedPersonality.remove(currentInterest);
+                        selectedPersonality.remove(currentPersonality);
                     }
                 }
             });
             currentLinearLayout.addView(checkBox);
         }
-
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +91,12 @@ public class SetProfile15PersonalityActivity extends MainActivity {
                         if (snapshot.exists()) {
                             UserInfo userInfo = snapshot.getValue(UserInfo.class);
                             if (!selectedPersonality.isEmpty()) {
-                                userInfo.setPersonality(String.valueOf(selectedPersonality));
+
+                                String personalityAsString = TextUtils.join(", ", selectedPersonality);
+
+                                usersRef.child("personality").setValue(personalityAsString);
+
+                                userInfo.setPersonality(personalityAsString);
                                 userInfo.setUid(user.getUid());
                                 usersRef.setValue(userInfo);
 
@@ -92,7 +105,7 @@ public class SetProfile15PersonalityActivity extends MainActivity {
                                 finish();
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                             } else {
-                                Toast.makeText(getApplicationContext(), "관심사를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "성격 타입을 선택해주세요", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
@@ -110,6 +123,7 @@ public class SetProfile15PersonalityActivity extends MainActivity {
             }
         });
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
         startActivity(intent);
