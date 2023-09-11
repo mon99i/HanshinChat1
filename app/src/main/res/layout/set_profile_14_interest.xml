@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".SetProfile14InterestActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/interest_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="14"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_profile_interest"
+            android:textSize="28sp"
+            android:textColor="#000000"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/interest_checkbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/set_interest_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="다음"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -45,7 +45,7 @@ public class SetProfile4AgeActivity extends MainActivity {
                                     userInfo.setAge(intAge);
                                     usersRef.setValue(userInfo);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile5StudentIdActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile5GradeActivity.class);
                                     startActivity(intent);
                                     finish();
                                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -71,5 +71,11 @@ public class SetProfile4AgeActivity extends MainActivity {
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SetProfile3GenderActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 }

@@ -1,9 +1,10 @@
 package com.example.hanshinchat1;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MatchRoom {
+public class MatchRoom implements Serializable {
 
     private RoomInfo roomInfo;
 

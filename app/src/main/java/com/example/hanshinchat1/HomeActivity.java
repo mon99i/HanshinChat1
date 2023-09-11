@@ -36,7 +36,6 @@ public class HomeActivity extends MainActivity {
         clickProfile();
         checkMatchRequest();
         checkProfileExist();
-        checkProfileExist();
 
         Button mbtiMatching = findViewById(R.id.mbti_matching);
         Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
@@ -60,15 +59,15 @@ public class HomeActivity extends MainActivity {
                 /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
                 startActivity(intent);
                 finish();*/
-                showAlertDialog();
-
             }
         });
 
         idealTypeMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), SetProfile10AddressActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

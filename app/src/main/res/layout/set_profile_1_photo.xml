@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".SetProfile2NameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/photo_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_profile_photo"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_margin="100dp"
+            android:src="@drawable/profile"/>
+      </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/captureBtn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="55dp"
+            android:text="촬영하기"
+            android:backgroundTint="#BFA0ED"/>
+
+        <Button
+            android:id="@+id/getPhotoBtn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="55dp"
+            android:text="가져오기"
+            android:backgroundTint="#BFA0ED"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/set_photo_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="다음"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
+
+</LinearLayout>

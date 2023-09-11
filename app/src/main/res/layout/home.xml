@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="#F5EEFF">
@@ -43,18 +43,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1450px">
+        android:layout_height="555dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1450px"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="30dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100px"
-            android:text="오늘의 추천"
+            android:text="오늘의 매칭"
             android:gravity="center"
             android:textSize="20dp"
             android:textColor="#000000"
@@ -171,7 +171,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="상위 5% 매칭"
+            android:text="TOP 5 매칭"
             android:backgroundTint="#BFA0ED"/>
 
         <View

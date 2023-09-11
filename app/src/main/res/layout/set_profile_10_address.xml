@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".SetProfile10AddressActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/address_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="10"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_profile_address"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <NumberPicker
+                android:id="@+id/first_address_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_marginEnd="8dp" />
+
+            <NumberPicker
+                android:id="@+id/second_address_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:descendantFocusability="blocksDescendants" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/set_address_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="다음"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="#BFA0ED" />
+    </LinearLayout>
+
+</LinearLayout>
