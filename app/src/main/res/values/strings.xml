@@ -20,7 +20,7 @@
     <string name="set_profile_interest">어떤 관심사를 갖고 계신가요?</string>
     <string name="set_profile_personality">본인의 성격은 어떠한가요?</string>
     <string name="set_profile_idealType">마지막 질문입니다!\n이상형 순위를 골라주세요!</string>
-    <string name="set_profile_mbti">당신의 MBTI 유형을 선택해 주세요.</string>
+    <string name="set_profile_mbti">당신의 MBTI 유형을\n선택해 주세요.</string>
     <string name="set_profile_complete">프로필 입력이 완료되었어요!\n\n이제 상대를 찾으러 가볼까요?</string>
     <string name="set_profile_form">체형은 어떠하신가요?</string>
     <string name="set_profile_grade">몇학년 인가요?</string>
