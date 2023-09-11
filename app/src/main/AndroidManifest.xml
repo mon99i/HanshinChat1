@@ -75,6 +75,9 @@
             android:name=".board.ListActivity"
             android:exported="false"></activity>
         <activity
+            android:name=".board.List2Activity"
+            android:exported="false"></activity>
+        <activity
             android:name=".board.BoardEditActivity"
             android:exported="false"></activity>
         <activity
@@ -139,6 +142,18 @@
             android:exported="false"></activity>
         <activity
             android:name=".SetProfile16CompleteActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.MatchHome"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.MBTIMatchActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.MBTIMatchNone"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.LookingForMBTI"
             android:exported="false"></activity>
     </application>
 

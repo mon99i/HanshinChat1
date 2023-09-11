@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ListActivity extends MainActivity {
+public class List2Activity extends MainActivity {
 
     private ArrayList<ListViewItem> boardDataList;
     private ArrayList<String> boardKeyList;
@@ -51,11 +51,11 @@ public class ListActivity extends MainActivity {
         messageboard = findViewById(R.id.messageboard);
         dating_advice = findViewById(R.id.dating_advice);
 
-        messageboard.setPaintFlags(messageboard.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        dating_advice.setOnClickListener(new View.OnClickListener() {
+        dating_advice.setPaintFlags(dating_advice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        messageboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), List2Activity.class);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,7 +97,7 @@ public class ListActivity extends MainActivity {
 
     private void FBData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("board");
+        DatabaseReference myRef = database.getReference("연애상담");
 
         ValueEventListener postListener = new ValueEventListener() {
 
@@ -106,7 +106,7 @@ public class ListActivity extends MainActivity {
                 boardDataList.clear();
 
                 for (DataSnapshot dataModel : dataSnapshot.getChildren()) {
-                    Log.d("ListActivity", dataModel.toString());
+                    Log.d("List2Activity", dataModel.toString());
 
                     ListViewItem item = dataModel.getValue(ListViewItem.class);
                     boardDataList.add(item);
@@ -115,14 +115,14 @@ public class ListActivity extends MainActivity {
                 Collections.reverse(boardKeyList);
                 Collections.reverse(boardDataList);
                 boardAdapter.notifyDataSetChanged();
-                Log.w("ListActivity", boardDataList.toString());
+                Log.w("List2Activity", boardDataList.toString());
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("List2Activity", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
@@ -131,4 +131,3 @@ public class ListActivity extends MainActivity {
 
 
 }
-
