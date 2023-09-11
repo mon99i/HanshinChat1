@@ -114,6 +114,7 @@
             android:gravity="center"
             android:textStyle="bold"/>
         <Button
+            android:id="@+id/mmbbtiBtn"
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="50dp"

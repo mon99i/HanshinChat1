@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.hanshinchat1.Match.MBTIMatchActivity;
+import com.example.hanshinchat1.Match.MatchHome;
+
+//import com.example.hanshinchat1.Match.MBTIMatchActivity;
+
 public class HomeActivity extends MainActivity {
 
 
@@ -17,9 +22,8 @@ public class HomeActivity extends MainActivity {
     private static final String TEXT_REPLY = "text_reply";
 
     private static final String TAG="채널생성실패";
+    public Button mmbbtiBtn;
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
@@ -38,6 +42,16 @@ public class HomeActivity extends MainActivity {
         Button friendAroundMatching = findViewById(R.id.friend_around_matching);
         Button topUserMatching = findViewById(R.id.top_user_matching);
 
+
+        mmbbtiBtn = findViewById(R.id.mmbbtiBtn);
+
+        mmbbtiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MatchHome.class);
+                startActivity(intent);
+            }
+        });
 
         mbtiMatching.setOnClickListener(new View.OnClickListener() {
             @Override

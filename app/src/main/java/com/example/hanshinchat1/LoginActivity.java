@@ -201,7 +201,8 @@ public class LoginActivity extends MainActivity{
 
             String email = user.getEmail();
 
-            if (email != null && email.endsWith("@hs.ac.kr")) {
+            if (email != null) {
+//            if (email != null && email.endsWith("@hs.ac.kr")) {
                 //Toast.makeText(getApplicationContext(), "한신대 학생 확인!", Toast.LENGTH_SHORT).show();
                 // 이메일이 hs@ac.kr과 일치하는 경우 처리할 작업 수행
                 return true;
