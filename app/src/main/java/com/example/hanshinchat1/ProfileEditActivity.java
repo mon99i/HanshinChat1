@@ -20,7 +20,7 @@ public class ProfileEditActivity extends MainActivity {
 
     private EditText editAge, editStudentId, editDepartment, editHeight, editReligion,
             editAddress, editSmoking, editDrinking, editForm, editGrade, editMbti;
-    private TextView name, gender, interest, personality, idealTypeFirst, idealTypeSecond, photoUrl;
+    private TextView name, gender, interest, personality;
 
     private Button editBtn, cancelBtn;
     private DatabaseReference databaseReference;
@@ -57,9 +57,6 @@ public class ProfileEditActivity extends MainActivity {
         gender = findViewById(R.id.gender);
         interest = findViewById(R.id.interest);
         personality = findViewById(R.id.personality);
-        idealTypeFirst = findViewById(R.id.ideal_type_first);
-        idealTypeSecond = findViewById(R.id.ideal_type_second);
-        photoUrl = findViewById(R.id.photo_url);
 
         editBtn = findViewById(R.id.edit_profile_edit);
         cancelBtn = findViewById(R.id.edit_profile_cancel);
@@ -88,9 +85,6 @@ public class ProfileEditActivity extends MainActivity {
                         gender.setText(userInfo.getGender());
                         interest.setText(userInfo.getInterest());
                         personality.setText(userInfo.getPersonality());
-                        idealTypeFirst.setText(userInfo.getIdealTypeFirst());
-                        idealTypeSecond.setText(userInfo.getIdealTypeSecond());
-                        photoUrl.setText(userInfo.getPhotoUrl());
                     }
                 }
             }
