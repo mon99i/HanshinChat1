@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취미 이야기를 했는데, 둘이 겹치는 취미가 하나도 없었다. 당신의 반응은?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question9_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX씨 취미가 다 재밌어보여서 저도 해보고 싶어요"/>
+            <RadioButton
+                android:id="@+id/question9_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취미는 앞으로 같이 만들면 되죠."/>
+            <RadioButton
+                android:id="@+id/question9_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="그러게요, 아쉽지만 어쩔 수 없죠."/>
+            <RadioButton
+                android:id="@+id/question9_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="안그래도 새로운 취미를 요즘 계속 찾고 있어요."/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

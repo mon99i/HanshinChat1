@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소개팅 전, 상대가 어디서 만날지 질문을 했다. 어떻게 답장할까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question1_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="혹시 뭐 좋아하세요?"/>
+            <RadioButton
+                android:id="@+id/question1_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="각자 생각해보고 여기에 올려볼까요?"/>
+            <RadioButton
+                android:id="@+id/question1_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="공평하게 중간쯤 아무 식당에서 볼까요"/>
+            <RadioButton
+                android:id="@+id/question1_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제가 몇개 찾아봤는데, 링크 을릴게요. 한 번 봐주실래요?"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

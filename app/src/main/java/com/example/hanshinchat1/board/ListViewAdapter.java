@@ -53,8 +53,11 @@ public final class ListViewAdapter extends BaseAdapter {
         // 버그 생기면 지우면 됨
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(layout.listview_item, parent, false);
+//            convertView = inflater.inflate(layout.listview_item, parent, false);
+            convertView = inflater.inflate(layout.board_list_cardview, parent, false);
+
         }
+
 
         title = (TextView) convertView.findViewById(R.id.titleArea);
         content = (TextView) convertView.findViewById(R.id.contentArea);

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소개팅 당일, 약속 시간에 조금 늦을 거 같다. 어쩌지?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question2_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미리 도착 예정 시간을 솔직하게 상대에게 알린다"/>
+            <RadioButton
+                android:id="@+id/question2_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조금 늦을 수도 있다고 넌지시 상대에게 말한다"/>
+            <RadioButton
+                android:id="@+id/question2_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상대에게 전전히 오라고 말한다"/>
+            <RadioButton
+                android:id="@+id/question2_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="괜히 늦는다고 말하기 보단 가는 데에 집중한다"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

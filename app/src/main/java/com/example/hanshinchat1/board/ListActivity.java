@@ -1,6 +1,7 @@
 package com.example.hanshinchat1.board;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -29,6 +31,7 @@ public class ListActivity extends MainActivity {
     private ListView listView;
     private ListViewAdapter boardAdapter;
     private ImageView writePageBtn;
+    private TextView messageboard, dating_advice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,17 @@ public class ListActivity extends MainActivity {
         boardAdapter = new ListViewAdapter(boardDataList);
         listView = findViewById(R.id.boardListView);
         listView.setAdapter(boardAdapter);
+        messageboard = findViewById(R.id.messageboard);
+        dating_advice = findViewById(R.id.dating_advice);
+
+        messageboard.setPaintFlags(messageboard.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        dating_advice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), List2Activity.class);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
