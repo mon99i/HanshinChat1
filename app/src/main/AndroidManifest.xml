@@ -45,6 +45,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Simulation1" android:exported="false" />
+        <activity android:name=".Simulation2" android:exported="false" />
+        <activity android:name=".Simulation3" android:exported="false" />
+        <activity android:name=".Simulation4" android:exported="false" />
+        <activity android:name=".Simulation5" android:exported="false" />
+        <activity android:name=".Simulation6" android:exported="false" />
+        <activity android:name=".Simulation7" android:exported="false" />
+        <activity android:name=".Simulation8" android:exported="false" />
+        <activity android:name=".Simulation9" android:exported="false" />
+        <activity android:name=".Simulation10" android:exported="false" />
+        <activity android:name=".Simulation11" android:exported="false" />
+        <activity android:name=".SimulationResult" android:exported="false" />
+
         <activity
             android:name=".HomeActivity"
             android:exported="false"></activity>

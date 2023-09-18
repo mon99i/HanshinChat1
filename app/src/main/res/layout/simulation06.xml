@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이야기를 하던 중, 질문이 들어왔다. 오늘 검정색을 입은 건 우연인데, 어떻게 대답하면 좋을까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question5_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="음..A씨랑 소개팅 한다고 하니까 저도 모르게 시크한 걸 집었나? 어떤 색 좋아하세요?"/>
+            <RadioButton
+                android:id="@+id/question5_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검정색이라서 입은 건 맞긴 한데, 사실 옷 살 때는 회색 계열을 좋아하긴 하거든요. 근데 좀 예뻐서 사는 경우에는 검정색을 살 때도 있어요. 하지만 이 옷은 선물받은 거긴 해요. 아마도 어머니나 동생한테 받은거 같아요"/>
+            <RadioButton
+                android:id="@+id/question5_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="생각해보니 제가 검정색을 좋아하는 거 같긴 하네요, 관심 가져주셔서 감사합니다. A씨는 어떤 색 깔 좋아하세요?"/>
+            <RadioButton
+                android:id="@+id/question5_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="네, 검정색을 좋아해요. A씨도 검정색을 좋아하시나요?"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

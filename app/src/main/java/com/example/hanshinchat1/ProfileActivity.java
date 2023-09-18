@@ -6,21 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class ProfileActivity extends MainActivity{
 
@@ -41,6 +34,8 @@ public class ProfileActivity extends MainActivity{
         ImageView profile = (ImageView) findViewById(R.id.profileImage);
 
         Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
+
+        Button simulationBtn = (Button) findViewById(R.id.simulation);
         
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,6 +62,15 @@ public class ProfileActivity extends MainActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        simulationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
                 startActivity(intent);
                 finish();
             }
