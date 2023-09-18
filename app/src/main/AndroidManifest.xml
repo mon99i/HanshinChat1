@@ -143,6 +143,14 @@
         <activity
             android:name=".SetProfile5GradeActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".SetIdealActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".SetIdeal2Activity"
+            android:exported="false"></activity>
+
+
     </application>
 
 </manifest>
