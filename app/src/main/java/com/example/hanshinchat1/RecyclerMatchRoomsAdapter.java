@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +37,10 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     private Context context;
     private final static String TAG = "매칭요청실패";
 
-    private UserInfo userInfo = new UserInfo();
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    private ArrayList<String> alreadyMatchedUids;
     private List<MatchRoom> matchRoomsList;
     private ArrayList<String> matchKeyList;
+    private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
     public RecyclerMatchRoomsAdapter(Context context) {
         this.context = context;
@@ -63,18 +63,6 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
                 }
 
-                /*for (DataSnapshot item : snapshot.getChildren()) {    //생각해볼거
-                    if (item.child("matchInfo").getValue(MatchInfo.class) == null) {
-                        matchRoomsList.add(item.getValue(MatchRoom.class));
-
-                    }
-                }
-                for (DataSnapshot item : snapshot.getChildren()) {
-                    for (DataSnapshot subItem : item.child("matchInfo").getChildren()){
-                        subItem.getValue(MatchInfo.class).getApproved();
-                    }
-                }*/
-
                 notifyDataSetChanged();
             }
 
@@ -83,6 +71,37 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
             }
         });
+        /*//다시 만나지않기, 같은과 만나지않기, 등 필터링 구현예시
+        FirebaseDatabase.getInstance().getReference().child("matchRooms").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               *//* for(DataSnapshot item:snapshot.getChildren()){
+                    for(DataSnapshot subItem:item.child("matchInfo").getChildren()){
+                        if(subItem.getValue(MatchInfo.class))
+                    }
+                }*//*
+
+                matchRoomsList.clear();
+                matchKeyList.clear();
+                for(DataSnapshot item:snapshot.getChildren()){
+                    Map<String,MatchInfo> matchUsers=item.getValue(MatchRoom.class).getMatchInfo();
+                    String hostUid=item.getValue(MatchRoom.class).getRoomInfo().getHost();
+                    if(matchUsers.containsKey(user.getUid())){
+                       alreadyMatchedUids.add(hostUid);
+                    }
+                    else{
+                        matchRoomsList.add(item.getValue(MatchRoom.class));
+                        matchKeyList.add(item.getKey());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
 
     }
 

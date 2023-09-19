@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2차로 술 한 잔 하기로 했다. 어떤 장소가 좋을까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question7_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="통나무 인테리어가 인상적인 호프집"/>
+            <RadioButton
+                android:id="@+id/question7_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연인들로 붐비는 와인바"/>
+            <RadioButton
+                android:id="@+id/question7_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="대학교 미팅이 한창인 룸술집"/>
+            <RadioButton
+                android:id="@+id/question7_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="조금은 어두운 칵테일바"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

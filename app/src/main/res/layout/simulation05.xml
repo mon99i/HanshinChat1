@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메뉴를 고를 차례. 상대가 메뉴판을 오래동안 골똘히 보고 있다. 이 레스토랑 단골인 당신은 어떻 게 할까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question4_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="단골이라고 밝히고 메뉴 선정을 대신 해준다"/>
+            <RadioButton
+                android:id="@+id/question4_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="처음 온 척을 하고, 상대가 고를 때까지 가만히 기다린다"/>
+            <RadioButton
+                android:id="@+id/question4_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="직원을 불러 뭐가 제일 잘나가는지 묻는다"/>
+            <RadioButton
+                android:id="@+id/question4_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="어떤 게 먹고싶으신지 묻는 말을 건다"/>
+
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/next5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+    </LinearLayout>
+</LinearLayout>

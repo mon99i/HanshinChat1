@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이제 서로 집을 가려한다. 당신의 행동은?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question10_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사실은 다른 방향이지만, 같은 방향이라며 같이 가준다."/>
+            <RadioButton
+                android:id="@+id/question10_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="버스 정류장 까지 데려다 주고 버스 기다려준 다음에 집간다."/>
+            <RadioButton
+                android:id="@+id/question10_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="술집에서 나와서 그 앞에서 오늘 즐거웠습니다. 연락드릴게요. 하고 집으로 간다."/>
+            <RadioButton
+                android:id="@+id/question10_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="막차 시간까지 아직 여유 있으니까 여기 앞에 산책로 가서 산책 하실래요?라고 질문한다."/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="완료"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

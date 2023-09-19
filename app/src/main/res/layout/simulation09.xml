@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="술집에 들어오자마자 갑자기 정적이 찾아왔다. 무엇이 좋을까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question8_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다른 곳을 응시하고, 좋네요라고 말한다"/>
+            <RadioButton
+                android:id="@+id/question8_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="지그시 바라보며 약간의 미소를 짓는다"/>
+            <RadioButton
+                android:id="@+id/question8_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상대에 대한 질문을 만들어 물어본다."/>
+            <RadioButton
+                android:id="@+id/question8_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="어색하네요 술은 언제나오지..? 라며 웃는다"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="결국 나는 늦지 않았지만, 상대가 늦어버렸다. 미안해하는 상대에게 뭐라고 말하지?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question3_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="괜찮아요 저도 온 지 얼마 안되었어요"/>
+            <RadioButton
+                android:id="@+id/question3_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사람이 그럴 수도 있죠"/>
+            <RadioButton
+                android:id="@+id/question3_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미안해하실 것 까진 아니에요."/>
+            <RadioButton
+                android:id="@+id/question3_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오시느라 힘드셨죠?"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -53,6 +53,7 @@ public class ChattingActivity extends MainActivity {
         initializeView();
         initializeListener();
         setupChatRooms();
+
     }
 
     private void initializeProperty() {  //chatroomActivity에서 받아옴

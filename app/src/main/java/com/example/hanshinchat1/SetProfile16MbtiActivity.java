@@ -3,11 +3,8 @@ package com.example.hanshinchat1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,79 +16,132 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SetProfile16MbtiActivity extends MainActivity {
 
-    TextView mbti;
+    private String selectedFirst = "", selectedSecond = "", selectedThird = "", selectedForth = "";
+
+    private RadioButton btnE, btnI, btnN, btnS, btnF, btnT, btnP, btnJ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.set_profile_16_mbti);
 
         Button nextBtn = findViewById(R.id.set_mbti_next);
 
-        mbti = (TextView) findViewById(R.id.mbti);
+        btnE = findViewById(R.id.mbti_e);
+        btnI = findViewById(R.id.mbti_i);
+        btnN = findViewById(R.id.mbti_n);
+        btnS = findViewById(R.id.mbti_s);
+        btnF = findViewById(R.id.mbti_f);
+        btnT = findViewById(R.id.mbti_t);
+        btnP = findViewById(R.id.mbti_p);
+        btnJ = findViewById(R.id.mbti_j);
 
-        Spinner spinner = findViewById(R.id.mbti_spinner);
-        String[] spinnerList = getResources().getStringArray(R.array.mbti);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btnE.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDepartment = spinnerList[position];
-                mbti.setText(selectedDepartment);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                mbti.setText("MBTI 선택");
+            public void onClick(View v) {
+                selectedFirst = "E";
+                btnE.setBackgroundResource(R.drawable.radio_button_checked);
+                btnI.setBackgroundResource(R.drawable.radio_button_unchecked);
             }
         });
+
+        btnI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedFirst = "I";
+                btnE.setBackgroundResource(R.drawable.radio_button_unchecked);
+                btnI.setBackgroundResource(R.drawable.radio_button_checked);
+            }
+        });
+        btnN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedSecond = "N";
+                btnN.setBackgroundResource(R.drawable.radio_button_checked);
+                btnS.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+        btnS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedSecond = "S";
+                btnS.setBackgroundResource(R.drawable.radio_button_checked);
+                btnN.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+        btnF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedThird = "F";
+                btnF.setBackgroundResource(R.drawable.radio_button_checked);
+                btnT.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+        btnT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedThird = "T";
+                btnT.setBackgroundResource(R.drawable.radio_button_checked);
+                btnF.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+        btnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedForth = "P";
+                btnP.setBackgroundResource(R.drawable.radio_button_checked);
+                btnJ.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+        btnJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedForth = "J";
+                btnJ.setBackgroundResource(R.drawable.radio_button_checked);
+                btnP.setBackgroundResource(R.drawable.radio_button_unchecked);
+            }
+        });
+
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                            String strMbti = mbti.getText().toString();
-                            if (!strMbti.isEmpty()) {
-                                try {
-                                    userInfo.setMbti(strMbti);
-                                    usersRef.setValue(userInfo);
+                if (!selectedFirst.isEmpty() && !selectedSecond.isEmpty() && !selectedThird.isEmpty() && !selectedForth.isEmpty()) {
+                    DatabaseReference usersRef = myRef.child("users").child(user.getUid());
+                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                UserInfo userInfo = snapshot.getValue(UserInfo.class);
 
-                                    Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                                } catch (NumberFormatException e) {
-                                    Toast.makeText(getApplicationContext(), "올바른 MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
-                                }
+                                String mbtiValue = selectedFirst + selectedSecond + selectedThird + selectedForth;
+
+                                userInfo.setMbti(mbtiValue);
+                                usersRef.setValue(userInfo);
+
+                                Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
+                                startActivity(intent);
+                                finish();
+                                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                             } else {
-                                Toast.makeText(getApplicationContext(), "MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                            finish();
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SetProfile15PersonalityActivity.class);
         startActivity(intent);

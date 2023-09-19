@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="소개팅 시물레이션"
+        android:textSize="50sp"
+        android:textAlignment="center"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="밥을 다 먹었을 무렵, 상대가 술 좋아하세요 ? 질문을 했다. 뭐라고 답할까?"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/question6_answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="진짜 좋아해요, 혹시 무슨 술 좋아하세요? 저는 요즘 와인이 맛있더라고요...신대륙 와인 드셔보셨어요?"/>
+            <RadioButton
+                android:id="@+id/question6_answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="음 사실 별로 즐겨하지 않아요. 건강에 안좋잖아요."/>
+            <RadioButton
+                android:id="@+id/question6_answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="네, 술 좋아하는 편이에요. A씨는요? 괜찮으시면 술 한 잔 하면서 이야기 더 나눌까요?"/>
+            <RadioButton
+                android:id="@+id/question6_answer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="술은 별로지만, 사람이 중요한 편이에요. 그러고보니 괜찮으시면 카페나 술집으로 이동할까요?"/>
+
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/next7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

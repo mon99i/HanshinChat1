@@ -127,10 +127,10 @@ public class ShowMatchInfoActivity extends MainActivity {           //슬라이�
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 MatchInfo matchInfo = snapshot.getValue(MatchInfo.class);
                 if (b == true) {     //승인시
+
                     matchInfo.setApproved(true);
                     matchInfo.setConfirmed(true);
                     matchInfoRef.setValue(matchInfo);
-
 
                     createChatRoom(requestedUid);
                     //approved가 true인 uid로 채팅방생성
@@ -181,11 +181,13 @@ public class ShowMatchInfoActivity extends MainActivity {           //슬라이�
                         boolean chatExists =false;
                         for (DataSnapshot item : snapshot.getChildren()) {
                             Map<String, Boolean> chatUsers = item.getValue(ChatRoom.class).getUsers();
-                            if (chatUsers.containsKey(approvedUid)) {   //이미 채팅방 있는경우
+                            if (chatUsers.containsKey(approvedUid)) {   //이미 상대와의 채팅방이 있는경우
                                 chatExists = true;
                                 Log.d(TAG, "onDataChange: 이미 채팅정보 있음!!");
 
                             }
+
+
                         }
                         if (chatExists == false) {  //이후 수락한 uid와의 채팅방 없는경우
                             chatRoomsRef.push().setValue(chatRoom).addOnSuccessListener(aVoid -> {
