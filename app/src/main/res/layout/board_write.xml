@@ -60,7 +60,7 @@
 
         <ImageView
             android:id="@+id/imageArea"
-            android:src="@drawable/addchat"
+            android:src="@drawable/picture"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="230dp"/>

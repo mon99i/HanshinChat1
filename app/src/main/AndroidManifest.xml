@@ -75,9 +75,6 @@
             android:name=".board.ListActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".board.List2Activity"
-            android:exported="false"></activity>
-        <activity
             android:name=".board.BoardEditActivity"
             android:exported="false"></activity>
         <activity
