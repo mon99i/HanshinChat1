@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.IdealPersonalityFragment">
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/idealInterestTxt"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:maxEms="10"
+        android:text="선호하는 성격을   골라주세요."
+        android:textColor="#434959"
+        android:textSize="25dp" />
 
-</FrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/fragment_personality_checkbox_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </ScrollView>
+=
+
+</LinearLayout>
+
+
+
+
+
+
+

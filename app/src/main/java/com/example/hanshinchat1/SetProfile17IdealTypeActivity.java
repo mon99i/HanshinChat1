@@ -29,6 +29,7 @@ public class SetProfile17IdealTypeActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         setContentView(R.layout.set_profile_17_idealtype);
 

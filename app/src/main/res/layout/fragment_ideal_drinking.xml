@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.IdealDrinkingFragment">
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="500dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/idealInterestTxt"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:maxEms="10"
+            android:text="선호하는 음주여부를 골라주세요"
+            android:textColor="#434959"
+            android:textSize="25dp" />
+
+
+
+            <RadioGroup
+                android:id="@+id/fragment_drinking_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <GridLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:padding="16dp">
+
+                    <RadioButton
+                        android:id="@+id/fragment_drinking_radio_btn_1"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="안 마심"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+
+                    <RadioButton
+                        android:id="@+id/fragment_drinking_radio_btn_2"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="거의 매일"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/fragment_drinking_radio_btn_3"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="주 1~2번"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/fragment_drinking_radio_btn_4"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="주 3회 이상"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/fragment_drinking_radio_btn_5"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="한 달에 1~2번"
+                        android:textSize="16sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                </GridLayout>
+            </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>

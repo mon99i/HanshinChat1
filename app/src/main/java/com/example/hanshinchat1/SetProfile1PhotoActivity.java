@@ -194,6 +194,7 @@ public class SetProfile1PhotoActivity extends MainActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
+                                intent.putExtra("UserInfo",userInfo);
                                 startActivity(intent);
                                 Toast.makeText(getApplicationContext(), "사진 등록 성공!", Toast.LENGTH_SHORT).show();
                             }

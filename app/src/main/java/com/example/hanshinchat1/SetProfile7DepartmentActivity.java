@@ -19,15 +19,17 @@ import com.google.firebase.database.ValueEventListener;
 public class SetProfile7DepartmentActivity extends MainActivity {
 
     private String selectedDepartment;
+    private Button nextBtn;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.set_profile_7_department);
-
-        Button nextBtn = findViewById(R.id.set_department_next);
-        Spinner spinner = findViewById(R.id.department_spinner);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
+        nextBtn = findViewById(R.id.set_department_next);
+        spinner = findViewById(R.id.department_spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.학과, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -46,7 +48,27 @@ public class SetProfile7DepartmentActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                selectedDepartment = spinner.getSelectedItem().toString();
+                if (!selectedDepartment.isEmpty()) {
+                    try {
+                        userInfo.setDepartment(selectedDepartment);
+                        userInfo.setUid(user.getUid());
+                        usersRef.setValue(userInfo);
+
+                        Intent intent = new Intent(getApplicationContext(), SetProfile8HeightActivity.class);
+                        intent.putExtra("UserInfo",userInfo);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "올바른 학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "학과를 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+
+                /*usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -80,7 +102,7 @@ public class SetProfile7DepartmentActivity extends MainActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
             }
         });
 

@@ -22,10 +22,14 @@ public class SetProfile9FormActivity extends MainActivity {
 
     private RadioButton selectedRadioButton;
 
+    private Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_9_form);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
+
 
         radioGroup = findViewById(R.id.form_radio_group);
         radioButton1 = findViewById(R.id.form_radio_btn_1);
@@ -33,7 +37,7 @@ public class SetProfile9FormActivity extends MainActivity {
         radioButton3 = findViewById(R.id.form_radio_btn_3);
         radioButton4 = findViewById(R.id.form_radio_btn_4);
 
-        Button nextBtn = findViewById(R.id.set_form_next);
+        nextBtn = findViewById(R.id.set_form_next);
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +98,19 @@ public class SetProfile9FormActivity extends MainActivity {
             public void onClick(View v) {
                 if (selectedRadioButton != null) {
                     DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    String selectedForm = selectedRadioButton.getText().toString();
+                    userInfo.setForm(selectedForm);
+                    userInfo.setUid(user.getUid());
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile10AddressActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                   /* usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
@@ -121,7 +137,7 @@ public class SetProfile9FormActivity extends MainActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                             Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
                 } else {
                     Toast.makeText(getApplicationContext(), "체형을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }

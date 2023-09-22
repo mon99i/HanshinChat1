@@ -20,12 +20,15 @@ public class SetProfile16MbtiActivity extends MainActivity {
 
     private RadioButton btnE, btnI, btnN, btnS, btnF, btnT, btnP, btnJ;
 
+    private Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_16_mbti);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
-        Button nextBtn = findViewById(R.id.set_mbti_next);
+        nextBtn = findViewById(R.id.set_mbti_next);
 
         btnE = findViewById(R.id.mbti_e);
         btnI = findViewById(R.id.mbti_i);
@@ -107,7 +110,18 @@ public class SetProfile16MbtiActivity extends MainActivity {
             public void onClick(View v) {
                 if (!selectedFirst.isEmpty() && !selectedSecond.isEmpty() && !selectedThird.isEmpty() && !selectedForth.isEmpty()) {
                     DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    String mbtiValue = selectedFirst + selectedSecond + selectedThird + selectedForth;
+
+                    userInfo.setMbti(mbtiValue);
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                   /* usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
@@ -134,7 +148,7 @@ public class SetProfile16MbtiActivity extends MainActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                             Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
                 } else {
                     Toast.makeText(getApplicationContext(), "MBTI를 선택해주세요", Toast.LENGTH_SHORT).show();
                 }

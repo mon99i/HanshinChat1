@@ -23,17 +23,18 @@ import java.util.List;
 
 public class SetProfile15PersonalityActivity extends MainActivity {
 
-    private List<String> selectedPersonality = new ArrayList<>();
+    private ArrayList<String> selectedPersonality = new ArrayList<>();
 
     private static final int MAX_PERSONALITY = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.set_profile_15_personality);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         String[] personalityArray = getResources().getStringArray(R.array.성격);
 
-        setContentView(R.layout.set_profile_15_personality);
 
         Button nextBtn = findViewById(R.id.set_personality_next);
         LinearLayout checkBoxLayout = findViewById(R.id.personality_checkbox_layout);
@@ -85,7 +86,22 @@ public class SetProfile15PersonalityActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                if (!selectedPersonality.isEmpty()) {
+                    
+                    userInfo.setPersonality(selectedPersonality);
+                    userInfo.setUid(user.getUid());
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile16MbtiActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                } else {
+                    Toast.makeText(getApplicationContext(), "성격 타입을 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
+               /* usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -119,7 +135,7 @@ public class SetProfile15PersonalityActivity extends MainActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
             }
         });
     }

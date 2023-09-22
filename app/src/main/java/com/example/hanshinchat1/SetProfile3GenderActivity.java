@@ -15,14 +15,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class SetProfile3GenderActivity extends MainActivity {
-    AppCompatRadioButton setProfileMale, setProfileFemale;
-
+    private AppCompatRadioButton setProfileMale, setProfileFemale;
+    private Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_3_gender);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
-        Button nextBtn = findViewById(R.id.set_gender_next);
+        nextBtn = findViewById(R.id.set_gender_next);
 
         setProfileMale = findViewById(R.id.set_profile_gender_male);
         setProfileFemale = findViewById(R.id.set_profile_gender_female);
@@ -32,7 +33,31 @@ public class SetProfile3GenderActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                if(setProfileMale.isChecked()){
+                    String strGender = "남자";
+                    userInfo.setGender(strGender);
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                } else if (setProfileFemale.isChecked()) {
+                    String strGender = "여자";
+                    userInfo.setGender(strGender);
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
+
+
+
+                /*usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -70,7 +95,7 @@ public class SetProfile3GenderActivity extends MainActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
             }
         });
     }

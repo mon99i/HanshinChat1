@@ -83,8 +83,8 @@ public class ProfileEditActivity extends MainActivity {
 
                         name.setText(userInfo.getName());
                         gender.setText(userInfo.getGender());
-                        interest.setText(userInfo.getInterest());
-                        personality.setText(userInfo.getPersonality());
+                /*        interest.setText(userInfo.getInterest());
+                        personality.setText(userInfo.getPersonality());*/
                     }
                 }
             }
@@ -95,7 +95,7 @@ public class ProfileEditActivity extends MainActivity {
             }
         });
 
-        editBtn.setOnClickListener(new View.OnClickListener() {
+      /*  editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer newAge = Integer.valueOf(editAge.getText().toString());
@@ -137,7 +137,7 @@ public class ProfileEditActivity extends MainActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override

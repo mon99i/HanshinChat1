@@ -21,11 +21,12 @@ public class SetProfile11ReligionActivity extends MainActivity {
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
 
     private RadioButton selectedRadioButton;
-
+    private Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_11_religion);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         radioGroup = findViewById(R.id.religion_radio_group);
         radioButton1 = findViewById(R.id.religion_radio_btn_1);
@@ -34,7 +35,7 @@ public class SetProfile11ReligionActivity extends MainActivity {
         radioButton4 = findViewById(R.id.religion_radio_btn_4);
         radioButton5 = findViewById(R.id.religion_radio_btn_5);
 
-        Button nextBtn = findViewById(R.id.set_religion_next);
+        nextBtn = findViewById(R.id.set_religion_next);
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +112,18 @@ public class SetProfile11ReligionActivity extends MainActivity {
             public void onClick(View v) {
                 if (selectedRadioButton != null) {
                     DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    String selectedReligion = selectedRadioButton.getText().toString();
+                    userInfo.setReligion(selectedReligion);
+                    userInfo.setUid(user.getUid());
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile12SmokingActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    /*usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
@@ -138,7 +150,7 @@ public class SetProfile11ReligionActivity extends MainActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                             Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
                 } else {
                     Toast.makeText(getApplicationContext(), "종교를 선택해주세요", Toast.LENGTH_SHORT).show();
                 }

@@ -79,34 +79,78 @@ public abstract class MainActivity extends AppCompatActivity {
 
     protected void checkProfileExist() {   //프로필 존재유무 확인
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference usersRef = myRef.child("users").child(user.getUid());
+        //마지막으로 프로필설정을 저장했던 액티비티로 이동
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        if (user != null) {
+                        if (snapshot.exists()) {
+                            //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+                            UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                            Class<?> setProfileActivity = getSetProfileActivity(userInfo);
+                            if (setProfileActivity!=null) {
+                                Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), setProfileActivity);
+                                intent.putExtra("UserInfo", userInfo);
+                                startActivity(intent);
+                            }else Log.d(TAG, "onDataChange: 모든 프로필 설정완료");
 
-            usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {         //User is signed in && 프로필도 지정완료
-
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
-                        startActivity(intent);
-                        finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
 
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-        }
-
+                    }
+                });
 
     }
+    private Class<?> getSetProfileActivity(UserInfo userInfo) {
+        if (userInfo.getName() == null) {
+            return SetProfile2NameActivity.class;
+        } else if (userInfo.getGender() == null) {
+            return SetProfile3GenderActivity.class;
+        } else if (userInfo.getAge() == null) {
+            return SetProfile4AgeActivity.class;
+        } else if (userInfo.getGrade() == null) {
+            return SetProfile5GradeActivity.class;
+        } else if (userInfo.getStudentId() == null) {
+            return SetProfile6StudentIdActivity.class;
+        } else if (userInfo.getDepartment() == null) {
+            return SetProfile7DepartmentActivity.class;
+        } else if (userInfo.getHeight() == null) {
+            return SetProfile8HeightActivity.class;
+        } else if (userInfo.getForm() == null) {
+            return SetProfile9FormActivity.class;
+        } else if (userInfo.getAddress() == null) {
+            return SetProfile10AddressActivity.class;
+        } else if (userInfo.getReligion() == null) {
+            return SetProfile11ReligionActivity.class;
+        } else if (userInfo.getSmoking() == null) {
+            return SetProfile12SmokingActivity.class;
+        } else if (userInfo.getDrinking() == null) {
+            return SetProfile13DrinkingActivity.class;
+        } else if (userInfo.getInterest() == null) {
+            return SetProfile14InterestActivity.class;
+        } else if (userInfo.getPersonality() == null) {
+            return SetProfile15PersonalityActivity.class;
+        } else if (userInfo.getMbti() == null) {
+            return SetProfile16MbtiActivity.class;
+        }
+        // 모든 프로필 정보가 입력되었을 때 null 반환
+        return null;
+    }
+
+
+
+
 
     protected void deleteUser() {  //앱상에서 유저 삭제
         // [START delete_user]
@@ -287,9 +331,9 @@ public abstract class MainActivity extends AppCompatActivity {
 
     protected void checkMatchRequest() {
         requestedUidList = new ArrayList<>();
-        requestedUserInfoList=new ArrayList<>();
-        matchRoomKeyList=new ArrayList<>();
-        matchRoomList=new ArrayList<>();
+        requestedUserInfoList = new ArrayList<>();
+        matchRoomKeyList = new ArrayList<>();
+        matchRoomList = new ArrayList<>();
 
         //내가 만든 방을 기준으로 조회
         FirebaseDatabase.getInstance().getReference().child("matchRooms")
@@ -298,15 +342,15 @@ public abstract class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        int requestCount=0;
+                        int requestCount = 0;
 
                         for (DataSnapshot item : snapshot.getChildren()) {
-                            Log.d(TAG, "onDataChange: "+requestCount);
+                            Log.d(TAG, "onDataChange: " + requestCount);
                             for (DataSnapshot subItem : item.child("matchInfo").getChildren()) {
                                 Boolean request = subItem.getValue(MatchInfo.class).getRequest();
-                                Boolean confirmed=subItem.getValue(MatchInfo.class).getConfirmed();
+                                Boolean confirmed = subItem.getValue(MatchInfo.class).getConfirmed();
 
-                                if (request.equals(true)&&confirmed.equals(false)) {  //요청이들어온후 요청확인이 안된경우의 request수 계산
+                                if (request.equals(true) && confirmed.equals(false)) {  //요청이들어온후 요청확인이 안된경우의 request수 계산
                                     requestCount++;
                                     requestedUidList.add(subItem.getKey());  //요청이 들어온 uid 리스트에 저장
                                     matchRoomKeyList.add(item.getKey());     //요청이 들어올때마다 해당 방 키 리스트에저장
@@ -315,12 +359,12 @@ public abstract class MainActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        if(requestCount>0){  //요청이 한개라도 들어온 방에 alertDialog
-                            Log.d(TAG, "request수 "+requestCount);
+                        if (requestCount > 0) {  //요청이 한개라도 들어온 방에 alertDialog
+                            Log.d(TAG, "request수 " + requestCount);
                             showAlertDialog();
 
                         }
-                        Log.d(TAG, "omatchRoomKEy: "+matchRoomKeyList.size());
+                        Log.d(TAG, "omatchRoomKEy: " + matchRoomKeyList.size());
                     }
 
                     @Override

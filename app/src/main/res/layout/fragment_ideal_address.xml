@@ -14,20 +14,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/ideal"
-            android:layout_width="279dp"
+            android:id="@+id/idealInterestTxt"
+            android:layout_width="218dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:maxEms="10"
-            android:text="선호하는 거주지역을 입력하세요."
+            android:text="선호하는 거주지역을 골라주세요."
             android:textColor="#434959"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+          >
 
             <NumberPicker
                 android:id="@+id/area_number_picker"

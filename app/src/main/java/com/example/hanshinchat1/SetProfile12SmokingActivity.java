@@ -21,11 +21,13 @@ public class SetProfile12SmokingActivity extends MainActivity {
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
 
     private RadioButton selectedRadioButton;
+    private Button nextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_12_smoking);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         radioGroup = findViewById(R.id.smoking_radio_group);
         radioButton1 = findViewById(R.id.smoking_radio_btn_1);
@@ -33,7 +35,7 @@ public class SetProfile12SmokingActivity extends MainActivity {
         radioButton3 = findViewById(R.id.smoking_radio_btn_3);
         radioButton4 = findViewById(R.id.smoking_radio_btn_4);
 
-        Button nextBtn = findViewById(R.id.set_smoking_next);
+        nextBtn = findViewById(R.id.set_smoking_next);
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +96,19 @@ public class SetProfile12SmokingActivity extends MainActivity {
             public void onClick(View v) {
                 if (selectedRadioButton != null) {
                     DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    String selectedSmoking = selectedRadioButton.getText().toString();
+                    userInfo.setSmoking(selectedSmoking);
+                    userInfo.setUid(user.getUid());
+                    usersRef.setValue(userInfo);
+
+                    Intent intent = new Intent(getApplicationContext(), SetProfile13DrinkingActivity.class);
+                    intent.putExtra("UserInfo",userInfo);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                    /*usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
@@ -121,7 +135,7 @@ public class SetProfile12SmokingActivity extends MainActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                             Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    });*/
                 } else {
                     Toast.makeText(getApplicationContext(), "흡연 타입을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }

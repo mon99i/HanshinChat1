@@ -63,8 +63,7 @@ public class IdealAddressFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-
-            address="null은아님"   ;
+            address="null은아님";
         }
     }
 
@@ -76,13 +75,14 @@ public class IdealAddressFragment extends Fragment {
         cityNumberPicker = view.findViewById(R.id.city_number_picker);
 
 
+
         initializeNumberPicker();
         initializeListener();
 
         return view;
     }
 
-    public void initializeNumberPicker() {
+    private void initializeNumberPicker() {
         areaToCityMap=new HashMap<>();
 
         areas = getResources().getStringArray(R.array.도);   //일단 지역배열 모두 가져오기
@@ -161,116 +161,6 @@ public class IdealAddressFragment extends Fragment {
 }
 
 
-
-
-
-
-    /*private void setCityNumberPicker(int position) {
-        if (position >= 0 && position < areaNumberPicker.getDisplayedValues().length) {
-            // 선택된 "도"에 따라 "시" 배열 가져오기
-            String[] cities = getResources().getStringArray(getResources().getIdentifier(areaNumberPicker
-                    .getDisplayedValues()[position], "array", getContext().getPackageName()));
-
-            cityNumberPicker.setWrapSelectorWheel(false);
-            cityNumberPicker.setDisplayedValues(null);
-            cityNumberPicker.setMinValue(0);
-            cityNumberPicker.setMaxValue(cities.length - 1);
-            cityNumberPicker.setDisplayedValues(cities);
-            address= areaNumberPicker.getDisplayedValues()[position] + " "
-                    +cities[areaNumberPicker.getValue()];
-            Log.d(TAG, "주소는 " + address);
-
-        }
-
-        cityNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
-                address = areaNumberPicker.getDisplayedValues()[position] + " "
-                        +cityNumberPicker.getDisplayedValues()[newVal];
-                Log.d(TAG, "주소는 " + address);
-            }
-        });
-
-    }*/
-
-
-
-    /*
-    private void setupNumberPickers() {
-        String[] firstAddressOptions = getResources().getStringArray(R.array.도);
-        firstAddressNumberPicker.setMinValue(0);
-        firstAddressNumberPicker.setMaxValue(firstAddressOptions.length - 1);
-        firstAddressNumberPicker.setDisplayedValues(firstAddressOptions);
-
-        //최초 보이는거
-        String[] initialSecondAddressOptions = secondAddressOptionsMap.get(firstAddressOptions[0]);
-        secondAddressNumberPicker.setMinValue(0);
-        if (initialSecondAddressOptions != null) {
-            secondAddressNumberPicker.setMaxValue(initialSecondAddressOptions.length - 1);
-            secondAddressNumberPicker.setDisplayedValues(initialSecondAddressOptions);
-        }
-        //firstAddressNumberPicker.setWrapSelectorWheel(false);
-
-        //스크롤움직일때
-        firstAddressNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-             *//*   String selectedFirstAddress = firstAddressOptions[newVal];  // 도 배열에서 선택한것
-
-                //선택된 도에서의 시 배열 초기화
-                String[] secondAddressOptions = secondAddressOptionsMap.get(selectedFirstAddress);
-                if (secondAddressOptions != null) {
-                    Log.d(TAG, "onValueChange: "+secondAddressOptions.length);
-                    secondAddressNumberPicker.setMinValue(0);
-                    secondAddressNumberPicker.setMaxValue(secondAddressOptions.length - 1);
-                    secondAddressNumberPicker.setDisplayedValues(secondAddressOptions);
-                    choice_first = selectedFirstAddress;
-                }
-                *//*
-
-                String[] displayedValues = firstAddressNumberPicker.getDisplayedValues();
-                if (newVal >= 0 && newVal < displayedValues.length) {
-                    String[] secondAddressOptions = secondAddressOptionsMap.get(displayedValues[newVal]);
-                    if (secondAddressOptions != null) {
-                        Log.d(TAG, "onValueChange: "+secondAddressOptions.length);
-                        secondAddressNumberPicker.setMinValue(0);
-                        secondAddressNumberPicker.setMaxValue(secondAddressOptions.length - 1);
-                        secondAddressNumberPicker.setDisplayedValues(secondAddressOptions);
-                        choice_first = displayedValues[newVal];
-                    }
-
-                    //choice_first = displayedValues[newVal];
-                }
-
-
-            }
-        });
-        secondAddressNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                String[] displayedValues = secondAddressNumberPicker.getDisplayedValues();
-                if (newVal >= 0 && newVal < displayedValues.length) {
-                    choice_second = displayedValues[newVal];
-                }
-            }
-        });
-    }
-
-    private void initializeSecondAddressOptionsMap() {
-        String[] firstAddresses = getResources().getStringArray(R.array.도);
-
-        for (String firstAddress : firstAddresses) {
-            int resourceId = getResources().getIdentifier(firstAddress, "array", getContext().getPackageName());
-            if (resourceId != 0) {
-                String[] secondAddressOptions = getResources().getStringArray(resourceId);
-                secondAddressOptionsMap.put(firstAddress, secondAddressOptions);
-                Log.d(TAG, "각 도별 시 : "+secondAddressOptions.length);
-            } else {
-                secondAddressOptionsMap.put(firstAddress, new String[0]);
-            }
-        }
-    }*/
 
 
 

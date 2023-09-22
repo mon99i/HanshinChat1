@@ -30,13 +30,15 @@ public class SetProfile10AddressActivity extends MainActivity {
     private Map<String, String[]> areaToCityMap;
     private NumberPicker areaNumberPicker, cityNumberPicker;
 
+    private Button nextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_10_address);
+        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
-        Button nextBtn = findViewById(R.id.set_address_next);
+        nextBtn = findViewById(R.id.set_address_next);
         addressProgress = findViewById(R.id.address_progress);
 
         areaNumberPicker = findViewById(R.id.first_address_number_picker);
@@ -58,7 +60,25 @@ public class SetProfile10AddressActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                if (!address.isEmpty()) {
+                    try {
+                        userInfo.setAddress(address);
+                        usersRef.setValue(userInfo);
+
+                        Intent intent = new Intent(getApplicationContext(), SetProfile11ReligionActivity.class);
+                        intent.putExtra("UserInfo",userInfo);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "올바른 주소를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "주소를 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                /*usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -91,7 +111,7 @@ public class SetProfile10AddressActivity extends MainActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(getApplicationContext(), "프로필 저장 실패", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
             }
         });
     }
