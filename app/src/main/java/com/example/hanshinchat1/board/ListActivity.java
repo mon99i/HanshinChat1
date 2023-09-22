@@ -12,9 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,13 +33,47 @@ public class ListActivity extends MainActivity {
     private ListView listView;
     private ListViewAdapter boardAdapter;
     private ImageView writePageBtn;
-    private TextView messageboard, dating_advice;
+    ViewPager viewPager;
+    TabLayout boardtab;
+    MyPageAdapter myPageAdapter;
+    int pos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.board_list);
+//        setContentView(R.layout.board_list);   ㅁㅁ
+        setContentView(R.layout.mainboard);
 
+        boardtab = findViewById(R.id.board_tab);
+        viewPager = findViewById(R.id.boardViewPager);
+
+        boardtab.addTab(boardtab.newTab().setText("자유 게시판"));
+        boardtab.addTab(boardtab.newTab().setText("연애상담 게시판"));
+        boardtab.setTabGravity(boardtab.GRAVITY_FILL);
+
+        myPageAdapter = new MyPageAdapter(getSupportFragmentManager(), 2);
+        viewPager.setAdapter(myPageAdapter);
+
+        boardtab.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+
+        boardtab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(boardtab));
 //        boardDataList.clear();
 //        boardAdapter.notifyDataSetChanged();
 //
@@ -46,39 +82,39 @@ public class ListActivity extends MainActivity {
         boardDataList = new ArrayList<>();
         boardKeyList = new ArrayList<>();
         boardAdapter = new ListViewAdapter(boardDataList);
-        listView = findViewById(R.id.boardListView);
-        listView.setAdapter(boardAdapter);
-        messageboard = findViewById(R.id.messageboard);
-        dating_advice = findViewById(R.id.dating_advice);
+//        listView = findViewById(R.id.boardListView);     ㅁㅁ
+//        listView.setAdapter(boardAdapter);   ㅁㅁ
+//        messageboard = findViewById(R.id.messageboard);
+//        dating_advice = findViewById(R.id.dating_advice);
+//
+//        messageboard.setPaintFlags(messageboard.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//        dating_advice.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), List2Activity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        messageboard.setPaintFlags(messageboard.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        dating_advice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), List2Activity.class);
-                startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
+//                intent.putExtra("key", boardKeyList.get(position));
+//                startActivity(intent);
+//
+//            }
+//        });  ㅁㅁ
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
-                intent.putExtra("key", boardKeyList.get(position));
-                startActivity(intent);
-
-            }
-        });
-
-        writePageBtn = (ImageView) findViewById(R.id.writePageBtn);
-        writePageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BoardWriteActivity.class);
-                startActivity(intent);
-//                finish();
-            }
-        });
+//        writePageBtn = (ImageView) findViewById(R.id.writePageBtn);
+//        writePageBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), BoardWriteActivity.class);
+//                startActivity(intent);
+////                finish();
+//            }
+//        });
 
 
         boardDataList.clear();
@@ -86,8 +122,6 @@ public class ListActivity extends MainActivity {
 
         FBData();
 
-
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();

@@ -102,7 +102,7 @@
 
             <ImageView
                 android:id="@+id/commentBtn"
-                android:src="@drawable/btn_write"
+                android:src="@drawable/pencil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

@@ -39,20 +39,20 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginBottom="10dp">
-        <ImageView
-            android:id="@+id/likesBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/likes"/>
-        <TextView
-            android:id="@+id/likesCount"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:text="0"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/likesBtn"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:src="@drawable/likes"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/likesCount"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="15dp"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:text="0"/>-->
         <TextView
             android:id="@+id/timeArea"
             android:text="시간"
