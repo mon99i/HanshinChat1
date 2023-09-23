@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends MainActivity{
 
     private static final String TAG = "ProfileActivity";
+    Button ideal_edit_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ProfileActivity extends MainActivity{
         Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
 
         Button simulationBtn = (Button) findViewById(R.id.simulation);
+        ideal_edit_btn=findViewById(R.id.ideal_edit_btn);
         
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,6 +73,15 @@ public class ProfileActivity extends MainActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Simulation1.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        ideal_edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
                 startActivity(intent);
                 finish();
             }

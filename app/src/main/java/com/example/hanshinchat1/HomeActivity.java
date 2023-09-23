@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.hanshinchat1.Match.MBTIMatchActivity;
 import com.example.hanshinchat1.Match.MatchHome;
+import com.example.hanshinchat1.utils.Utils;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
@@ -70,9 +71,11 @@ public class HomeActivity extends MainActivity {
         idealTypeMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
+
+                Utils.checkIdealExists(getApplicationContext());
+              /*  Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         });
 

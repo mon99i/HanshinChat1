@@ -87,7 +87,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/ideal_type_button"
+            android:id="@+id/ideal_edit_btn"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:text="이상형 설정"
