@@ -60,7 +60,6 @@ import androidx.appcompat.app.AppCompatActivity;
             next2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(Simulation2.this, "중간 Total Score: " + totalScore, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Simulation2.this, Simulation3.class);
                     intent.putExtra("totalScore", totalScore);
                     startActivity(intent);

@@ -162,7 +162,5 @@ public class ListActivity extends MainActivity {
         };
         myRef.addValueEventListener(postListener);
     };
-
-
 }
 
