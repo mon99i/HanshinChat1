@@ -2,31 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/sky_blue">
 
-    <TextView
+    <ProgressBar
+        android:id="@+id/height_progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="소개팅 시물레이션"
-        android:textSize="50sp"
-        android:textAlignment="center"/>
-
-
+        android:layout_height="10dp"
+        android:layout_margin="10dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progressBackgroundTint="#FFFFFF"
+        android:progressTint="#FF69B4"
+        android:max="10"
+        android:progress="6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="1dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상황 6"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:src="@drawable/simulation7"
+            android:layout_gravity="center"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="밥을 다 먹었을 무렵, 상대가 술 좋아하세요 ? 질문을 했다. 뭐라고 답할까?"/>
+            android:text="밥을 다 먹었을 무렵, 상대가 술 좋아하세요? 질문을 했다.\n뭐라고 답할까?"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"/>
+
         <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp">
+
             <RadioButton
                 android:id="@+id/question6_answer1"
                 android:layout_width="wrap_content"
@@ -36,27 +58,29 @@
                 android:id="@+id/question6_answer2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="음 사실 별로 즐겨하지 않아요. 건강에 안좋잖아요."/>
             <RadioButton
                 android:id="@+id/question6_answer3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="네, 술 좋아하는 편이에요. A씨는요? 괜찮으시면 술 한 잔 하면서 이야기 더 나눌까요?"/>
+                android:text="네, 술 좋아하는 편이에요. A씨는요?\n괜찮으시면 술 한 잔 하면서 이야기 더 나눌까요?"/>
             <RadioButton
                 android:id="@+id/question6_answer4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="술은 별로지만, 사람이 중요한 편이에요. 그러고보니 괜찮으시면 카페나 술집으로 이동할까요?"/>
-
+                android:text="술은 별로지만, 사람이 중요한 편이에요.\n그러고보니 괜찮으시면 카페나 술집으로 이동할까요?"/>
 
         </RadioGroup>
+
         <Button
             android:id="@+id/next7"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="다음"/>
-
-
-
+            android:layout_height="50dp"
+            android:text="다음"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/pink" />
     </LinearLayout>
 </LinearLayout>
