@@ -8,6 +8,22 @@ public class UserInfo implements Serializable{
 
     public UserInfo(){}
 
+    public String getLastSignInTime() {
+        return lastSignInTime;
+    }
+
+    public void setLastSignInTime(String lastSignInTime) {
+        this.lastSignInTime = lastSignInTime;
+    }
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public UserInfo(String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl) {
         this.uid = uid;
         this.name = name;
@@ -201,6 +217,9 @@ public class UserInfo implements Serializable{
     private String idealTypeFirst;
     private String idealTypeSecond;
     private String photoUrl;
+
+    private String lastSignInTime;
+    private String creationTime;
 
 
 

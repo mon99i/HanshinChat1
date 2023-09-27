@@ -1,6 +1,7 @@
 package com.example.hanshinchat1;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,38 +29,54 @@ public class HomeActivity extends MainActivity {
     private static final String TEXT_REPLY = "text_reply";
 
     private static final String TAG="채널생성실패";
-    public Button mmbbtiBtn;
+
+    private Button idealMatchingBtn;
+    private Button mbtiMatchingBtn;
+    private Button aroundMatchingBtn;
+    private Button recentRegisterMatchingBtn;
+    private Button recentContectMatchingBtn;
+    private Button topUserMatchingBtn;
+
+    Context context=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();
         clickBoard();
         clickProfile();
         checkMatchRequest();
-        checkProfileExist();
-
-        Button mbtiMatching = findViewById(R.id.mbti_matching);
-        Button idealTypeMatching = findViewById(R.id.ideal_type_matching);
-        Button friendAroundMatching = findViewById(R.id.friend_around_matching);
-        Button topUserMatching = findViewById(R.id.top_user_matching);
 
 
-        mmbbtiBtn = findViewById(R.id.mmbbtiBtn);
+        initializeView();
+        initializeListener();
 
-        mmbbtiBtn.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void initializeView(){
+        idealMatchingBtn=findViewById(R.id.idealMatchingBtn);
+        mbtiMatchingBtn=findViewById(R.id.mbtiMatchingBtn);
+        aroundMatchingBtn=findViewById(R.id.aroundMatchingBtn);
+        recentRegisterMatchingBtn=findViewById(R.id.recentRegisterMatchingBtn);
+        recentContectMatchingBtn=findViewById(R.id.recentConnectMatchingBtn);
+        topUserMatchingBtn=findViewById(R.id.topUserMatchingBtn);
+    }
+
+    private void initializeListener(){
+
+        //모두 로그만 뜸 , 유저뜨는거 구현해야함
+        idealMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MatchHome.class);
-                startActivity(intent);
+                //수정필요
+              Utils.checkIdealExists(context);
             }
         });
 
-        mbtiMatching.setOnClickListener(new View.OnClickListener() {
+        mbtiMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
@@ -68,21 +85,19 @@ public class HomeActivity extends MainActivity {
             }
         });
 
-        idealTypeMatching.setOnClickListener(new View.OnClickListener() {
+        aroundMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.arroundMatching();
 
-                Utils.checkIdealExists(getApplicationContext());
-              /*  Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
-                startActivity(intent);
-                finish();*/
             }
         });
 
-        friendAroundMatching.setOnClickListener(new View.OnClickListener() {
+        recentRegisterMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder famDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
+                Utils.recentRegisterMatching();
+           /*     AlertDialog.Builder famDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 
                 famDialog.setMessage("동일한 지역에 거주하는 상대를 검색합니다.")
                         .setTitle("내 주변 친구 매칭")
@@ -100,14 +115,17 @@ public class HomeActivity extends MainActivity {
                             }
                         })
                         .setCancelable(false)
-                        .show();
+                        .show();*/
+
             }
         });
 
-        topUserMatching.setOnClickListener(new View.OnClickListener() {
+        recentContectMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder tumDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
+                Utils.recentConnectMatching();
+                //Utils.recentRegisterMatching();
+               /* AlertDialog.Builder tumDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 
                 tumDialog.setMessage("상위 5% 사용자를 검색합니다.\n\n*사용자 순위는 프로필의 좋아요 갯수를 합산해 매겨집니다.")
                         .setTitle("상위 5% 매칭")
@@ -125,11 +143,31 @@ public class HomeActivity extends MainActivity {
                             }
                         })
                         .setCancelable(false)
-                        .show();
+                        .show();*/
             }
         });
 
+        topUserMatchingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //나중에쓸수있음

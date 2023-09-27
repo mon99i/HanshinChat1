@@ -36,6 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public abstract class MainActivity extends AppCompatActivity {
@@ -76,42 +79,82 @@ public abstract class MainActivity extends AppCompatActivity {
 
     }
 
-
-    protected void checkProfileExist() {   //프로필 존재유무 확인
+    protected void checkHanshin() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //마지막으로 프로필설정을 저장했던 액티비티로 이동
-        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (user != null) {
+            String email = user.getEmail();
+            /*if (email != null && email.endsWith("@hs.ac.kr")) {
+                Toast.makeText(getApplicationContext(), "한신대 학생 인증완료.", Toast.LENGTH_SHORT).show();
+                checkProfileExist();
+            }*/
 
-                        if (snapshot.exists()) {
-                            //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
-                            UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                            Class<?> setProfileActivity = getSetProfileActivity(userInfo);
-                            if (setProfileActivity!=null) {
-                                Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), setProfileActivity);
-                                intent.putExtra("UserInfo", userInfo);
-                                startActivity(intent);
-                            }else Log.d(TAG, "onDataChange: 모든 프로필 설정완료");
+            //임시
+            if (email != null) {
+                checkProfileExist();
 
-                        } else {
-                            Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+            } else {
+                Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
+                deleteUser();
+                // 이메일이 hs@ac.kr과 일치하지 않는 경우 처리할 작업 수행
 
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+            }
+        }
 
     }
+
+    protected void checkProfileExist() {   //프로필 존재유무 확인
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String currentTime=localDateTime.format(dateTimeFormatter);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        //마지막으로 프로필설정을 저장했던 액티비티로 이동
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    if (snapshot.exists()) {
+                        //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+                        UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                        Class<?> setProfileActivity = getSetProfileActivity(userInfo);
+                        if (setProfileActivity != null) {
+                            Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), setProfileActivity);
+                            startActivity(intent);
+                            finish();
+                        } else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
+                            Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
+                            userRef.child("lastSignInTime").setValue(currentTime);
+                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                            //userInfo.setLastSignInTime();
+                            //FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).se
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            Log.d(TAG, "checkProfileExist: " + user.getUid());
+        } else Toast.makeText(getApplicationContext(), "로그인 유저가 없음.", Toast.LENGTH_SHORT).show();
+
+
+    }
+
     private Class<?> getSetProfileActivity(UserInfo userInfo) {
         if (userInfo.getName() == null) {
             return SetProfile2NameActivity.class;
@@ -149,9 +192,6 @@ public abstract class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
     protected void deleteUser() {  //앱상에서 유저 삭제
         // [START delete_user]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -162,7 +202,8 @@ public abstract class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "유저정보 삭제 성공!!", Toast.LENGTH_SHORT).show();
-                            checkCurrentUser();       //다시 로그인창으로
+                            //checkCurrentUser();       //다시 로그인창으로
+                            signOut();
                         }
                     }
                 });
@@ -197,6 +238,7 @@ public abstract class MainActivity extends AppCompatActivity {
     protected void signOut() {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        //mAuth.signOut();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -214,7 +256,6 @@ public abstract class MainActivity extends AppCompatActivity {
 
                 });
         gsa = null;
-
 
     }
 

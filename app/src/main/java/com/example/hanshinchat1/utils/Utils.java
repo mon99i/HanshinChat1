@@ -17,25 +17,125 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
-    private static UserInfo userInfo;
-    private static ArrayList<UserInfo> userInfoList;
-
-    private static ArrayList<String> userUidList;
-
     private static final String TAG = "Utils";
 
 
+    public static void recentConnectMatching(){    //하루전부터 지금까지 접속한 유저 조회
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime oneDayAgo = currentTime.minusDays(1);
+        String currentTimeString=currentTime.format(dateTimeFormatter);
+        String oneDayAgoString=oneDayAgo.format(dateTimeFormatter);
+
+        Log.d(TAG, "recentConnectMatching: 예시");
+        ArrayList<UserInfo> recentConnectUsers=new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .orderByChild("lastSignInTime").startAt(oneDayAgoString)
+                .endAt(currentTimeString).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item:snapshot.getChildren()){
+                            if(!item.getKey().equals(user.getUid())){
+                                UserInfo userInfo=item.getValue(UserInfo.class);
+                                recentConnectUsers.add(userInfo);
+                                Log.d(TAG, "onDataChange: "+userInfo.getName()+": "+userInfo.getLastSignInTime());
+                            }
+
+                        }
+                        Log.d(TAG, "onDataChange: "+recentConnectUsers.size());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+    public static void recentRegisterMatching() {    //일주일전부터 지금까지 새로 생성한 유저
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime oneWeekAgo = currentTime.minusWeeks(1);
+        String currentTimeString = currentTime.format(dateTimeFormatter);
+        String oneWeekAgoString = oneWeekAgo.format(dateTimeFormatter);
+
+        ArrayList<UserInfo> recentRegisterUsers=new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .orderByChild("creationTime").startAt(oneWeekAgoString)
+                .endAt(currentTimeString).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                       for(DataSnapshot item:snapshot.getChildren()){
+                           if(!item.getKey().equals(user.getUid())){
+                               UserInfo userInfo=item.getValue(UserInfo.class);
+                               recentRegisterUsers.add(userInfo);
+                               Log.d(TAG, "onDataChange: "+userInfo.getName()+": "+userInfo.getCreationTime());
+                           }
+
+                       }
+                        Log.d(TAG, "onDataChange: "+recentRegisterUsers.size());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
+
+    public static void arroundMatching() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        ArrayList<UserInfo> arroundUsers = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserInfo currentUser = snapshot.child(user.getUid()).getValue(UserInfo.class);
+
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            if (!item.getKey().equals(user.getUid())) {
+                                UserInfo opponentUser = item.getValue(UserInfo.class);
+                                if (currentUser.getAddress().equals(opponentUser.getAddress())) {
+                                    Log.d(TAG, "onDataChange: " + opponentUser.getName() + ": " + opponentUser.getAddress());
+                                    arroundUsers.add(opponentUser);
+                                }
+                            }
+
+                        }
+                        Log.d(TAG, "onDataChange: " + arroundUsers);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
     public static void idealMatching(Ideal ideal) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ArrayList<UserInfo> userInfoList;
+        ArrayList<UserInfo> idealMatchedUsers;
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -314,16 +414,16 @@ public class Utils {
                 });
     }
 
-    public static ArrayList<UserInfo> getAllUserInfo() {   //나를 제외한 모든 유저
+/*    public static ArrayList<UserInfo> getAllUserInfo() {   //나를 제외한 모든 유저
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userInfoList = new ArrayList<>();
+        ArrayList<UserInfo> allUserInfoList=new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("users")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot item : snapshot.getChildren()) {
                             if (!item.getKey().equals(user.getUid())) {
-                                userInfoList.add(item.getValue(UserInfo.class));
+                                allUserInfoList.add(item.getValue(UserInfo.class));
                             }
                         }
                     }
@@ -333,27 +433,8 @@ public class Utils {
 
                     }
                 });
-        return userInfoList;
-    }
-
-    public static UserInfo getCurrentUserInfo() {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        userInfo = snapshot.getValue(UserInfo.class);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-        return userInfo;
-    }
+        return allUserInfoList;
+    }*/
 
 
     public static Boolean checkProfileOpen() {

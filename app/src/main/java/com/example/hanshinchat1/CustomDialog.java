@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hanshinchat1.recycler.VerticalDecoration;
+
 import java.util.Map;
 
 public class CustomDialog extends Dialog {
@@ -68,8 +70,10 @@ public class CustomDialog extends Dialog {
     public Dialog priorityDialog(int priority, Map<String,String>idealMap){
         View view=inflater.inflate(R.layout.ideal_prioity_dialog, null);
         RecyclerView recyclerView=view.findViewById(R.id.recycler_idealPriority);
-        recyclerView.setAdapter(new RecyclerIdealAdapter(context,priority,idealMap));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.addItemDecoration(new VerticalDecoration(20));
+        recyclerView.setAdapter(new RecyclerIdealAdapter(context,priority,idealMap));
+
 
         builder.setView(view);
         dialog = builder.create();

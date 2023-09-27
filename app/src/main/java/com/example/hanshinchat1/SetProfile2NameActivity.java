@@ -29,11 +29,9 @@ public class SetProfile2NameActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.set_profile_2_name);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         nextBtn = findViewById(R.id.set_name_next);
         name = (EditText) findViewById(R.id.name);
-
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -41,10 +39,18 @@ public class SetProfile2NameActivity extends MainActivity {
             public void onClick(View v) {
                 FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
                 String strName = name.getText().toString();
-
+                DatabaseReference userRef = myRef.child("users").child(user.getUid());
                 if (!strName.isEmpty() && strName.length() >= 2) {
                     try {
-                        userInfo.setName(strName);
+                        userRef.child("name").setValue(strName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Intent intent = new Intent(getApplicationContext(), SetProfile3GenderActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                        /*userInfo.setName(strName);
                         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
                                 .setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -56,7 +62,7 @@ public class SetProfile2NameActivity extends MainActivity {
                                     }
                                 });
 
-                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);*/
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "올바른 이름을 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
