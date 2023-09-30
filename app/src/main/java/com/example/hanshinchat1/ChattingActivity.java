@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hanshinchat1.recycler.VerticalDecoration;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -156,6 +157,7 @@ public class ChattingActivity extends MainActivity {
 
     private void setupRecycler() {  //리사이클러뷰에 어댑터 설정
         recycler_chatting.setLayoutManager(new LinearLayoutManager(this));
+        recycler_chatting.addItemDecoration(new VerticalDecoration(30));
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
     }

@@ -1,77 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="20dp"
+    android:orientation="vertical"
     tools:context=".SetProfile2NameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ProgressBar
             android:id="@+id/photo_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:progressBackgroundTint="#FFFFFF"
-            android:progressTint="#FF69B4"
             android:max="18"
-            android:progress="1"/>
+            android:progress="1"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/set_profile_photo"
-            android:textSize="30sp"
-            android:textColor="#000000"/>
+            android:textColor="#434959"
+            android:textSize="30sp" />
 
-        <ImageView
-            android:id="@+id/image"
+        <androidx.cardview.widget.CardView
             android:layout_width="180dp"
             android:layout_height="180dp"
-            android:layout_margin="100dp"
-            android:src="@drawable/profile"/>
-      </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:backgroundTint="#E6E6FA"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="4dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_person_24" />
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageButton
+            android:id="@+id/addProfileBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:contentDescription="추가"
+            android:background="@drawable/baseline_add_circle_24" />
+    </LinearLayout>
 
-        <Button
+
+
+
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        te</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="촬영하기"
+
+        <ImageButton
             android:id="@+id/captureBtn"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="55dp"
-            android:text="촬영하기"
-            android:backgroundTint="#BFA0ED"/>
+            android:background="@drawable/baseline_photo_camera_24"
+            android:contentDescription="촬영하기 버튼" />
 
-        <Button
+        <ImageButton
             android:id="@+id/getPhotoBtn"
             android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="55dp"
-            android:text="가져오기"
-            android:backgroundTint="#BFA0ED"/>
-        </LinearLayout>
+            android:background="@drawable/baseline_album_24"
+            android:text="가져오기" />
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
             android:id="@+id/set_photo_next"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="다음"
             android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED" />
+
+            android:backgroundTint="#BEB6F2"
+            android:text="다음" />
     </LinearLayout>
 
 </LinearLayout>

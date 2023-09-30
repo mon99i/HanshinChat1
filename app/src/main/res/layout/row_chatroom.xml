@@ -7,18 +7,24 @@
     android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="20dp">
 
-
-    <ImageView
-        android:id="@+id/room_profile"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:padding="5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile2"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#E6E6FA"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/room_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_person_24" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/room_txt_date"
@@ -26,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,33 +45,20 @@
         android:layout_marginEnd="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FF4400"
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.703" />
 
-    <TextView
-        android:id="@+id/room_txt_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="몽키"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintStart_toEndOf="@+id/room_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="250dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/room_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.795">
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2">
 
         <TextView
             android:id="@+id/room_txt_message"
@@ -77,7 +71,21 @@
             android:maxLines="2"
             android:text="대화를 나눠보세요!"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/room_txt_nickname" />
+
+        <TextView
+            android:id="@+id/room_txt_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="몽키"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

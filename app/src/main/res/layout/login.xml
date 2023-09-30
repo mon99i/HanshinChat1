@@ -4,41 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="30dp"
-    tools:context=".LoginActivity"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:text="두근두근 한신대"
-        android:textSize="30dp"
-        android:textColor="#000000"
-        android:layout_marginBottom="20dp"/>
+        android:textColor="#434959"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/signInBtn"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signInButtonContainer"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"/>
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="90dp"
+        app:cardElevation="4dp">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signInBtn"
+            android:layout_width="220dp"
+            android:layout_gravity="center"
+            android:layout_height="70dp" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="로그아웃"
-        android:backgroundTint="#BFA0ED"/>
+        android:backgroundTint="#BFA0ED"
+        android:text="로그아웃" />
+
 
     <EditText
         android:id="@+id/edt_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:hint="ID"
-       />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edt_password"
@@ -46,8 +62,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Pawwrd"
-        android:inputType="text"
-       />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/exRegisterBtn"

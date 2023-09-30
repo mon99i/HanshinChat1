@@ -1,22 +1,33 @@
 package com.example.hanshinchat1;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -37,11 +48,10 @@ public class SetProfile1PhotoActivity extends MainActivity {
     private static final String TAG = "SetProfileActivity";
     private static final int REQUEST_PERMISSION = 50;
     private static final int REQUEST_CAMERA = 100;
+
     private String currentPhotoPath;
     private static final int REQUEST_GALLERY = 101;
 
-    Button getPhotoBtn;
-    Button captureBtn;
 
     Button saveBtn;
 
@@ -49,59 +59,81 @@ public class SetProfile1PhotoActivity extends MainActivity {
     private Bitmap imageBitmap;
 
 
+    private ImageButton addProfileBtn;
+    private Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_1_photo);
 
-        checkCurrentUser();
-        checkPermission();
+        //checkCurrentUser();
 
-        getPhotoBtn = (Button) findViewById(R.id.getPhotoBtn);
-        captureBtn = (Button) findViewById(R.id.captureBtn);
-        saveBtn = (Button) findViewById(R.id.set_photo_next);
-        image = (ImageView) findViewById(R.id.image);
+        if (checkPermission() == false) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.CAMERA/*, android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE*/}, REQUEST_PERMISSION);
+        }
 
-        getPhotoBtn.setOnClickListener(new View.OnClickListener() {
+
+        addProfileBtn = findViewById(R.id.addProfileBtn);
+        saveBtn =findViewById(R.id.set_photo_next);
+        image = findViewById(R.id.image);
+
+        addProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                openGallery();
-            }
-        });
-        captureBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                openCamera();
+                showAddProfileDialog();
             }
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadFileToStorageAndDatabase();
+                Drawable drawable = image.getDrawable();
+                if (drawable instanceof VectorDrawable) {   //기본 이미지일때
+                    Toast.makeText(getApplicationContext(), "사진을 등록하세요", Toast.LENGTH_SHORT).show();
+                } else uploadFileToStorageAndDatabase();
+
+
             }
         });
 
 
     }
 
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, REQUEST_GALLERY);
+    private void showAddProfileDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
 
-    }
+        View view = inflater.inflate(R.layout.add_profile_dialog, null);
+        ConstraintLayout camerLayout = view.findViewById(R.id.cameraLayout);
+        ConstraintLayout galleryLayout = view.findViewById(R.id.galleryLayout);
 
-    private void openCamera() {
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
 
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+        camerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        /*Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (checkPermission() == true) {
+                    //openCamera
+
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                    dialog.dismiss();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "카메라 촬영을 위해 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                /*Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {   // Create the File where the photo should go
             File photoFile = null;
@@ -121,6 +153,23 @@ public class SetProfile1PhotoActivity extends MainActivity {
             }
 
         }*/
+
+            }
+        });
+
+        galleryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //openGallery
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_GALLERY);
+                dialog.dismiss();
+            }
+        });
+
     }
 
     @Override
@@ -212,7 +261,6 @@ public class SetProfile1PhotoActivity extends MainActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "사진 등록하세요!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "스토리지에 사진 업로드 실패");
             }
         });
@@ -220,7 +268,7 @@ public class SetProfile1PhotoActivity extends MainActivity {
     }
 
 
-    public void checkPermission() {
+    public boolean checkPermission() {
         int permissionCamera = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CAMERA);
         /*int permissionRead = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE);
         int permissionWrite = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);*/
@@ -231,18 +279,12 @@ public class SetProfile1PhotoActivity extends MainActivity {
                     permissionRead != PackageManager.PERMISSION_GRANTED ||
                     permissionWrite != PackageManager.PERMISSION_GRANTED*/
             ) {
-
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.CAMERA)) {
-                    Toast.makeText(this, "카메라 촬영을 위해 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
-                }
+                return false;
 
 
-                ActivityCompat.requestPermissions(this, new String[]{
-                        android.Manifest.permission.CAMERA/*, android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE*/}, REQUEST_PERMISSION);
-
-
-            }
+            } else return true;
         }
+        return false;
     }
 
     @Override

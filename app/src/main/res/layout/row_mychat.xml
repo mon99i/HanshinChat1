@@ -20,10 +20,10 @@
         android:maxEms="15"
         android:padding="10dp"
         android:text="안녕하세요."
+        android:textSize="15dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -33,8 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="오전 10:23"
-        android:textSize="12dp"
-
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="@+id/my_txt_message"
         app:layout_constraintEnd_toStartOf="@+id/my_txt_message"
         app:layout_constraintHorizontal_bias="1.0"
@@ -44,9 +43,10 @@
     <TextView
         android:id="@+id/opponent_txt_isShown"
         android:layout_width="4dp"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
+        android:textSize="11dp"
         android:text="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFBE3C"

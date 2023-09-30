@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hanshinchat1.recycler.VerticalDecoration;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -60,6 +61,7 @@ public class ChatRoomActivity extends MainActivity {
 
     private void setupRecycler() {
         recycler_chatrooms.setLayoutManager(new LinearLayoutManager(this));   //아래향으로 리사이클러뷰나오게..?
+        recycler_chatrooms.addItemDecoration(new VerticalDecoration(20));
         recycler_chatrooms.setAdapter(new RecyclerChatRoomsAdapter(this));    //리사이클러뷰에 만들어놓은 어댑터 설정
     }
 }
