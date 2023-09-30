@@ -13,6 +13,8 @@ import android.text.TextUtils; // 추가된 import 문
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +34,6 @@ public class SetProfile14InterestActivity extends MainActivity {
 
 
         setContentView(R.layout.set_profile_14_interest);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         String[] interestArray = getResources().getStringArray(R.array.관심사);
 
@@ -85,18 +86,17 @@ public class SetProfile14InterestActivity extends MainActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference usersRef = myRef.child("users").child(user.getUid());
+                DatabaseReference userRef = myRef.child("users").child(user.getUid());
                 if (!selectedInterests.isEmpty()) {
-
-                    userInfo.setInterest(selectedInterests);
-                    userInfo.setUid(user.getUid());
-                    usersRef.setValue(userInfo);
-
-                    Intent intent = new Intent(getApplicationContext(), SetProfile15PersonalityActivity.class);
-                    intent.putExtra("UserInfo",userInfo);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    userRef.child("interest").setValue(selectedInterests).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(getApplicationContext(), SetProfile15PersonalityActivity.class);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        }
+                    });
                 } else {
                     Toast.makeText(getApplicationContext(), "관심사를 선택해주세요", Toast.LENGTH_SHORT).show();
                 }

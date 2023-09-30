@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -166,7 +167,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
         String getKoreanDateText(String sendDate){                   //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
-            LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+         /*   LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
             // 시간 포맷 지정
             String amPmText = currentTime.getHour() < 12 ?
@@ -176,9 +177,27 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
                     .appendPattern(" hh:mm")
                     .toFormatter();
             //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
-            String koreanDateText= currentTime.format(formatter);
+            String koreanDateText= currentTime.format(formatter);*/
 
-            return koreanDateText;
+            try {
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime localDateTime = LocalDateTime.parse(sendDate,dateTimeFormatter);
+
+                // 시간 포맷 지정
+                String amPmText = localDateTime.getHour()<12?"오전" : "오후";
+                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                        .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
+                        .appendPattern(" hh:mm")
+                        .toFormatter();
+
+                String koreanDateText = localDateTime.format(formatter);
+                return koreanDateText;
+                // koreanDateText를 사용하면 지정된 형식의 시간을 얻을 수 있습니다.
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+                throw new RuntimeException("시간 파싱 오류");
+            }
+
         }
 
 
@@ -220,8 +239,8 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
         }
 
-        String getKoreanDateText(String sendDate){                               //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
-            LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        String getKoreanDateText(String sendDate){                            //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
+            /*LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
             // 시간 포맷 지정
             String amPmText = currentTime.getHour() < 12 ?
@@ -234,6 +253,28 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             String koreanDateText= currentTime.format(formatter);
 
             return koreanDateText;
+
+            */
+
+            try {
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime localDateTime = LocalDateTime.parse(sendDate,dateTimeFormatter);
+
+                // 시간 포맷 지정
+                String amPmText = localDateTime.getHour()<12?"오전" : "오후";
+                DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                        .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
+                        .appendPattern(" hh:mm")
+                        .toFormatter();
+
+                String koreanDateText = localDateTime.format(formatter);
+                return koreanDateText;
+                // koreanDateText를 사용하면 지정된 형식의 시간을 얻을 수 있습니다.
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+                throw new RuntimeException("시간 파싱 오류");
+            }
+
         }
 
        /* String getDateText(String sendDate) {

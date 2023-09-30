@@ -9,10 +9,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SetProfile16MbtiActivity extends MainActivity {
 
@@ -21,12 +29,15 @@ public class SetProfile16MbtiActivity extends MainActivity {
     private RadioButton btnE, btnI, btnN, btnS, btnF, btnT, btnP, btnJ;
 
     private Button nextBtn;
+    private LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_16_mbti);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
+
 
         nextBtn = findViewById(R.id.set_mbti_next);
 
@@ -109,18 +120,23 @@ public class SetProfile16MbtiActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 if (!selectedFirst.isEmpty() && !selectedSecond.isEmpty() && !selectedThird.isEmpty() && !selectedForth.isEmpty()) {
-                    DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-
                     String mbtiValue = selectedFirst + selectedSecond + selectedThird + selectedForth;
+                    String currentTime=localDateTime.format(dateTimeFormatter);
+                    Map<String, Object> childUpdates= new HashMap<>();
+                    childUpdates.put("/mbti/",mbtiValue);
+                    childUpdates.put("/creationTime/",currentTime);      //계정생성 시간
+                    childUpdates.put("/lastSignInTime/",currentTime);    //마지막 로그인시간
 
-                    userInfo.setMbti(mbtiValue);
-                    usersRef.setValue(userInfo);
-
-                    Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
-                    intent.putExtra("UserInfo",userInfo);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    DatabaseReference userRef = myRef.child("users").child(user.getUid());
+                    userRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(getApplicationContext(), SetProfile17IdealTypeActivity.class);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        }
+                    });
                    /* usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,6 @@ public class SetProfile13DrinkingActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_13_drinking);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         radioGroup = findViewById(R.id.drinking_radio_group);
         radioButton1 = findViewById(R.id.drinking_radio_btn_1);
@@ -111,18 +112,18 @@ public class SetProfile13DrinkingActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 if (selectedRadioButton != null) {
-                    DatabaseReference usersRef = myRef.child("users").child(user.getUid());
+                    DatabaseReference userRef = myRef.child("users").child(user.getUid());
 
                     String selectedDrinking = selectedRadioButton.getText().toString();
-                    userInfo.setDrinking(selectedDrinking);
-                    userInfo.setUid(user.getUid());
-                    usersRef.setValue(userInfo);
-
-                    Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
-                    intent.putExtra("UserInfo",userInfo);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    userRef.child("drinking").setValue(selectedDrinking).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(getApplicationContext(), SetProfile14InterestActivity.class);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        }
+                    });
                    /* usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

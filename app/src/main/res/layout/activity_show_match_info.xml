@@ -22,7 +22,12 @@
         android:layout_height="500dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" >
+
+
+
+
+    </androidx.viewpager.widget.ViewPager>
 
     <Button
         android:id="@+id/declineButton"

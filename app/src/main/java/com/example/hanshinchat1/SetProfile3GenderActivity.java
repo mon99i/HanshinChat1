@@ -9,19 +9,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRadioButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class SetProfile3GenderActivity extends MainActivity {
     private AppCompatRadioButton setProfileMale, setProfileFemale;
     private Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_3_gender);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
 
         nextBtn = findViewById(R.id.set_gender_next);
 
@@ -32,27 +35,30 @@ public class SetProfile3GenderActivity extends MainActivity {
 
             @Override
             public void onClick(View v) {
-                DatabaseReference usersRef = myRef.child("users").child(user.getUid());
-                if(setProfileMale.isChecked()){
+                DatabaseReference userRef = myRef.child("users").child(user.getUid());
+                if (setProfileMale.isChecked()) {
                     String strGender = "남자";
-                    userInfo.setGender(strGender);
-                    usersRef.setValue(userInfo);
+                    userRef.child("gender").setValue(strGender).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                                }
+                            });
 
-                    Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
-                    intent.putExtra("UserInfo",userInfo);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 } else if (setProfileFemale.isChecked()) {
                     String strGender = "여자";
-                    userInfo.setGender(strGender);
-                    usersRef.setValue(userInfo);
-
-                    Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
-                    intent.putExtra("UserInfo",userInfo);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    userRef.child("gender").setValue(strGender).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(getApplicationContext(), SetProfile4AgeActivity.class);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        }
+                    });
                 }
 
 
@@ -100,21 +106,22 @@ public class SetProfile3GenderActivity extends MainActivity {
         });
     }
 
-    public void onRadioButtonClicked(View view){
-        boolean isSelected = ((AppCompatRadioButton)view).isChecked();
-        switch (view.getId()){
+    public void onRadioButtonClicked(View view) {
+        boolean isSelected = ((AppCompatRadioButton) view).isChecked();
+        switch (view.getId()) {
             case R.id.set_profile_gender_male:
-                if(isSelected) {
+                if (isSelected) {
                     // 기능 구현
                 }
                 break;
             case R.id.set_profile_gender_female:
-                if(isSelected){
+                if (isSelected) {
                     // 기능 구현
                 }
                 break;
         }
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
         startActivity(intent);

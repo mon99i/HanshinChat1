@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +26,7 @@ public class SetProfile5GradeActivity extends MainActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.set_profile_5_grade);
-        UserInfo userInfo=(UserInfo) getIntent().getSerializableExtra("UserInfo");
+
 
         nextBtn = findViewById(R.id.set_grade_next);
 
@@ -33,19 +35,20 @@ public class SetProfile5GradeActivity extends MainActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference usersRef = myRef.child("users").child(user.getUid());
+                DatabaseReference userRef = myRef.child("users").child(user.getUid());
                 String strGrade = grade.getText().toString();
                 if (!strGrade.isEmpty()) {
                     try {
                         Integer intGrade = Integer.valueOf(strGrade);
-                        userInfo.setGrade(intGrade);
-                        usersRef.setValue(userInfo);
-
-                        Intent intent = new Intent(getApplicationContext(), SetProfile6StudentIdActivity.class);
-                        intent.putExtra("UserInfo",userInfo);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        userRef.child("grade").setValue(intGrade).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Intent intent = new Intent(getApplicationContext(), SetProfile6StudentIdActivity.class);
+                                startActivity(intent);
+                                finish();
+                                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                            }
+                        });
                     } catch (NumberFormatException e) {
                         Toast.makeText(getApplicationContext(), "올바른 학년을 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
