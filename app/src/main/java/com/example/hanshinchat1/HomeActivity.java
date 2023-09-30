@@ -65,6 +65,8 @@ public class HomeActivity extends MainActivity {
                 /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
                 startActivity(intent);
                 finish();*/
+                Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -1,24 +1,19 @@
 package com.example.hanshinchat1.Match;
 
-import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
 
-import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.board.BoardWriteActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,76 +25,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MBTIMatchActivity extends MainActivity {
-
-
-    private Button mbtiBtn;
+public class Fragment_2 extends Fragment {
     private TextView age;
-    private TextView grade;
     private TextView department;
     private TextView mbti;
-    private TextView mymbti;
-    private String key;
-    private String myMBTI;
-    private String myGender;
     private String currentUid;
-    private ViewPager2 viewPager;
+
     private ArrayList<mbtiModel> mbtiDataList;
-    private int currentIndex = 0;
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
-
-
+    private MyAdapter adapter;
+    FrameLayout frameLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.mbtimatch);
-//        setContentView(R.layout.mbtimatch2);
-        setContentView(R.layout.activity_main);
-//        currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-//        viewPager = findViewById(R.id.mbtiViewPager);   잠깐
-        viewPager = findViewById(R.id.viewpager);
-        mbtiDataList = new ArrayList<>();
-//        adapter = new mbtiAdapter(mbtiDataList);
-        mbtiDataList.add(new mbtiModel(25, "Computer Science", "INTJ"));
-        mbtiDataList.add(new mbtiModel(22, "Electrical Engineering", "INFP"));
-//        mbtiAdapter adapter = new mbtiAdapter(this, mbtiDataList);
-//        viewPager.setAdapter(adapter);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.frame_2, container, false);
 
 
+        currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-//        mbtiBtn = findViewById(R.id.mbtiBtn);
-//        mbtiBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        frameLayout = rootView.findViewById(R.id.mbtiuser);
+        age = rootView.findViewById(R.id.ageArea);
+        department = rootView.findViewById(R.id.departmentArea);
+        mbti = rootView.findViewById(R.id.mbtiArea);
+        frameLayout.setAdapter(adapter);
+        
+        MyUid();
 
-
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                currentIndex = position;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-//        adapter = new mbtiAdapter(mbtiDataList);
-
-
+        return rootView;
     }
-
 
     private void MyUid() {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUid);
@@ -119,71 +73,11 @@ public class MBTIMatchActivity extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("MBTIMatchActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("Fragment_2", "loadPost:onCancelled", databaseError.toException());
             }
         });
 
 
-    }
-    private void getMyGender(String key) {
-        if (key == null) {
-            Toast.makeText(MBTIMatchActivity.this, "설마 여기?", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("users");
-
-//        final String[] myGender = new String[4];
-
-        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot datasnapshot) {
-
-                UserInfo dataModel = datasnapshot.getValue(UserInfo.class);
-                if (dataModel != null) {
-//                    String userGender = dataModel.getMbti();
-//                    mymbti.setText(userGender != null ? userGender : "");
-//                    myGender[0] = userGender;
-                    myGender = dataModel.getGender();
-                    getMyMbti(key);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("MBTIMatchActivity", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
-//        return myGender[0];
-    }
-
-    private void getMyMbti(String key) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("users");
-
-//        final String[] myMbti = new String[4];
-
-        userRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot datasnapshot) {
-
-                UserInfo dataModel = datasnapshot.getValue(UserInfo.class);
-                if (dataModel != null) {
-//                    String userMbti = dataModel.getMbti();
-//                    mymbti.setText(userMbti != null ? userMbti : "");
-//                    myMbti[0] = userMbti;
-                    myMBTI = dataModel.getMbti();
-                    getRecommend(myMBTI, myGender);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("MBTIMatchActivity", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
-//        return myMbti[0];
     }
 
     private void getRecommend(String myMBTI, String myGender) {
@@ -214,101 +108,117 @@ public class MBTIMatchActivity extends MainActivity {
                             if ((my_mbti.equals(mbtiList[0])) && (userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ESTP")
                                     || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ENTP
                             else if ((my_mbti.equals(mbtiList[1])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("ESTJ")
                                     || userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISTJ") || userMBTI.equalsIgnoreCase("ISFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // INTJ
                             else if ((my_mbti.equals(mbtiList[2])) && (userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ESTP")
                                     || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // INTP
                             else if ((my_mbti.equals(mbtiList[3])) && (userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ESFJ")
                                     || userMBTI.equalsIgnoreCase("ISFJ") || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ESTJ
                             else if ((my_mbti.equals(mbtiList[4])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
                                     || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ESFJ
                             else if ((my_mbti.equals(mbtiList[5])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
                                     || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ISTJ
                             else if ((my_mbti.equals(mbtiList[6])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("ENFP")
                                     || userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ISFJ
                             else if ((my_mbti.equals(mbtiList[7])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
                                     || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ENFJ
                             else if ((my_mbti.equals(mbtiList[8])) && (userMBTI.equalsIgnoreCase("INTP") || userMBTI.equalsIgnoreCase("ENFJ")
                                     || userMBTI.equalsIgnoreCase("ESTP") || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ENFP
                             else if ((my_mbti.equals(mbtiList[9])) && (userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISTJ")
                                     || userMBTI.equalsIgnoreCase("ISFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // INFJ
                             else if ((my_mbti.equals(mbtiList[10])) && (userMBTI.equalsIgnoreCase("INTP") || userMBTI.equalsIgnoreCase("ESTP")
                                     || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // INFP
                             else if ((my_mbti.equals(mbtiList[11])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
                                     || userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ISTJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ESTP
                             else if ((my_mbti.equals(mbtiList[12])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
                                     || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
                             }
                             // ESFP
                             else if ((my_mbti.equals(mbtiList[13])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
                                     || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ISTP
                             else if ((my_mbti.equals(mbtiList[14])) && (userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISFJ")
                                     || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // ISFP
-                            else if ((my_mbti.equals(mbtiList[1])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
+                            else if ((my_mbti.equals(mbtiList[15])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
                                     || userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ISTJ"))) {
                                 matchingUsers.add(userInfo);
-                                Toast.makeText(MBTIMatchActivity.this, "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "매칭된 사람이 있기는 함", Toast.LENGTH_SHORT).show();
+                                return;
                             } else {
-                                Intent intent = new Intent(getApplicationContext(), MBTIMatchNone.class);
+                                Intent intent = new Intent(getContext(), MBTIMatchNone.class);
                                 startActivity(intent);
-                                Toast.makeText(MBTIMatchActivity.this, "회원님과 어울리는 MBTI를 가진 사람이 없습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "회원님과 어울리는 MBTI를 가진 사람이 없습니다.", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                         }
 
@@ -317,29 +227,44 @@ public class MBTIMatchActivity extends MainActivity {
 
                 if (!matchingUsers.isEmpty()) {
 
+                    frameLayout.removeAllViews();
                     for (UserInfo userInfo : matchingUsers) {
-                        mbtiDataList.add(new mbtiModel(
-                                userInfo.getAge(),
-                                userInfo.getDepartment(),
-                                userInfo.getMbti()
-                        ));
+                        View userView = createUserView(userInfo);
+                        frameLayout.addView(userView);
                     }
+//                    Random random = new Random();
+//                    int randomIndex = random.nextInt(matchingUsers.size());
+//                    UserInfo randomUser = matchingUsers.get(randomIndex);
+//
+//                    UserInfo dataModel = datasnapshot.child(randomUser.getUid()).getValue(UserInfo.class);
+//
+//                    age.setText(dataModel != null ? String.valueOf(dataModel.getAge()) : "");
+//                    department.setText(dataModel != null ? dataModel.getDepartment() : "");
+//                    mbti.setText(dataModel != null ? dataModel.getMbti() : "");  여기까지
+
+//                    for (UserInfo userInfo : matchingUsers) {
+//                        mbtiDataList.add(new mbtiModel(
+//                                userInfo.getAge(),
+//                                userInfo.getDepartment(),
+//                                userInfo.getMbti()
+//                        ));
+//                    }   잠깐2
 
 //                    adapter.notifyDataSetChanged(); // 어댑터에 데이터 변경 알림
 
-                    // 뷰페이저를 순서대로 보여주도록 설정
-                    if (currentIndex < mbtiDataList.size()) {
-                        viewPager.setCurrentItem(currentIndex);
-                    } else {
-                        viewPager.setCurrentItem(0); // 리스트가 끝에 도달하면 첫 번째 아이템으로 돌아감
-                    }
+//                    // 뷰페이저를 순서대로 보여주도록 설정
+//                    if (currentIndex < mbtiDataList.size()) {
+//                        viewPager.setCurrentItem(currentIndex);
+//                    } else {
+//                        viewPager.setCurrentItem(0); // 리스트가 끝에 도달하면 첫 번째 아이템으로 돌아감
+//                    }
 
-                    Toast.makeText(MBTIMatchActivity.this, "사용자 정보를 가져왔다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "사용자 정보를 가져왔다", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), MBTIMatchNone.class);
+                    Intent intent = new Intent(getContext(), MBTIMatchNone.class);
                     startActivity(intent);
-                    Toast.makeText(MBTIMatchActivity.this, "매칭된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "매칭된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -347,12 +272,26 @@ public class MBTIMatchActivity extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("MBTIMatchActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("Fragment_2", "loadPost:onCancelled", databaseError.toException());
             }
 
         });
 
     }
+
+    private View createUserView(UserInfo userInfo) {
+        // 개별 사용자에 대한 정보를 보여주는 View를 생성하고 반환
+        View userView = LayoutInflater.from(getContext()).inflate(R.layout.frame_2, null);
+
+        TextView ageTextView = userView.findViewById(R.id.ageArea);
+        TextView departmentTextView = userView.findViewById(R.id.departmentArea);
+        TextView mbtiTextView = userView.findViewById(R.id.mbtiArea);
+
+        // userInfo에서 필요한 정보를 가져와서 TextView에 설정
+        ageTextView.setText(String.valueOf(userInfo.getAge()));
+        departmentTextView.setText(userInfo.getDepartment());
+        mbtiTextView.setText(userInfo.getMbti());
+
+        return userView;
+    }
 }
-
-

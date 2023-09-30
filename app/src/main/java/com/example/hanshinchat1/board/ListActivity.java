@@ -41,7 +41,6 @@ public class ListActivity extends MainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.board_list);   ㅁㅁ
         setContentView(R.layout.mainboard);
 
         boardtab = findViewById(R.id.board_tab);
@@ -120,7 +119,7 @@ public class ListActivity extends MainActivity {
         boardDataList.clear();
         boardAdapter.notifyDataSetChanged();
 
-        FBData();
+//        FBData();
 
         clickHome();
         clickRoom();
