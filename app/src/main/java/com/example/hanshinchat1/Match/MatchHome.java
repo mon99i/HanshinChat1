@@ -22,7 +22,7 @@ public class MatchHome extends MainActivity {
         mbtiRecommendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LookingForMBTI.class);
+                Intent intent = new Intent(getApplicationContext(), MBTIMatchActivity.class);
                 startActivity(intent);
             }
         });

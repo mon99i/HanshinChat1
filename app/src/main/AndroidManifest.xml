@@ -170,11 +170,18 @@
             android:name=".Match.LookingForMBTI"
             android:exported="false"></activity>
         <activity
+            android:name=".Match.mbtiFragment"
+            android:exported="false"></activity>
+        <activity
             android:name=".SetIdealActivity"
             android:exported="false"></activity>
         <activity
             android:name=".SetIdeal2Activity"
             android:exported="false"></activity>
+        <activity
+            android:name=".Match.MainActivity"
+            android:exported="false"></activity>
+
 
 
     </application>
