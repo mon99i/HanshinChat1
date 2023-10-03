@@ -1,6 +1,8 @@
 package com.example.hanshinchat1;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -123,6 +126,8 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
             public void onClick(View view) {
                 try {
 
+                   /* holder.background.setBackgroundColor(Color.parseColor("#E6E6FA"));*/
+                    //holder.background.setBackground("#E6E6FA");
                     Intent intent = new Intent(context, ChattingActivity.class);
                     intent.putExtra("ChatRoom", chatRooms.get(currentPosition));
                     intent.putExtra("Opponent", holder.opponentUser);

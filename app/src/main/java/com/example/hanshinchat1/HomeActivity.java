@@ -1,27 +1,21 @@
 package com.example.hanshinchat1;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.hanshinchat1.Match.MBTIMatchActivity;
-import com.example.hanshinchat1.Match.MatchHome;
+//import com.example.hanshinchat1.Match.MBTIMatchActivity;
+//import com.example.hanshinchat1.Match.MatchHome;
 import com.example.hanshinchat1.utils.Utils;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
 public class HomeActivity extends MainActivity {
+
 
 
     private final String CHANNEL_ID = "my_notification_chanel";
@@ -72,25 +66,28 @@ public class HomeActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 //수정필요
+                /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_up);
+                idealMatchingBtn.startAnimation(animation);*/
               Utils.checkIdealExists(context);
+        /*      Intent intent=new Intent(getApplicationContext(), RecommendMatchActivity.class);
+              startActivity(intent);*/
             }
         });
+
 
         mbtiMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(getApplicationContext(), SetProfile2NameActivity.class);
-                startActivity(intent);
-                finish();*/
-                Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
-                startActivity(intent);
+
+            /*    Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
+                startActivity(intent);*/
             }
         });
 
         aroundMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.arroundMatching();
+                Utils.arroundMatching(context);
 
             }
         });
@@ -98,7 +95,7 @@ public class HomeActivity extends MainActivity {
         recentRegisterMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.recentRegisterMatching();
+                Utils.recentRegisterMatching(context);
            /*     AlertDialog.Builder famDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 
                 famDialog.setMessage("동일한 지역에 거주하는 상대를 검색합니다.")
@@ -125,7 +122,7 @@ public class HomeActivity extends MainActivity {
         recentContectMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.recentConnectMatching();
+                Utils.recentConnectMatching(context);
                 //Utils.recentRegisterMatching();
                /* AlertDialog.Builder tumDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 

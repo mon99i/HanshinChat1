@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/idealBackBtn" />
 
     <Button
-        android:id="@+id/idealSaveBtn"
+        android:id="@+id/chatRequestBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

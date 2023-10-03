@@ -80,6 +80,10 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
+
+     /*   if(dateChangeCheck(messages.get(position))==true){
+
+        }*/
         return messages.get(position).getSenderUid().equals(myUid) ? 1 : 0;
     }
 
@@ -99,6 +103,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
         if (messages.get(position).getSenderUid().equals(myUid)) {
             ((MyMessageViewHolder) holder).bind(position);
         } else {
@@ -167,18 +172,6 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
         String getKoreanDateText(String sendDate){                   //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
-         /*   LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-
-            // 시간 포맷 지정
-            String amPmText = currentTime.getHour() < 12 ?
-                    "오전" : "오후";
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                    .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
-                    .appendPattern(" hh:mm")
-                    .toFormatter();
-            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
-            String koreanDateText= currentTime.format(formatter);*/
-
             try {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
                 LocalDateTime localDateTime = LocalDateTime.parse(sendDate,dateTimeFormatter);
@@ -301,5 +294,12 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 
 
+
+
     }
+ /*   private boolean dateChangeCheck(Message message){
+
+        message
+        return false;
+    }*/
 }

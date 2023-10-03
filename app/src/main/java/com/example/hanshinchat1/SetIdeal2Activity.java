@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,7 +80,7 @@ public class SetIdeal2Activity extends AppCompatActivity {
             }
         }else Log.d(TAG, "받은 fragment가 없음");
 
-        idealSaveBtn = findViewById(R.id.idealSaveBtn);
+        idealSaveBtn = findViewById(R.id.chatRequestBtn);
         idealBackBtn = findViewById(R.id.idealBackBtn);
         priority1 = new HashMap<>();
         priority2 = new HashMap<>();

@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ChatRoomActivity extends MainActivity {
-    private ImageButton btn_addChat;
+
     private EditText editText_chat;
     private Button btn_send;
     private DatabaseReference chatRef;
@@ -31,7 +31,6 @@ public class ChatRoomActivity extends MainActivity {
         clickBoard();
         clickProfile();
         clickRoom();
-        clickMenu();
         initializeView();
         initializeListener();
         setupRecycler();
@@ -40,7 +39,6 @@ public class ChatRoomActivity extends MainActivity {
     private void initializeView() {
         try {
             chatRef= FirebaseDatabase.getInstance().getReference();
-            btn_addChat=(ImageButton)findViewById(R.id.btn_addChat);
             recycler_chatrooms= findViewById(R.id.recycler_chatrooms);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,18 +48,18 @@ public class ChatRoomActivity extends MainActivity {
 
     private void initializeListener() {
 
-        btn_addChat.setOnClickListener(new View.OnClickListener() {
+ /*       btn_addChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), AddChatRoomActivity.class));
                 finish();
             }
-        });
+        });*/
     }
 
     private void setupRecycler() {
         recycler_chatrooms.setLayoutManager(new LinearLayoutManager(this));   //아래향으로 리사이클러뷰나오게..?
-        recycler_chatrooms.addItemDecoration(new VerticalDecoration(20));
+        //recycler_chatrooms.addItemDecoration(new VerticalDecoration(20));
         recycler_chatrooms.setAdapter(new RecyclerChatRoomsAdapter(this));    //리사이클러뷰에 만들어놓은 어댑터 설정
     }
 }

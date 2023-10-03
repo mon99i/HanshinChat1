@@ -235,7 +235,7 @@
         <ImageButton
             android:id="@+id/home"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:background="@drawable/baseline_home_black_24_xml"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/room"
@@ -245,7 +245,7 @@
         <ImageButton
             android:id="@+id/room"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:background="@drawable/baseline_room_black_24_xml"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/chat"
@@ -255,7 +255,7 @@
         <ImageButton
             android:id="@+id/chat"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:background="@drawable/baseline_chat_black_24_xml"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/post"
@@ -265,7 +265,7 @@
         <ImageButton
             android:id="@+id/post"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:background="@drawable/baseline_board_black_24_xml"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toStartOf="@+id/info"
@@ -275,7 +275,7 @@
         <ImageButton
             android:id="@+id/info"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:background="@drawable/baseline_profile_black_24_xml"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"

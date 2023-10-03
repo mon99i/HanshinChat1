@@ -5,6 +5,8 @@
     android:id="@+id/chatRoomBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/chat_room_background_state"
+    android:padding="10dp"
     tools:layout_editor_absoluteY="20dp">
 
     <androidx.cardview.widget.CardView

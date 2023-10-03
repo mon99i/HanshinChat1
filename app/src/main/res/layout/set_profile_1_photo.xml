@@ -50,6 +50,7 @@
         </androidx.cardview.widget.CardView>
 
 
+        <!--애니메이션추가필요-->
         <ImageButton
             android:id="@+id/addProfileBtn"
             android:layout_width="wrap_content"

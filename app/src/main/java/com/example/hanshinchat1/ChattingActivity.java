@@ -32,7 +32,7 @@ import java.util.TimeZone;
 
 public class ChattingActivity extends MainActivity {
 
-    private ImageButton chatting_btn_exit;
+    private ImageButton chatting_btn_back;
     private Button btn_submit;
     private TextView chatting_txt_nickname;
     private EditText edt_message;
@@ -66,7 +66,7 @@ public class ChattingActivity extends MainActivity {
     }
 
     private void initializeView() {
-        chatting_btn_exit = findViewById(R.id.chatting_btn_exit);
+        chatting_btn_back = findViewById(R.id.chatting_btn_back);
         recycler_chatting = findViewById(R.id.recycler_chatting);
         edt_message = findViewById(R.id.edt_message);
         btn_submit = findViewById(R.id.btn_submit);
@@ -75,7 +75,7 @@ public class ChattingActivity extends MainActivity {
     }
 
     private void initializeListener() {
-        chatting_btn_exit.setOnClickListener(new View.OnClickListener() {
+        chatting_btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChattingActivity.this, ChatRoomActivity.class));
@@ -157,7 +157,7 @@ public class ChattingActivity extends MainActivity {
 
     private void setupRecycler() {  //리사이클러뷰에 어댑터 설정
         recycler_chatting.setLayoutManager(new LinearLayoutManager(this));
-        recycler_chatting.addItemDecoration(new VerticalDecoration(30));
+        //recycler_chatting.addItemDecoration(new VerticalDecoration(30));
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
     }

@@ -6,9 +6,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.SnapHelper;
 
 import com.example.hanshinchat1.Ideal;
+import com.example.hanshinchat1.RecommendIdealActivity;
+import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,22 +18,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
     private static final String TAG = "Utils";
 
-
-    public static void recentConnectMatching(){    //하루전부터 지금까지 접속한 유저 조회
+    public static void recentConnectMatching(Context context){    //하루전부터 지금까지 접속한 유저 조회
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         LocalDateTime oneDayAgo = currentTime.minusDays(1);
@@ -56,6 +53,11 @@ public class Utils {
 
                         }
                         Log.d(TAG, "onDataChange: "+recentConnectUsers.size());
+
+                        Intent intent=new Intent(context,RecommendMatchActivity.class);
+                        intent.putExtra("recommendUsers",recentConnectUsers);
+                        context.startActivity(intent);
+                        ((AppCompatActivity) context).finish();
                     }
 
                     @Override
@@ -66,7 +68,7 @@ public class Utils {
     }
 
 
-    public static void recentRegisterMatching() {    //일주일전부터 지금까지 새로 생성한 유저
+    public static void recentRegisterMatching(Context context) {    //일주일전부터 지금까지 새로 생성한 유저
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         LocalDateTime oneWeekAgo = currentTime.minusWeeks(1);
@@ -90,6 +92,11 @@ public class Utils {
 
                        }
                         Log.d(TAG, "onDataChange: "+recentRegisterUsers.size());
+
+                        Intent intent=new Intent(context,RecommendMatchActivity.class);
+                        intent.putExtra("recommendUsers",recentRegisterUsers);
+                        context.startActivity(intent);
+                        ((AppCompatActivity) context).finish();
                     }
 
                     @Override
@@ -99,10 +106,14 @@ public class Utils {
                 });
 
 
+
+
     }
 
 
-    public static void arroundMatching() {
+
+
+    public static void arroundMatching(Context context) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ArrayList<UserInfo> arroundUsers = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("users")
@@ -121,7 +132,10 @@ public class Utils {
                             }
 
                         }
-                        Log.d(TAG, "onDataChange: " + arroundUsers);
+                        Intent intent=new Intent(context, RecommendMatchActivity.class );
+                        intent.putExtra("recommendUsers",arroundUsers);
+                        context.startActivity(intent);
+                        ((AppCompatActivity) context).finish();
                     }
 
                     @Override
@@ -133,15 +147,20 @@ public class Utils {
 
     }
 
-    public static void idealMatching(Ideal ideal) {
+
+    public static void idealMatching(Context context,Ideal ideal) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ArrayList<UserInfo> idealMatchedUsers;
+        ArrayList<UserInfo> firstIdealUsers=new ArrayList<>();
+        ArrayList<UserInfo> secondIdealUsers=new ArrayList<>();
+        ArrayList<UserInfo> thirdIdealUsers=new ArrayList<>();
+
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {
                     String uid = item.getKey();
                     if (!uid.equals(user.getUid())) {
+                        UserInfo userInfo=item.getValue(UserInfo.class);
                         for (DataSnapshot subItem : item.getChildren()) {
 
                             //priority1
@@ -157,20 +176,24 @@ public class Utils {
 
                                         for (Object value : priorityValues) {
                                             if (userValues.contains(value)) {
+                                                firstIdealUsers.add(userInfo);
                                                 Log.d(TAG, "둘다 리스트 1순위 이상형있음 " + uid + " " + value);
                                             }
                                         }
                                     } else if (userValue instanceof ArrayList) {
                                         userValues = (ArrayList<Object>) userValue;
                                         if (userValues.contains(priorityValue)) {
+                                            firstIdealUsers.add(userInfo);
                                             Log.d(TAG, "리스트 object 1순위 이상형있음 " + uid + " " + priorityValue);
                                         }
                                     } else if (priorityValue instanceof ArrayList) {
                                         priorityValues = (ArrayList<Object>) priorityValue;
                                         if (priorityValues.contains(userValue)) {
+                                            firstIdealUsers.add(userInfo);
                                             Log.d(TAG, "object list 1순위 이상형있음 " + uid + " " + userValue);
                                         }
                                     } else if (userValue.equals(priorityValue)) {
+                                        firstIdealUsers.add(userInfo);
                                         Log.d(TAG, "object object1순위 이상형있음 " + uid + " " + priorityValue);
                                     }
 
@@ -191,20 +214,24 @@ public class Utils {
 
                                         for (Object value : priorityValues) {
                                             if (userValues.contains(value)) {
+                                                secondIdealUsers.add(userInfo);
                                                 Log.d(TAG, "둘다 리스트 2순위 이상형있음 " + uid + " " + value);
                                             }
                                         }
                                     } else if (userValue instanceof ArrayList) {
                                         userValues = (ArrayList<Object>) userValue;
                                         if (userValues.contains(priorityValue)) {
+                                            secondIdealUsers.add(userInfo);
                                             Log.d(TAG, "리스트 object 2순위 이상형있음 " + uid + " " + priorityValue);
                                         }
                                     } else if (priorityValue instanceof ArrayList) {
                                         priorityValues = (ArrayList<Object>) priorityValue;
                                         if (priorityValues.contains(userValue)) {
+                                            secondIdealUsers.add(userInfo);
                                             Log.d(TAG, "object list 2순위 이상형있음 " + uid + " " + userValue);
                                         }
                                     } else if (userValue.equals(priorityValue)) {
+                                        secondIdealUsers.add(userInfo);
                                         Log.d(TAG, "object object2순위 이상형있음 " + uid + " " + priorityValue);
                                     }
 
@@ -225,20 +252,24 @@ public class Utils {
 
                                         for (Object value : priorityValues) {
                                             if (userValues.contains(value)) {
+                                                thirdIdealUsers.add(userInfo);
                                                 Log.d(TAG, "둘다 리스트 3순위 이상형있음 " + uid + " " + value);
                                             }
                                         }
                                     } else if (userValue instanceof ArrayList) {
                                         userValues = (ArrayList<Object>) userValue;
                                         if (userValues.contains(priorityValue)) {
+                                            thirdIdealUsers.add(userInfo);
                                             Log.d(TAG, "리스트 object 3순위 이상형있음 " + uid + " " + priorityValue);
                                         }
                                     } else if (priorityValue instanceof ArrayList) {
                                         priorityValues = (ArrayList<Object>) priorityValue;
                                         if (priorityValues.contains(userValue)) {
+                                            thirdIdealUsers.add(userInfo);
                                             Log.d(TAG, "object list 3순위 이상형있음 " + uid + " " + userValue);
                                         }
                                     } else if (userValue.equals(priorityValue)) {
+                                        thirdIdealUsers.add(userInfo);
                                         Log.d(TAG, "object object3순위 이상형있음 " + uid + " " + priorityValue);
                                     }
 
@@ -252,6 +283,13 @@ public class Utils {
 
                     }
                 }
+
+                Intent intent=new Intent(context, RecommendIdealActivity.class );
+                intent.putExtra("firstIdealUsers",firstIdealUsers);
+                intent.putExtra("secondIdealUsers",secondIdealUsers);
+                intent.putExtra("thirdIdealUsers",thirdIdealUsers);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
             }
 
             @Override
@@ -259,6 +297,8 @@ public class Utils {
 
             }
         });
+
+
 
        /*
         //보류
@@ -402,7 +442,7 @@ public class Utils {
                             context.startActivity(intent);
                             ((AppCompatActivity) context).finish();
                         } else {
-                            idealMatching(snapshot.getValue(Ideal.class));
+                            idealMatching(context,snapshot.getValue(Ideal.class));
 
                         }
                     }

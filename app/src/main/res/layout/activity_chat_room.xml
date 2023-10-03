@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+>
 
     <LinearLayout
         android:id="@+id/top_view"
@@ -13,65 +13,53 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#F5EEFF">
+        android:background="#F8F8FF">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/baseline_chat_black_24_xml"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="채팅방"/>
+            android:textColor="#252525"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Chat"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <ImageButton
-            android:id="@+id/btn_addChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/addchat"
-            tools:layout_editor_absoluteX="78dp"
-            tools:layout_editor_absoluteY="32dp" />
 
-        <ImageButton
-            android:id="@+id/menu"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:src="@drawable/baseline_menu_black_24"/>
+
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1450px"
         android:orientation="vertical">
 
+
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/recycler_chatrooms"
             android:layout_width="match_parent"
-            android:layout_height="480dp"
-            android:layout_weight="1"
-            android:scrollbars="vertical"
-            android:layout_margin="10dp"/>
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
 
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#F8F8FF"
         android:orientation="horizontal">
 
         <ImageButton

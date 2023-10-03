@@ -5,14 +5,15 @@
     android:id="@+id/myChatBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp">
+    android:padding="10dp"
+>
 
 
     <TextView
         android:id="@+id/my_txt_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
         android:autoLink="web"
         android:background="@drawable/background_talk_mine"
         android:gravity="start|center_vertical"
@@ -20,8 +21,8 @@
         android:maxEms="15"
         android:padding="10dp"
         android:text="안녕하세요."
-        android:textSize="15dp"
         android:textColor="@color/white"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

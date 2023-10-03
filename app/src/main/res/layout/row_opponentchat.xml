@@ -5,12 +5,14 @@
     android:id="@+id/opponentChatBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_editor_absoluteY="20dp">
+    android:padding="10dp"
+>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="5dp"
         android:backgroundTint="#E6E6FA"
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
