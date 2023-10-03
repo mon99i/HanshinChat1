@@ -22,7 +22,7 @@ public class ProfileActivity extends MainActivity{
 
     private static final String TAG = "ProfileActivity";
 
-    private TextView name;
+    private TextView name, gender, age;
     private DatabaseReference databaseReference;
     private UserInfo userInfo;
 
@@ -49,6 +49,8 @@ public class ProfileActivity extends MainActivity{
         ideal_edit_btn=findViewById(R.id.ideal_edit_btn);
 
         name = findViewById(R.id.name);
+        gender = findViewById(R.id.gender);
+        age = findViewById(R.id.age);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
 
@@ -59,6 +61,8 @@ public class ProfileActivity extends MainActivity{
                 if (snapshot.exists()) {
                     userInfo = snapshot.getValue(UserInfo.class);
                     name.setText(userInfo.getName());
+                    gender.setText(userInfo.getGender());
+                    age.setText(userInfo.getAge().toString());
 
                     UserInfo userInfo=snapshot.getValue(UserInfo.class);
                     String imageUrl=userInfo.getPhotoUrl();
