@@ -1,21 +1,17 @@
 package com.example.hanshinchat1;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-public class MenuActivity extends MainActivity {
+public class SettingActivity extends MainActivity {
 
     Button deleteBtn;
     Button logoutBtn2;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu);
+        setContentView(R.layout.setting);
 
         clickHome();
         clickRoom();

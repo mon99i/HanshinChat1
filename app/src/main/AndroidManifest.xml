@@ -126,7 +126,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".SettingActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileEditActivity"

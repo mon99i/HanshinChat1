@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@color/sky_blue">
+    android:background="@drawable/simulation_background">
 
     <ProgressBar
-        android:id="@+id/height_progress"
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:progressBackgroundTint="#FFFFFF"
         android:progressTint="#FF69B4"
@@ -22,15 +23,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="상황 4"
-            android:textColor="@android:color/black"
-            android:textSize="40sp"
-            android:textAlignment="center" />
-
         <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:src="@drawable/simulation5"
@@ -41,44 +35,76 @@
             android:layout_height="wrap_content"
             android:text="메뉴를 고를 차례. 상대가 메뉴판을 골똘히 보고 있다.\n이 레스토랑 단골인 당신은 어떻게 할까?"
             android:layout_margin="10dp"
+            android:textSize="15dp"
             android:layout_gravity="center"/>
 
-        <RadioGroup
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="10dp">
-
-            <RadioButton
-                android:id="@+id/question4_answer1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="단골이라고 밝히고 메뉴 선정을 대신 해준다"/>
-            <RadioButton
-                android:id="@+id/question4_answer2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="처음 온 척을 하고, 상대가 고를 때까지 가만히 기다린다"/>
-            <RadioButton
-                android:id="@+id/question4_answer3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="직원을 불러 뭐가 제일 잘 나가는지 묻는다"/>
-            <RadioButton
-                android:id="@+id/question4_answer4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="어떤 게 먹고 싶으신지 묻는 말을 건다"/>
-
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/next5"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="다음"
-            android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/pink" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/question4_answer1"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="단골이라고 밝히고 메뉴 선정을 대신 해준다"
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question4_answer2"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="처음 온 척을 하고, 상대가 고를 때까지 가만히 기다린다"
+                    android:textSize="13sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question4_answer3"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="직원을 불러 뭐가 제일 잘 나가는지 묻는다"
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question4_answer4"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="어떤 게 먹고 싶으신지 묻는 말을 건다"
+                    android:textSize="15sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/next5"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/match_button_style"
+                android:text="다음"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -60,9 +60,10 @@ import androidx.appcompat.app.AppCompatActivity;
             next2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Simulation2.this, Simulation3.class);
-                    intent.putExtra("totalScore", totalScore);
+                    Intent intent = new Intent(getApplicationContext(), Simulation3.class);
                     startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
             });
         }

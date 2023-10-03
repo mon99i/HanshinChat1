@@ -59,9 +59,10 @@ public class Simulation8 extends AppCompatActivity {
         next8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Simulation8.this, Simulation9.class);
-                intent.putExtra("totalScore", totalScore);
+                Intent intent = new Intent(getApplicationContext(), Simulation9.class);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
 
         });

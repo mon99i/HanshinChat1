@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@color/sky_blue">
+    android:background="@drawable/simulation_background">
 
     <ProgressBar
-        android:id="@+id/height_progress"
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:progressBackgroundTint="#FFFFFF"
         android:progressTint="#FF69B4"
@@ -22,15 +23,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="상황 3"
-            android:textColor="@android:color/black"
-            android:textSize="40sp"
-            android:textAlignment="center" />
-
         <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:src="@drawable/simulation4"
@@ -40,45 +34,77 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="결국 나는 늦지 않았지만, 상대가 늦어버렸다.\n미안해하는 상대에게 뭐라고 말하지?"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
             android:layout_gravity="center"/>
 
-        <RadioGroup
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="10dp">
-
-            <RadioButton
-                android:id="@+id/question3_answer1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="괜찮아요 저도 온 지 얼마 안되었어요"/>
-            <RadioButton
-                android:id="@+id/question3_answer2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사람이 그럴 수도 있죠"/>
-            <RadioButton
-                android:id="@+id/question3_answer3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="미안해하실 것 까진 아니에요."/>
-            <RadioButton
-                android:id="@+id/question3_answer4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오시느라 힘드셨죠?"/>
-
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/next4"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="다음"
-            android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/pink" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/question3_answer1"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="괜찮아요. 저도 온 지 얼마 안 됐어요."
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question3_answer2"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="사람이 그럴 수도 있죠"
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question3_answer3"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="미안해하실 것 까진 아니에요."
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question3_answer4"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="오시느라 힘드셨죠?"
+                    android:textSize="14sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/next4"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/match_button_style"
+                android:text="다음"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,13 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@drawable/simulation_background">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="결 과"
+        android:layout_marginTop="30dp"
+        android:text="소개팅 결과"
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textAlignment="center" />
@@ -20,20 +23,20 @@
         android:layout_marginTop="50dp" />
 
     <TextView
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/result_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:gravity="center"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/simulation_exit"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="시뮬레이션 종료"
-        android:layout_gravity="bottom"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/pink" />
-
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/match_button_style"
+        android:text="시뮬레이션 종료"/>
 </LinearLayout>

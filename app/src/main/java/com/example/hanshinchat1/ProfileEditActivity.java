@@ -32,7 +32,6 @@ public class ProfileEditActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_edit);
 
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();

@@ -7,25 +7,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends MainActivity{
 
     private static final String TAG = "ProfileActivity";
-    Button ideal_edit_btn;
 
+    private TextView name;
+    private DatabaseReference databaseReference;
+    private UserInfo userInfo;
+
+    Button ideal_edit_btn, settingBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();
@@ -37,12 +43,23 @@ public class ProfileActivity extends MainActivity{
         Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
 
         Button simulationBtn = (Button) findViewById(R.id.simulation);
+
+        settingBtn = (Button) findViewById(R.id.setting);
+
         ideal_edit_btn=findViewById(R.id.ideal_edit_btn);
-        
+
+        name = findViewById(R.id.name);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
+
+
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    userInfo = snapshot.getValue(UserInfo.class);
+                    name.setText(userInfo.getName());
+
                     UserInfo userInfo=snapshot.getValue(UserInfo.class);
                     String imageUrl=userInfo.getPhotoUrl();
                     Uri imageUri=Uri.parse(imageUrl);
@@ -60,15 +77,6 @@ public class ProfileActivity extends MainActivity{
             }
         });
 
-        profileEditBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         simulationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,10 +86,28 @@ public class ProfileActivity extends MainActivity{
             }
         });
 
+        profileEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         ideal_edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
                 finish();
             }

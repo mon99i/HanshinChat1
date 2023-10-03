@@ -4,33 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@color/sky_blue">
+    android:background="@drawable/simulation_background">
 
     <ProgressBar
-        android:id="@+id/height_progress"
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:progressBackgroundTint="#FFFFFF"
         android:progressTint="#FF69B4"
         android:max="10"
         android:progress="5"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="상황 5"
-            android:textColor="@android:color/black"
-            android:textSize="40sp"
-            android:textAlignment="center" />
-
         <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:src="@drawable/simulation6"
@@ -41,46 +34,79 @@
             android:layout_height="wrap_content"
             android:text="이야기를 하던 중, 질문이 들어왔다.\n오늘 검정색을 입은 건 우연인데, 어떻게 대답하면 좋을까?"
             android:layout_margin="10dp"
+            android:textSize="14dp"
             android:layout_gravity="center"/>
 
-        <RadioGroup
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="10dp">
-
-            <RadioButton
-                android:id="@+id/question5_answer1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="음..A씨랑 소개팅 한다고 하니까 저도 모르게 시크한 걸 집었나? 어떤 색 좋아하세요?"/>
-            <RadioButton
-                android:id="@+id/question5_answer2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="검정색이라서 입은 건 맞긴 한데, 사실 옷 살 때는 회색 계열을 좋아하긴 하거든요. 근데 좀 예뻐서 사는 경우에는 ......"/>
-            <RadioButton
-                android:id="@+id/question5_answer3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="생각해보니 제가 검정색을 좋아하는 거 같긴 하네요, 관심 가져주셔서 감사합니다. A씨는 어떤 색 깔 좋아하세요?"/>
-            <RadioButton
-                android:id="@+id/question5_answer4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="네, 검정색을 좋아해요. A씨도 검정색을 좋아하시나요?"/>
-
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/next6"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="다음"
-            android:layout_gravity="bottom"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/pink" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/question5_answer1"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="음...A씨랑 소개팅 한다고 하니까 저도 모르게 시크한 걸 집었나? 어떤 색 좋아하세요?"
+                    android:textSize="11sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question5_answer2"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="검정색이라서 입은 건 맞긴 한데, 사실 옷 살 때는 회색 계열을 좋아하긴 하거든요. 근데 옷이 예뻐서 사는 경우도 있는데 그럴 때는......"
+                    android:textSize="10sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question5_answer3"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="생각해보니 제가 검정색을 좋아하는 거 같긴 하네요, 관심 가져주셔서 감사합니다. A씨는 어떤 색 깔 좋아하세요?"
+                    android:textSize="11sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+                <RadioButton
+                    android:id="@+id/question5_answer4"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="네, 검정색을 좋아해요. A씨도 검정색을 좋아하시나요?"
+                    android:textSize="12sp"
+                    android:button="@null"
+                    android:background="@drawable/radio_button_border" />
+
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/next6"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/match_button_style"
+                android:text="다음"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -18,9 +18,11 @@ public class Simulation1 extends AppCompatActivity {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Simulation1.this, Simulation2.class));
+                Intent intent = new Intent(getApplicationContext(), Simulation2.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
-
         });
     }
 }
