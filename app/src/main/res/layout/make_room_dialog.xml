@@ -10,12 +10,11 @@
     android:gravity="center">
 
     <TextView
-        android:drawableStart="@drawable/baseline_room_black_24_xml"
         android:drawablePadding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:text="카테고리 찾기"
+        android:text="생성할 방 종류를 선택해주세요."
         android:gravity="center" />
 
     <LinearLayout
@@ -24,19 +23,19 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/category1"
+            android:id="@+id/make_category1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="과팅\n찾기"
+            android:text="과팅"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:backgroundTint="#E6E6FA" />
 
         <Button
-            android:id="@+id/category2"
+            android:id="@+id/make_category2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="미팅\n찾기"
+            android:text="미팅"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:backgroundTint="#E6E6FA"/>
@@ -49,24 +48,22 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/category3"
+            android:id="@+id/make_category3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="밥팅\n찾기"
+            android:text="밥팅"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:backgroundTint="#E6E6FA"/>
 
         <Button
-            android:id="@+id/category4"
+            android:id="@+id/make_category4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="기타\n찾기"
+            android:text="기타"
             android:layout_margin="10dp"
             android:textColor="@color/black"
             android:backgroundTint="#E6E6FA"/>
-
     </LinearLayout>
-
 
 </LinearLayout>

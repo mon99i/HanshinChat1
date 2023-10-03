@@ -1,36 +1,28 @@
 package com.example.hanshinchat1;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 public class RoomActivity extends MainActivity {
 
     Dialog findRoomDialog;
     Dialog findRoomDialog2;
 
-    RecyclerView recycler_matchRooms;
+    Dialog makeRoomDialog;
 
+    RecyclerView recycler_matchRooms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.room);
 
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();
@@ -43,6 +35,9 @@ public class RoomActivity extends MainActivity {
         Button findRoom2 = findViewById(R.id.find_room2);
         recycler_matchRooms=findViewById(R.id.recycler_matchRooms);
 
+        makeRoomDialog = new Dialog(RoomActivity.this);
+        makeRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
+        makeRoomDialog.setContentView(R.layout.make_room_dialog);
 
         findRoomDialog = new Dialog(RoomActivity.this);
         findRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
@@ -55,9 +50,53 @@ public class RoomActivity extends MainActivity {
         makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeRoomActivity.class);
-                startActivity(intent);
-                finish();
+                makeRoomDialog.show();
+
+                Button makeCategory1Btn = makeRoomDialog.findViewById(R.id.make_category1);
+                Button makeCategory2Btn = makeRoomDialog.findViewById(R.id.make_category2);
+                Button makeCategory3Btn = makeRoomDialog.findViewById(R.id.make_category3);
+                Button makeCategory4Btn = makeRoomDialog.findViewById(R.id.make_category4);
+
+                makeCategory1Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        makeRoomDialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                makeCategory2Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        makeRoomDialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                makeCategory3Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        makeRoomDialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                makeCategory4Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        makeRoomDialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
         });
 

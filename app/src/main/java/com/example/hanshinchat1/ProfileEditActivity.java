@@ -37,8 +37,6 @@ public class ProfileEditActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
-        checkMatchRequest();
-        checkProfileExist();
 
         editAge = findViewById(R.id.edit_age);
         editStudentId = findViewById(R.id.edit_student_id);
@@ -94,7 +92,7 @@ public class ProfileEditActivity extends MainActivity {
             }
         });
 
-      /*  editBtn.setOnClickListener(new View.OnClickListener() {
+      editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer newAge = Integer.valueOf(editAge.getText().toString());
@@ -110,6 +108,7 @@ public class ProfileEditActivity extends MainActivity {
                 String newMbti = editMbti.getText().toString();
 
                 UserInfo updatedUserInfo = new UserInfo(
+                        userInfo.getUid(),
                         userInfo.getName(),
                         userInfo.getGender(),
                         newAge,
@@ -136,7 +135,7 @@ public class ProfileEditActivity extends MainActivity {
                 startActivity(intent);
                 finish();
             }
-        });*/
+        });
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override

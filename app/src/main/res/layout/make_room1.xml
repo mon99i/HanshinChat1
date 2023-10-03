@@ -6,22 +6,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MakeRoomActivity"
-    android:gravity="center">
+    tools:context=".MakeRoom1Activity">
+
+    <LinearLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#F8F8FF">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#252525"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="MAKE ROOM"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_height="540dp"
         android:orientation="vertical"
         android:layout_margin="10dp"
-        android:gravity="center">
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp">
 
         <TextView
             android:id="@+id/title_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="방 제목:"
-            android:layout_marginTop="16dp"
+            android:text="방 제목"
             android:textSize="18sp"
             android:layout_below="@id/participants_spinner"/>
 
@@ -30,118 +53,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="방 제목을 입력하세요."
+            android:layout_marginLeft="10dp"
             android:layout_below="@id/title_label"/>
-        <TextView
-            android:id="@+id/category_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카테고리 선택:"
-            android:layout_marginBottom="8dp"
-            android:textSize="18sp"/>
+        </LinearLayout>
 
-        <RadioGroup
-            android:id="@+id/category_radio_group"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/category_label">
-
-            <RadioButton
-                android:id="@+id/groupMeeting_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="과팅"/>
-
-            <RadioButton
-                android:id="@+id/meeting_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="미팅"/>
-
-            <RadioButton
-                android:id="@+id/lunch_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="밥팅"/>
-
-            <RadioButton
-                android:id="@+id/other_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="기타"/>
-        </RadioGroup>
+            android:layout_marginTop="50dp">
 
         <TextView
-            android:id="@+id/gender_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="성별:"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            android:layout_below="@id/category_radio_group"/>
-
-        <RadioGroup
-            android:id="@+id/gender_radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/gender_label">
-
-            <RadioButton
-                android:id="@+id/male_radio_button"
+                android:id="@+id/participants_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="남성"/>
+                android:text="인원수"
+                android:textSize="18sp" />
 
-            <RadioButton
-                android:id="@+id/female_radio_button"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/participants_spinner"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="여성"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/participants_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인원수:"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            android:layout_below="@id/gender_radio_group"/>
-
-        <Spinner
-            android:id="@+id/participants_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/participants_label"
-            android:layout_marginTop="8dp"/>
-
+                android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/department_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="학과:"
-            android:layout_marginTop="16dp"
+            android:text="학과"
             android:textSize="18sp"
-            android:layout_below="@id/edt_roomTitle"/>
+            android:layout_marginLeft="10dp"/>
 
-
-        <Spinner
+            <Spinner
             android:id="@+id/department_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/participants_label"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginLeft="10dp"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp">
         <Button
             android:id="@+id/btn_makeRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
             android:text="방 생성"
-            android:layout_marginTop="16dp"
             android:onClick="onCreateButtonClick"
-            android:layout_below="@id/department_spinner"/>
+            android:textColor="@color/black"
+            android:backgroundTint="#E6E6FA" />
+        <CheckBox
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="프로필 보여주기"
+            android:checked="true"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

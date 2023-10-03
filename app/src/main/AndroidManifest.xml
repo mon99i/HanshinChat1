@@ -132,7 +132,7 @@
             android:name=".ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".MakeRoomActivity"
+            android:name=".MakeRoom1Activity"
             android:exported="false" />
         <activity
             android:name=".SetProfile2NameActivity"
