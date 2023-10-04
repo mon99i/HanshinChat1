@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Simulation3 extends AppCompatActivity {
     public int question2Score = 0;
-    public int totalScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +24,10 @@ public class Simulation3 extends AppCompatActivity {
 
         Button next3 = findViewById(R.id.next3);
 
-        Intent intent = getIntent();
-        totalScore = intent.getIntExtra("totalScore", totalScore);
-
         question2_Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question2Score = 4;
-                totalScore += question2Score;
             }
         });
 
@@ -40,7 +35,6 @@ public class Simulation3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 question2Score = 10;
-                totalScore += question2Score;
             }
         });
 
@@ -48,7 +42,6 @@ public class Simulation3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 question2Score = 7;
-                totalScore += question2Score;
             }
         });
 
@@ -56,13 +49,14 @@ public class Simulation3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 question2Score = 2;
-                totalScore += question2Score;
             }
         });
 
         next3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimulationScoreManager.addToScore(question2Score);
+
                 Intent intent = new Intent(getApplicationContext(), Simulation4.class);
                 startActivity(intent);
                 finish();

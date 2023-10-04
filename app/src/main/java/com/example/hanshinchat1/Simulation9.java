@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Simulation9 extends AppCompatActivity {
     public int question8Score = 0;
-    public int totalScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,49 +21,42 @@ public class Simulation9 extends AppCompatActivity {
         RadioButton question8_Answer3 = findViewById(R.id.question8_answer3);
         RadioButton question8_Answer4 = findViewById(R.id.question8_answer4);
         Button next9 = (Button) findViewById(R.id.next9);
-        Intent intent = getIntent();
-        totalScore = intent.getIntExtra("totalScore", totalScore);
+
         question8_Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question8Score = 4;
-                totalScore += question8Score;
             }
         });
         question8_Answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question8Score = 7;
-                totalScore += question8Score;
             }
         });
         question8_Answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question8Score = 10;
-                totalScore += question8Score;
             }
         });
         question8_Answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question8Score = 2;
-                totalScore += question8Score;
             }
         });
 
         next9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimulationScoreManager.addToScore(question8Score);
+
                 Intent intent = new Intent(getApplicationContext(), Simulation10.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
-
         });
     }
 }

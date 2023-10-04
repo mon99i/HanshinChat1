@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Simulation4 extends AppCompatActivity {
     public int question3Score = 0;
-    public int totalScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,46 +20,42 @@ public class Simulation4 extends AppCompatActivity {
         RadioButton question3_Answer3 = findViewById(R.id.question3_answer3);
         RadioButton question3_Answer4 = findViewById(R.id.question3_answer4);
         Button next4 = (Button) findViewById(R.id.next4);
-        Intent intent = getIntent();
-        totalScore = intent.getIntExtra("totalScore", totalScore);
+
         question3_Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question3Score = 10;
-                totalScore += question3Score;
             }
         });
         question3_Answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question3Score = 4;
-                totalScore += question3Score;
             }
         });
         question3_Answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question3Score = 2;
-                totalScore += question3Score;
             }
         });
         question3_Answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question3Score = 7;
-                totalScore += question3Score;
             }
         });
 
         next4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimulationScoreManager.addToScore(question3Score);
+
                 Intent intent = new Intent(getApplicationContext(), Simulation5.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
-
         });
     }
 }

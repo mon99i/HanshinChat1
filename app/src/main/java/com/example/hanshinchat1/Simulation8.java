@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Simulation8 extends AppCompatActivity {
     public int question7Score = 0;
-    public int totalScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,49 +22,41 @@ public class Simulation8 extends AppCompatActivity {
         RadioButton question7_Answer4 = findViewById(R.id.question7_answer4);
         Button next8 = (Button) findViewById(R.id.next8);
 
-        Intent intent = getIntent();
-        totalScore = intent.getIntExtra("totalScore", totalScore);
         question7_Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question7Score = 4;
-                totalScore += question7Score;
             }
         });
         question7_Answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question7Score = 10;
-                totalScore += question7Score;
             }
         });
         question7_Answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 question7Score = 2;
-                totalScore += question7Score;
             }
         });
         question7_Answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 question7Score = 7;
-                totalScore += question7Score;
             }
         });
 
         next8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimulationScoreManager.addToScore(question7Score);
+
                 Intent intent = new Intent(getApplicationContext(), Simulation9.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
-
         });
     }
 }

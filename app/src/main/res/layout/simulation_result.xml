@@ -9,18 +9,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="소개팅 결과"
         android:textColor="@android:color/black"
         android:textSize="40sp"
         android:textAlignment="center" />
 
-    <EditText
+    <TextView
         android:id="@+id/simul_result"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:textSize="40sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:layout_marginTop="50dp"
@@ -28,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:gravity="center"/>
 
     <androidx.appcompat.widget.AppCompatButton
