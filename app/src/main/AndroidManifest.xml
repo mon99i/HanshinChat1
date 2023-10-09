@@ -93,7 +93,7 @@
             android:name=".RoomActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".ChatRoom"
             android:exported="false" />
         <activity
             android:name=".ChatRoomActivity"
@@ -132,7 +132,16 @@
             android:name=".ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".MakeRoom1Activity"
+            android:name=".MakeRoomActivity1"
+            android:exported="false" />
+        <activity
+            android:name=".MakeRoomActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".MakeRoomActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".MakeRoomActivity4"
             android:exported="false" />
         <activity
             android:name=".SetProfile2NameActivity"

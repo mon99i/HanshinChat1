@@ -62,7 +62,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
 
                         makeRoomDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), MakeRoomActivity1.class);
                         startActivity(intent);
                         finish();
                     }
@@ -72,7 +72,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
 
                         makeRoomDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), MakeRoomActivity2.class);
                         startActivity(intent);
                         finish();
                     }
@@ -82,7 +82,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
 
                         makeRoomDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), MakeRoomActivity3.class);
                         startActivity(intent);
                         finish();
                     }
@@ -92,7 +92,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
 
                         makeRoomDialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MakeRoom1Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), MakeRoomActivity4.class);
                         startActivity(intent);
                         finish();
                     }

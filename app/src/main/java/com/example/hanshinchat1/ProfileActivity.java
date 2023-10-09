@@ -42,8 +42,6 @@ public class ProfileActivity extends MainActivity{
 
         Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
 
-        Button simulationBtn = (Button) findViewById(R.id.simulation);
-
         settingBtn = (Button) findViewById(R.id.setting);
 
         ideal_edit_btn=findViewById(R.id.ideal_edit_btn);
@@ -78,15 +76,6 @@ public class ProfileActivity extends MainActivity{
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        simulationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
-                startActivity(intent);
-                finish();
             }
         });
 

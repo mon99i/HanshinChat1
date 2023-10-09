@@ -8,4 +8,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:dropDownHeight">30dp</item>
+        <item name="android:dropDownVerticalOffset">30dp</item>
+    </style>
+
 </resources>

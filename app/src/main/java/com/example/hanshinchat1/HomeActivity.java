@@ -7,10 +7,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 //import com.example.hanshinchat1.Match.MatchHome;
 import com.example.hanshinchat1.utils.Utils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
@@ -31,6 +37,11 @@ public class HomeActivity extends MainActivity {
     private Button recentContectMatchingBtn;
     private Button topUserMatchingBtn;
 
+    private int previousPhraseIndex = -1;
+    private String[] phrases;
+    private List<String> phrasesList;
+    private Button speakerBtn;
+    private ImageButton simulationBtn;
     Context context=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +59,46 @@ public class HomeActivity extends MainActivity {
         initializeView();
         initializeListener();
 
+        simulationBtn = (ImageButton) findViewById(R.id.simulation);
+
+        phrases = getResources().getStringArray(R.array.random_speaker);
+        phrasesList = Arrays.asList(phrases);
+
+        speakerBtn = findViewById(R.id.home_speaker);
+        speakerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayRandomPhrase();
+            }
+        });
+
+        simulationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
+    private void displayRandomPhrase() {
+        int max = phrasesList.size();
+        if (max == 0) {
+            speakerBtn.setText("앱 이용 관련 팁");
+            return;
+        }
+        Random random = new Random();
+        int randomIndex;
+        do {
+            randomIndex = random.nextInt(max);
+        } while (randomIndex == previousPhraseIndex);
+
+        previousPhraseIndex = randomIndex;
+        String randomPhrase = phrasesList.get(randomIndex);
+        speakerBtn.setText(randomPhrase);
+    }
+
 
     private void initializeView(){
         idealMatchingBtn=findViewById(R.id.idealMatchingBtn);

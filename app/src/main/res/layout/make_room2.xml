@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MakeRoomActivity1">
+    tools:context=".MakeRoomActivity2">
 
     <LinearLayout
         android:id="@+id/top_view"
@@ -40,21 +40,21 @@
             android:orientation="horizontal"
             android:layout_marginTop="100dp">
 
-        <TextView
-            android:id="@+id/title_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="방 제목"
-            android:textSize="18sp"
-            android:layout_below="@id/participants_spinner"/>
+            <TextView
+                android:id="@+id/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="방 제목"
+                android:textSize="18sp"
+                android:layout_below="@id/participants_spinner"/>
 
-        <EditText
-            android:id="@+id/edt_roomTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="방 제목을 입력하세요."
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/title_label"/>
+            <EditText
+                android:id="@+id/edt_roomTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="방 제목을 입력하세요."
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/title_label"/>
         </LinearLayout>
 
         <LinearLayout
@@ -62,20 +62,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="50dp">
-
-        <TextView
-                android:id="@+id/participants_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="인원수"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/participants_spinner"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                style="@style/SpinnerStyle"/>
 
             <TextView
                 android:id="@+id/department_label"
@@ -87,10 +73,11 @@
 
             <Spinner
                 android:id="@+id/department_spinner"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 style="@style/SpinnerStyle"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -98,21 +85,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="100dp">
-        <Button
-            android:id="@+id/btn_makeRoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
-            android:text="방 생성"
-            android:onClick="onCreateButtonClick"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA" />
-        <CheckBox
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="프로필 보여주기"
-            android:checked="true"/>
+            <Button
+                android:id="@+id/btn_makeRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="130dp"
+                android:text="방 생성"
+                android:onClick="onCreateButtonClick"
+                android:textColor="@color/black"
+                android:backgroundTint="#E6E6FA" />
+
+            <CheckBox
+                android:id="@+id/show_profile"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="프로필 보여주기"
+                android:checked="true"/>
         </LinearLayout>
     </LinearLayout>
 

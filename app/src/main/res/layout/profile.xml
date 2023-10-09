@@ -139,22 +139,18 @@
             </LinearLayout>
         </LinearLayout>
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/simulation"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/match_button_style"
-            android:text="소개팅 시뮬레이션" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#eaeaea"
+            android:layout_marginTop="10dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profile_edit"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/match_button_style"
             android:text="프로필 편집" />
