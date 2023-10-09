@@ -4,59 +4,96 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Simulation6 extends AppCompatActivity {
-    public int question5Score = 0;
-
+public class Simulation6 extends MainActivity {
+    public int questionScore = 0;
+    private Button nextBtn;
+    private ImageButton backBtn, homeBtn;
+    private RadioGroup questionRadioGroup;
+    private RadioButton answer1, answer2, answer3, answer4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simulation06);
-        RadioButton question5_Answer1 = findViewById(R.id.question5_answer1);
-        RadioButton question5_Answer2 = findViewById(R.id.question5_answer2);
-        RadioButton question5_Answer3 = findViewById(R.id.question5_answer3);
-        RadioButton question5_Answer4 = findViewById(R.id.question5_answer4);
-        Button next6 = (Button) findViewById(R.id.next6);
 
-        question5_Answer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                question5Score = 4;
-            }
-        });
-        question5_Answer2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                question5Score = 2;
-            }
-        });
-        question5_Answer3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                question5Score = 10;
-            }
-        });
-        question5_Answer4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        questionRadioGroup = (RadioGroup) findViewById(R.id.question_radio_group);
+        answer1 = (RadioButton) findViewById(R.id.answer1_btn);
+        answer2 = (RadioButton) findViewById(R.id.answer2_btn);
+        answer3 = (RadioButton) findViewById(R.id.answer3_btn);
+        answer4 = (RadioButton) findViewById(R.id.answer4_btn);
 
-                question5Score = 7;
+        nextBtn = (Button) findViewById(R.id.next_btn);
+        nextBtn.setEnabled(false);
+        backBtn = (ImageButton) findViewById(R.id.back_btn);
+        homeBtn = (ImageButton) findViewById(R.id.home_btn);
+        answer1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionScore = 4;
+                SimulationScoreManager.setQuestionScore(Simulation6.class, questionScore);
+            }
+        });
+        answer2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                questionScore = 2;
+                SimulationScoreManager.setQuestionScore(Simulation6.class, questionScore);
+            }
+        });
+        answer3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                questionScore = 10;
+                SimulationScoreManager.setQuestionScore(Simulation6.class, questionScore);
+            }
+        });
+        answer4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                questionScore = 7;
+                SimulationScoreManager.setQuestionScore(Simulation6.class, questionScore);
             }
         });
 
-        next6.setOnClickListener(new View.OnClickListener() {
+        questionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                nextBtn.setEnabled(checkedId != -1);
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimulationScoreManager.addToScore(question5Score);
+                SimulationScoreManager.addToScore(questionScore);
 
                 Intent intent = new Intent(getApplicationContext(), Simulation7.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int previousQuestionScore = SimulationScoreManager.getQuestionScore(Simulation5.class);
+                SimulationScoreManager.subtractFromScore(previousQuestionScore);
+
+                Intent intent = new Intent(getApplicationContext(), Simulation5.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimulationScoreManager.resetScore();
+
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

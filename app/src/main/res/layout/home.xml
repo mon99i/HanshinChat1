@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:drawableStart="@drawable/speaker"
-                android:text="앱 이용 팁"
+                android:text="맞춤 매칭을 이용해보세요!"
                 android:textAlignment="viewStart"
                 android:textColor="#434959"
                 android:textStyle="bold"
@@ -135,8 +135,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
                 android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
                 android:drawableStart="@drawable/baseline_recommend_24"
                 android:drawablePadding="10dp"
                 android:padding="10dp"
@@ -199,7 +199,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="20dp"
                         android:drawableStart="@drawable/star"
                         android:drawablePadding="10dp"

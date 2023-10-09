@@ -2,9 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/simulation_background">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/baseline_arrow_back" />
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="310dp"
+            android:background="@drawable/baseline_home_black_24_xml" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/simulation_background">
 
     <ProgressBar
         android:id="@+id/progress"
@@ -45,6 +77,7 @@
             android:gravity="center">
 
             <RadioGroup
+                android:id="@+id/question_radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -52,7 +85,7 @@
                 android:gravity="center">
 
                 <RadioButton
-                    android:id="@+id/question6_answer1"
+                    android:id="@+id/answer1_btn"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:layout_margin="5dp"
@@ -63,7 +96,7 @@
                     android:background="@drawable/radio_button_border" />
 
                 <RadioButton
-                    android:id="@+id/question6_answer2"
+                    android:id="@+id/answer2_btn"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:layout_margin="5dp"
@@ -74,10 +107,10 @@
                     android:background="@drawable/radio_button_border" />
 
                 <RadioButton
-                    android:id="@+id/question6_answer3"
+                    android:id="@+id/answer3_btn"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_margin="4dp"
                     android:gravity="center"
                     android:text="네, 술 좋아하는 편이에요. A씨는요?\n괜찮으시면 술 한 잔 하면서 이야기 더 나눌까요?"
                     android:textSize="12sp"
@@ -85,10 +118,10 @@
                     android:background="@drawable/radio_button_border" />
 
                 <RadioButton
-                    android:id="@+id/question6_answer4"
+                    android:id="@+id/answer4_btn"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
-                    android:layout_margin="5dp"
+                    android:layout_margin="4dp"
                     android:gravity="center"
                     android:text="술은 별로지만, 사람이 중요한 편이에요.\n괜찮으시면 카페나 술집으로 이동할까요?"
                     android:textSize="12sp"
@@ -97,13 +130,13 @@
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next7"
+                android:id="@+id/next_btn"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/match_button_style"
                 android:text="다음"/>
-
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
