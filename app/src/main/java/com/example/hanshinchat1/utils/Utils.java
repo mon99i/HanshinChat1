@@ -3,13 +3,11 @@ package com.example.hanshinchat1.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
-import com.example.hanshinchat1.Match.MainActivity4;
 import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.RecommendIdealActivity;
 import com.example.hanshinchat1.RecommendMatchActivity;
@@ -27,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class Utils {
@@ -495,7 +492,7 @@ public class Utils {
                     String myMBTI = currentUserInfo.getMbti();
                     String myGender = currentUserInfo.getGender();
 
-                    // 현재 사용자의 MBTI와 성별을 기반으로 추천 받는 로직 수행
+                    // 현재 사용자의 MBTI와 성별을 기반으로 추천
                     getRecommend(context, myMBTI, myGender);
                 }
             }
@@ -521,10 +518,9 @@ public class Utils {
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
-//                List<UserInfo> matchingUsers = new ArrayList<>();
+
                 for (DataSnapshot userSnapshot : datasnapshot.getChildren()) {
-//                    UserInfo userMBTI = userSnapshot.child("mbti").getValue(UserInfo.class);
-//                    UserInfo userGender = userSnapshot.child("gender").getValue(UserInfo.class);
+
                     UserInfo userInfo = userSnapshot.getValue(UserInfo.class);
                     if (userInfo != null) {
                         String userMBTI = userInfo.getMbti();
@@ -623,23 +619,6 @@ public class Utils {
                 intent.putExtra("matchingUsers",matchingUsers);
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
-
-//                if (!matchingUsers.isEmpty()) {
-////                    Random random = new Random();
-////                    int randomIndex = random.nextInt(matchingUsers.size());
-//                    UserInfo randomUser = matchingUsers.get(0);
-//
-//                    UserInfo dataModel = datasnapshot.child(randomUser.getUid()).getValue(UserInfo.class);
-//
-//                    age.setText(dataModel != null ? String.valueOf(dataModel.getAge()) : "");
-//                    department.setText(dataModel != null ? dataModel.getDepartment() : "");
-////                    mbti.setText(dataModel != null ? dataModel.getMbti() : "");
-//
-//                    Toast.makeText(MainActivity3.this, "사용자 정보를 가져왔다", Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    Toast.makeText(MainActivity3.this, "매칭된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
-//                }
 
 
             }

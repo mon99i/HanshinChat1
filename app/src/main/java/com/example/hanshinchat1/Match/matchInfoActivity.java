@@ -26,7 +26,7 @@ public class matchInfoActivity extends AppCompatActivity {
 
         mPager = findViewById(R.id.viewpager);
 
-        pagerAdapter = new MyAdapter3(this, num_page);
+        pagerAdapter = new matchFragmentAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
 
         mIndicator = findViewById(R.id.indicator);

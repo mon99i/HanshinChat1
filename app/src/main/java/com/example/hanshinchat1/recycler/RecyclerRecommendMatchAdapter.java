@@ -1,6 +1,7 @@
 package com.example.hanshinchat1.recycler;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RecyclerChatRoomsAdapter;
 import com.example.hanshinchat1.UserInfo;
@@ -43,10 +45,13 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         holder.recommendMatchImage.setImageURI(imageUri);
         holder.recommendMatchName.setText(recommendUsers.get(position).getName());
 
+        final int currentPosition = position;
+
         holder.recommendMatchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, MbtiMatchActivity2.class);
+                context.startActivity(intent);
             }
         });
 
