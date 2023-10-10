@@ -157,7 +157,6 @@ public class ChattingActivity extends MainActivity {
 
     private void setupRecycler() {  //리사이클러뷰에 어댑터 설정
         recycler_chatting.setLayoutManager(new LinearLayoutManager(this));
-        //recycler_chatting.addItemDecoration(new VerticalDecoration(30));
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
     }

@@ -5,9 +5,22 @@
     android:id="@+id/myChatBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
->
+    android:padding="10dp">
 
+    <TextView
+        android:id="@+id/my_changed_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#bdbdbd"
+        android:background="@drawable/background_ideal_list_layout2"
+        android:padding="5dp"
+        android:text="1999년 1월 1일"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/my_txt_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/my_txt_message"
@@ -21,7 +34,7 @@
         android:maxEms="15"
         android:padding="10dp"
         android:text="안녕하세요."
-        android:textColor="@color/white"
+        android:textColor="#5F5F5F"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,15 +55,15 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/opponent_txt_isShown"
+        android:id="@+id/txt_isShown"
         android:layout_width="4dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
-        android:textSize="11dp"
         android:text="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#FFBE3C"
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/my_txt_message"
         app:layout_constraintTop_toTopOf="@+id/my_txt_message"

@@ -7,6 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.hanshinchat1.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -25,7 +26,7 @@ public class matchInfoActivity extends AppCompatActivity {
 
         mPager = findViewById(R.id.viewpager);
 
-        pagerAdapter = new matchFragmentAdapter(this, num_page);
+        pagerAdapter = new MyAdapter3(this, num_page);
         mPager.setAdapter(pagerAdapter);
 
         mIndicator = findViewById(R.id.indicator);
