@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
 import com.example.hanshinchat1.Match.MbtiMatchActivity2;
-import com.example.hanshinchat1.RecommendIdealActivity;
+
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
@@ -685,8 +685,9 @@ public class Utils {
                     }
                 }
 
-                Intent intent=new Intent(context, MbtiMatchActivity2.class );
-                intent.putExtra("matchingUsers",matchingUsers);
+                Intent intent=new Intent(context, RecommendMatchActivity.class );
+                intent.putExtra("recommendType", "MBTI 추천");
+                intent.putExtra("recommendUsers",matchingUsers);
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
 

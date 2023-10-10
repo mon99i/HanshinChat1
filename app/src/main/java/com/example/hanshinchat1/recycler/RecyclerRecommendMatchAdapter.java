@@ -35,6 +35,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
     //일반 추천
     private ArrayList<UserInfo> recommendUsers;
 
+    private ArrayList<UserInfo> mbtiRecommendUsers;
     //이상형추천
     private ArrayList<UserInfo> firstIdealUsers;
     private ArrayList<UserInfo> secondIdealUsers;
@@ -45,6 +46,12 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         this.context = context;
         this.recommendUsers = recommendUsers;
         this.recommendType = recommendType;
+    }
+
+    public RecyclerRecommendMatchAdapter(Context context, ArrayList<UserInfo> recommendUsers) {
+        this.context = context;
+        this.recommendUsers = recommendUsers;
+
     }
 
     public RecyclerRecommendMatchAdapter(Context context, String recommendType,ArrayList<UserInfo> firstIdealUsers,
@@ -125,6 +132,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
                 }
                 break;
             case "MBTI 추천":
+                holder.newImage.setVisibility(View.VISIBLE);
                 break;
             case "내 주변 친구":
                 holder.onLocationImage.setVisibility(View.VISIBLE);
