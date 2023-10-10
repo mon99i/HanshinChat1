@@ -9,9 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
-import com.example.hanshinchat1.Match.MainActivity4;
+
 import com.example.hanshinchat1.Match.MbtiMatchActivity2;
-import com.example.hanshinchat1.RecommendIdealActivity;
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
