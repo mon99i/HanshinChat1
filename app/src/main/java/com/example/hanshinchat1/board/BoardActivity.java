@@ -51,6 +51,14 @@ public class BoardActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.board);
 
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         binding.boardSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +139,7 @@ public class BoardActivity extends MainActivity {
         View mDialogView = LayoutInflater.from(this).inflate(R.layout.board_dialog, null);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this)
                 .setView(mDialogView)
-                .setTitle("게시글 수정/삭제");
+                .setTitle("게시글 메뉴");
 
         AlertDialog alertDialog = mBuilder.show();
         alertDialog.findViewById(R.id.editButton).setOnClickListener(new View.OnClickListener() {
@@ -192,6 +200,7 @@ public class BoardActivity extends MainActivity {
                     binding.titleArea.setText(dataModel != null ? dataModel.getTitle() : "");
                     binding.contentArea.setText(dataModel != null ? dataModel.getContent() : "");
                     binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
+                    binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
 
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();

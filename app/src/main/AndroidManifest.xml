@@ -22,12 +22,6 @@
         android:theme="@style/Theme.HanshinChat1"
         tools:targetApi="31">
         <activity
-            android:name=".RecommendIdealActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RecommendMatchActivity"
-            android:exported="false" />
-        <activity
             android:name=".ShowMatchInfoActivity"
             android:exported="false" />
         <!--
@@ -50,87 +44,65 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Simulation1"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation2"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation3"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation4"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation5"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation6"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation7"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation8"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation9"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation10"
-            android:exported="false" />
-        <activity
-            android:name=".Simulation11"
-            android:exported="false" />
-        <activity
-            android:name=".SimulationResult"
-            android:exported="false" />
+
+        <activity android:name=".Simulation1" android:exported="false" />
+        <activity android:name=".Simulation2" android:exported="false" />
+        <activity android:name=".Simulation3" android:exported="false" />
+        <activity android:name=".Simulation4" android:exported="false" />
+        <activity android:name=".Simulation5" android:exported="false" />
+        <activity android:name=".Simulation6" android:exported="false" />
+        <activity android:name=".Simulation7" android:exported="false" />
+        <activity android:name=".Simulation8" android:exported="false" />
+        <activity android:name=".Simulation9" android:exported="false" />
+        <activity android:name=".Simulation10" android:exported="false" />
+        <activity android:name=".Simulation11" android:exported="false" />
+        <activity android:name=".SimulationResult" android:exported="false" />
+
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".RoomActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ChatRoom"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ChatRoomActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ChattingActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".AddChatRoomActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".board.BoardActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".board.BoardWriteActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".board.ListActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".board.BoardEditActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile1PhotoActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SettingActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".ProfileEditActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".MakeRoomActivity1"
             android:exported="false" />
@@ -142,82 +114,95 @@
             android:exported="false" />
         <activity
             android:name=".MakeRoomActivity4"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile2NameActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile3GenderActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile4AgeActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile6StudentIdActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile7DepartmentActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile8HeightActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile11ReligionActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile10AddressActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile12SmokingActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile13DrinkingActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile14InterestActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile15PersonalityActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile17IdealTypeActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile16MbtiActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile18CompleteActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile9FormActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetProfile5GradeActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.MatchHome"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.MBTIMatchActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.MBTIMatchNone"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.LookingForMBTI"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.mbtiFragment"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetIdealActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SetIdeal2Activity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".Match.MainActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.MainActivity4"
+            android:exported="false"></activity>
+        <activity
+            android:name=".RecommendIdealActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".RecommendMatchActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Match.MbtiMatchActivity2"
+            android:exported="false"></activity>
+
     </application>
 
 </manifest>

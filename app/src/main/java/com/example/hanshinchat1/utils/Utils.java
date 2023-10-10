@@ -3,11 +3,14 @@ package com.example.hanshinchat1.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
+import com.example.hanshinchat1.Match.MainActivity4;
+import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.RecommendIdealActivity;
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
@@ -24,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Utils {
@@ -476,6 +480,178 @@ public class Utils {
         return allUserInfoList;
     }*/
 
+    public static void MyUid(Context context) {
+
+        String currentUid;
+
+        currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(currentUid);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot datasnapshot) {
+                UserInfo currentUserInfo = datasnapshot.getValue(UserInfo.class);
+                if (currentUserInfo != null) {
+                    String myMBTI = currentUserInfo.getMbti();
+                    String myGender = currentUserInfo.getGender();
+
+                    // 현재 사용자의 MBTI와 성별을 기반으로 추천 받는 로직 수행
+                    getRecommend(context, myMBTI, myGender);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Fragment_1", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+    }
+
+    public static void getRecommend(Context context, String myMBTI, String myGender) {
+        String my_mbti = myMBTI;
+        String my_gender = myGender;
+
+        String mbtiList[] = {"ENTJ", "ENTP", "INTJ", "INTP", "ESTJ", "ESFJ", "ISTJ", "ISFJ", "ENFJ", "ENFP", "INFJ", "INFP", "ESTP", "ESFP", "ISTP", "ISFP"};
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("users");
+
+        ArrayList<UserInfo> matchingUsers = new ArrayList<>();
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot datasnapshot) {
+//                List<UserInfo> matchingUsers = new ArrayList<>();
+                for (DataSnapshot userSnapshot : datasnapshot.getChildren()) {
+//                    UserInfo userMBTI = userSnapshot.child("mbti").getValue(UserInfo.class);
+//                    UserInfo userGender = userSnapshot.child("gender").getValue(UserInfo.class);
+                    UserInfo userInfo = userSnapshot.getValue(UserInfo.class);
+                    if (userInfo != null) {
+                        String userMBTI = userInfo.getMbti();
+                        String userGender = userInfo.getGender();
+
+                        if (!my_gender.equals(userGender) && userMBTI != null) {
+                            // ENTJ
+                            if ((my_mbti.equals(mbtiList[0])) && (userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ESTP")
+                                    || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ENTP
+                            else if ((my_mbti.equals(mbtiList[1])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("ESTJ")
+                                    || userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISTJ") || userMBTI.equalsIgnoreCase("ISFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // INTJ
+                            else if ((my_mbti.equals(mbtiList[2])) && (userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ESTP")
+                                    || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // INTP
+                            else if ((my_mbti.equals(mbtiList[3])) && (userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ESFJ")
+                                    || userMBTI.equalsIgnoreCase("ISFJ") || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ESTJ
+                            else if ((my_mbti.equals(mbtiList[4])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
+                                    || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ESFJ
+                            else if ((my_mbti.equals(mbtiList[5])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
+                                    || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ISTJ
+                            else if ((my_mbti.equals(mbtiList[6])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("ENFP")
+                                    || userMBTI.equalsIgnoreCase("INFP") || userMBTI.equalsIgnoreCase("ISFP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ISFJ
+                            else if ((my_mbti.equals(mbtiList[7])) && (userMBTI.equalsIgnoreCase("ENTP") || userMBTI.equalsIgnoreCase("INTP")
+                                    || userMBTI.equalsIgnoreCase("ENFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ENFJ
+                            else if ((my_mbti.equals(mbtiList[8])) && (userMBTI.equalsIgnoreCase("INTP") || userMBTI.equalsIgnoreCase("ENFJ")
+                                    || userMBTI.equalsIgnoreCase("ESTP") || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ENFP
+                            else if ((my_mbti.equals(mbtiList[9])) && (userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISTJ")
+                                    || userMBTI.equalsIgnoreCase("ISFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // INFJ
+                            else if ((my_mbti.equals(mbtiList[10])) && (userMBTI.equalsIgnoreCase("INTP") || userMBTI.equalsIgnoreCase("ESTP")
+                                    || userMBTI.equalsIgnoreCase("ESFP") || userMBTI.equalsIgnoreCase("ISTP"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // INFP
+                            else if ((my_mbti.equals(mbtiList[11])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
+                                    || userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ISTJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ESTP
+                            else if ((my_mbti.equals(mbtiList[12])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
+                                    || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ESFP
+                            else if ((my_mbti.equals(mbtiList[13])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
+                                    || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ISTP
+                            else if ((my_mbti.equals(mbtiList[14])) && (userMBTI.equalsIgnoreCase("ESFJ") || userMBTI.equalsIgnoreCase("ISFJ")
+                                    || userMBTI.equalsIgnoreCase("ENFJ") || userMBTI.equalsIgnoreCase("INFJ"))) {
+                                matchingUsers.add(userInfo);
+                            }
+                            // ISFP
+                            else if ((my_mbti.equals(mbtiList[15])) && (userMBTI.equalsIgnoreCase("ENTJ") || userMBTI.equalsIgnoreCase("INTJ")
+                                    || userMBTI.equalsIgnoreCase("ESTJ") || userMBTI.equalsIgnoreCase("ISTJ"))) {
+                                matchingUsers.add(userInfo);
+                            } else {
+//                                Intent intent = new Intent(getContext(), MBTIMatchNone.class);
+//                                startActivity(intent);
+                            }
+                        }
+
+                    }
+                }
+
+                Intent intent=new Intent(context, MbtiMatchActivity2.class );
+                intent.putExtra("matchingUsers",matchingUsers);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+
+//                if (!matchingUsers.isEmpty()) {
+////                    Random random = new Random();
+////                    int randomIndex = random.nextInt(matchingUsers.size());
+//                    UserInfo randomUser = matchingUsers.get(0);
+//
+//                    UserInfo dataModel = datasnapshot.child(randomUser.getUid()).getValue(UserInfo.class);
+//
+//                    age.setText(dataModel != null ? String.valueOf(dataModel.getAge()) : "");
+//                    department.setText(dataModel != null ? dataModel.getDepartment() : "");
+////                    mbti.setText(dataModel != null ? dataModel.getMbti() : "");
+//
+//                    Toast.makeText(MainActivity3.this, "사용자 정보를 가져왔다", Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    Toast.makeText(MainActivity3.this, "매칭된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
+//                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Fragment_1", "loadPost:onCancelled", databaseError.toException());
+            }
+
+        });
+    }
 
     public static Boolean checkProfileOpen() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
