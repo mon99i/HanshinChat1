@@ -37,7 +37,8 @@ public class RecommendMatchActivity extends AppCompatActivity {
 private ImageButton recommendMatchBackBtn;
     private TextView noneRecommendTxt;
     private RecyclerView recyclerView;
-    private ArrayList<UserInfo> recommendUsers;
+    private TextView recommenTypeTxt;
+    private String recommendType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,19 @@ private ImageButton recommendMatchBackBtn;
         setContentView(R.layout.activity_recommend_match);
 
         initializeView();
+        setUpRecycler();
         initializeListener();
 
         //setUpUsers();
     }
+
+/*    private void setUpRecycler() {
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new GridSpaceDecoration(2,100,60));
+        recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendUsers,recommendType));
+    }*/
 
     private void initializeView(){
    /*     recommendMatchImage1=findViewById(R.id.recommendMatchImage1);
@@ -66,26 +76,45 @@ private ImageButton recommendMatchBackBtn;
         recommendMatchBackBtn=findViewById(R.id.recommendMatchBackBtn);
         recyclerView = findViewById(R.id.recycler_recommend_match);
 
+        recommenTypeTxt=findViewById(R.id.recommendTypeTxt);
+        recommendType=getIntent().getStringExtra("recommendType");
+        recommenTypeTxt.setText(recommendType);
 
-        recommendUsers = (ArrayList<UserInfo>) getIntent().getSerializableExtra("recommendUsers");
-        if(recommendUsers==null||recommendUsers.isEmpty()){
-            noneRecommendTxt.setVisibility(View.VISIBLE);
-        }else{
-            GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addItemDecoration(new GridSpaceDecoration(2,100,20));
-            recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendUsers));
-        }
 
     }
 
-    private void setUpUsers(){
+    private void setUpRecycler(){
       /*  if(recommendUsers!=null){
             Uri imageUri = Uri.parse( recommendUsers.get(0).getPhotoUrl());
             Glide.with(this).load(imageUri).into(recommendMatchImage1);
             recommendMatchImage1.
             recommendMatchName1.setText(recommendUsers.get(0).getName());
         }else noneRecommendTxt.setVisibility(View.VISIBLE);*/
+
+        ArrayList<UserInfo> recommendUsers = (ArrayList<UserInfo>) getIntent().getSerializableExtra("recommendUsers");
+
+        ArrayList<UserInfo> firstIdealUsers = (ArrayList<UserInfo>) getIntent().getSerializableExtra("firstIdealUsers");
+        ArrayList<UserInfo>secondIdealUsers = (ArrayList<UserInfo>) getIntent().getSerializableExtra("secondIdealUsers");
+        ArrayList<UserInfo>thirdIdealUsers = (ArrayList<UserInfo>) getIntent().getSerializableExtra("thirdIdealUsers");
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new GridSpaceDecoration(2,100,60));
+        if(recommendType.equals("이상형 추천")){
+            if(firstIdealUsers.isEmpty()&&secondIdealUsers.isEmpty()&&thirdIdealUsers.isEmpty()){
+                noneRecommendTxt.setVisibility(View.VISIBLE);
+            }else{
+                recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendType,firstIdealUsers,secondIdealUsers,thirdIdealUsers));
+            }
+        }else{
+            if(recommendUsers.isEmpty()){
+                noneRecommendTxt.setVisibility(View.VISIBLE);
+            }else{
+                recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendUsers,recommendType));
+            }
+        }
+
+        //Log.d(TAG, "initializeView: "+firstIdealUsers.size()+secondIdealUsers.size()+thirdIdealUsers.size());
 
     }
     private void initializeListener(){

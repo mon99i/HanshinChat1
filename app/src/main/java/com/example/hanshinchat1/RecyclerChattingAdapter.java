@@ -36,7 +36,8 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
     private String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RecyclerView recyclerView;
 
-    private static final String TAG="RecyclerChattingAdapter";
+    private static final String TAG = "RecyclerChattingAdapter";
+
     public RecyclerChattingAdapter(Context context, String chatRoomKey, String opponentUid) {
         this.context = context;
         this.chatRoomKey = chatRoomKey;
@@ -81,9 +82,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemViewType(int position) {
 
-     /*   if(dateChangeCheck(messages.get(position))==true){
 
-        }*/
         return messages.get(position).getSenderUid().equals(myUid) ? 1 : 0;
     }
 
@@ -104,6 +103,8 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+        /*final int currentPosition=holder.getAbsoluteAdapterPosition();*/
+        Log.d(TAG, "onBindViewHolder: "+position);
         if (messages.get(position).getSenderUid().equals(myUid)) {
             ((MyMessageViewHolder) holder).bind(position);
         } else {
@@ -118,46 +119,36 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private class OtherMessageViewHolder extends RecyclerView.ViewHolder {
         private View background;
+        private ImageView profile;
         private TextView txt_Message;
         private TextView txt_date;
-
-        private ImageView profile;
-        private TextView txtIsShown;
+        private TextView txt_isShown;
         private TextView txt_nickname;
+        private TextView opponnet_changed_date;
 
         OtherMessageViewHolder(View itemView) {
             super(itemView);
             background = itemView.findViewById(R.id.opponentChatBackground);
-            profile=itemView.findViewById(R.id.opponent_profile);
+            profile = itemView.findViewById(R.id.opponent_profile);
             txt_Message = itemView.findViewById(R.id.opponent_txt_message);
             txt_date = itemView.findViewById(R.id.opponent_txt_date);
-            txtIsShown = itemView.findViewById(R.id.opponent_txt_isShown);
+            txt_isShown = itemView.findViewById(R.id.txt_isShown);
             txt_nickname = itemView.findViewById(R.id.row_opponent_nickname);
-
+            opponnet_changed_date = itemView.findViewById(R.id.opponent_changed_date);
         }
 
         void bind(int position) {
             Message message = messages.get(position);
-            String sendDate = message.getSended_date();
-            txt_Message.setText(message.getContent());
-            txt_date.setText(getKoreanDateText(sendDate));
 
-            if (message.isConfirmed()) {
-                txtIsShown.setVisibility(View.GONE);
-            } else {
-                txtIsShown.setVisibility(View.VISIBLE);
-            }
-
-            opponentUid=message.getSenderUid();
-           FirebaseDatabase.getInstance().getReference().child("users").child(opponentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            // profile
+            opponentUid = message.getSenderUid();
+            FirebaseDatabase.getInstance().getReference().child("users").child(opponentUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     txt_nickname.setText(snapshot.getValue(UserInfo.class).getName());
-                    String imageUrl=snapshot.getValue(UserInfo.class).getPhotoUrl();
-                    Uri imageUri=Uri.parse(imageUrl);
+                    String imageUrl = snapshot.getValue(UserInfo.class).getPhotoUrl();
+                    Uri imageUri = Uri.parse(imageUrl);
                     Glide.with(context).load(imageUri).into(profile);
-
-
                 }
 
                 @Override
@@ -166,18 +157,69 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
             });
 
+            //보낸 메세지 내용
+            txt_Message.setText(message.getContent());
+
+            //보낸 날짜
+            String sendDate = message.getSended_date();
+            txt_date.setText(getKoreanDateText(sendDate));
+
+            //confirm 적용
+            if (message.isConfirmed()) {
+                txt_isShown.setVisibility(View.GONE);
+            } else {
+                txt_isShown.setVisibility(View.VISIBLE);
+            }
+
+            //날짜 바뀔시 적용
+            opponnet_changed_date.setVisibility(View.GONE);     //기본적으로 안보임
+            setChangedDate(position);
+
             setShown(position);
         }
 
 
+        void setChangedDate(int position) {
+            if (position > 0) {
+                String previousSendedDate = messages.get(position - 1).sended_date;
+                String currentSendedDate = messages.get(position).sended_date;
 
-        String getKoreanDateText(String sendDate){                   //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
+                //디비에서 시간 String 가져와서 localDateTime형식으로 변경
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime previousDateTime = LocalDateTime.parse(previousSendedDate, dateTimeFormatter);
+                LocalDateTime currentDateTime = LocalDateTime.parse(currentSendedDate, dateTimeFormatter);
+
+                if (currentDateTime.getDayOfWeek() != previousDateTime.getDayOfWeek() ||
+                        currentDateTime.getDayOfMonth() != previousDateTime.getDayOfMonth() ||
+                        currentDateTime.getDayOfYear() != previousDateTime.getDayOfYear()) {
+                    //다시 원하는 포맷으로 변경
+                    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일");
+                    String changedDate = currentDateTime.format(newFormatter);
+                    opponnet_changed_date.setVisibility(View.VISIBLE);
+                    opponnet_changed_date.setText(changedDate);
+
+                }
+            } else {
+                String currentSendedDate = messages.get(position).sended_date;
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime currentDateTime = LocalDateTime.parse(currentSendedDate, dateTimeFormatter);
+
+                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일");
+                String changedDate = currentDateTime.format(newFormatter);
+                opponnet_changed_date.setVisibility(View.VISIBLE);
+                opponnet_changed_date.setText(changedDate);
+            }
+
+        }
+
+
+        String getKoreanDateText(String sendDate) {                   //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
             try {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-                LocalDateTime localDateTime = LocalDateTime.parse(sendDate,dateTimeFormatter);
+                LocalDateTime localDateTime = LocalDateTime.parse(sendDate, dateTimeFormatter);
 
                 // 시간 포맷 지정
-                String amPmText = localDateTime.getHour()<12?"오전" : "오후";
+                String amPmText = localDateTime.getHour() < 12 ? "오전" : "오후";
                 DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                         .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
                         .appendPattern(" hh:mm")
@@ -209,20 +251,25 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
         private TextView txt_message;
         private TextView txt_date;
         private TextView txt_isShown;
+        private TextView my_changed_date;
 
         MyMessageViewHolder(View itemView) {
             super(itemView);
             background = itemView.findViewById(R.id.myChatBackground);
             txt_message = itemView.findViewById(R.id.my_txt_message);
             txt_date = itemView.findViewById(R.id.my_txt_date);
-            txt_isShown = itemView.findViewById(R.id.opponent_txt_isShown);
+            txt_isShown = itemView.findViewById(R.id.txt_isShown);
+            my_changed_date = itemView.findViewById(R.id.my_changed_date);
         }
 
         void bind(int position) {
             Message message = messages.get(position);
-            String sendDate = message.getSended_date();
 
+            //보낸 메세지 내용
             txt_message.setText(message.getContent());
+
+            //보낸 날짜
+            String sendDate = message.getSended_date();
             txt_date.setText(getKoreanDateText(sendDate));
 
             if (message.isConfirmed()) {
@@ -230,31 +277,54 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             } else {
                 txt_isShown.setVisibility(View.VISIBLE);
             }
+
+            //날짜 바뀔시 적용
+            my_changed_date.setVisibility(View.GONE);  //기본적으로 안보임
+            setChangedDate(position);
         }
 
-        String getKoreanDateText(String sendDate){                            //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
-            /*LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        void setChangedDate(int position) {
+            if (position > 0) {
+                String previousSendedDate = messages.get(position - 1).sended_date;
+                String currentSendedDate = messages.get(position).sended_date;
 
-            // 시간 포맷 지정
-            String amPmText = currentTime.getHour() < 12 ?
-                    "오전" : "오후";
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                    .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
-                    .appendPattern(" hh:mm")
-                    .toFormatter();
-            //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
-            String koreanDateText= currentTime.format(formatter);
+                //디비에서 시간 String 가져와서 localDateTime형식으로 변경
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime previousDateTime = LocalDateTime.parse(previousSendedDate, dateTimeFormatter);
+                LocalDateTime currentDateTime = LocalDateTime.parse(currentSendedDate, dateTimeFormatter);
 
-            return koreanDateText;
+                if (currentDateTime.getDayOfWeek() != previousDateTime.getDayOfWeek() ||
+                        currentDateTime.getDayOfMonth() != previousDateTime.getDayOfMonth() ||
+                        currentDateTime.getDayOfYear() != previousDateTime.getDayOfYear()) {
+                    //다시 원하는 포맷으로 변경
+                    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일");
+                    String changedDate = currentDateTime.format(newFormatter);
+                    my_changed_date.setVisibility(View.VISIBLE);
+                    my_changed_date.setText(changedDate);
 
-            */
+                }
+            } else {
+                String currentSendedDate = messages.get(position).sended_date;
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime currentDateTime = LocalDateTime.parse(currentSendedDate, dateTimeFormatter);
+
+                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일");
+                String changedDate = currentDateTime.format(newFormatter);
+                my_changed_date.setVisibility(View.VISIBLE);
+                my_changed_date.setText(changedDate);
+
+            }
+
+        }
+
+        String getKoreanDateText(String sendDate) {                            //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
 
             try {
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-                LocalDateTime localDateTime = LocalDateTime.parse(sendDate,dateTimeFormatter);
+                LocalDateTime localDateTime = LocalDateTime.parse(sendDate, dateTimeFormatter);
 
                 // 시간 포맷 지정
-                String amPmText = localDateTime.getHour()<12?"오전" : "오후";
+                String amPmText = localDateTime.getHour() < 12 ? "오전" : "오후";
                 DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                         .appendLiteral(amPmText)  // 오전/오후 텍스트 삽입
                         .appendPattern(" hh:mm")
@@ -270,36 +340,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         }
 
-       /* String getDateText(String sendDate) {
-            String dateText = "";
-            String timeString = "";
-
-            if (sendDate != null && !sendDate.isEmpty()) {
-                timeString = sendDate.substring(8, 12);
-                String hour = timeString.substring(0, 2);
-                String minute = timeString.substring(2, 4);
-
-                String timeFormat = "%02d:%02d";
-
-                if (Integer.parseInt(hour) > 11) {
-                    dateText += "오후 ";
-                    dateText += String.format(timeFormat, Integer.parseInt(hour) - 12, Integer.parseInt(minute));
-                } else {
-                    dateText += "오전 ";
-                    dateText += String.format(timeFormat, Integer.parseInt(hour), Integer.parseInt(minute));
-                }
-            }
-            return dateText;
-        }*/
-
-
-
-
 
     }
- /*   private boolean dateChangeCheck(Message message){
 
-        message
-        return false;
-    }*/
 }

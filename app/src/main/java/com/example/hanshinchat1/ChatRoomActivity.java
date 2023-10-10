@@ -59,7 +59,6 @@ public class ChatRoomActivity extends MainActivity {
 
     private void setupRecycler() {
         recycler_chatrooms.setLayoutManager(new LinearLayoutManager(this));   //아래향으로 리사이클러뷰나오게..?
-        //recycler_chatrooms.addItemDecoration(new VerticalDecoration(20));
         recycler_chatrooms.setAdapter(new RecyclerChatRoomsAdapter(this));    //리사이클러뷰에 만들어놓은 어댑터 설정
     }
 }

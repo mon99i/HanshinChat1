@@ -58,8 +58,22 @@ public class GridSpaceDecoration extends RecyclerView.ItemDecoration{
             outRect.left = itemSpace;
         }
 */
+        if (column == 0) {
+            // 첫 번째 열에 왼쪽 마진 추가
+            outRect.left = itemSpace;
+            //outRect.right = itemSpace / 2;
+        } else if (column == spanCount - 1) {
+            // 마지막 열에 오른쪽 마진 추가
+            //outRect.left = itemSpace/ 2;
+            outRect.right = itemSpace;
+        } /*else {
+            // 중간 열은 양쪽 마진을 반반 추가
+            outRect.left = spacing / 2;
+            outRect.right = spacing / 2;
+        }
+
         outRect.left = itemSpace - column * itemSpace / spanCount; // 왼쪽 여백 설정
-        outRect.right = (column + 1) * itemSpace / spanCount; // 오른쪽 여백 설정
+        outRect.right = (column + 1) * itemSpace / spanCount; // 오른쪽 여백 설정*/
 
     }
 

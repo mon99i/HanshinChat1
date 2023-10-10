@@ -37,8 +37,7 @@ public class ProfileEditActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
-        checkMatchRequest();
-        checkProfileExist();
+
 
         editAge = findViewById(R.id.edit_age);
         editStudentId = findViewById(R.id.edit_student_id);
