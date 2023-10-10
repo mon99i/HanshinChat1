@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.R;
-import com.example.hanshinchat1.RecyclerChatRoomsAdapter;
 import com.example.hanshinchat1.UserInfo;
 
 

@@ -7,7 +7,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.hanshinchat1.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 import me.relex.circleindicator.CircleIndicator3;
 
