@@ -4,66 +4,97 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class Simulation10 extends AppCompatActivity {
-    public int question9Score = 0;
-    public int totalScore;
+public class Simulation10 extends MainActivity {
+    public int questionScore = 0;
+    private Button nextBtn;
+    private ImageButton backBtn, homeBtn;
+    private RadioGroup questionRadioGroup;
+    private RadioButton answer1, answer2, answer3, answer4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simulation10);
-        RadioButton question9_Answer1 = findViewById(R.id.question9_answer1);
-        RadioButton question9_Answer2 = findViewById(R.id.question9_answer2);
-        RadioButton question9_Answer3 = findViewById(R.id.question9_answer3);
-        RadioButton question9_Answer4 = findViewById(R.id.question9_answer4);
-        Button next10 = (Button) findViewById(R.id.next10);
-        Intent intent = getIntent();
-        totalScore = intent.getIntExtra("totalScore", totalScore);
-        question9_Answer1.setOnClickListener(new View.OnClickListener() {
+
+        questionRadioGroup = (RadioGroup) findViewById(R.id.question_radio_group);
+        answer1 = (RadioButton) findViewById(R.id.answer1_btn);
+        answer2 = (RadioButton) findViewById(R.id.answer2_btn);
+        answer3 = (RadioButton) findViewById(R.id.answer3_btn);
+        answer4 = (RadioButton) findViewById(R.id.answer4_btn);
+
+        nextBtn = (Button) findViewById(R.id.next_btn);
+        nextBtn.setEnabled(false);
+        backBtn = (ImageButton) findViewById(R.id.back_btn);
+        homeBtn = (ImageButton) findViewById(R.id.home_btn);
+        answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                question9Score = 7;
-                totalScore += question9Score;
+                questionScore = 7;
+                SimulationScoreManager.setQuestionScore(Simulation10.class, questionScore);
             }
         });
-        question9_Answer2.setOnClickListener(new View.OnClickListener() {
+        answer2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                question9Score = 10;
-                totalScore += question9Score;
+            public void onClick(View v){
+                questionScore = 10;
+                SimulationScoreManager.setQuestionScore(Simulation10.class, questionScore);
             }
         });
-        question9_Answer3.setOnClickListener(new View.OnClickListener() {
+        answer3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                question9Score = 2;
-                totalScore += question9Score;
+            public void onClick(View v){
+                questionScore = 2;
+                SimulationScoreManager.setQuestionScore(Simulation10.class, questionScore);
             }
         });
-        question9_Answer4.setOnClickListener(new View.OnClickListener() {
+        answer4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                question9Score = 4;
-                totalScore += question9Score;
+            public void onClick(View v){
+                questionScore = 4;
+                SimulationScoreManager.setQuestionScore(Simulation10.class, questionScore);
             }
         });
 
-        next10.setOnClickListener(new View.OnClickListener() {
+        questionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                nextBtn.setEnabled(checkedId != -1);
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimulationScoreManager.addToScore(questionScore);
+
                 Intent intent = new Intent(getApplicationContext(), Simulation11.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int previousQuestionScore = SimulationScoreManager.getQuestionScore(Simulation9.class);
+                SimulationScoreManager.subtractFromScore(previousQuestionScore);
 
+                Intent intent = new Intent(getApplicationContext(), Simulation9.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimulationScoreManager.resetScore();
+
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
     }
 }

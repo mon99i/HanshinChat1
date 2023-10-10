@@ -31,6 +31,8 @@ android {
     dataBinding {
         enabled = true
     }
+
+
     tasks.whenTaskAdded { task ->
         if (task.name.contains("mergeDebugResources")) {
             task.dependsOn("processDebugGoogleServices")

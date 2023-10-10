@@ -2,110 +2,144 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/simulation_background">
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="20dp"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressBackgroundTint="#FFFFFF"
-        android:progressTint="#FF69B4"
-        android:max="10"
-        android:progress="7"/>
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:src="@drawable/simulation8"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2차로 술 한 잔 하기로 했다. 어떤 장소가 좋을까?"
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/baseline_arrow_back" />
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:textSize="14dp"
-            android:layout_gravity="center"/>
+            android:layout_marginStart="310dp"
+            android:background="@drawable/baseline_home_black_24_xml" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@drawable/simulation_background">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="20dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="10"
+            android:progress="7"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RadioGroup
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:src="@drawable/simulation8"
+                android:layout_gravity="center"/>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
+                android:text="2차로 술 한 잔 하기로 했다. 어떤 장소가 좋을까?"
                 android:layout_marginTop="10dp"
+                android:textSize="14dp"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:gravity="center">
 
-                <RadioButton
-                    android:id="@+id/question7_answer1"
+                <RadioGroup
+                    android:id="@+id/question_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/answer1_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="통나무 인테리어가 인상적인 호프집"
+                        android:textSize="14sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/answer2_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="연인들로 붐비는 와인바"
+                        android:textSize="14sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/answer3_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="대학교 미팅이 한창인 룸술집"
+                        android:textSize="14sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+
+                    <RadioButton
+                        android:id="@+id/answer4_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="조금은 어두운 칵테일바"
+                        android:textSize="14sp"
+                        android:button="@null"
+                        android:background="@drawable/radio_button_border" />
+                </RadioGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/next_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="통나무 인테리어가 인상적인 호프집"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/question7_answer2"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="연인들로 붐비는 와인바"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/question7_answer3"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="대학교 미팅이 한창인 룸술집"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/question7_answer4"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="조금은 어두운 칵테일바"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-            </RadioGroup>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next8"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/match_button_style"
-                android:text="다음"/>
-
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/match_button_style"
+                    android:layout_marginTop="5dp"
+                    android:text="다음"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

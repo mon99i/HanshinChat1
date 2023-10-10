@@ -9,19 +9,22 @@ public class    ListViewItem {
     private String titleArea;
     private String time;
     private String uid;
+    private String name;
 
     public ListViewItem() {}
 
-    public ListViewItem(String titleArea, String contentArea, String time) {
+    public ListViewItem(String titleArea, String contentArea, String time, String name) {
         this.titleArea = titleArea;
         this.contentArea = contentArea;
         this.time = time;
+        this.name = name;
     }
 
-    public ListViewItem(String titleArea, String contentArea, String time, String uid) {
+    public ListViewItem(String titleArea, String contentArea, String time, String name, String uid) {
         this.titleArea = titleArea;
         this.contentArea = contentArea;
         this.time = time;
+        this.name = name;
         this.uid = uid;
     }
 
@@ -53,5 +56,12 @@ public class    ListViewItem {
     }
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -73,11 +73,15 @@ public class SetIdealActivity extends MainActivity {
 
         setContentView(R.layout.activity_set_ideal);
 
+        clickHome();
+        clickRoom();
+        clickChat();
+        clickBoard();
+        clickProfile();
+
         initializeView();
         setupPriority();
         initializeListener();
-
-
     }
 
 

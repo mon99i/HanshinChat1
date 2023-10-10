@@ -29,7 +29,8 @@
             android:layout_height="100dp"
             android:text="과팅\n찾기"
             android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED" />
+            android:textColor="@color/black"
+            android:backgroundTint="#E6E6FA" />
 
         <Button
             android:id="@+id/category2"
@@ -37,7 +38,8 @@
             android:layout_height="100dp"
             android:text="미팅\n찾기"
             android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED"/>
+            android:textColor="@color/black"
+            android:backgroundTint="#E6E6FA"/>
 
     </LinearLayout>
 
@@ -52,7 +54,8 @@
             android:layout_height="100dp"
             android:text="밥팅\n찾기"
             android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED"/>
+            android:textColor="@color/black"
+            android:backgroundTint="#E6E6FA"/>
 
         <Button
             android:id="@+id/category4"
@@ -60,7 +63,8 @@
             android:layout_height="100dp"
             android:text="기타\n찾기"
             android:layout_margin="10dp"
-            android:backgroundTint="#BFA0ED"/>
+            android:textColor="@color/black"
+            android:backgroundTint="#E6E6FA"/>
 
     </LinearLayout>
 

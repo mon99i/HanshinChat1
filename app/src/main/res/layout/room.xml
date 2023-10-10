@@ -13,32 +13,17 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#F5EEFF">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/baseline_room_black_24_xml"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+        android:background="#F8F8FF">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="방 목록"/>
+            android:textColor="#252525"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="ROOM LIST"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/menu"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:src="@drawable/baseline_menu_black_24"/>
     </LinearLayout>
 
     <LinearLayout
@@ -50,34 +35,32 @@
             android:id="@+id/make_room"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
+            android:backgroundTint="#E6E6FA"
             android:text="방 만들기"
             android:textSize="13dp"
             android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/find_room"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
+            android:backgroundTint="#E6E6FA"
             android:text="방 찾기"
             android:textSize="13dp"
             android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/find_room2"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:backgroundTint="#BFA0ED"
+            android:backgroundTint="#E6E6FA"
             android:text="카테고리 찾기"
             android:textSize="13dp"
             android:layout_margin="3dp"
-            android:textStyle="bold"
-            />
+            android:textColor="@color/black" />
+
 
     </LinearLayout>
 

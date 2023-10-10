@@ -10,6 +10,7 @@ import android.widget.Button;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 //import com.example.hanshinchat1.Match.MatchHome;
+import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.utils.Utils;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
@@ -81,6 +82,7 @@ public class HomeActivity extends MainActivity {
 
             /*    Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
                 startActivity(intent);*/
+                Utils.MyUid(context);
             }
         });
 

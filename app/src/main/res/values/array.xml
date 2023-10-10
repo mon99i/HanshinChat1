@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="random_speaker">
+        <item>앱 이용 관련 팁</item>
+        <item>두근두근 한신대</item>
+        <item>이상형 매칭을 통해 본인의 이상형을 찾아보세요!</item>
+        <item>MBTI 매칭을 통해 궁합이 잘 맞는 사람을 찾아보아요!</item>
+        <item>내 주변 친구 매칭을 통해 근처에 사는 사람을 찾아봐요!</item>
+        <item>새로 가입한 친구 탭에서 새로운 사람을 찾아볼까요?</item>
+        <item>과팅, 미팅, 밥팅, 기타 카테고리 중에서 선택해봐요!</item>
+        <item>한신대학교 학생들이 제작한 앱입니다.</item>
+        <item>맞춤 매칭을 통해 적합한 상대를 찾아보세요!</item>
+        <item>소개팅 시뮬레이션을 통해 본인의 점수를 매겨보세요!</item>
+        <item>게시판에서 사람들과 소통해보세요!</item>
+        <item>상대방 프로필에 좋아요를 남겨 호감을 표현해보세요!</item>
+        <item>이 앱은 한신대 학생들만 교류가 가능해요!</item>
+
+        <item>소개팅 시뮬레이션을 통해 당신의 소개ㅇㅇㅇㅇㅇ여기까지</item>
+    </string-array>
+
     <string-array name="학과">
         <item>신학부</item>
         <item>한국어문학과</item>
