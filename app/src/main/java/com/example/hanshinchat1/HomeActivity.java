@@ -1,19 +1,15 @@
 package com.example.hanshinchat1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 //import com.example.hanshinchat1.Match.MatchHome;
-//import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.utils.Utils;
 
-import com.example.hanshinchat1.Match.MBTIMatchActivity;
+//import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
 public class HomeActivity extends MainActivity {
 
@@ -80,7 +76,9 @@ public class HomeActivity extends MainActivity {
             @Override
             public void onClick(View v) {
 
-                //Utils.MyUid(context);
+            /*    Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
+                startActivity(intent);*/
+                Utils.MyUid(context);
             }
         });
 

@@ -106,7 +106,13 @@ private ImageButton recommendMatchBackBtn;
             }else{
                 recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendType,firstIdealUsers,secondIdealUsers,thirdIdealUsers));
             }
-        }else{
+        }else if(recommendType.equals("MBTI 추천")){
+            if(recommendUsers.isEmpty()){
+                noneRecommendTxt.setVisibility(View.VISIBLE);
+            }else{
+                recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this,recommendUsers,recommendType));
+            }
+        } else {
             if(recommendUsers.isEmpty()){
                 noneRecommendTxt.setVisibility(View.VISIBLE);
             }else{

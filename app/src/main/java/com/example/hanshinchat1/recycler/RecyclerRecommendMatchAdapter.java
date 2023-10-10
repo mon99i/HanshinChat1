@@ -3,6 +3,7 @@ package com.example.hanshinchat1.recycler;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
@@ -33,6 +35,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
     //일반 추천
     private ArrayList<UserInfo> recommendUsers;
 
+    private ArrayList<UserInfo> mbtiRecommendUsers;
     //이상형추천
     private ArrayList<UserInfo> firstIdealUsers;
     private ArrayList<UserInfo> secondIdealUsers;
@@ -43,6 +46,12 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         this.context = context;
         this.recommendUsers = recommendUsers;
         this.recommendType = recommendType;
+    }
+
+    public RecyclerRecommendMatchAdapter(Context context, ArrayList<UserInfo> recommendUsers) {
+        this.context = context;
+        this.recommendUsers = recommendUsers;
+
     }
 
     public RecyclerRecommendMatchAdapter(Context context, String recommendType,ArrayList<UserInfo> firstIdealUsers,
@@ -80,11 +89,15 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
         setRecommendTypeImage(holder,position);
 
+//        final int currentPosition = position;
+
         holder.recommendMatchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 showRecommendUserDialog(recommendUsers.get(currentPosition));
+//                Intent intent = new Intent(context, MbtiMatchActivity2.class);
+//                context.startActivity(intent);
             }
         });
 
@@ -119,6 +132,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
                 }
                 break;
             case "MBTI 추천":
+                holder.newImage.setVisibility(View.VISIBLE);
                 break;
             case "내 주변 친구":
                 holder.onLocationImage.setVisibility(View.VISIBLE);

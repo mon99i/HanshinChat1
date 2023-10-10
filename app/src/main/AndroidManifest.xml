@@ -167,31 +167,10 @@
             android:name=".SetProfile5GradeActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".Match.MatchHome"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.MBTIMatchActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.MBTIMatchNone"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.LookingForMBTI"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.mbtiFragment"
-            android:exported="false"></activity>
-        <activity
             android:name=".SetIdealActivity"
             android:exported="false"></activity>
         <activity
             android:name=".SetIdeal2Activity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.MainActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Match.MainActivity4"
             android:exported="false"></activity>
         <activity
             android:name=".RecommendIdealActivity"

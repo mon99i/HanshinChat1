@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
+import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 
-/*import com.example.hanshinchat1.Match.MbtiMatchActivity2;*/
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
@@ -26,7 +26,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -547,7 +546,7 @@ public class Utils {
         return allUserInfoList;
     }*/
 
-  /*  public static void MyUid(Context context) {
+    public static void MyUid(Context context) {
 
         String currentUid;
 
@@ -573,9 +572,9 @@ public class Utils {
             }
         });
 
-    }*/
+    }
 
-   /* public static void getRecommend(Context context, String myMBTI, String myGender) {
+    public static void getRecommend(Context context, String myMBTI, String myGender) {
         String my_mbti = myMBTI;
         String my_gender = myGender;
 
@@ -686,27 +685,12 @@ public class Utils {
                     }
                 }
 
-                Intent intent=new Intent(context, MbtiMatchActivity2.class );
-                intent.putExtra("matchingUsers",matchingUsers);
+                Intent intent=new Intent(context, RecommendMatchActivity.class );
+                intent.putExtra("recommendType", "MBTI 추천");
+                intent.putExtra("recommendUsers",matchingUsers);
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
 
-//                if (!matchingUsers.isEmpty()) {
-////                    Random random = new Random();
-////                    int randomIndex = random.nextInt(matchingUsers.size());
-//                    UserInfo randomUser = matchingUsers.get(0);
-//
-//                    UserInfo dataModel = datasnapshot.child(randomUser.getUid()).getValue(UserInfo.class);
-//
-//                    age.setText(dataModel != null ? String.valueOf(dataModel.getAge()) : "");
-//                    department.setText(dataModel != null ? dataModel.getDepartment() : "");
-////                    mbti.setText(dataModel != null ? dataModel.getMbti() : "");
-//
-//                    Toast.makeText(MainActivity3.this, "사용자 정보를 가져왔다", Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    Toast.makeText(MainActivity3.this, "매칭된 사용자가 없습니다.", Toast.LENGTH_SHORT).show();
-//                }
 
 
             }
@@ -718,7 +702,7 @@ public class Utils {
             }
 
         });
-    }*/
+    }
 
     public static Boolean checkProfileOpen() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

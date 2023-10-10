@@ -120,6 +120,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         MatchRoom matchRoom = matchRoomsList.get(currentPosition);
         holder.txt_roomTitle.setText(matchRoom.getRoomInfo().getTitle());
         holder.txt_roomCategory.setText(matchRoom.getRoomInfo().getCategory());
+//        holder.txt_roomGender.setText(matchRoom.getRoomInfo().getGender());
+//        holder.txt_roomMember.setText(matchRoom.getRoomInfo().getNum());
         holder.btn_match.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +170,9 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         Button btn_match;
         TextView txt_roomTitle;
         TextView txt_roomCategory;
+//        TextView txt_roomGender;
+//        TextView txt_roomMember;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -175,6 +180,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             btn_match = itemView.findViewById(R.id.btn_match);
             txt_roomTitle = itemView.findViewById(R.id.txt_roomTitle);
             txt_roomCategory = itemView.findViewById(R.id.txt_roomCategory);
+//            txt_roomMember = itemView.findViewById(R.id.txt_roomMember);
+//            txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
         }
     }
 }

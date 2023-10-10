@@ -1,6 +1,5 @@
 package com.example.hanshinchat1;
 
-import android.net.Uri;
 import java.io.Serializable;
 import java.util.ArrayList;
 
