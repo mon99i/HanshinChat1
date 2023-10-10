@@ -7,28 +7,6 @@
     android:background="@drawable/background_ideal_list_layout">
 
 
-    <!--    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:backgroundTint="#E6E6FA"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/recommendMatchImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baseline_person_24" />
-
-
-    </androidx.cardview.widget.CardView>-->
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="30dp"

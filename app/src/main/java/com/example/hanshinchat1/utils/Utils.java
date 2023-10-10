@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hanshinchat1.Ideal;
 
-import com.example.hanshinchat1.Match.MbtiMatchActivity2;
+/*import com.example.hanshinchat1.Match.MbtiMatchActivity2;*/
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
@@ -547,7 +547,7 @@ public class Utils {
         return allUserInfoList;
     }*/
 
-    public static void MyUid(Context context) {
+  /*  public static void MyUid(Context context) {
 
         String currentUid;
 
@@ -573,9 +573,9 @@ public class Utils {
             }
         });
 
-    }
+    }*/
 
-    public static void getRecommend(Context context, String myMBTI, String myGender) {
+   /* public static void getRecommend(Context context, String myMBTI, String myGender) {
         String my_mbti = myMBTI;
         String my_gender = myGender;
 
@@ -718,7 +718,7 @@ public class Utils {
             }
 
         });
-    }
+    }*/
 
     public static Boolean checkProfileOpen() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
