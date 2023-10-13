@@ -16,7 +16,7 @@
         android:background="#F8F8FF">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="335dp"
             android:layout_height="wrap_content"
             android:textColor="#252525"
             android:textStyle="bold"
@@ -24,6 +24,12 @@
             android:textSize="20dp"
             android:text="Home"/>
 
+        <ImageButton
+            android:id="@+id/notification"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/heart_no"
+            android:background="@color/white" />
 
     </LinearLayout>
 
