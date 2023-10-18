@@ -7,8 +7,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_row_room_layout"
  >
-
-
     <!--
     <TextView
         android:id="@+id/room_txt_date"
@@ -27,8 +25,9 @@
         android:id="@+id/btn_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#B08AFD"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="#E6E6FA"
+        android:textColor="@color/black"
         android:text="매칭신청"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,12 +36,14 @@
 
     <TextView
         android:id="@+id/txt_roomCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:layout_marginStart="15dp"
         android:background="@drawable/background_row_room_widget"
         android:layout_margin="7dp"
         android:padding="7dp"
+        android:textSize="17sp"
         android:text="[미팅]"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +57,9 @@
         android:layout_margin="7dp"
         android:background="@drawable/background_row_room_widget"
         android:padding="7dp"
+        android:layout_marginEnd="10dp"
         android:text="과팅할 사람??"
+        android:textSize="17sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
