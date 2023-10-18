@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -26,10 +25,12 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 
-public class BoardWriteActivity extends MainActivity {
+public class BoardWriteActivity2 extends MainActivity {
 
-    public Button writeUploadBtn;
+    public ImageView writeUploadBtn;
     private ImageView image;
+    private ImageView imageBtn;
+    private ImageView backBtn;
 
     private boolean isImageUpload = false;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -39,11 +40,20 @@ public class BoardWriteActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_write);
 
+        backBtn = findViewById(R.id.backBtn);
         writeUploadBtn = findViewById(R.id.writeUploadBtn);
         EditText writeTitle = findViewById(R.id.writeTitleArea);
         EditText writeContent = findViewById(R.id.writeContentArea);
         image = findViewById(R.id.imageArea);
+        imageBtn = findViewById(R.id.imageBtn);
 
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+            }
+        });
         writeUploadBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -57,7 +67,7 @@ public class BoardWriteActivity extends MainActivity {
                 } else {
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("board");
+                    DatabaseReference myRef = database.getReference("board2");
 
                     String key = myRef.push().getKey();
                     myRef.child(key).setValue(new ListViewItem(writeTitle.getText().toString(), writeContent.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
@@ -74,7 +84,7 @@ public class BoardWriteActivity extends MainActivity {
             }
         });
 
-        image.setOnClickListener(new View.OnClickListener() {
+        imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -85,7 +95,6 @@ public class BoardWriteActivity extends MainActivity {
         });
 
 
-        clickMenu();
         clickHome();
         clickRoom();
         clickChat();

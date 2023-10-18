@@ -10,8 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.R;
@@ -64,7 +62,7 @@ public class BoardFragment2 extends Fragment {
         writePageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BoardWriteActivity.class);
+                Intent intent = new Intent(getActivity(), BoardWriteActivity2.class);
                 startActivity(intent);
 //                finish();
             }
@@ -80,7 +78,7 @@ public class BoardFragment2 extends Fragment {
 
     private void FBData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("board");
+        DatabaseReference myRef = database.getReference("board2");
 
         ValueEventListener postListener = new ValueEventListener() {
 

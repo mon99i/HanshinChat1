@@ -83,7 +83,10 @@
             android:name=".ProfileActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".board.BoardWriteActivity"
+            android:name=".board.BoardWriteActivity1"
+            android:exported="false"></activity>
+        <activity
+            android:name=".board.BoardWriteActivity2"
             android:exported="false"></activity>
         <activity
             android:name=".board.ListActivity"
@@ -171,9 +174,6 @@
             android:exported="false"></activity>
         <activity
             android:name=".SetIdeal2Activity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".RecommendIdealActivity"
             android:exported="false"></activity>
         <activity
             android:name=".RecommendMatchActivity"

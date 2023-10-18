@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.comment.commentLVAdapter;
 import com.example.hanshinchat1.comment.commentModel;
 import com.example.hanshinchat1.databinding.BoardBinding;
@@ -196,11 +197,13 @@ public class BoardActivity extends MainActivity {
 
                 ListViewItem dataModel = dataSnapshot.getValue(ListViewItem.class);
 
+
                 if(dataModel != null) {
                     binding.titleArea.setText(dataModel != null ? dataModel.getTitle() : "");
                     binding.contentArea.setText(dataModel != null ? dataModel.getContent() : "");
                     binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
                     binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
+//                    binding.nameArea.setText(data != null ? data.getName() : "");
 
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();

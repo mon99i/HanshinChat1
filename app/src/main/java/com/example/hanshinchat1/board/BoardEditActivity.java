@@ -30,7 +30,7 @@ import com.google.firebase.storage.StorageReference;
 public class BoardEditActivity extends MainActivity {
 
     private ImageView image;
-    private Button editBtn;
+    private ImageView editBtn;
     private EditText titleArea;
     private EditText contentArea;
     private String writerUid;
