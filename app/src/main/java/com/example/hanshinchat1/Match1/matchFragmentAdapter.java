@@ -1,13 +1,9 @@
-package com.example.hanshinchat1.Match;
+package com.example.hanshinchat1.Match1;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import com.example.hanshinchat1.UserInfo;
-
-import java.util.List;
 
 public class matchFragmentAdapter extends FragmentStateAdapter {
 

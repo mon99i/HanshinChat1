@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
+        android:id="@+id/recommendUserScroll1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/recommendMatchImage"
+                    android:id="@+id/recommendUserImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
@@ -56,31 +56,35 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserDrinking" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/recommendUserSmoking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
+                android:padding="15px"
                 android:text="일주일에 한번 "
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/recommendUserForm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
+                android:padding="15px"
                 android:text="통통한편"
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
             <ImageView
@@ -88,43 +92,45 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/baseline_location_on_24"
-                app:layout_constraintBottom_toBottomOf="@+id/textView20"
-                app:layout_constraintStart_toEndOf="@+id/textView20"
-                app:layout_constraintTop_toTopOf="@+id/textView20" />
+                app:layout_constraintBottom_toBottomOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toEndOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toTopOf="@+id/recommendAgeAddress" />
 
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/recommendUserHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
+                android:padding="15px"
                 android:text="160cm"
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="100dp"
                 android:text="음주는"
                 android:textColor="#434959"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/recommendAgeAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
                 android:text="20세, 경기도 오산시"
                 android:textColor="#434959"
                 android:textStyle="bold"
@@ -134,34 +140,38 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/recommendUserDrinking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
-                android:text="통통한 편 입니다"
+                android:padding="15px"
+                android:text="일주일에 두 세번"
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="#CCCCCC"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16">
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserDepartment">
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/recommendUserReligion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
+                android:padding="15px"
                 android:text="무교입니다"
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -179,45 +189,47 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserSmoking" />
 
             <TextView
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="ㆍ키"
+                android:text="키는"
                 android:textColor="#434959"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendAgeAddress" />
 
             <TextView
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="ㆍ체형"
+                android:text="체형은"
                 android:textColor="#434959"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserHeight" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/recommendUserDepartment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/background_ideal_list_layout2"
+                android:padding="15px"
                 android:text="컴퓨터 공학"
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
@@ -225,13 +237,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="ㆍ학과"
+                android:text="학과는"
                 android:textColor="#434959"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserForm" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -247,7 +259,7 @@
                 android:id="@+id/textView32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="매력평가를 해주세요!"
                 android:textColor="#434959"
                 android:textStyle="bold"
@@ -259,11 +271,11 @@
                 android:id="@+id/constraintLayout10"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="#CCCCCC"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView28">
+                app:layout_constraintTop_toBottomOf="@+id/recommendUserReligion">
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

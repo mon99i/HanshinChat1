@@ -1,25 +1,52 @@
 package com.example.hanshinchat1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 //import com.example.hanshinchat1.Match.MatchHome;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.hanshinchat1.fragment.ShowUserFragment1;
+import com.example.hanshinchat1.fragment.ShowUserFragment2;
 import com.example.hanshinchat1.utils.Utils;
+import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
 public class HomeActivity extends MainActivity {
 
 
-
     private final String CHANNEL_ID = "my_notification_chanel";
     static final int NOTIFICATION_ID = 1001;
     private static final String TEXT_REPLY = "text_reply";
 
-    private static final String TAG="채널생성실패";
+    private static final String TAG = "채널생성실패";
 
     private Button idealMatchingBtn;
     private Button mbtiMatchingBtn;
@@ -27,19 +54,22 @@ public class HomeActivity extends MainActivity {
     private Button recentRegisterMatchingBtn;
     private Button recentContectMatchingBtn;
     private Button topUserMatchingBtn;
+    private ImageButton getRequestBtn;
 
-    Context context=this;
+    private Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        checkNewRequest();
 
         clickHome();
         clickRoom();
         clickChat();
         clickBoard();
         clickProfile();
-        checkMatchRequest();
 
 
         initializeView();
@@ -47,16 +77,83 @@ public class HomeActivity extends MainActivity {
 
     }
 
-    private void initializeView(){
-        idealMatchingBtn=findViewById(R.id.idealMatchingBtn);
-        mbtiMatchingBtn=findViewById(R.id.mbtiMatchingBtn);
-        aroundMatchingBtn=findViewById(R.id.aroundMatchingBtn);
-        recentRegisterMatchingBtn=findViewById(R.id.recentRegisterMatchingBtn);
-        recentContectMatchingBtn=findViewById(R.id.recentConnectMatchingBtn);
-        topUserMatchingBtn=findViewById(R.id.topUserMatchingBtn);
+    public void checkNewRequest() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
+        ArrayList<String> newRequestUids = new ArrayList<>();
+
+        //나한테 요청온 목록 모두 조회
+        matchRef.orderByChild("request").equalTo(true).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                newRequestUids.clear();
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    newRequestUids.add(item.getKey());
+                    //요청중 확인하지 않은 uid 조회
+                }
+                if (newRequestUids.size() > 0) {
+                    showNewRequestDialog();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
-    private void initializeListener(){
+    //채팅요청이 왔다는 다이얼로그
+    private void showNewRequestDialog() {
+        if (!isFinishing()) {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View view = inflater.inflate(R.layout.new_request_dialog, null);
+            ConstraintLayout layout = view.findViewById(R.id.alert_layout);
+
+            // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(view);
+            final AlertDialog alertDialog = builder.create();
+
+            alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
+            //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            // 다이얼로그 표시
+            alertDialog.show();
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //창 누르면 확인했으므로 다시 안뜨게
+                    Utils.goToGetRequestActivity(context);
+
+                    alertDialog.dismiss();
+                    //showUserInfoDialog(context,chatRequestUsers);
+
+                }
+            });
+
+        }
+
+
+    }
+
+
+    private void initializeView() {
+        idealMatchingBtn = findViewById(R.id.idealMatchingBtn);
+        mbtiMatchingBtn = findViewById(R.id.mbtiMatchingBtn);
+        aroundMatchingBtn = findViewById(R.id.aroundMatchingBtn);
+        recentRegisterMatchingBtn = findViewById(R.id.recentRegisterMatchingBtn);
+        recentContectMatchingBtn = findViewById(R.id.recentConnectMatchingBtn);
+        topUserMatchingBtn = findViewById(R.id.topUserMatchingBtn);
+        getRequestBtn = findViewById(R.id.getRequestBtn);
+    }
+
+    private void initializeListener() {
 
         //모두 로그만 뜸 , 유저뜨는거 구현해야함
         idealMatchingBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,9 +162,8 @@ public class HomeActivity extends MainActivity {
                 //수정필요
                 /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_up);
                 idealMatchingBtn.startAnimation(animation);*/
-              Utils.checkIdealExists(context);
-        /*      Intent intent=new Intent(getApplicationContext(), RecommendMatchActivity.class);
-              startActivity(intent);*/
+                Utils.checkIdealExists(context);
+
             }
         });
 
@@ -75,7 +171,6 @@ public class HomeActivity extends MainActivity {
         mbtiMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             /*    Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
                 startActivity(intent);*/
                 Utils.MyUid(context);
@@ -152,14 +247,15 @@ public class HomeActivity extends MainActivity {
         });
 
 
+        getRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.goToGetRequestActivity(context);
+            }
+        });
+
+
     }
-
-
-
-
-
-
-
 
 
 

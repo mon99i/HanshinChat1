@@ -1,20 +1,30 @@
 package com.example.hanshinchat1;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hanshinchat1.recycler.VerticalDecoration;
+import com.example.hanshinchat1.utils.Utils;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +64,7 @@ public class ChattingActivity extends MainActivity {
         initializeView();
         initializeListener();
         setupChatRooms();
+        showLetsChatDialog();
 
     }
 
@@ -101,8 +112,10 @@ public class ChattingActivity extends MainActivity {
         }
     }
 
-    private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성,,?
-        FirebaseDatabase.getInstance().getReference()
+    private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성
+
+        //이거 보류
+     /*   FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + opponentUser.getUid()).equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -114,10 +127,33 @@ public class ChattingActivity extends MainActivity {
 
                             break;
                         }
+
+
                     }
 
                     @Override
                     public void onCancelled(DatabaseError error) {
+                    }
+                });*/
+
+
+        FirebaseDatabase.getInstance().getReference().child("chatRooms")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot item:snapshot.getChildren()){
+                            if(item.getValue(ChatRoom.class).equals(chatRoom)){
+                                chatRoomKey=item.getKey();
+                                setupRecycler();
+                                showLetsChatDialog();
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
     }
@@ -159,5 +195,37 @@ public class ChattingActivity extends MainActivity {
         recycler_chatting.setLayoutManager(new LinearLayoutManager(this));
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
+    }
+
+
+    private void showLetsChatDialog(){
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.lets_chat_dialog, null);
+
+        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
+        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // 다이얼로그 표시
+        alertDialog.show();
+        if (!isFinishing()) {
+
+     /*       Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (alertDialog != null && alertDialog.isShowing()) {
+                        alertDialog.dismiss(); // AlertDialog 닫기
+                    }
+                }
+            }, 3000);*/
+
+        }
     }
 }

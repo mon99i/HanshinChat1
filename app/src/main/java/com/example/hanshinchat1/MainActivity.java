@@ -5,11 +5,9 @@ import android.content.Intent;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -423,7 +421,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
     protected void showAlertDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
-        View alert_dialog = inflater.inflate(R.layout.alert_dialog, null);
+        View alert_dialog = inflater.inflate(R.layout.new_request_dialog, null);
 
         // 커스텀 레이아웃의 버튼 설정
         ConstraintLayout layout = alert_dialog.findViewById(R.id.alert_layout);

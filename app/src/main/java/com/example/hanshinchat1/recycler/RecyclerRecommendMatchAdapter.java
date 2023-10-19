@@ -3,12 +3,12 @@ package com.example.hanshinchat1.recycler;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,27 +19,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<RecyclerRecommendMatchAdapter.ViewHolder> {
+    private static final String TAG = "RecyclerRecommendMatchAdapter";
     private Context context;
     private String recommendType;
 
     //일반 추천
     private ArrayList<UserInfo> recommendUsers;
 
-    private ArrayList<UserInfo> mbtiRecommendUsers;
     //이상형추천
     private ArrayList<UserInfo> firstIdealUsers;
     private ArrayList<UserInfo> secondIdealUsers;
     private ArrayList<UserInfo> thirdIdealUsers;
+
+    private AlertDialog dialog;
 
 
     public RecyclerRecommendMatchAdapter(Context context, ArrayList<UserInfo> recommendUsers, String recommendType) {
@@ -89,7 +96,6 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
         setRecommendTypeImage(holder,position);
 
-//        final int currentPosition = position;
 
         holder.recommendMatchImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,17 +113,52 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
     private void showRecommendUserDialog(UserInfo userInfo){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-
         View view = inflater.inflate(R.layout.recommend_user_dialog, null);
-        ViewPager2 recommendViewPager=view.findViewById(R.id.recommendViewPager);
+
+        ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
+        Button requestChatBtn=view.findViewById(R.id.acceptUserBtn);
+        TextView recommendUserName=view.findViewById(R.id.decisionUserName);
+
+        recommendUserName.setText(userInfo.getName());
         recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo));
 
         builder.setView(view);
-        AlertDialog dialog = builder.create();
+        dialog = builder.create();
         //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
 
+
+        requestChatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestChat(userInfo);
+            }
+        });
+
+    }
+
+    private void requestChat(UserInfo userInfo) {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference matchRef=FirebaseDatabase.getInstance().getReference().child("matches")
+                .child(userInfo.getUid()).child(user.getUid());
+        matchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    Log.d(TAG, "onDataChange: 이미 요청한 적 있음");
+                }else{
+                    matchRef.child("request").setValue(true);
+                    Log.d(TAG, "onDataChange: 요청완료");
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setRecommendTypeImage(ViewHolder holder, int position) {
@@ -168,7 +209,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            recommendMatchImage = itemView.findViewById(R.id.recommendMatchImage);
+            recommendMatchImage = itemView.findViewById(R.id.recommendUserImage);
             recommendMatchName = itemView.findViewById(R.id.recommendMatchName);
             recommendMatchAge = itemView.findViewById(R.id.recommendMatchAge);
 

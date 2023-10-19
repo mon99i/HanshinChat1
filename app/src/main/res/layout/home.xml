@@ -11,18 +11,29 @@
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:background="#F8F8FF"
         android:gravity="center_vertical"
-        android:background="#F8F8FF">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#252525"
-            android:textStyle="bold"
             android:layout_marginLeft="20dp"
+            android:text="Home"
+            android:textColor="#252525"
+            android:layout_weight="1"
             android:textSize="20dp"
-            android:text="Home"/>
+            android:textStyle="bold" />
+
+
+        <ImageButton
+            android:id="@+id/getRequestBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/requestchat"
+            />
 
 
     </LinearLayout>

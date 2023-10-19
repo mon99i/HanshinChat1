@@ -1,16 +1,24 @@
 package com.example.hanshinchat1.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.hanshinchat1.GetRequestActivity;
 import com.example.hanshinchat1.Ideal;
-import com.example.hanshinchat1.Match.MbtiMatchActivity2;
 
+import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.SetIdealActivity;
 import com.example.hanshinchat1.UserInfo;
@@ -26,11 +34,150 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class Utils {
     private static final String TAG = "Utils";
+
+
+    public static void goToGetRequestActivity(Context context){
+        ArrayList<String> getRequestUids=new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference matchRef= FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
+        matchRef.orderByChild("approved").equalTo(null).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getRequestUids.clear();
+                for(DataSnapshot item:snapshot.getChildren()){
+                    matchRef.child(item.getKey()).child("request").setValue(false);
+                    getRequestUids.add(item.getKey());
+                }
+                Intent intent=new Intent(context, GetRequestActivity.class);
+                intent.putExtra("getRequestUids",getRequestUids);
+                Log.d(TAG, "onDataChange: "+getRequestUids.size());
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+   /* public static void checkNewRequest(Context context){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference matchRef= FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
+        ArrayList<String> newRequestUids=new ArrayList<>();
+
+        //나한테 요청온 목록 모두 조회
+        matchRef.orderByChild("request").equalTo(true).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                newRequestUids.clear();
+                for(DataSnapshot item:snapshot.getChildren()){
+                    newRequestUids.add(item.getKey());
+                    //요청중 확인하지 않은 uid 조회
+                }
+                if(newRequestUids.size()>0){
+                    showNewRequestDialog(context);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    //채팅요청이 왔다는 다이얼로그
+    private static void showNewRequestDialog(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view= inflater.inflate(R.layout.new_request_dialog, null);
+        ConstraintLayout layout = view.findViewById(R.id.alert_layout);
+
+        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
+        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // 다이얼로그 표시
+        alertDialog.show();
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //창 누르면 확인했으므로 다시 안뜨게
+                goToGetRequestActivity(context);
+
+                alertDialog.dismiss();
+                //showUserInfoDialog(context,chatRequestUsers);
+
+            }
+        });
+
+
+    }*/
+
+    /*private static void showUserInfoDialog(Context context,ArrayList<UserInfo> chatRequestUsers) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.decision_user_dialog, null);
+
+        Button acceptUserBtn=view.findViewById(R.id.acceptUserBtn);
+        Button refuseUserBtn=view.findViewById(R.id.refuseUserBtn);
+        TextView decisionUserName=view.findViewById(R.id.decisionUserName);
+        ViewPager2 decisionViewPager=view.findViewById(R.id.decisionViewPager);
+
+        RecommendViewPagerAdapter adapter=new RecommendViewPagerAdapter((FragmentActivity) context,chatRequestUsers);
+        decisionViewPager.setAdapter(adapter);
+
+        builder.setView(view);
+        androidx.appcompat.app.AlertDialog dialog= builder.create();
+        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
+
+
+        decisionViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                int currentPosition = position/2; // 현재 페이지의 인덱스
+                decisionUserName.setText(chatRequestUsers.get(currentPosition).getName());
+
+                if(position%2==0){
+                    ShowUserFragment1 fragment1 = (ShowUserFragment1) adapter.createFragment(position);
+                    fragment1.resetScrollView();
+                }else{
+                    ShowUserFragment2 fragment2 = (ShowUserFragment2) adapter.createFragment(position);
+                    fragment2.resetScrollView();
+                }
+            }
+        });
+
+        acceptUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: acceptbtn 클릭");
+            }
+        });
+
+        refuseUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick:   refuseUserBtn 클릭");
+            }
+        });
+
+
+    }*/
 
     public static void recentConnectMatching(Context context) {    //하루전부터 지금까지 접속한 유저 조회
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");

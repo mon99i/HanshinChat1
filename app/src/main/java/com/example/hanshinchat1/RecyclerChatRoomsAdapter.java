@@ -51,7 +51,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
     private void setupAllUserList() {       //현재 user가 채팅하는 목록나열?
        FirebaseDatabase.getInstance().getReference().child("chatRooms")
                 .orderByChild("users/" + myUid).equalTo(true)     //현재 유저가 이용중인 채팅룸, 즉 myUid 가 true인 채팅룸 나열
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         chatRooms.clear();                  //채팅룸 ArrayList 초기화

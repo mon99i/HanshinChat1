@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F8F8FF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/getRequestBackBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/baseline_arrow_back" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알림"
+            android:layout_marginLeft="5dp"
+            android:textColor="#252525"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#eaeaea" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_get_request"
+        android:layout_width="match_parent"
+        android:layout_height="1450px"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
+
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#F8F8FF"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/baseline_home_black_24_xml"/>
+        <ImageButton
+            android:id="@+id/room"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/baseline_room_black_24_xml"/>
+        <ImageButton
+            android:id="@+id/chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/baseline_chat_black_24_xml"/>
+        <ImageButton
+            android:id="@+id/post"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/baseline_board_black_24_xml"/>
+        <ImageButton
+            android:id="@+id/info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/baseline_profile_black_24_xml"/>
+    </LinearLayout>
+
+</LinearLayout>
