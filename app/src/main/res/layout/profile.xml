@@ -23,7 +23,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:textSize="20dp"
-            android:text="Profile"/>
+            android:text="프로필"/>
 
     </LinearLayout>
 

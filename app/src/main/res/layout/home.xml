@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:textSize="20dp"
-            android:text="Home"/>
+            android:text="홈"/>
 
         <ImageButton
             android:id="@+id/notification"

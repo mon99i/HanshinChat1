@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:textSize="20dp"
-            android:text="Edit Profile"/>
+            android:text="프로필 편집"/>
 
     </LinearLayout>
 
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
+                    android:clickable="true"
                     android:src="@drawable/baseline_person_24" />
             </androidx.cardview.widget.CardView>
 
