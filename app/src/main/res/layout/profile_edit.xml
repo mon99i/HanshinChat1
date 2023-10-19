@@ -13,32 +13,17 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#F5EEFF">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/baseline_profile_black_24_xml"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+        android:background="#F8F8FF">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="프로필 편집 "/>
+            android:textColor="#252525"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="Edit Profile"/>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/menu"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:src="@drawable/baseline_menu_black_24"/>
     </LinearLayout>
 
     <ScrollView
@@ -52,29 +37,50 @@
         android:layout_margin="10dp"
         android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/profileImage"
+            <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="10dp" />
+                android:backgroundTint="#E6E6FA"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/edit_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_person_24" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:text="이름 " />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/edit_name"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,12 +92,18 @@
                     android:text="성별 " />
 
                 <TextView
-                    android:id="@+id/gender"
+                    android:id="@+id/edit_gender"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@android:color/black"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,16 +111,21 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="나이 " />
-
-                <EditText
+                <TextView
                     android:id="@+id/edit_age"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,16 +133,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="학년 " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_grade"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,33 +156,42 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="학번 " />
-
-                <EditText
+                <TextView
                     android:id="@+id/edit_student_id"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="학과 " />
-
-                <EditText
+                <TextView
                     android:id="@+id/edit_department"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -167,16 +199,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="키    " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_height"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,16 +222,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="종교 "/>
 
-                <EditText
-                    android:id="@+id/edit_religion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                <TextView
+                android:id="@+id/edit_religion"
+                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,16 +245,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="주소 " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_address"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,15 +268,21 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="흡연 여부 " />
-
-                <EditText
+                    android:layout_height="30dp"
+                    android:text="흡연 " />
+                <TextView
                     android:id="@+id/edit_smoking"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -234,15 +290,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="음주 타입 " />
+                    android:layout_height="30dp"
+                    android:text="음주 " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_drinking"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
+            <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eaeaea"
+            android:layout_marginBottom="8dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -251,16 +314,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="채형 " />
+                    android:layout_height="30dp"
+                    android:text="체형 " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_form"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -268,16 +337,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MBTI 타입 " />
+                    android:layout_height="30dp"
+                    android:text="MBTI " />
 
-                <EditText
+                <TextView
                     android:id="@+id/edit_mbti"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -285,17 +360,22 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:text="취미 " />
 
                 <TextView
                     android:id="@+id/interest"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@android:color/black"/>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginBottom="8dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -303,46 +383,61 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:text="성격 " />
 
                 <TextView
                     android:id="@+id/personality"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@android:color/black"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eaeaea"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:gravity="end">
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_profile_edit"
             android:layout_width="80dp"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:layout_margin="5dp"
-            android:text="수정"
-            android:backgroundTint="#BFA0ED" />
-        <Button
+            android:layout_gravity="center"
+            android:background="@drawable/match_button_style"
+            android:text="수정" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_profile_cancel"
             android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:text="취소"
-            android:backgroundTint="#BFA0ED" />
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/match_button_style"
+            android:text="취소" />
     </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
 
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#F8F8FF"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton

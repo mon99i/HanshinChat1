@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:textSize="20dp"
-            android:text="ROOM LIST"/>
+            android:text="방 목록"/>
 
     </LinearLayout>
 
@@ -74,16 +74,22 @@
                 android:id="@+id/recycler_matchRooms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 />
 
         </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
 
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#F8F8FF"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton

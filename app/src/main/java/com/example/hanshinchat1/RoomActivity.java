@@ -13,7 +13,6 @@ public class RoomActivity extends MainActivity {
 
     Dialog findRoomDialog;
     Dialog findRoomDialog2;
-
     Dialog makeRoomDialog;
 
     RecyclerView recycler_matchRooms;

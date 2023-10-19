@@ -23,26 +23,30 @@ public class UserInfo implements Serializable{
         this.creationTime = creationTime;
     }
 
-    public UserInfo(String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl) {
+    public UserInfo(String uid, String photoUrl, String name, String gender, Integer age, Integer grade,
+                    Integer studentId, String department, Integer height, String form, String address,
+                    String religion, String smoking, String drinking, ArrayList<String> interest,
+                    ArrayList<String> personality, String mbti, String idealTypeFirst, String idealTypeSecond)
+    {
         this.uid = uid;
+        this.photoUrl = photoUrl;
         this.name = name;
         this.gender = gender;
         this.age = age;
+        this.grade = grade;
         this.studentId = studentId;
         this.department = department;
         this.height = height;
-        this.religion = religion;
+        this.form = form;
         this.address = address;
+        this.religion = religion;
         this.smoking = smoking;
         this.drinking = drinking;
         this.interest = interest;
         this.personality = personality;
-        this.form = form;
-        this.grade = grade;
         this.mbti = mbti;
         this.idealTypeFirst = idealTypeFirst;
         this.idealTypeSecond = idealTypeSecond;
-        this.photoUrl = photoUrl;
     }
 
     public String getUid() {

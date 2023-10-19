@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ImageButton;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 //import com.example.hanshinchat1.Match.MatchHome;
@@ -23,6 +25,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.hanshinchat1.fragment.ShowUserFragment1;
 import com.example.hanshinchat1.fragment.ShowUserFragment2;
+import androidx.annotation.NonNull;
+
 import com.example.hanshinchat1.utils.Utils;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +40,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
 
@@ -46,7 +59,7 @@ public class HomeActivity extends MainActivity {
     static final int NOTIFICATION_ID = 1001;
     private static final String TEXT_REPLY = "text_reply";
 
-    private static final String TAG = "채널생성실패";
+    private static final String TAG="채널생성실패";
 
     private Button idealMatchingBtn;
     private Button mbtiMatchingBtn;
@@ -57,6 +70,15 @@ public class HomeActivity extends MainActivity {
     private ImageButton getRequestBtn;
 
     private Context context = this;
+
+    private DatabaseReference notificationRef;
+    private ImageButton notificationBtn;
+
+    private int previousPhraseIndex = -1;
+    private String[] phrases;
+    private List<String> phrasesList;
+    private Button speakerBtn;
+    private ImageButton simulationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +92,68 @@ public class HomeActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
-
+        checkMatchRequest();
 
         initializeView();
         initializeListener();
 
+        // 상단 앱 관련 팁 기능
+        phrases = getResources().getStringArray(R.array.random_speaker);
+        phrasesList = Arrays.asList(phrases);
+        speakerBtn = findViewById(R.id.home_speaker);
+        speakerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayRandomPhrase();
+            }
+        });
+
+        // 알림 기능, 미완
+        notificationBtn = findViewById(R.id.notification);
+        notificationRef = FirebaseDatabase.getInstance().getReference().child("notification");
+    /*    notificationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    notificationBtn.setImageResource(R.drawable.heart_yes);
+                } else {
+                    notificationBtn.setImageResource(R.drawable.heart_no);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
+        // 소개팅 시뮬레이션 기능
+        simulationBtn = (ImageButton) findViewById(R.id.simulation);
+        simulationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    // 앱 관련 팁
+    private void displayRandomPhrase() {
+        int max = phrasesList.size();
+        if (max == 0) {
+            speakerBtn.setText("앱 이용 관련 팁");
+            return;
+        }
+        Random random = new Random();
+        int randomIndex;
+        do {
+            randomIndex = random.nextInt(max);
+        } while (randomIndex == previousPhraseIndex);
+
+        previousPhraseIndex = randomIndex;
+        String randomPhrase = phrasesList.get(randomIndex);
+        speakerBtn.setText(randomPhrase);
     }
 
     public void checkNewRequest() {

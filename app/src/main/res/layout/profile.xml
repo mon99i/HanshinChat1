@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="555dp"
+        android:layout_height="560dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -175,11 +175,18 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.8dp"
+        android:background="#CCCCCC" />
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#F8F8FF"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton

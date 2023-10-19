@@ -14,6 +14,11 @@ public class FBAuth {
         auth = FirebaseAuth.getInstance();
         return auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : "";
     }
+
+    public static String getName() {
+        auth = FirebaseAuth.getInstance();
+        return auth.getCurrentUser() != null ? auth.getCurrentUser().getDisplayName() : "";
+    }
     public static String getTime() {
         Date currentDateTime = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss ", Locale.KOREA);

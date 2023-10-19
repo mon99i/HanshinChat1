@@ -16,8 +16,11 @@
         android:orientation="horizontal">
 
         <TextView
+            android:layout_width="335dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#252525"
+            android:textStyle="bold"
             android:layout_marginLeft="20dp"
             android:text="Home"
             android:textColor="#252525"
@@ -35,7 +38,12 @@
             android:background="@drawable/requestchat"
             />
 
-
+        <ImageButton
+            android:id="@+id/notification"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/heart_no"
+            android:background="@color/white" />
     </LinearLayout>
 
     <View
@@ -45,7 +53,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="555dp">
+        android:layout_height="560dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -277,35 +285,35 @@
         <ImageButton
             android:id="@+id/home"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/baseline_home_black_24_xml"/>
         <ImageButton
             android:id="@+id/room"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/baseline_room_black_24_xml"/>
         <ImageButton
             android:id="@+id/chat"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/baseline_chat_black_24_xml"/>
         <ImageButton
             android:id="@+id/post"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/baseline_board_black_24_xml"/>
         <ImageButton
             android:id="@+id/info"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/baseline_profile_black_24_xml"/>

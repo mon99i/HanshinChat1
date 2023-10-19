@@ -1,6 +1,7 @@
 package com.example.hanshinchat1.board;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public final class ListViewAdapter extends BaseAdapter {
         title.setText(item.getTitle());
         content.setText(item.getContent());
         time.setText(item.getTime());
+        Log.d("ListViewAdapter", "onBindViewHolder: position " + position);
 
         return convertView;
     }

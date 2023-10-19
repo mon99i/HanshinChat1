@@ -102,7 +102,6 @@ public class SetIdealActivity extends MainActivity {
         firstChoiceTxt.setPaintFlags(firstChoiceTxt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         secondChoiceTxt.setPaintFlags(secondChoiceTxt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         thirdChoiceTxt.setPaintFlags(thirdChoiceTxt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
     }
 
     private void setupPriority(){
