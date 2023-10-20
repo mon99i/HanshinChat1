@@ -60,9 +60,9 @@ public class ProfileEditActivity extends MainActivity {
     private ArrayList<String> interestList;
     private ArrayList<String> personalityList;
     private Button editBtn, cancelBtn;
-    private DatabaseReference databaseReference;
+
     private StorageReference profileRef;
-    private DatabaseReference usersRef;
+    private DatabaseReference userRef;
     private UserInfo userInfo;
 
     @Override
@@ -96,9 +96,8 @@ public class ProfileEditActivity extends MainActivity {
         editBtn = findViewById(R.id.edit_profile_edit);
         cancelBtn = findViewById(R.id.edit_profile_cancel);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
         profileRef = storageRef.child("profile.jpg/" + user.getUid());
-        usersRef = myRef.child("users").child(user.getUid());
+        userRef = myRef.child("users").child(user.getUid());
 
         if (checkPermission() == false) {
             ActivityCompat.requestPermissions(this, new String[]{
@@ -193,7 +192,7 @@ public class ProfileEditActivity extends MainActivity {
                         userInfo.getIdealTypeSecond()
                 );
 
-                databaseReference.setValue(updatedUserInfo);
+                userRef.setValue(updatedUserInfo);
 
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
@@ -322,7 +321,7 @@ public class ProfileEditActivity extends MainActivity {
                         String imageUrl = uri.toString();
                         userInfo.setPhotoUrl(imageUrl);
                         userInfo.setUid(user.getUid());
-                        usersRef.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        userRef.setValue(userInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 

@@ -9,19 +9,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/background_chat_request"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:rotation="10"
+            android:src="@drawable/baseline_favorite_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="-10dp"
+            android:layout_marginBottom="10dp"
+            android:rotation="-10"
+            android:src="@drawable/baseline_favorite_24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+            app:layout_constraintStart_toEndOf="@+id/textView20"
+            app:layout_constraintTop_toTopOf="@+id/textView20" />
+
         <TextView
+            android:id="@+id/textView20"
             style="@style/TextAppearance.Compat.Notification.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="대화를 나눠보세요!"
             android:textColor="#252525"
