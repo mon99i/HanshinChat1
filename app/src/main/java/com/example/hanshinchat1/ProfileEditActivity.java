@@ -193,7 +193,7 @@ public class ProfileEditActivity extends MainActivity {
                         userInfo.getIdealTypeSecond()
                 );
 
-                databaseReference.setValue(updatedUserInfo);
+                usersRef.setValue(updatedUserInfo);
 
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);

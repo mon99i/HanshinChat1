@@ -26,9 +26,10 @@ public class RoomActivity extends MainActivity {
     Dialog makeRoom2Dialog;
     Dialog makeRoom3Dialog;
     RecyclerView recycler_matchRooms;
-
+    RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
     public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,9 @@ public class RoomActivity extends MainActivity {
         findRoomDialog2 = new Dialog(RoomActivity.this);
         findRoomDialog2.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         findRoomDialog2.setContentView(R.layout.find_room2_dialog);
+
+        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(this); // Create the adapter here
+        setUpRecycler();
 
         makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +118,6 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
                         //검색 눌렀을 때 기능 구현
 
-
-
                         findRoomDialog.dismiss();
                     }
                 });
@@ -135,52 +137,44 @@ public class RoomActivity extends MainActivity {
                 category1Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //과팅 찾기 눌렀을 때 기능 구현
-
-
-
+                        recyclerMatchRoomsAdapter.setSelectedCategory("과팅");
+                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
                         findRoomDialog2.dismiss();
                     }
                 });
                 category2Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //미팅 찾기 눌렀을 때 기능 구현
-
-
-
+                        recyclerMatchRoomsAdapter.setSelectedCategory("미팅");
+                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
                         findRoomDialog2.dismiss();
                     }
                 });
                 category3Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //밥팅 찾기 눌렀을 때 기능 구현
-
-
-
+                        recyclerMatchRoomsAdapter.setSelectedCategory("밥팅");
+                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
                         findRoomDialog2.dismiss();
                     }
                 });
                 category4Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //기타 찾기 눌렀을 때 기능 구현
-
-
-
+                        recyclerMatchRoomsAdapter.setSelectedCategory("기타");
+                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
                         findRoomDialog2.dismiss();
                     }
                 });
             }
         });
-        setUpRecycler();
     }
 
     private void setUpRecycler() {
         recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));
-        recycler_matchRooms.setAdapter(new RecyclerMatchRoomsAdapter(this));
+        recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
     }
+
 
     private void makeRoom1() {
         makeRoom1Dialog = new Dialog(RoomActivity.this);
