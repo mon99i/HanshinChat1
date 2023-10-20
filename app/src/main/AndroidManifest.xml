@@ -110,18 +110,6 @@
             android:name=".ProfileEditActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".MakeRoomActivity1"
-            android:exported="false" />
-        <activity
-            android:name=".MakeRoomActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".MakeRoomActivity3"
-            android:exported="false" />
-        <activity
-            android:name=".MakeRoomActivity4"
-            android:exported="false"></activity>
-        <activity
             android:name=".SetProfile2NameActivity"
             android:exported="false"></activity>
         <activity

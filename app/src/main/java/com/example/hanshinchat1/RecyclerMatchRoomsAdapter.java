@@ -189,38 +189,25 @@
 
 package com.example.hanshinchat1;
 
-        import android.content.Context;
-        import android.provider.ContactsContract;
-        import android.service.autofill.FieldClassification;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
-
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
-
-        import com.google.android.gms.tasks.OnCanceledListener;
-        import com.google.android.gms.tasks.OnCompleteListener;
-        import com.google.android.gms.tasks.OnSuccessListener;
-        import com.google.android.gms.tasks.Task;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.auth.FirebaseUser;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.google.firebase.database.ValueEventListener;
-
-        import java.lang.reflect.Array;
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
 
 public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatchRoomsAdapter.ViewHolder> {
 
@@ -230,6 +217,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     private ArrayList<String> alreadyMatchedUids;
     private ArrayList<MatchRoom> matchRoomsList;
     private ArrayList<String> matchKeyList;
+
     private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
     public RecyclerMatchRoomsAdapter(Context context) {
@@ -302,7 +290,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     @NonNull
     @Override
     public RecyclerMatchRoomsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_matchroom4, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_matchroom, parent, false);
 
         return new RecyclerMatchRoomsAdapter.ViewHolder(view);
     }
@@ -310,7 +298,6 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerMatchRoomsAdapter.ViewHolder holder, int position) {
-
 
         //final int currentPosition = holder.getAdapterPosition();
         MatchRoom matchRoom = matchRoomsList.get(position);
@@ -333,7 +320,10 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         holder.roomCategory.setImageResource(imageResourceId);
 
         holder.txt_roomGender.setText(matchRoom.getRoomInfo().getGender());
+        holder.txt_roomDepartment.setText(matchRoom.getRoomInfo().getDepartment());
+        holder.txt_roomGender.setText(matchRoom.getRoomInfo().getGender());
         holder.txt_roomMember.setText(matchRoom.getRoomInfo().getNum());
+
         Log.d(TAG, "onBindViewHolder: position " + position);
 //        holder.btn_match.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -386,16 +376,16 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         ImageView roomCategory;
         TextView txt_roomGender;
         TextView txt_roomMember;
+        TextView txt_roomDepartment;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            background = itemView.findViewById(R.id.matchRoomBackground);
-            btn_match = itemView.findViewById(R.id.btn_match);
             txt_roomTitle = itemView.findViewById(R.id.txt_roomTitle);
             roomCategory = itemView.findViewById(R.id.roomCategory);
             txt_roomMember = itemView.findViewById(R.id.txt_roomMember);
             txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
+            txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
         }
     }
 }
