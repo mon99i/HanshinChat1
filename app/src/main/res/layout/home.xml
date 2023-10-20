@@ -38,6 +38,7 @@
             android:id="@+id/notification"
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:src="@drawable/heart_no"
             android:background="@color/white" />
     </LinearLayout>

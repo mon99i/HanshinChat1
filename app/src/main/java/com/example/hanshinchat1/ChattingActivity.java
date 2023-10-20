@@ -64,7 +64,7 @@ public class ChattingActivity extends MainActivity {
         initializeView();
         initializeListener();
         setupChatRooms();
-        showLetsChatDialog();
+
 
     }
 
@@ -115,12 +115,13 @@ public class ChattingActivity extends MainActivity {
     private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성
 
         //이거 보류
-     /*   FirebaseDatabase.getInstance().getReference()
+        FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + opponentUser.getUid()).equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
+                            Log.d(TAG, "onDataChange: "+data.getValue(ChatRoom.class)+" 받은 chatRoom:"+chatRoom);
                             chatRoomKey = data.getKey();
                             setupRecycler();
 
@@ -134,18 +135,41 @@ public class ChattingActivity extends MainActivity {
                     @Override
                     public void onCancelled(DatabaseError error) {
                     }
-                });*/
+                });
+
+     /*   FirebaseDatabase.getInstance().getReference()
+                .child("chatRooms").orderByChild("users/" + user.getUid()).equalTo(true)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            chatRoom.getUsers()
 
 
-        FirebaseDatabase.getInstance().getReference().child("chatRooms")
+                            break;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                    }
+        */
+
+
+     /*   FirebaseDatabase.getInstance().getReference().child("chatRooms")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot item:snapshot.getChildren()){
-                            if(item.getValue(ChatRoom.class).equals(chatRoom)){
+                            Log.d(TAG, "onDataChange: for문으로 들어오긴함");
+                            Log.d(TAG, "onDataChange: "+chatRoom+" item.getvalue:"+item.getValue(ChatRoom.class));
+                            if(item.getValue(ChatRoom.class)==chatRoom){
+                                Log.d(TAG, "onDataChange: if문으로 들어오긴함");
                                 chatRoomKey=item.getKey();
                                 setupRecycler();
-                                showLetsChatDialog();
+                                Log.d(TAG, "onDataChange: 방키는 "+chatRoomKey);
                                 break;
                             }
                         }
@@ -155,7 +179,7 @@ public class ChattingActivity extends MainActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
     }
 
     private void putMessage() {          //데이터베이스에 메세지 넣고, 저장된 데이터를 다시 리사이클러뷰에 보이게하는거임
@@ -198,34 +222,5 @@ public class ChattingActivity extends MainActivity {
     }
 
 
-    private void showLetsChatDialog(){
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.lets_chat_dialog, null);
 
-        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(view);
-        final AlertDialog alertDialog = builder.create();
-
-        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
-        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        // 다이얼로그 표시
-        alertDialog.show();
-        if (!isFinishing()) {
-
-     /*       Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (alertDialog != null && alertDialog.isShowing()) {
-                        alertDialog.dismiss(); // AlertDialog 닫기
-                    }
-                }
-            }, 3000);*/
-
-        }
-    }
 }
