@@ -64,9 +64,21 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+        <CheckBox
+            android:id="@+id/department_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="같은 과 만나지 않기"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="460dp"
             android:orientation="vertical"
             android:layout_margin="10dp">
 
