@@ -9,14 +9,14 @@
     tools:context=".RoomActivity"
     android:gravity="center">
 
-    <TextView
-        android:drawableStart="@drawable/baseline_room_black_24_xml"
-        android:drawablePadding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="카테고리 찾기"
-        android:gravity="center" />
+    <Button
+        android:id="@+id/category_all"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:text="전체"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:backgroundTint="#E6E6FA" />
 
     <LinearLayout
         android:layout_width="240dp"
