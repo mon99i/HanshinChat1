@@ -114,6 +114,8 @@ public class ChattingActivity extends MainActivity {
 
     private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성
 
+        //수정필요
+
         //이거 보류
         FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + opponentUser.getUid()).equalTo(true)

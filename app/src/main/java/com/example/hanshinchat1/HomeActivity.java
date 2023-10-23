@@ -25,6 +25,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.hanshinchat1.fragment.ShowUserFragment1;
 import com.example.hanshinchat1.fragment.ShowUserFragment2;
+
 import androidx.annotation.NonNull;
 
 import com.example.hanshinchat1.utils.Utils;
@@ -40,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,7 +61,7 @@ public class HomeActivity extends MainActivity {
     static final int NOTIFICATION_ID = 1001;
     private static final String TEXT_REPLY = "text_reply";
 
-    private static final String TAG="채널생성실패";
+    private static final String TAG = "채널생성실패";
 
     private Button idealMatchingBtn;
     private Button mbtiMatchingBtn;
@@ -70,9 +72,6 @@ public class HomeActivity extends MainActivity {
     private ImageButton getRequestBtn;
 
     private Context context = this;
-
-    private DatabaseReference notificationRef;
-    private ImageButton notificationBtn;
 
     private int previousPhraseIndex = -1;
     private String[] phrases;
@@ -108,24 +107,7 @@ public class HomeActivity extends MainActivity {
             }
         });
 
-        // 알림 기능, 미완
-        notificationBtn = findViewById(R.id.notification);
-        notificationRef = FirebaseDatabase.getInstance().getReference().child("notification");
-    /*    notificationRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    notificationBtn.setImageResource(R.drawable.heart_yes);
-                } else {
-                    notificationBtn.setImageResource(R.drawable.heart_no);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-*/
         // 소개팅 시뮬레이션 기능
         simulationBtn = (ImageButton) findViewById(R.id.simulation);
         simulationBtn.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +303,7 @@ public class HomeActivity extends MainActivity {
         topUserMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.mostLikedMatching(context);
 
             }
         });
@@ -335,10 +318,6 @@ public class HomeActivity extends MainActivity {
 
 
     }
-
-
-
-
 
 
 
