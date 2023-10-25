@@ -63,7 +63,7 @@ public class RoomActivity extends MainActivity {
     private String selectedCategory = "전체";
     public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
-    private Context context;
+//    private Context context;
 
 
     @Override
