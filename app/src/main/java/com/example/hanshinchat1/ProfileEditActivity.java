@@ -170,7 +170,7 @@ public class ProfileEditActivity extends MainActivity {
                 String newDrinking = editDrinking.getText().toString();
                 String newMbti = editMbti.getText().toString();
 
-                UserInfo updatedUserInfo = new UserInfo(
+               /* UserInfo updatedUserInfo = new UserInfo(
                         userInfo.getUid(),
                         userInfo.getPhotoUrl(),
                         newName,
@@ -193,7 +193,7 @@ public class ProfileEditActivity extends MainActivity {
                 );
 
                 userRef.setValue(updatedUserInfo);
-
+*/
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
                 finish();

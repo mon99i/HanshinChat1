@@ -3,14 +3,11 @@ package com.example.hanshinchat1;
 import java.io.Serializable;
 
 public class RoomInfo implements Serializable {
-
-
     private String title;
     private String category;
     private String num;
     private String department;
     private String host;
-
     private String gender;
 
     public String getHost() {

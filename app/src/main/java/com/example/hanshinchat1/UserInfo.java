@@ -23,30 +23,12 @@ public class UserInfo implements Serializable{
         this.creationTime = creationTime;
     }
 
-    public UserInfo(String uid, String photoUrl, String name, String gender, Integer age, Integer grade,
-                    Integer studentId, String department, Integer height, String form, String address,
-                    String religion, String smoking, String drinking, ArrayList<String> interest,
-                    ArrayList<String> personality, String mbti, String idealTypeFirst, String idealTypeSecond)
-    {
-        this.uid = uid;
-        this.photoUrl = photoUrl;
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-        this.grade = grade;
-        this.studentId = studentId;
-        this.department = department;
-        this.height = height;
-        this.form = form;
-        this.address = address;
-        this.religion = religion;
-        this.smoking = smoking;
-        this.drinking = drinking;
-        this.interest = interest;
-        this.personality = personality;
-        this.mbti = mbti;
-        this.idealTypeFirst = idealTypeFirst;
-        this.idealTypeSecond = idealTypeSecond;
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
     }
 
     public String getUid() {
@@ -193,6 +175,31 @@ public class UserInfo implements Serializable{
         this.idealTypeSecond = idealTypeSecond;
     }
 
+    public UserInfo(Integer like, String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl, String lastSignInTime, String creationTime) {
+        this.like = like;
+        this.uid = uid;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.studentId = studentId;
+        this.department = department;
+        this.height = height;
+        this.religion = religion;
+        this.address = address;
+        this.smoking = smoking;
+        this.drinking = drinking;
+        this.interest = interest;
+        this.personality = personality;
+        this.form = form;
+        this.grade = grade;
+        this.mbti = mbti;
+        this.idealTypeFirst = idealTypeFirst;
+        this.idealTypeSecond = idealTypeSecond;
+        this.photoUrl = photoUrl;
+        this.lastSignInTime = lastSignInTime;
+        this.creationTime = creationTime;
+    }
+
     public String getPhotoUrl() {
         return photoUrl;
     }
@@ -201,6 +208,8 @@ public class UserInfo implements Serializable{
         this.photoUrl = photoUrl;
     }
 
+
+    private Integer like;
     private String uid;
     private String name;
     private String gender;

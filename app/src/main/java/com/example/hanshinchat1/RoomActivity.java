@@ -16,6 +16,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,6 +56,11 @@ public class RoomActivity extends MainActivity {
     Dialog makeRoom3Dialog;
     RecyclerView recycler_matchRooms;
     RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
+    Context context=this;
+
+    private boolean isDepartmentFilterEnabled = false;
+
+    private String selectedCategory = "전체";
     public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
     private Context context;
@@ -71,6 +78,7 @@ public class RoomActivity extends MainActivity {
         clickBoard();
         clickProfile();
 
+        CheckBox departmentCheckbox = findViewById(R.id.department_checkbox);
         matchRoomsList = new ArrayList<>();
         matchKeyList = new ArrayList<>();
 
@@ -92,8 +100,40 @@ public class RoomActivity extends MainActivity {
         findRoomDialog2.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         findRoomDialog2.setContentView(R.layout.find_room2_dialog);
 
-        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(this); // Create the adapter here
+        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(context);
         setUpRecycler();
+        departmentCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    isDepartmentFilterEnabled = true;
+                    if(selectedCategory!=null){ // 체크on, 카테고리on
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
+                        recyclerMatchRoomsAdapter.removeMatchRoomsByCategory(selectedCategory);
+                        setUpRecycler();
+                    }
+                    else { // 체크on, 카테고리off
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
+                        setUpRecycler();
+                    }
+                }
+                else {
+                    isDepartmentFilterEnabled = false;
+                        if(selectedCategory!=null){ // 체크off, 카테고리on
+                            recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                            recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(selectedCategory);
+                            setUpRecycler();
+                        }
+                        else { // 체크off, 카테고리off
+                            recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                            recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(null);
+                            setUpRecycler();
+                        }
+                }
+            }
+        });
 
 
         recyclerMatchRoomsAdapter.setOnItemClickListener(new RecyclerMatchRoomsAdapter.OnItemClickListener() {
@@ -121,6 +161,7 @@ public class RoomActivity extends MainActivity {
                 Button makeCategory2Btn = makeRoomDialog.findViewById(R.id.make_category2);
                 Button makeCategory3Btn = makeRoomDialog.findViewById(R.id.make_category3);
                 Button makeCategory4Btn = makeRoomDialog.findViewById(R.id.make_category4);
+
 
                 makeCategory1Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -178,41 +219,84 @@ public class RoomActivity extends MainActivity {
             public void onClick(View v) {
                 findRoomDialog2.show();
 
+                Button category0Btn = findRoomDialog2.findViewById(R.id.category_all);
                 Button category1Btn = findRoomDialog2.findViewById(R.id.category1);
                 Button category2Btn = findRoomDialog2.findViewById(R.id.category2);
                 Button category3Btn = findRoomDialog2.findViewById(R.id.category3);
                 Button category4Btn = findRoomDialog2.findViewById(R.id.category4);
 
+                category0Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        departmentCheckbox.setChecked(false);
+                        if(isDepartmentFilterEnabled = true){
+                            recyclerMatchRoomsAdapter.setSelectedCategory(null);
+                            findRoomDialog2.dismiss();
+                        }
+                        else {
+                            recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
+                            findRoomDialog2.dismiss();
+                        }
+                    }
+                });
                 category1Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        recyclerMatchRoomsAdapter.setSelectedCategory("과팅");
-                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
-                        findRoomDialog2.dismiss();
+                        departmentCheckbox.setChecked(false);
+                        if(isDepartmentFilterEnabled = true){
+                            recyclerMatchRoomsAdapter.setSelectedCategory("과팅");
+                            findRoomDialog2.dismiss();
+                        }
+                        else{
+                            recyclerMatchRoomsAdapter.setSelectedCategory("과팅");
+                            recyclerMatchRoomsAdapter.removeMatchRoomsByDepartment();
+                            findRoomDialog2.dismiss();
+                        }
                     }
                 });
                 category2Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        recyclerMatchRoomsAdapter.setSelectedCategory("미팅");
-                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
-                        findRoomDialog2.dismiss();
+                        departmentCheckbox.setChecked(false);
+                        if(isDepartmentFilterEnabled = true){
+                            recyclerMatchRoomsAdapter.setSelectedCategory("미팅");
+                            findRoomDialog2.dismiss();
+                        }
+                        else{
+                            recyclerMatchRoomsAdapter.setSelectedCategory("미팅");
+                            recyclerMatchRoomsAdapter.removeMatchRoomsByDepartment();
+                            findRoomDialog2.dismiss();
+                        }
                     }
                 });
                 category3Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        recyclerMatchRoomsAdapter.setSelectedCategory("밥팅");
-                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
-                        findRoomDialog2.dismiss();
+                        departmentCheckbox.setChecked(false);
+                        if(isDepartmentFilterEnabled = true){
+                            recyclerMatchRoomsAdapter.setSelectedCategory("밥팅");
+                            findRoomDialog2.dismiss();
+                        }
+                        else{
+                            recyclerMatchRoomsAdapter.setSelectedCategory("밥팅");
+                            recyclerMatchRoomsAdapter.removeMatchRoomsByDepartment();
+                            findRoomDialog2.dismiss();
+                        }
                     }
                 });
                 category4Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        recyclerMatchRoomsAdapter.setSelectedCategory("기타");
-                        recyclerMatchRoomsAdapter.notifyDataSetChanged();
-                        findRoomDialog2.dismiss();
+                        departmentCheckbox.setChecked(false);
+                        if(isDepartmentFilterEnabled = true){
+                            recyclerMatchRoomsAdapter.setSelectedCategory("기타");
+                            findRoomDialog2.dismiss();
+                        }
+                        else{
+                            recyclerMatchRoomsAdapter.setSelectedCategory("기타");
+                            recyclerMatchRoomsAdapter.removeMatchRoomsByDepartment();
+                            findRoomDialog2.dismiss();
+                        }
                     }
                 });
             }
