@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<RecyclerRecommendMatchAdapter.ViewHolder> {
     private static final String TAG = "RecyclerRecommendMatchAdapter";
     private Context context;
@@ -119,8 +121,33 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         Button requestChatBtn=view.findViewById(R.id.acceptUserBtn);
         TextView recommendUserName=view.findViewById(R.id.decisionUserName);
 
+        CircleIndicator3 indicator = view.findViewById(R.id.indicator);
+        indicator.setViewPager(recommendViewPager);
+        indicator.createIndicators(2, 0);
+        recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
         recommendUserName.setText(userInfo.getName());
-        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo));
+        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo, true));
+        recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            //                        @Override
+//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+//                            if (positionOffsetPixels == 0) {
+//                                recommendViewPager.setCurrentItem(position);
+//                            }
+//                        }
+//
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                indicator.animatePageSelected(position % 2);
+                if (position == 0) {
+                    // indicator.setBackgroundColor(R.drawable.indicator_selected); // 선택된 페이지의 이미지
+                } else {
+                    // indicator.setBackgroundColor(R.drawable.indicator_default); // 나머지 페이지의 이미지
+                }
+            }
+        });
 
         builder.setView(view);
         dialog = builder.create();

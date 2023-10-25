@@ -1,24 +1,51 @@
 package com.example.hanshinchat1;
 
+import static com.example.hanshinchat1.CustomDialog.dialog;
+
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.hanshinchat1.Room.RoomInfoActivity;
+import com.example.hanshinchat1.board.BoardActivity;
+import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class RoomActivity extends MainActivity {
+
+    private ArrayList<MatchRoom> matchRoomsList;
+    private ArrayList<String> matchKeyList;
 
     Dialog findRoomDialog, findRoomDialog2;
     Dialog makeRoomDialog;
@@ -29,6 +56,7 @@ public class RoomActivity extends MainActivity {
     RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
     public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
+    private Context context;
 
 
     @Override
@@ -42,6 +70,10 @@ public class RoomActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
+
+        matchRoomsList = new ArrayList<>();
+        matchKeyList = new ArrayList<>();
+
 
         Button makeRoom = findViewById(R.id.make_room);
         Button findRoom = findViewById(R.id.find_room);
@@ -62,6 +94,23 @@ public class RoomActivity extends MainActivity {
 
         recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(this); // Create the adapter here
         setUpRecycler();
+
+
+        recyclerMatchRoomsAdapter.setOnItemClickListener(new RecyclerMatchRoomsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+//                String matchkey = matchkeyList.get(position);
+//                Intent intent = new Intent(getApplicationContext(), RoomInfoActivity.class);
+//                intent.putExtra("key", matchkey);
+//                startActivity(intent);
+
+                MatchRoom matchRoom = matchRoomsList.get(position);
+
+//                String matchkey = matchkeyList.get(position);
+                showRecommendUserDialog(matchRoom);
+
+            }
+        });
 
         makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +218,70 @@ public class RoomActivity extends MainActivity {
             }
         });
     }
+
+    private void showRecommendUserDialog(MatchRoom matchRoom){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
+
+        ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
+        Button matchBtn=view.findViewById(R.id.matchBtn);
+        TextView roomTitle=view.findViewById(R.id.roomTitle);
+
+        roomTitle.setText(matchRoom.getRoomInfo().getTitle());
+        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, matchRoom));
+
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
+        Log.w("RoomActivity", matchRoom.toString());
+
+
+
+        matchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                int adapterPosition = getAdapterPosition(); // 현재 아이템의 위치를 가져옵니다.
+//                if (adapterPosition != RecyclerView.NO_POSITION) {
+//                    MatchRoom matchRoom = matchRoomsList.get(adapterPosition);
+//                    requestMatch(matchRoom); // 선택한 MatchRoom 객체를 전달
+//                }
+                requestMatch(recommendViewPager.getVerticalScrollbarPosition());
+            }
+        });
+
+    }
+    private void requestMatch(int position) {
+        MatchRoom matchRoom = matchRoomsList.get(position);
+        String matchKey = matchKeyList.get(position);
+
+        String hostUid = matchRoom.getRoomInfo().getHost();
+        String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
+                .child("matchInfo").child(currentUid);
+
+        if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
+            matchInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {  //매칭정보가 없을때 매칭요청가능하게, 이미 요청내역이 있을 경우 요청불가.
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.getValue(MatchInfo.class) == null) {
+                        MatchInfo matchInfo = new MatchInfo(true, null, null);
+                        matchInfoRef.setValue(matchInfo);
+                        Toast.makeText(context, "매칭 요청 완료!!", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(context, "이미 요청 하였습니다!", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void setUpRecycler() {
         recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));

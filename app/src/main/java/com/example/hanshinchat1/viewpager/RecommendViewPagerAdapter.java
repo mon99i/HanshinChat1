@@ -11,8 +11,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.hanshinchat1.ChattingActivity;
 import com.example.hanshinchat1.HomeActivity;
 import com.example.hanshinchat1.Match;
+import com.example.hanshinchat1.MatchRoom;
 import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.RoomInfo;
 import com.example.hanshinchat1.UserInfo;
+import com.example.hanshinchat1.fragment.ShowRoomUserFragment1;
+import com.example.hanshinchat1.fragment.ShowRoomUserFragment2;
 import com.example.hanshinchat1.fragment.ShowUserFragment1;
 import com.example.hanshinchat1.fragment.ShowUserFragment2;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 public class RecommendViewPagerAdapter extends FragmentStateAdapter {
     private UserInfo userInfo;
     public ArrayList<UserInfo> userInfos;
+    private MatchRoom matchRoom;
     public ArrayList<Fragment> fragments=new ArrayList<>();
     private static final String TAG = "RecommendViewPagerAdapter ";
 
@@ -44,12 +49,24 @@ public class RecommendViewPagerAdapter extends FragmentStateAdapter {
     }
 */
 
-    public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, UserInfo userInfo) {
+    public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, UserInfo userInfo, boolean isRoomUser) {
         super(fragmentActivity);
-        this.userInfo=userInfo;
-        fragments.add(new ShowUserFragment1(userInfo));
-        fragments.add(new ShowUserFragment2(userInfo));
+//        this.userInfo=userInfo;
+        if(isRoomUser) {
+            fragments.add(new ShowUserFragment1(userInfo));
+            fragments.add(new ShowUserFragment2(userInfo));
+        } else {
+            fragments.add(new ShowRoomUserFragment1(userInfo));
+            fragments.add(new ShowRoomUserFragment2(userInfo));
+        }
+    }
 
+
+    public RecommendViewPagerAdapter(FragmentActivity fragmentActivity, MatchRoom matchRoom) {
+        super(fragmentActivity);
+        this.matchRoom=matchRoom;
+        fragments.add(new ShowRoomUserFragment1(matchRoom));
+        fragments.add(new ShowRoomUserFragment2(matchRoom));
     }
 
   /*  public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {

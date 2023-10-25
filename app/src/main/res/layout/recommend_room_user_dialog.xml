@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/acceptUserBtn"
+        app:layout_constraintBottom_toTopOf="@+id/matchBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -40,7 +40,7 @@
         app:ci_drawable="@drawable/indicator_selected" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/acceptUserBtn"
+        android:id="@+id/matchBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -48,15 +48,14 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/background_ideal_list_layout"
         android:backgroundTint="#BEB6F2"
-        android:text="대화신청"
+        android:text="매칭신청"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <TextView
-        android:id="@+id/decisionUserName"
+        android:id="@+id/roomTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
