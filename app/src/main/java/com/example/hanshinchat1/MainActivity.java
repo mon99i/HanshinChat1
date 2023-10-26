@@ -105,7 +105,60 @@ public abstract class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void checkProfileExist() {   //프로필 존재유무 확인
+//    protected void checkProfileExist() {   //프로필 존재유무 확인
+//        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+//        String currentTime=localDateTime.format(dateTimeFormatter);
+//
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        //마지막으로 프로필설정을 저장했던 액티비티로 이동
+//        if (user != null) {
+//            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+//            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                    if (snapshot.exists()) {
+//                        //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+//                        UserInfo userInfo = snapshot.getValue(UserInfo.class);
+//                        Class<?> setProfileActivity = getSetProfileActivity(userInfo);
+//                        if (setProfileActivity != null) {
+//                            Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(getApplicationContext(), setProfileActivity);
+//                            startActivity(intent);
+//                            finish();
+//                        } else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
+//                            Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
+//                            userRef.child("lastSignInTime").setValue(currentTime);
+//                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                            //userInfo.setLastSignInTime();
+//                            //FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).se
+//                        }
+//
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+//            Log.d(TAG, "checkProfileExist: " + user.getUid());
+//        } else Toast.makeText(getApplicationContext(), "로그인 유저가 없음.", Toast.LENGTH_SHORT).show();
+//
+//
+//    }
+
+    protected  void checkProfileExist(){
         LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String currentTime=localDateTime.format(dateTimeFormatter);
@@ -122,13 +175,17 @@ public abstract class MainActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
                         UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                        Class<?> setProfileActivity = getSetProfileActivity(userInfo);
-                        if (setProfileActivity != null) {
-                            Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), setProfileActivity);
+                        if(userInfo.getName() == null||userInfo.getGender() == null||userInfo.getAge() == null||
+                                userInfo.getGrade() == null||userInfo.getStudentId() == null||userInfo.getDepartment() == null||
+                                userInfo.getHeight() == null||userInfo.getForm() == null||userInfo.getAddress() == null||
+                                userInfo.getReligion() == null||userInfo.getSmoking() == null||userInfo.getDrinking() == null||
+                                userInfo.getInterest() == null||userInfo.getPersonality() == null||userInfo.getMbti() == null||userInfo.getCreationTime() ==null)
+                        {
+                            Intent intent=new Intent(getApplicationContext(),SetProfileActivity.class);
                             startActivity(intent);
                             finish();
-                        } else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
+                        }
+                        else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
                             Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
                             userRef.child("lastSignInTime").setValue(currentTime);
                             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -140,7 +197,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), SetProfilePhotoActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -155,44 +212,109 @@ public abstract class MainActivity extends AppCompatActivity {
             Log.d(TAG, "checkProfileExist: " + user.getUid());
         } else Toast.makeText(getApplicationContext(), "로그인 유저가 없음.", Toast.LENGTH_SHORT).show();
 
-
     }
 
-    private Class<?> getSetProfileActivity(UserInfo userInfo) {
-        if (userInfo.getName() == null) {
-            return SetProfile2NameActivity.class;
-        } else if (userInfo.getGender() == null) {
-            return SetProfile3GenderActivity.class;
-        } else if (userInfo.getAge() == null) {
-            return SetProfile4AgeActivity.class;
-        } else if (userInfo.getGrade() == null) {
-            return SetProfile5GradeActivity.class;
-        } else if (userInfo.getStudentId() == null) {
-            return SetProfile6StudentIdActivity.class;
-        } else if (userInfo.getDepartment() == null) {
-            return SetProfile7DepartmentActivity.class;
-        } else if (userInfo.getHeight() == null) {
-            return SetProfile8HeightActivity.class;
-        } else if (userInfo.getForm() == null) {
-            return SetProfile9FormActivity.class;
-        } else if (userInfo.getAddress() == null) {
-            return SetProfile10AddressActivity.class;
-        } else if (userInfo.getReligion() == null) {
-            return SetProfile11ReligionActivity.class;
-        } else if (userInfo.getSmoking() == null) {
-            return SetProfile12SmokingActivity.class;
-        } else if (userInfo.getDrinking() == null) {
-            return SetProfile13DrinkingActivity.class;
-        } else if (userInfo.getInterest() == null) {
-            return SetProfile14InterestActivity.class;
-        } else if (userInfo.getPersonality() == null) {
-            return SetProfile15PersonalityActivity.class;
-        } else if (userInfo.getMbti() == null) {
-            return SetProfile16MbtiActivity.class;
-        }
-        // 모든 프로필 정보가 입력되었을 때 null 반환
-        return null;
-    }
+//    private Class<?> getSetProfileActivity(UserInfo userInfo) {
+//        if (userInfo.getName() == null) {
+//            return SetProfile2NameActivity.class;
+//        } else if (userInfo.getGender() == null) {
+//            return SetProfile3GenderActivity.class;
+//        } else if (userInfo.getAge() == null) {
+//            return SetProfile4AgeActivity.class;
+//        } else if (userInfo.getGrade() == null) {
+//            return SetProfile5GradeActivity.class;
+//        } else if (userInfo.getStudentId() == null) {
+//            return SetProfile6StudentIdActivity.class;
+//        } else if (userInfo.getDepartment() == null) {
+//            return SetProfile7DepartmentActivity.class;
+//        } else if (userInfo.getHeight() == null) {
+//            return SetProfile8HeightActivity.class;
+//        } else if (userInfo.getForm() == null) {
+//            return SetProfile9FormActivity.class;
+//        } else if (userInfo.getAddress() == null) {
+//            return SetProfile10AddressActivity.class;
+//        } else if (userInfo.getReligion() == null) {
+//            return SetProfile11ReligionActivity.class;
+//        } else if (userInfo.getSmoking() == null) {
+//            return SetProfile12SmokingActivity.class;
+//        } else if (userInfo.getDrinking() == null) {
+//            return SetProfile13DrinkingActivity.class;
+//        } else if (userInfo.getInterest() == null) {
+//            return SetProfile14InterestActivity.class;
+//        } else if (userInfo.getPersonality() == null) {
+//            return SetProfile15PersonalityActivity.class;
+//        } else if (userInfo.getMbti() == null) {
+//            return SetProfile16MbtiActivity.class;
+//        }
+//        // 모든 프로필 정보가 입력되었을 때 null 반환
+//        return null;
+//    }
+
+
+//    protected  void checkProfileExists3(){
+//        Bundle bundle = new Bundle();
+//        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+//        String currentTime=localDateTime.format(dateTimeFormatter);
+//
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        //마지막으로 프로필설정을 저장했던 액티비티로 이동
+//        if (user != null) {
+//            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+//            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                    if (snapshot.exists()) {
+//                        //Toast.makeText(getApplicationContext(), "프로필 설정이 조금 더 남았습니다!", Toast.LENGTH_SHORT).show();
+//                        UserInfo userInfo = snapshot.getValue(UserInfo.class);
+//                        if(userInfo.getName() == null){
+//                            bundle.putString()
+//                        }
+//                            userInfo.getGender() == null||userInfo.getAge() == null||
+//                                    userInfo.getGrade() == null||userInfo.getStudentId() == null||userInfo.getDepartment() == null||
+//                                    userInfo.getHeight() == null||userInfo.getForm() == null||userInfo.getAddress() == null||
+//                                    userInfo.getReligion() == null||userInfo.getSmoking() == null||userInfo.getDrinking() == null||
+//                                    userInfo.getInterest() == null||userInfo.getPersonality() == null||userInfo.getMbti() == null
+//
+//                        {
+//                            Intent intent=new Intent(getApplicationContext(),SetProfileActivity.class);
+//                            intent.putExtra("userInfo",userInfo);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//
+//
+//
+//                        else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
+//                            Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
+//                            userRef.child("lastSignInTime").setValue(currentTime);
+//                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                            //userInfo.setLastSignInTime();
+//                            //FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).se
+//                        }
+//
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), SetProfileActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
+//            Log.d(TAG, "checkProfileExist: " + user.getUid());
+//        } else Toast.makeText(getApplicationContext(), "로그인 유저가 없음.", Toast.LENGTH_SHORT).show();
+//
+//    }
 
 
     protected void deleteUser() {  //앱상에서 유저 삭제

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".SetProfileIdealTypeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/ideal_type_progress"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4"
+            android:max="18"
+            android:progress="17"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_profile_idealType"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1순위" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/first_idealtype_spinner1"
+            android:entries="@array/이상형조건1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/first_idealtype_spinner2"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2순위" />
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/second_idealtype_spinner1"
+            android:entries="@array/이상형조건1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:layout_margin="10dp"
+            android:id="@+id/second_idealtype_spinner2"
+            android:spinnerMode="dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/ideal_first"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="1순위 선택"
+            android:textSize="20sp"
+            android:gravity="left|center" />
+        <TextView
+            android:id="@+id/ideal_second"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="2순위 선택"
+            android:textSize="20sp"
+            android:gravity="left|center" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_profile_address"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp">
+
+        <NumberPicker
+            android:id="@+id/first_address_number_picker"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_marginEnd="8dp" />
+
+        <NumberPicker
+            android:id="@+id/second_address_number_picker"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:descendantFocusability="blocksDescendants" />
+    </LinearLayout>
+</FrameLayout>

@@ -224,6 +224,4 @@ public class UserInfo implements Serializable{
     private String lastSignInTime;
     private String creationTime;
 
-
-
 }
