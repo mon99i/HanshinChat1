@@ -122,7 +122,7 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
 
 
         decisionUserName.setText(userInfo.getName());
-        RecommendViewPagerAdapter adapter = new RecommendViewPagerAdapter((FragmentActivity) context, userInfo);
+        RecommendViewPagerAdapter adapter = new RecommendViewPagerAdapter((FragmentActivity) context, userInfo, true);
         decisionViewPager.setAdapter(adapter);
 
         builder.setView(view);

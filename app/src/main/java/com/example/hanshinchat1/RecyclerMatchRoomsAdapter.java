@@ -2,15 +2,30 @@ package com.example.hanshinchat1;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+//import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.hanshinchat1.Room.RoomInfoActivity;
+import com.example.hanshinchat1.board.ListViewItem;
+import com.example.hanshinchat1.utils.FBAuth;
+import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +34,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import me.relex.circleindicator.CircleIndicator3;
 
 public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatchRoomsAdapter.ViewHolder> {
 
@@ -32,6 +50,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     private boolean isDepartmentFilterEnabled = false;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private String selectedCategory;
+    private AlertDialog dialog;
+
     private UserInfo userInfo;
 
     public RecyclerMatchRoomsAdapter(Context context) {
@@ -58,6 +78,9 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                         matchKeyList.add(item.getKey());
                     }
                 }
+                Collections.reverse(matchKeyList);
+                Collections.reverse(matchRoomsList);
+
 
                 // 카테고리 적용
                 if (selectedCategory != null) {
@@ -111,6 +134,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             }
         });*/
 
+
+
     @NonNull
     @Override
     public RecyclerMatchRoomsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -121,6 +146,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     @Override
     public void onBindViewHolder(@NonNull RecyclerMatchRoomsAdapter.ViewHolder holder, int position) {
         MatchRoom matchRoom = matchRoomsList.get(position);
+        final int currentPosition = holder.getAdapterPosition();
         holder.txt_roomTitle.setText(matchRoom.getRoomInfo().getTitle());
 
         String categoryTxt = matchRoom.getRoomInfo().getCategory();
@@ -133,19 +159,29 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         } else if ("밥팅".equals(categoryTxt)) {
             imageResourceId = R.drawable.icon3;
         } else {
-            imageResourceId = R.drawable.icon1;
+            imageResourceId = R.drawable.icon4;
         }
         holder.roomCategory.setImageResource(imageResourceId);
         holder.txt_roomGender.setText(matchRoom.getRoomInfo().getGender());
         holder.txt_roomDepartment.setText(matchRoom.getRoomInfo().getDepartment());
         holder.txt_roomMember.setText(matchRoom.getRoomInfo().getNum());
 
-        //        holder.btn_match.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                requestMatch(currentPosition);
-//            }
-//        });
+        holder.room_cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPosition = holder.getAdapterPosition();
+                if (currentPosition != RecyclerView.NO_POSITION) {
+                    MatchRoom currentMatchRoom = matchRoomsList.get(currentPosition);
+                    showRecommendUserDialog(currentPosition);
+
+//                showRecommendUserDialog(matchRoomsList.get(currentPosition));
+
+                    Log.d("RoomActivity", matchRoom.getRoomInfo().getHost());
+
+                }
+            }
+        });
+
     }
 
     public void setSelectedCategory(String category) {
@@ -258,33 +294,117 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         return matchRoomsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_roomTitle;
-        ImageView roomCategory;
-        TextView txt_roomGender;
-        TextView txt_roomMember;
-        TextView txt_roomDepartment;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txt_roomTitle = itemView.findViewById(R.id.txt_roomTitle);
-            roomCategory = itemView.findViewById(R.id.roomCategory);
-            txt_roomMember = itemView.findViewById(R.id.txt_roomMember);
-            txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
-            txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
-        }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
+
+
+    private void showRecommendUserDialog(int currentPosition){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
+
+        ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
+        Button matchBtn=view.findViewById(R.id.matchBtn);
+        TextView roomTitle=view.findViewById(R.id.roomTitle);
+
+        CircleIndicator3 indicator = view.findViewById(R.id.indicator);
+        indicator.setViewPager(recommendViewPager);
+        indicator.createIndicators(2, 0);
+        recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
+
+        MatchRoom matchRoom = matchRoomsList.get(currentPosition);
+
+        Log.d("RoomActivity", matchRoom.getRoomInfo().getHost());
+        roomTitle.setText("[" + matchRoom.getRoomInfo().getCategory() + "] " + matchRoom.getRoomInfo().getTitle());
+
+        String matchRoomId = matchRoom.getRoomInfo().getHost(); // MatchRoom의 고유 ID
+        DatabaseReference matchRoomRef = FirebaseDatabase.getInstance().getReference().child("users").child(matchRoomId);
+
+        matchRoomRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    UserInfo hostUserInfo = dataSnapshot.getValue(UserInfo.class);
+
+                    Log.d("RoomActivity", hostUserInfo.toString());
+
+                        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
+                        recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//                        @Override
+//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+//                            if (positionOffsetPixels == 0) {
+//                                recommendViewPager.setCurrentItem(position);
+//                            }
+//                        }
+//
+                        @Override
+                        public void onPageSelected(int position) {
+                            super.onPageSelected(position);
+                            indicator.animatePageSelected(position % 2);
+
+                        }
+                    });
+
+                } else {
+                    Log.d("RoomActivity", "아무것도 없나봐...");
+
+                    // 해당 MatchRoom 데이터가 없을 경우 처리
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // 데이터베이스 에러 처리
+            }
+        });
+
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
+
+
+        matchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                int adapterPosition = getAdapterPosition(); // 현재 아이템의 위치를 가져옵니다.
+//                if (adapterPosition != RecyclerView.NO_POSITION) {
+//                    MatchRoom matchRoom = matchRoomsList.get(adapterPosition);
+//                    requestMatch(matchRoom); // 선택한 MatchRoom 객체를 전달
+//                }
+//                requestMatch(recommendViewPager.getVerticalScrollbarPosition());
+//                if (currentPosition != RecyclerView.NO_POSITION) {
+                    requestMatch(currentPosition);
+//                }
+            }
+        });
+
+    }
+
     private void requestMatch(int position) {
         MatchRoom matchRoom = matchRoomsList.get(position);
         String matchKey = matchKeyList.get(position);
 
         String hostUid = matchRoom.getRoomInfo().getHost();
+        Log.d("ListActivity", hostUid);
         String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("ListActivity", currentUid);
 
-        DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
-                .child("matchInfo").child(currentUid);
+//        DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
+//                .child("matchInfo").child(currentUid);
 
-        if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
+//        String myUid = FBAuth.getUid();
+//        String writerUid = dataModel.getUid();
+
+//        if(myUid.equals(writerUid))
+//        if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
+        if (!currentUid.equals(hostUid)) {
+            DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
+                    .child("matchInfo").child(currentUid);
             matchInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {  //매칭정보가 없을때 매칭요청가능하게, 이미 요청내역이 있을 경우 요청불가.
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -301,5 +421,64 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                 }
             });
         } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private OnItemClickListener mListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private LinearLayout room_cardview;
+        TextView txt_roomTitle;
+        ImageView roomCategory;
+        TextView txt_roomGender;
+        TextView txt_roomMember;
+        TextView txt_roomDepartment;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txt_roomTitle = itemView.findViewById(R.id.txt_roomTitle);
+            roomCategory = itemView.findViewById(R.id.roomCategory);
+            txt_roomMember = itemView.findViewById(R.id.txt_roomMember);
+            txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
+            txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
+
+            room_cardview = itemView.findViewById(R.id.room_cardview);
+        }
+
+
+        private void requestMatch(int position) {
+            MatchRoom matchRoom = matchRoomsList.get(position);
+            String matchKey = matchKeyList.get(position);
+
+            String hostUid = matchRoom.getRoomInfo().getHost();
+            String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
+                    .child("matchInfo").child(currentUid);
+
+            if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
+                matchInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {  //매칭정보가 없을때 매칭요청가능하게, 이미 요청내역이 있을 경우 요청불가.
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.getValue(MatchInfo.class) == null) {
+                            MatchInfo matchInfo = new MatchInfo(true, null, null);
+                            matchInfoRef.setValue(matchInfo);
+                            Toast.makeText(context, "매칭 요청 완료!!", Toast.LENGTH_SHORT).show();
+                        } else Toast.makeText(context, "이미 요청 하였습니다!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

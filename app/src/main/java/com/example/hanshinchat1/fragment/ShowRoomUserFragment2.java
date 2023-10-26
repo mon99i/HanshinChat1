@@ -2,17 +2,16 @@ package com.example.hanshinchat1.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.MatchRoom;
 import com.example.hanshinchat1.R;
@@ -27,10 +26,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShowUserFragment2#newInstance} factory method to
+ * Use the {@link ShowRoomUserFragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowUserFragment2 extends Fragment {
+public class ShowRoomUserFragment2 extends Fragment {
     private static final String TAG = "RecommendUserFragment2";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,12 +53,12 @@ public class ShowUserFragment2 extends Fragment {
 
 
     private ScrollView scroll2;
-    public ShowUserFragment2(UserInfo userInfo) {
+    public ShowRoomUserFragment2(UserInfo userInfo) {
         // Required empty public constructor
         this.userInfo = userInfo;
     }
 
-    public ShowUserFragment2(MatchRoom matchRoom) {
+    public ShowRoomUserFragment2(MatchRoom matchRoom) {
         this.matchRoom = matchRoom;
     }
 
@@ -72,8 +71,8 @@ public class ShowUserFragment2 extends Fragment {
      * @return A new instance of fragment recommendUserFragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowUserFragment2 newInstance(String param1, String param2, UserInfo userInfo) {
-        ShowUserFragment2 fragment = new ShowUserFragment2(userInfo);
+    public static ShowRoomUserFragment2 newInstance(String param1, String param2, UserInfo userInfo) {
+        ShowRoomUserFragment2 fragment = new ShowRoomUserFragment2(userInfo);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -2,9 +2,6 @@ package com.example.hanshinchat1.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +9,21 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MatchRoom;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShowUserFragment1#newInstance} factory method to
+ * Use the {@link ShowRoomUserFragment1#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowUserFragment1 extends Fragment {
+public class ShowRoomUserFragment1 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,13 +38,14 @@ public class ShowUserFragment1 extends Fragment {
     private ScrollView scroll1;
     public UserInfo userInfo;
     public MatchRoom matchRoom;
-    public ShowUserFragment1(UserInfo userInfo) {
+    public ShowRoomUserFragment1(UserInfo userInfo) {
         // Required empty public constructor
         this.userInfo=userInfo;
     }
 
-    public ShowUserFragment1(MatchRoom matchRoom) {
+    public ShowRoomUserFragment1(MatchRoom matchRoom) {
         this.matchRoom=matchRoom;
+
     }
 
     /**
@@ -55,15 +57,23 @@ public class ShowUserFragment1 extends Fragment {
      * @return A new instance of fragment recommendUserFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowUserFragment1 newInstance(String param1, String param2, UserInfo userInfo) {
-        ShowUserFragment1 fragment = new ShowUserFragment1(userInfo);
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+    public static ShowRoomUserFragment1 newInstance(String param1, String param2, UserInfo userInfo) {
+        ShowRoomUserFragment1 fragment = new ShowRoomUserFragment1(userInfo);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
         return fragment;
     }
 
+    public static ShowRoomUserFragment1 newInstance(String param1, String param2, MatchRoom matchRoom) {
+        ShowRoomUserFragment1 fragment = new ShowRoomUserFragment1(matchRoom);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +87,7 @@ public class ShowUserFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_show_user1, container, false);
+        View view=inflater.inflate(R.layout.fragment_show_room_user1, container, false);
 
         ImageView recommendUserImage=view.findViewById(R.id.recommendUserImage);
         TextView recommendAgeAddress=view.findViewById(R.id.recommendAgeAddress);

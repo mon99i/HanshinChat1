@@ -34,18 +34,12 @@
             android:background="@drawable/requestchat"
             />
 
-        <ImageButton
-            android:id="@+id/notification"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
 
-            android:src="@drawable/heart_no"
-            android:background="@color/white" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.8dp"
+        android:layout_height="1dp"
         android:background="#eaeaea" />
 
     <ScrollView
@@ -268,7 +262,7 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="0.8dp"
+        android:layout_height="1dp"
         android:background="#CCCCCC" />
 
     <LinearLayout

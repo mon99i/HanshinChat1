@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 
 public class Utils {
@@ -180,6 +183,72 @@ public class Utils {
 
     }*/
 
+
+    public static void mostLikedMatching(Context context){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime threeWeeksAgo =currentTime.minusWeeks(3);
+        String currentTimeString = currentTime.format(dateTimeFormatter);
+        String threeWeeksAgoString = threeWeeksAgo.format(dateTimeFormatter);
+
+
+        ArrayList<UserInfo> allUsers=new ArrayList<>();
+        ArrayList<UserInfo> mostLikedUsers=new ArrayList<>();
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference usersRef=FirebaseDatabase.getInstance().getReference().child("users");
+        usersRef.orderByChild("lastSignInTime").startAt(threeWeeksAgoString)
+                .endAt(currentTimeString).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                allUsers.clear();
+                mostLikedUsers.clear();
+                for(DataSnapshot item: snapshot.getChildren()){
+                    if(!item.getKey().equals(user.getUid())){
+                        UserInfo userInfo=item.getValue(UserInfo.class);
+                        if(userInfo.getLike()!=null){
+                            allUsers.add(userInfo);
+                        }
+                    }
+                }
+
+                Collections.sort(allUsers, new Comparator<UserInfo>() {
+                    @Override
+                    public int compare(UserInfo object1, UserInfo object2) {
+                        return object2.getLike() - object1.getLike();
+
+                    }
+                });
+
+                if(allUsers.size()>5){
+                    for(int i=0;i<5;i++){
+                        mostLikedUsers.add(allUsers.get(i));
+                        Log.d(TAG, "most like user>5 "+mostLikedUsers.get(i).getName()+" 좋아요: "+mostLikedUsers.get(i).getLike());
+                    }
+                }else{
+                    for(int i=0;i<allUsers.size();i++){
+                        mostLikedUsers.add(allUsers.get(i));
+                        Log.d(TAG, "most like user<=5 "+mostLikedUsers.get(i).getName()+" 좋아요: "+mostLikedUsers.get(i).getLike());
+                    }
+                }
+
+                Log.d(TAG, "onDataChange: most like user size "+mostLikedUsers.size());
+
+                Intent intent = new Intent(context, RecommendMatchActivity.class);
+                intent.putExtra("recommendUsers", mostLikedUsers);
+                intent.putExtra("recommendType","좋아요를 많이 받은 친구");
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public static void recentConnectMatching(Context context) {    //하루전부터 지금까지 접속한 유저 조회
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
@@ -192,7 +261,7 @@ public class Utils {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference().child("users")
                 .orderByChild("lastSignInTime").startAt(oneDayAgoString)
-                .endAt(currentTimeString).addValueEventListener(new ValueEventListener() {
+                .endAt(currentTimeString).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         recentConnectUsers.clear();
@@ -264,9 +333,17 @@ public class Utils {
 
 
     public static void arroundMatching(Context context) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime threeWeeksAgo =currentTime.minusWeeks(3);
+        String currentTimeString = currentTime.format(dateTimeFormatter);
+        String threeWeeksAgoString = threeWeeksAgo.format(dateTimeFormatter);
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ArrayList<UserInfo> arroundUsers = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("users")
+                .orderByChild("lastSignInTime").startAt(threeWeeksAgoString).endAt(currentTimeString)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -300,18 +377,22 @@ public class Utils {
 
 
     public static void idealMatching(Context context, Ideal ideal) {
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime threeWeeksAgo =currentTime.minusWeeks(3);
+        String currentTimeString = currentTime.format(dateTimeFormatter);
+        String threeWeeksAgoString = threeWeeksAgo.format(dateTimeFormatter);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         HashSet<UserInfo> firstsSet=new HashSet<>();
         HashSet<UserInfo> secondsSet=new HashSet<>();
         HashSet<UserInfo> thirdsSet=new HashSet<>();
-    /*    ArrayList<UserInfo> firsts = new ArrayList<>();
-        ArrayList<UserInfo> seconds = new ArrayList<>();
-        ArrayList<UserInfo> thirds = new ArrayList<>();*/
 
-        //ArrayList<UserInfo> idealUsers=new ArrayList<>();
-
-        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .orderByChild("lastSignInTime").startAt(threeWeeksAgoString).endAt(currentTimeString)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 firstsSet.clear();
@@ -860,7 +941,7 @@ public class Utils {
         });
     }
 
-    public static Boolean checkProfileOpen() {
+/*    public static Boolean checkProfileOpen() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -879,5 +960,5 @@ public class Utils {
 
 
         return true;
-    }
+    }*/
 }

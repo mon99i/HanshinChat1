@@ -121,6 +121,9 @@
         <activity
             android:name=".Match1.MbtiMatchActivity2"
             android:exported="false" />
+        <activity
+            android:name=".Room.RoomInfoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
