@@ -38,6 +38,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,7 +50,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 //import com.example.hanshinchat1.Match.MBTIMatchActivity;
@@ -138,33 +141,97 @@ public class HomeActivity extends MainActivity {
         speakerBtn.setText(randomPhrase);
     }
 
-    public void checkNewRequest() {
+
+
+    private void checkNewRequest(){
+        ArrayList<String > myRoomKeys=new ArrayList<>();
+        ArrayList<String> newUserRequestUids = new ArrayList<>();
+        HashMap<String,ArrayList<String>> newRoomRequestUids=new HashMap<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
-        ArrayList<String> newRequestUids = new ArrayList<>();
 
-        //나한테 요청온 목록 모두 조회
-        matchRef.orderByChild("request").equalTo(true).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                newRequestUids.clear();
-                for (DataSnapshot item : snapshot.getChildren()) {
-                    newRequestUids.add(item.getKey());
-                    //요청중 확인하지 않은 uid 조회
-                }
-                if (newRequestUids.size() > 0) {
-                    showNewRequestDialog();
-                }
+        Query query=FirebaseDatabase.getInstance().getReference().child("rooms");
+        FirebaseDatabase.getInstance().getReference().child("matches")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            newUserRequestUids.clear();
+                            newRoomRequestUids.clear();
+                            Match match=snapshot.getValue(Match.class);
+                            Map<String, State> users=match.getUsers();
+                            Map<String, State> rooms=match.getRooms();
 
-            }
+                            query .orderByChild("host").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot subSnapshot) {
+                                    //내가만든 방이있으면 그 방 매칭기록 조회
+                                    if(subSnapshot.exists()){
+                                        myRoomKeys.clear();
+                                        for(DataSnapshot item:subSnapshot.getChildren()){
+                                            myRoomKeys.add(item.getKey());
+                                        }
+                                        for(String myRoomKey:myRoomKeys){
+                                            State myRoomState=rooms.get(myRoomKey);
+                                            if(myRoomState!=null){
+                                                ArrayList<String> requestUids=new ArrayList<>();
+                                                for(Map.Entry<String,Boolean> map:myRoomState.getRequest().entrySet()){
+                                                    String uid=map.getKey();
+                                                    Boolean request=map.getValue();
+                                                    if(request==true){
+                                                        requestUids.add(uid);
+                                                    }
+                                                }
+                                                newRoomRequestUids.put(myRoomKey,requestUids);
+                                            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                                        }
 
-            }
-        });
+                                    }
+
+                                    //나한테 들어온 매칭 기록 조회
+                                    State myMatchState=users.get(user.getUid());
+                                    if(myMatchState!=null){
+                                        for(Map.Entry<String,Boolean> map:myMatchState.getRequest().entrySet()){
+                                            String uid=map.getKey();
+                                            Boolean request=map.getValue();
+                                            if(request==true){
+                                                newUserRequestUids.add(uid);
+                                            }
+                                        }
+                                    }
+
+                                    if(!newUserRequestUids.isEmpty()||!newRoomRequestUids.isEmpty()){
+
+                                        showNewRequestDialog();
+                                    }
+
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
     }
+
+
+
+
+
+
+
+
+
+
 
     //채팅요청이 왔다는 다이얼로그
     private void showNewRequestDialog() {

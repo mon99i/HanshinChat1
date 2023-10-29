@@ -113,10 +113,6 @@ public class ChattingActivity extends MainActivity {
     }
 
     private void setupChatRoomKey() {   //새롭게 방을 만들경우 받아오는 chatRoomKey가 없으므로, 이곳에서 생성
-
-        //수정필요
-
-        //이거 보류
         FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + opponentUser.getUid()).equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -139,14 +135,22 @@ public class ChattingActivity extends MainActivity {
                     }
                 });
 
-     /*   FirebaseDatabase.getInstance().getReference()
+        /* //이거 보류
+        FirebaseDatabase.getInstance().getReference()
                 .child("chatRooms").orderByChild("users/" + user.getUid()).equalTo(true)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
-                            chatRoom.getUsers()
-
+                            ChatRoom chatRoom2=data.getValue(ChatRoom.class);
+                            Log.d(TAG, "onDataChange: "+chatRoom2);
+                            if(chatRoom2.getUsers().containsKey(opponentUser.getUid())){
+                                Log.d(TAG, "onDataChange: chat if 문 안들어옴");
+                                Log.d(TAG, "onDataChange: "+chatRoom2+" 받은 chatRoom:"+chatRoom);
+                                chatRoomKey=data.getKey();
+                                setupRecycler();
+                                break;
+                            }
 
                             break;
                         }
@@ -156,30 +160,6 @@ public class ChattingActivity extends MainActivity {
 
                     @Override
                     public void onCancelled(DatabaseError error) {
-                    }
-        */
-
-
-     /*   FirebaseDatabase.getInstance().getReference().child("chatRooms")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot item:snapshot.getChildren()){
-                            Log.d(TAG, "onDataChange: for문으로 들어오긴함");
-                            Log.d(TAG, "onDataChange: "+chatRoom+" item.getvalue:"+item.getValue(ChatRoom.class));
-                            if(item.getValue(ChatRoom.class)==chatRoom){
-                                Log.d(TAG, "onDataChange: if문으로 들어오긴함");
-                                chatRoomKey=item.getKey();
-                                setupRecycler();
-                                Log.d(TAG, "onDataChange: 방키는 "+chatRoomKey);
-                                break;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });*/
     }

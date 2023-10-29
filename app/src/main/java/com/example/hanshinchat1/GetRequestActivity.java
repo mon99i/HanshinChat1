@@ -14,12 +14,14 @@ import android.widget.LinearLayout;
 import com.example.hanshinchat1.recycler.RecyclerGetRequestAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GetRequestActivity extends AppCompatActivity {
 
     ImageButton getRequestBackBtn;
     RecyclerView recycler_get_request;
-    ArrayList<String> getRequestUids;
+    ArrayList<String> getUserRequestUids;
+    HashMap<String, ArrayList<String>> getRoomRequestUids;
     LinearLayout noneRequestUserlayout;
     private static final String TAG="GetRequestActivity";
 
@@ -37,15 +39,16 @@ public class GetRequestActivity extends AppCompatActivity {
         noneRequestUserlayout=findViewById(R.id.noneRequestUserLayout);
         getRequestBackBtn=findViewById(R.id.getRequestBackBtn);
         recycler_get_request=findViewById(R.id.recycler_get_request);
-        getRequestUids= (ArrayList<String>)getIntent().getSerializableExtra("getRequestUids");
-
-        if(getRequestUids==null||getRequestUids.isEmpty()){
+        getUserRequestUids= (ArrayList<String>)getIntent().getSerializableExtra("getUserRequestUids");
+        getRoomRequestUids= (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("getRoomRequestUids");
+        if((getUserRequestUids==null&& getRoomRequestUids==null)||(getUserRequestUids.isEmpty()&& getRoomRequestUids.isEmpty())){
             noneRequestUserlayout.setVisibility(View.VISIBLE);
         }
 
-        Log.d(TAG, "oGetRequestActivity: "+getRequestUids.size());
+        Log.d(TAG, "oGetRequestActivity: "+getUserRequestUids);
+        Log.d(TAG, "oGetRequestActivity: "+ getRoomRequestUids);
         recycler_get_request.setLayoutManager(new LinearLayoutManager(this));
-        recycler_get_request.setAdapter(new RecyclerGetRequestAdapter(this,getRequestUids));
+        recycler_get_request.setAdapter(new RecyclerGetRequestAdapter(this,getUserRequestUids,getRoomRequestUids));
 
     }
 
