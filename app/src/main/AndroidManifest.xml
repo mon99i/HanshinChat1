@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SetProfileActivity" android:exported="false" />
         <activity android:name=".Simulation1" android:exported="false" />
         <activity android:name=".Simulation2" android:exported="false" />
         <activity android:name=".Simulation3" android:exported="false" />
@@ -98,7 +98,7 @@
             android:name=".board.BoardEditActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".SetProfile1PhotoActivity"
+            android:name=".SetProfilePhotoActivity"
             android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
@@ -108,57 +108,6 @@
             android:exported="false"></activity>
         <activity
             android:name=".ProfileEditActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile2NameActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile3GenderActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile4AgeActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile6StudentIdActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile7DepartmentActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile8HeightActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile11ReligionActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile10AddressActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile12SmokingActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile13DrinkingActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile14InterestActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile15PersonalityActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile17IdealTypeActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile16MbtiActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile18CompleteActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile9FormActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".SetProfile5GradeActivity"
             android:exported="false"></activity>
         <activity
             android:name=".SetIdealActivity"
@@ -171,6 +120,9 @@
             android:exported="false" />
         <activity
             android:name=".Match1.MbtiMatchActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".Room.RoomInfoActivity"
             android:exported="false" />
     </application>
 

@@ -14,4 +14,12 @@
         <item name="android:dropDownVerticalOffset">30dp</item>
     </style>
 
+    <style name="ThinProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progressbar_style</item>
+    </style>
+
+
+
+
 </resources>

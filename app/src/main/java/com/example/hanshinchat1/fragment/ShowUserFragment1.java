@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.hanshinchat1.MatchRoom;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
 
@@ -35,9 +36,14 @@ public class ShowUserFragment1 extends Fragment {
 
     private ScrollView scroll1;
     public UserInfo userInfo;
+    public MatchRoom matchRoom;
     public ShowUserFragment1(UserInfo userInfo) {
         // Required empty public constructor
         this.userInfo=userInfo;
+    }
+
+    public ShowUserFragment1(MatchRoom matchRoom) {
+        this.matchRoom=matchRoom;
     }
 
     /**
@@ -57,6 +63,7 @@ public class ShowUserFragment1 extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
