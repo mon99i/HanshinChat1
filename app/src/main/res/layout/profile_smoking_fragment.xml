@@ -11,7 +11,7 @@
         android:textSize="25sp"
         android:textColor="@color/black"/>
     <RadioGroup
-        android:id="@+id/smoking_radio_group"
+        android:id="@+id/smoking_radio_group_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -25,7 +25,7 @@
             android:padding="22dp">
 
             <RadioButton
-                android:id="@+id/smoking_radio_btn_1"
+                android:id="@+id/smoking_radio_btn_1_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -37,7 +37,7 @@
 
 
             <RadioButton
-                android:id="@+id/smoking_radio_btn_2"
+                android:id="@+id/smoking_radio_btn_2_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -48,7 +48,7 @@
                 android:background="@drawable/radio_button_border" />
 
             <RadioButton
-                android:id="@+id/smoking_radio_btn_3"
+                android:id="@+id/smoking_radio_btn_3_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -59,7 +59,7 @@
                 android:background="@drawable/radio_button_border" />
 
             <RadioButton
-                android:id="@+id/smoking_radio_btn_4"
+                android:id="@+id/smoking_radio_btn_4_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"

@@ -30,14 +30,14 @@ public class ProfileMbtiFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        btnE = view.findViewById(R.id.mbti_e);
-        btnI = view.findViewById(R.id.mbti_i);
-        btnN = view.findViewById(R.id.mbti_n);
-        btnS = view.findViewById(R.id.mbti_s);
-        btnF = view.findViewById(R.id.mbti_f);
-        btnT = view.findViewById(R.id.mbti_t);
-        btnP = view.findViewById(R.id.mbti_p);
-        btnJ = view.findViewById(R.id.mbti_j);
+        btnE = view.findViewById(R.id.mbti_e_fragment);
+        btnI = view.findViewById(R.id.mbti_i_fragment);
+        btnN = view.findViewById(R.id.mbti_n_fragment);
+        btnS = view.findViewById(R.id.mbti_s_fragment);
+        btnF = view.findViewById(R.id.mbti_f_fragment);
+        btnT = view.findViewById(R.id.mbti_t_fragment);
+        btnP = view.findViewById(R.id.mbti_p_fragment);
+        btnJ = view.findViewById(R.id.mbti_j_fragment);
 
         btnE.setChecked(true);
         btnN.setChecked(true);
@@ -119,5 +119,10 @@ public class ProfileMbtiFragment extends Fragment {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         String mbtiValue = selectedFirst + selectedSecond + selectedThird + selectedForth;
         userRef.child("mbti").setValue(mbtiValue);
+    }
+
+    public String editDB() {
+        String newMbtiValue = selectedFirst + selectedSecond + selectedThird + selectedForth;
+        return newMbtiValue;
     }
 }

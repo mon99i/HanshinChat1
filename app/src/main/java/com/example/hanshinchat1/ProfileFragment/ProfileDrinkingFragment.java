@@ -31,12 +31,12 @@ public class ProfileDrinkingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_drinking_fragment, container, false);
 
-        radioGroup = view.findViewById(R.id.drinking_radio_group);
-        radioButton1 = view.findViewById(R.id.drinking_radio_btn_1);
-        radioButton2 = view.findViewById(R.id.drinking_radio_btn_2);
-        radioButton3 = view.findViewById(R.id.drinking_radio_btn_3);
-        radioButton4 = view.findViewById(R.id.drinking_radio_btn_4);
-        radioButton5 = view.findViewById(R.id.drinking_radio_btn_5);
+        radioGroup = view.findViewById(R.id.drinking_radio_group_fragment);
+        radioButton1 = view.findViewById(R.id.drinking_radio_btn_1_fragment);
+        radioButton2 = view.findViewById(R.id.drinking_radio_btn_2_fragment);
+        radioButton3 = view.findViewById(R.id.drinking_radio_btn_3_fragment);
+        radioButton4 = view.findViewById(R.id.drinking_radio_btn_4_fragment);
+        radioButton5 = view.findViewById(R.id.drinking_radio_btn_5_fragment);
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,5 +80,10 @@ public class ProfileDrinkingFragment extends Fragment {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         String selectedDriking = selectedRadioButton.getText().toString();
         userRef.child("drinking").setValue(selectedDriking);
+    }
+
+    public String editDB() {
+        String selectedDrinking = selectedRadioButton.getText().toString();
+        return selectedDrinking;
     }
 }

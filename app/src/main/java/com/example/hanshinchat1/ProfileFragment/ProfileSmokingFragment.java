@@ -31,12 +31,12 @@ public class ProfileSmokingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_smoking_fragment, container, false);
 
-        radioGroup = view.findViewById(R.id.smoking_radio_group);
+        radioGroup = view.findViewById(R.id.smoking_radio_group_fragment);
 
-        radioButton1 = view.findViewById(R.id.smoking_radio_btn_1);
-        radioButton2 = view.findViewById(R.id.smoking_radio_btn_2);
-        radioButton3 = view.findViewById(R.id.smoking_radio_btn_3);
-        radioButton4 = view.findViewById(R.id.smoking_radio_btn_4);
+        radioButton1 = view.findViewById(R.id.smoking_radio_btn_1_fragment);
+        radioButton2 = view.findViewById(R.id.smoking_radio_btn_2_fragment);
+        radioButton3 = view.findViewById(R.id.smoking_radio_btn_3_fragment);
+        radioButton4 = view.findViewById(R.id.smoking_radio_btn_4_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -66,5 +66,10 @@ public class ProfileSmokingFragment extends Fragment {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         String selectedSmoking = selectedRadioButton.getText().toString();
         userRef.child("smoking").setValue(selectedSmoking);
+    }
+
+    public String editDB() {
+        String selectedSmoking = selectedRadioButton.getText().toString();
+        return selectedSmoking;
     }
 }

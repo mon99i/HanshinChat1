@@ -40,8 +40,8 @@ public class ProfileAddressFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        areaNumberPicker = view.findViewById(R.id.first_address_number_picker);
-        cityNumberPicker = view.findViewById(R.id.second_address_number_picker);
+        areaNumberPicker = view.findViewById(R.id.first_address_number_picker_fragment);
+        cityNumberPicker = view.findViewById(R.id.second_address_number_picker_fragment);
 
         initializeNumberPicker();
         initializeListener();
@@ -121,5 +121,10 @@ public class ProfileAddressFragment extends Fragment {
     public void updateDB() {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         userRef.child("address").setValue(address);
+    }
+
+    public String editDB() {
+        String newAddress = selectedArea+" "+selectedCity;
+        return newAddress;
     }
 }

@@ -295,6 +295,7 @@ public class SetProfileActivity extends AppCompatActivity {
                 });
     }
 
+
     private void updateProgressBar(Fragment fragment) {
         int progress = 0;
         currentStep = 1;

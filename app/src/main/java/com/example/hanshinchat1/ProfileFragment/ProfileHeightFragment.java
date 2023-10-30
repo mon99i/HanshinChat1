@@ -34,7 +34,7 @@ public class ProfileHeightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_height_fragment, container, false);
 
-        numberPicker = view.findViewById(R.id.height_number_picker);
+        numberPicker = view.findViewById(R.id.height_number_picker_fragment);
 
         height = getResources().getStringArray(R.array.키);
         selectedHeight=height[0];
@@ -60,5 +60,11 @@ public class ProfileHeightFragment extends Fragment {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         int heightValue = Integer.parseInt(selectedHeight);
         userRef.child("height").setValue(heightValue);
+    }
+
+    public String editDB() {
+        int heightValue = Integer.parseInt(selectedHeight);
+        String newHeight = String.valueOf(heightValue);
+        return newHeight;
     }
 }

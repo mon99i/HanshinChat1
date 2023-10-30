@@ -31,7 +31,7 @@ public class ProfileAgeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_age_fragment, container, false);
 
-        age = (EditText) view.findViewById(R.id.age);
+        age = (EditText) view.findViewById(R.id.age_fragment);
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -46,6 +46,16 @@ public class ProfileAgeFragment extends Fragment {
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("age").setValue(intAge);
+        }
+    }
+
+    public String editDB() {
+        String strAge = age.getText().toString();
+        if (strAge.isEmpty()) {
+            age.setError("올바른 나이를 입력하세요.");
+            return null;
+        } else {
+           return strAge;
         }
     }
 }

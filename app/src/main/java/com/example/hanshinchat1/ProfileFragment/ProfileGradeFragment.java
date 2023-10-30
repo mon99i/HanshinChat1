@@ -27,7 +27,7 @@ public class ProfileGradeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_grade_fragment, container, false);
-        grade = (EditText) view.findViewById(R.id.grade);
+        grade = (EditText) view.findViewById(R.id.grade_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -41,6 +41,16 @@ public class ProfileGradeFragment extends Fragment {
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("grade").setValue(intGrade);
+        }
+    }
+
+    public String editDB() {
+        String strGrade = grade.getText().toString();
+        if (strGrade.isEmpty()) {
+            grade.setError("학년을 입력하세요.");
+            return null;
+        } else {
+            return strGrade;
         }
     }
 }

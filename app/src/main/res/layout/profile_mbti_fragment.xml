@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <RadioGroup
-            android:id="@+id/mbti_first_radio_group"
+            android:id="@+id/mbti_first_radio_group_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -40,7 +40,7 @@
                     android:gravity="center">
 
                     <RadioButton
-                        android:id="@+id/mbti_e"
+                        android:id="@+id/mbti_e_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -51,7 +51,7 @@
                         android:background="@drawable/radio_button_border" />
 
                     <RadioButton
-                        android:id="@+id/mbti_i"
+                        android:id="@+id/mbti_i_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -65,7 +65,7 @@
         </RadioGroup>
 
         <RadioGroup
-            android:id="@+id/mbti_second_radio_group"
+            android:id="@+id/mbti_second_radio_group_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -87,7 +87,7 @@
                     android:gravity="center">
 
                     <RadioButton
-                        android:id="@+id/mbti_n"
+                        android:id="@+id/mbti_n_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -98,7 +98,7 @@
                         android:background="@drawable/radio_button_border" />
 
                     <RadioButton
-                        android:id="@+id/mbti_s"
+                        android:id="@+id/mbti_s_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -112,7 +112,7 @@
         </RadioGroup>
 
         <RadioGroup
-            android:id="@+id/mbti_third_radio_group"
+            android:id="@+id/mbti_third_radio_group_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -134,7 +134,7 @@
                     android:gravity="center">
 
                     <RadioButton
-                        android:id="@+id/mbti_f"
+                        android:id="@+id/mbti_f_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -145,7 +145,7 @@
                         android:background="@drawable/radio_button_border" />
 
                     <RadioButton
-                        android:id="@+id/mbti_t"
+                        android:id="@+id/mbti_t_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -159,7 +159,7 @@
         </RadioGroup>
 
         <RadioGroup
-            android:id="@+id/mbti_forth_radio_group"
+            android:id="@+id/mbti_forth_radio_group_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -181,7 +181,7 @@
                     android:gravity="center">
 
                     <RadioButton
-                        android:id="@+id/mbti_p"
+                        android:id="@+id/mbti_p_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
@@ -192,7 +192,7 @@
                         android:background="@drawable/radio_button_border" />
 
                     <RadioButton
-                        android:id="@+id/mbti_j"
+                        android:id="@+id/mbti_j_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"

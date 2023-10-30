@@ -31,7 +31,7 @@ public class ProfileStudentIdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_studentid_fragment, container, false);
 
-        studentId = (EditText) view.findViewById(R.id.student_id);
+        studentId = (EditText) view.findViewById(R.id.student_id_fragment);
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -46,6 +46,16 @@ public class ProfileStudentIdFragment extends Fragment {
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("studentId").setValue(intStudentId);
+        }
+    }
+
+    public String editDB() {
+        String newStudentId = studentId.getText().toString();
+        if (newStudentId.isEmpty()) {
+            studentId.setError("학번을 입력하세요.");
+            return null;
+        } else {
+            return newStudentId;
         }
     }
 }

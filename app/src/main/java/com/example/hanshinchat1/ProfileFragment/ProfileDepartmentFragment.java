@@ -28,7 +28,7 @@ public class ProfileDepartmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_department_fragment, container, false);
 
-        spinner = view.findViewById(R.id.department_spinner);
+        spinner = view.findViewById(R.id.department_spinner_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -46,12 +46,16 @@ public class ProfileDepartmentFragment extends Fragment {
                 // 아무것도 선택되지 않았을 때 처리
             }
         });
-
         return view;
     }
     public void updateDB() {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         selectedDepartment = spinner.getSelectedItem().toString();
         userRef.child("department").setValue(selectedDepartment);
+    }
+
+    public String editDB() {
+        selectedDepartment = spinner.getSelectedItem().toString();
+        return selectedDepartment;
     }
 }
