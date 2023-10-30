@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.hanshinchat1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +31,6 @@ public class ProfileDepartmentFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.학과, android.R.layout.simple_spinner_item);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -43,7 +40,6 @@ public class ProfileDepartmentFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // 아무것도 선택되지 않았을 때 처리
             }
         });
         return view;

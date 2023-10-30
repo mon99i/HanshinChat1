@@ -18,9 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProfileMbtiFragment extends Fragment {
     DatabaseReference myRef;
     FirebaseUser user;
-
     private String selectedFirst = "", selectedSecond = "", selectedThird = "", selectedForth = "";
-
     private RadioButton btnE, btnI, btnN, btnS, btnF, btnT, btnP, btnJ;
 
     @Nullable

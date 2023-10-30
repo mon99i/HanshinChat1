@@ -73,7 +73,6 @@ public class ProfileActivity extends MainActivity{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -106,21 +105,3 @@ public class ProfileActivity extends MainActivity{
     }
 }
 
-// 프로필 이미지 삽입 다른 코드
-/*
-        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext())
-                        .load(uri)
-                        .into(profile);
-                //profile.setImageURI(uri);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "프로필 안뜸!", Toast.LENGTH_SHORT).show();
-            }
-        }); */

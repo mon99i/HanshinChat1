@@ -88,7 +88,6 @@ public class ProfileEditActivity extends MainActivity {
     private static final int REQUEST_CODE_EDIT_GRADE = 14;
     private static final int REQUEST_CODE_EDIT_MBTI = 15;
     private static final int REQUEST_CODE_EDIT_FASHION_MALE = 16;
-
     private static final int REQUEST_CODE_EDIT_FASHION_FEMALE = 17;
 
     private Bitmap imageBitmap;

@@ -8,10 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SimulationResult extends AppCompatActivity {
-
     private int totalScore;
     private String comment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +37,6 @@ public class SimulationResult extends AppCompatActivity {
         }
 
         textViewResultMessage.setText(comment);
-
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

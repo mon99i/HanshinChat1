@@ -21,7 +21,6 @@ public class ProfileSmokingFragment extends Fragment {
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     private RadioButton selectedRadioButton;
-
     DatabaseReference myRef;
     FirebaseUser user;
     public ProfileSmokingFragment(){}

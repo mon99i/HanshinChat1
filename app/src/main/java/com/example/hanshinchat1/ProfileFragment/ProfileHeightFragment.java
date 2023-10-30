@@ -17,16 +17,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileHeightFragment extends Fragment {
-
     private static final String TAG="height";
-
     private String selectedHeight;
     private String[] height;
     private NumberPicker numberPicker;
-
     DatabaseReference myRef;
     FirebaseUser user;
-
     public ProfileHeightFragment(){}
 
     @Nullable

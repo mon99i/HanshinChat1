@@ -17,13 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileReligionFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
-
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
-
     private RadioButton selectedRadioButton;
 
     @Nullable
@@ -40,7 +37,6 @@ public class ProfileReligionFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         radioButton1.setChecked(true);
         selectedRadioButton = radioButton1;
 

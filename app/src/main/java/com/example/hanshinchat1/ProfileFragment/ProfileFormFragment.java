@@ -17,11 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFormFragment extends Fragment {
-
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     private RadioButton selectedRadioButton;
-
     DatabaseReference myRef;
     FirebaseUser user;
     public ProfileFormFragment(){}
@@ -60,6 +58,7 @@ public class ProfileFormFragment extends Fragment {
         radioButton2.setOnClickListener(radioButtonClickListener);
         radioButton3.setOnClickListener(radioButtonClickListener);
         radioButton4.setOnClickListener(radioButtonClickListener);
+
         return view;
     }
     public void updateDB() {

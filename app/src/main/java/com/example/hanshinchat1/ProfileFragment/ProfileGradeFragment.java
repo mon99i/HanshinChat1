@@ -16,11 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileGradeFragment extends Fragment {
-
     private EditText grade;
     DatabaseReference myRef;
     FirebaseUser user;
-
     public ProfileGradeFragment(){}
 
     @Nullable

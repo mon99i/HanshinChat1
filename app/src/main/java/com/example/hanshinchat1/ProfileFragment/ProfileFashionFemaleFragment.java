@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.Fragment;
-
 import com.example.hanshinchat1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,8 +19,7 @@ public class ProfileFashionFemaleFragment extends Fragment {
     DatabaseReference myRef;
     FirebaseUser user;
 
-    public ProfileFashionFemaleFragment() {
-    }
+    public ProfileFashionFemaleFragment() {}
 
     @Nullable
     @Override
@@ -44,7 +41,6 @@ public class ProfileFashionFemaleFragment extends Fragment {
                 ProfileFashion2.setChecked(false);
                 ProfileFashion3.setChecked(false);
                 ProfileFashion4.setChecked(false);
-
                 ((AppCompatRadioButton) v).setChecked(true);
             }
         };

@@ -56,8 +56,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:layout_width="250dp"
+            android:layout_height="170dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/simulation2"
             android:layout_gravity="center"/>
@@ -87,7 +87,7 @@
                 <RadioButton
                     android:id="@+id/answer1_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="혹시 뭐 좋아하세요?"
@@ -98,7 +98,7 @@
                 <RadioButton
                     android:id="@+id/answer2_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="각자 생각해보고 여기에 올려볼까요?"
@@ -109,7 +109,7 @@
                 <RadioButton
                     android:id="@+id/answer3_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="공평하게 중간쯤 아무 식당에서 볼까요?"
@@ -133,7 +133,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/next_btn"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:background="@drawable/match_button_style"
                 android:text="다음"/>

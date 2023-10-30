@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.hanshinchat1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -21,10 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProfileCompleteFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
-
     private LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
@@ -38,7 +33,6 @@ public class ProfileCompleteFragment extends Fragment {
 
         return view;
     }
-
     public void updateDB() {
         String currentTime=localDateTime.format(dateTimeFormatter);
         Map<String, Object> childUpdates= new HashMap<>();

@@ -23,13 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ProfilePersonalityFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
     private ArrayList<String> selectedPersonality = new ArrayList<>();
-
     private static final int MAX_PERSONALITY = 3;
-
 
     @Nullable
     @Override
@@ -41,7 +38,6 @@ public class ProfilePersonalityFragment extends Fragment {
         String[] personalityArray = getResources().getStringArray(R.array.성격);
 
         LinearLayout checkBoxLayout = view.findViewById(R.id.personality_checkbox_layout_fragment);
-
         LinearLayout currentLinearLayout = null;
         LinearLayout.LayoutParams checkBoxParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -52,13 +48,11 @@ public class ProfilePersonalityFragment extends Fragment {
 
         for (int i = 0; i < personalityArray.length; i++) {
             final String currentPersonality = personalityArray[i];
-
             if (i % 4 == 0) {
                 currentLinearLayout = new LinearLayout(getContext());
                 currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 checkBoxLayout.addView(currentLinearLayout);
             }
-
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(currentPersonality);
             checkBox.setLayoutParams(checkBoxParams);

@@ -20,10 +20,7 @@ public class ProfileFashionMaleFragment extends Fragment {
     private AppCompatRadioButton ProfileFashion1, ProfileFashion2, ProfileFashion3, ProfileFashion4;
     DatabaseReference myRef;
     FirebaseUser user;
-
-    public ProfileFashionMaleFragment() {
-    }
-
+    public ProfileFashionMaleFragment() {}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +33,6 @@ public class ProfileFashionMaleFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         AppCompatRadioButton.OnClickListener radioButtonClickListener = new AppCompatRadioButton.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +40,6 @@ public class ProfileFashionMaleFragment extends Fragment {
                 ProfileFashion2.setChecked(false);
                 ProfileFashion3.setChecked(false);
                 ProfileFashion4.setChecked(false);
-
                 ((AppCompatRadioButton) v).setChecked(true);
             }
         };

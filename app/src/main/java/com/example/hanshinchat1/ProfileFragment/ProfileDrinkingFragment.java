@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.hanshinchat1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,13 +15,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileDrinkingFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
-
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
-
     private RadioButton selectedRadioButton;
 
     @Nullable
@@ -40,14 +35,12 @@ public class ProfileDrinkingFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         radioButton1.setChecked(true);
         selectedRadioButton = radioButton1;
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 selectedRadioButton = view.findViewById(selectedRadioButtonId);
             }

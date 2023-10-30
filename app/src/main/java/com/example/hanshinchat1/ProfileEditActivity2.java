@@ -14,6 +14,8 @@ import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDrinkingFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionFemaleFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionMaleFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
@@ -330,6 +332,40 @@ public class ProfileEditActivity2 extends MainActivity {
                         String editedMbtiStr = mbtiFragment.editDB();
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("editedMbti", editedMbtiStr);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
+                });
+                break;
+            case 16:
+                ProfileFashionMaleFragment fashionMaleFragment = new ProfileFashionMaleFragment();
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.edit_profile_frame, fashionMaleFragment);
+                transaction.commit();
+
+                editBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String editedFashionStr = fashionMaleFragment.editDB();
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("editedFashion", editedFashionStr);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
+                });
+                break;
+            case 17:
+                ProfileFashionFemaleFragment fashionFemaleFragment = new ProfileFashionFemaleFragment();
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.edit_profile_frame, fashionFemaleFragment);
+                transaction.commit();
+
+                editBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String editedFashionStr = fashionFemaleFragment.editDB();
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("editedFashion", editedFashionStr);
                         setResult(RESULT_OK, resultIntent);
                         finish();
                     }

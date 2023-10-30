@@ -19,17 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ProfileGenderFragment extends Fragment {
-
     private AppCompatRadioButton ProfileMale, ProfileFemale;
     private RadioGroup GenderRadioGroup;
-
     DatabaseReference myRef;
     FirebaseUser user;
-
-    public ProfileGenderFragment() {
-
-    }
-
+    public ProfileGenderFragment() {}
 
     @Nullable
     @Override
