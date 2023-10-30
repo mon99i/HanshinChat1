@@ -59,11 +59,11 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         this.context = context;
         this.recommendUsers = recommendUsers;
         this.recommendType = recommendType;
-      // checkMatchExists(recommendUsers);
+        // checkMatchExists(recommendUsers);
     }
 
 
-    //매칭 재점검
+/*    //매칭 재점검
     private void checkMatchExists(ArrayList<UserInfo> recommendUsers) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference().child("matches").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -117,7 +117,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
                 });
 
 
-}
+}*/
 
     public RecyclerRecommendMatchAdapter(Context context, ArrayList<UserInfo> recommendUsers) {
         this.context = context;
@@ -181,7 +181,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
         ViewPager2 recommendViewPager = view.findViewById(R.id.decisionViewPager);
         Button requestChatBtn = view.findViewById(R.id.acceptUserBtn);
-        CheckBox recommendLikeBox=view.findViewById(R.id.recommendLikeBox);
+        CheckBox recommendLikeBox = view.findViewById(R.id.recommendLikeBox);
         TextView recommendUserName = view.findViewById(R.id.decisionUserName);
 
         CircleIndicator3 indicator = view.findViewById(R.id.indicator);
@@ -227,22 +227,22 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         });
 
 
-        DatabaseReference likeRef=FirebaseDatabase.getInstance().getReference().child("users").child(userInfo.getUid()).child("like");
+        DatabaseReference likeRef = FirebaseDatabase.getInstance().getReference().child("users").child(userInfo.getUid()).child("like");
         recommendLikeBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Integer like=userInfo.getLike();
-                if(isChecked){
-                    if(like==null||like==0){
+                Integer like = userInfo.getLike();
+                if (isChecked) {
+                    if (like == null || like == 0) {
                         likeRef.setValue(1);
-                    }else{
+                    } else {
                         like++;
                         likeRef.setValue(like);
                     }
-                }else{
-                    if(like==null||like==0){
+                } else {
+                    if (like == null || like == 0) {
                         likeRef.setValue(0);
-                    }else{
+                    } else {
                         likeRef.setValue(like);
                     }
                 }
@@ -251,20 +251,19 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         });
 
 
-
     }
 
     private void requestChat(UserInfo userInfo) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches")
-                .child(userInfo.getUid()).child(user.getUid());
-        matchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference usersMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
+                .child("users").child(userInfo.getUid()).child("request").child(user.getUid());
+        usersMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {                //match상태가 request true/false, approved false 인 상태
                     Toast.makeText(context, "이미 요청한 상대입니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    matchRef.child("request").setValue(true);
+                    usersMatchRef.setValue(true);
                     Toast.makeText(context, "요청 완료", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onDataChange: 요청완료");
                     dialog.dismiss();
@@ -312,39 +311,39 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         return recommendUsers.size();
     }
 
-public class ViewHolder extends RecyclerView.ViewHolder {
-    private ImageView recommendMatchImage;
-    private TextView recommendMatchName;
-    private TextView recommendMatchAge;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView recommendMatchImage;
+        private TextView recommendMatchName;
+        private TextView recommendMatchAge;
 
-    private ImageView crownImage;
-    private ImageView heartImage1;
-    private ImageView onLineImage;
-    private ImageView onLocationImage;
-    private ImageView top5Image;
-    private ImageView newImage;
+        private ImageView crownImage;
+        private ImageView heartImage1;
+        private ImageView onLineImage;
+        private ImageView onLocationImage;
+        private ImageView top5Image;
+        private ImageView newImage;
 
-    public ViewHolder(@NonNull View itemView) {
-        super(itemView);
-        recommendMatchImage = itemView.findViewById(R.id.recommendUserImage);
-        recommendMatchName = itemView.findViewById(R.id.recommendMatchName);
-        recommendMatchAge = itemView.findViewById(R.id.recommendMatchAge);
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            recommendMatchImage = itemView.findViewById(R.id.recommendUserImage);
+            recommendMatchName = itemView.findViewById(R.id.recommendMatchName);
+            recommendMatchAge = itemView.findViewById(R.id.recommendMatchAge);
 
-        crownImage = itemView.findViewById(R.id.crownImage);
-        heartImage1 = itemView.findViewById(R.id.heartImage1);
+            crownImage = itemView.findViewById(R.id.crownImage);
+            heartImage1 = itemView.findViewById(R.id.heartImage1);
 
-        onLineImage = itemView.findViewById(R.id.onLineImage);
-        onLocationImage = itemView.findViewById(R.id.onLocationImage);
-        //top5Image = itemView.findViewById(R.id.top5Image);
-        newImage = itemView.findViewById(R.id.newImage);
+            onLineImage = itemView.findViewById(R.id.onLineImage);
+            onLocationImage = itemView.findViewById(R.id.onLocationImage);
+            //top5Image = itemView.findViewById(R.id.top5Image);
+            newImage = itemView.findViewById(R.id.newImage);
 
-        crownImage.setVisibility(View.GONE);
-        heartImage1.setVisibility(View.GONE);
-        onLineImage.setVisibility(View.GONE);
-        onLocationImage.setVisibility(View.GONE);
-        //top5Image.setVisibility(View.GONE);
-        newImage.setVisibility(View.GONE);
+            crownImage.setVisibility(View.GONE);
+            heartImage1.setVisibility(View.GONE);
+            onLineImage.setVisibility(View.GONE);
+            onLocationImage.setVisibility(View.GONE);
+            //top5Image.setVisibility(View.GONE);
+            newImage.setVisibility(View.GONE);
 
+        }
     }
-}
 }

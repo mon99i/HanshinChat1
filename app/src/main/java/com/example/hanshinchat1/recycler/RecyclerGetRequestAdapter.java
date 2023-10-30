@@ -23,7 +23,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.ChatRoom;
 import com.example.hanshinchat1.ChattingActivity;
+import com.example.hanshinchat1.Match;
 import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.Room;
 import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.fragment.ShowUserFragment1;
 import com.example.hanshinchat1.fragment.ShowUserFragment2;
@@ -43,20 +45,69 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetRequestAdapter.ViewHolder> {
-    private ArrayList<String> getRequestUids;
+
     private ArrayList<UserInfo> getRequestUsers;
+    private ArrayList<Room> getRequestRooms;
+    private HashMap<String,ArrayList<String>> getRoomRequestUids;
     private Context context;
     private static final String TAG = "RecyclerGetRequestAdapter";
 
-    public RecyclerGetRequestAdapter(Context context, ArrayList<String> getRequestUids) {
+/*    public RecyclerGetRequestAdapter(Context context, ArrayList<String> getRequestUids) {
         super();
         this.context = context;
-        this.getRequestUids = getRequestUids;
-        getRequestUsers = new ArrayList<>();
+        this.getUserRequestUids = getUserRequestUids;
+
         setUpAlUsers();
+    }*/
+    public RecyclerGetRequestAdapter(Context context, ArrayList<String> getUserRequestUids,HashMap<String,ArrayList<String>> getRoomRequestUids) {
+        super();
+        this.context = context;
+        getRequestUsers=new ArrayList<>();
+        getRequestRooms=new ArrayList<>();
+        setUpAlUsers(getUserRequestUids,getRoomRequestUids);
+        if(!getRoomRequestUids.isEmpty()){
+        }
+
+        Map<String, Match> map = new HashMap<>();
+
+
+
+       /* ArrayList<Map.Entry<String, Match>> entryList = new ArrayList<>(map.entrySet());
+        if(entryList.get(position).getKey()==myRoomKey)
+            holder
+        for (Map.Entry<String, Match> entry : entryList) {
+            String key = entry.getKey();
+            Match value = entry.getValue();
+            // key와 value를 처리합니다.
+        }*/
     }
 
-    private void setUpAlUsers() {
+    private void setUpAlUsers(ArrayList<String> getUserRequestUids, HashMap<String, ArrayList<String>> getRoomRequestUids) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getRequestUsers.clear();
+                for (String uid : getUserRequestUids) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        if (uid.equals(item.getKey())) {
+                            getRequestUsers.add(item.getValue(UserInfo.class));
+                        }
+                    }
+                }
+                notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+/*    private void setUpAlUsers() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -79,7 +130,7 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
 
             }
         });
-    }
+    }*/
 
     @NonNull
     @Override
@@ -206,13 +257,15 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
                         }
                         //해당 유저와의 uid와의 채팅방 없는경우 새로 생성
                         if (chatRoomExists == false) {
-                            chatRoomsRef.push().setValue(chatRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            DatabaseReference newChatRoomRef=chatRoomsRef.push();
+                            String chatRoomKey= newChatRoomRef.getKey();
+                            newChatRoomRef.setValue(chatRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Intent intent = new Intent(context, ChattingActivity.class);
                                     intent.putExtra("ChatRoom", chatRoom); // 채팅방 정보
                                     intent.putExtra("Opponent", userInfo); // 상대방 정보
-                                    intent.putExtra("ChatRoomKey", ""); // 채팅방 키
+                                    intent.putExtra("ChatRoomKey", chatRoomKey); // 채팅방 키
                                     context.startActivity(intent);
                                     ((AppCompatActivity) context).finish();
                                 }

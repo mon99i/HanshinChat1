@@ -104,6 +104,9 @@ public abstract class MainActivity extends AppCompatActivity {
         }
 
     }
+    
+    
+
 
 //    protected void checkProfileExist() {   //프로필 존재유무 확인
 //        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));

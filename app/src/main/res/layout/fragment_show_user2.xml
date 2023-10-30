@@ -278,7 +278,6 @@
                     android:layout_marginTop="5dp"
                     android:text="이상형을 설정하지 않았어요"
                     android:textSize="12dp"
-                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
