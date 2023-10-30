@@ -35,6 +35,8 @@ import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDrinkingFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionFemaleFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionMaleFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
@@ -85,10 +87,13 @@ public class ProfileEditActivity extends MainActivity {
     private static final int REQUEST_CODE_EDIT_FORM = 13;
     private static final int REQUEST_CODE_EDIT_GRADE = 14;
     private static final int REQUEST_CODE_EDIT_MBTI = 15;
+    private static final int REQUEST_CODE_EDIT_FASHION_MALE = 16;
+
+    private static final int REQUEST_CODE_EDIT_FASHION_FEMALE = 17;
 
     private Bitmap imageBitmap;
     private TextView editName, editGender, editInterest, editPersonality, editAge, editStudentId, editDepartment,
-            editHeight, editReligion, editAddress, editSmoking, editDrinking, editForm, editGrade, editMbti;
+            editHeight, editReligion, editAddress, editSmoking, editDrinking, editForm, editGrade, editMbti, editFashion;
     private ImageView editImage;
 
     private ArrayList<String> interestList;
@@ -119,6 +124,8 @@ public class ProfileEditActivity extends MainActivity {
     private ProfilePersonalityFragment personalityFragment;
     private ProfileMbtiFragment mbtiFragment;
     private ProfileIdealTypeFragment idealTypeFragment;
+    private ProfileFashionMaleFragment fashionMaleFragment;
+    private ProfileFashionFemaleFragment fashionFemaleFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,6 +250,17 @@ public class ProfileEditActivity extends MainActivity {
                 showEditFragment(REQUEST_CODE_EDIT_MBTI);
             }
         });
+        editFashion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String gender = userInfo.getGender();
+                if (gender.equals("남자")) {
+                    showEditFragment(REQUEST_CODE_EDIT_FASHION_MALE);
+                } else if (gender.equals("여자")) {
+                    showEditFragment(REQUEST_CODE_EDIT_FASHION_FEMALE);
+                }
+            }
+        });
 
 
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -276,6 +294,7 @@ public class ProfileEditActivity extends MainActivity {
                         interestList = userInfo.getInterest();
                         String interestString = TextUtils.join(", ", interestList);
                         editInterest.setText(interestString);
+                        editFashion.setText(userInfo.getFashion());
                     }
                 }
             }
@@ -311,6 +330,7 @@ public class ProfileEditActivity extends MainActivity {
                 ArrayList<String> newInterestList = new ArrayList<>(Arrays.asList(newInterest.split(", ")));
                 String newPersonality = editPersonality.getText().toString();
                 ArrayList<String> newPersonalityList = new ArrayList<>(Arrays.asList(newPersonality.split(", ")));
+                String newFashion = editFashion.getText().toString();
 
                 UserInfo updatedUserInfo = new UserInfo(
                         userInfo.getLike(),
@@ -334,7 +354,8 @@ public class ProfileEditActivity extends MainActivity {
                         userInfo.getIdealTypeSecond(),
                         userInfo.getPhotoUrl(),
                         userInfo.getCreationTime(),
-                        userInfo.getLastSignInTime()
+                        userInfo.getLastSignInTime(),
+                        newFashion
                 );
 
                 userRef.setValue(updatedUserInfo);
@@ -516,6 +537,24 @@ public class ProfileEditActivity extends MainActivity {
                         }
                     }
                 }
+            case REQUEST_CODE_EDIT_FASHION_MALE:
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        String editedFashion = data.getStringExtra("editedFashion");
+                        if (editedFashion != null) {
+                            editFashion.setText(editedFashion);
+                        }
+                    }
+                }
+            case REQUEST_CODE_EDIT_FASHION_FEMALE:
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        String editedFashion = data.getStringExtra("editedFashion");
+                        if (editedFashion != null) {
+                            editFashion.setText(editedFashion);
+                        }
+                    }
+                }
         }
     }
 
@@ -548,7 +587,6 @@ public class ProfileEditActivity extends MainActivity {
 
                 } else {
                     Toast.makeText(getApplicationContext(), "카메라 촬영을 위해 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -562,7 +600,6 @@ public class ProfileEditActivity extends MainActivity {
                 dialog.dismiss();
             }
         });
-
     }
 
     private void uploadFileToStorageAndDatabase() {
@@ -668,6 +705,7 @@ public class ProfileEditActivity extends MainActivity {
         editInterest = (TextView)findViewById(R.id.interest);
         editPersonality = (TextView)findViewById(R.id.personality);
         editMbti = (TextView)findViewById(R.id.edit_mbti);
+        editFashion = (TextView)findViewById(R.id.edit_fashion);
 
         editCompleteBtn = findViewById(R.id.edit_profile_edit);
         cancelCompleteBtn = findViewById(R.id.edit_profile_cancel);
@@ -688,6 +726,8 @@ public class ProfileEditActivity extends MainActivity {
         personalityFragment = new ProfilePersonalityFragment();
         mbtiFragment = new ProfileMbtiFragment();
         idealTypeFragment = new ProfileIdealTypeFragment();
+        fashionMaleFragment = new ProfileFashionMaleFragment();
+        fashionFemaleFragment = new ProfileFashionFemaleFragment();
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
