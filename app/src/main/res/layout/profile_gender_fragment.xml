@@ -13,7 +13,7 @@
         android:textColor="@color/black"/>
 
     <RadioGroup
-        android:id="@+id/gender_radio_group"
+        android:id="@+id/gender_radio_group_fragment"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_marginTop="50dp"
@@ -21,14 +21,14 @@
         android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/gender_male"
+            android:id="@+id/gender_male_fragment"
             android:layout_width="185dp"
             android:layout_height="185dp"
             android:background="@drawable/set_profile_gender_male_selector"
             android:button="@null" />
 
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/gender_female"
+            android:id="@+id/gender_female_fragment"
             android:layout_width="185dp"
             android:layout_height="185dp"
             android:background="@drawable/set_profile_gender_female_selector"

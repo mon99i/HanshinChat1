@@ -14,25 +14,19 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 public class ProfileStudentIdFragment extends Fragment {
-
     private EditText studentId;
-
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    public ProfileStudentIdFragment() {
-
-    }
+    public ProfileStudentIdFragment() {}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_studentid_fragment, container, false);
 
-        studentId = (EditText) view.findViewById(R.id.student_id);
-
+        studentId = (EditText) view.findViewById(R.id.student_id_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -46,6 +40,16 @@ public class ProfileStudentIdFragment extends Fragment {
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("studentId").setValue(intStudentId);
+        }
+    }
+
+    public String editDB() {
+        String newStudentId = studentId.getText().toString();
+        if (newStudentId.isEmpty()) {
+            studentId.setError("학번을 입력하세요.");
+            return null;
+        } else {
+            return newStudentId;
         }
     }
 }

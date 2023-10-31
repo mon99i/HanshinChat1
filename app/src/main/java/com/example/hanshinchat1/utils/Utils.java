@@ -1,28 +1,17 @@
 package com.example.hanshinchat1.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.hanshinchat1.GetRequestActivity;
 import com.example.hanshinchat1.Ideal;
 
 import com.example.hanshinchat1.Match;
-import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RecommendMatchActivity;
-import com.example.hanshinchat1.Room;
 import com.example.hanshinchat1.SetIdealActivity;
 
 import com.example.hanshinchat1.UserInfo;
@@ -35,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;

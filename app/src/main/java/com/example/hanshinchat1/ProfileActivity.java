@@ -25,6 +25,7 @@ public class ProfileActivity extends MainActivity{
     private TextView name, gender, age;
     private DatabaseReference databaseReference;
     private UserInfo userInfo;
+    private ImageView profile;
 
     Button ideal_edit_btn, settingBtn;
     @Override
@@ -38,7 +39,7 @@ public class ProfileActivity extends MainActivity{
         clickBoard();
         clickProfile();
 
-        ImageView profile = (ImageView) findViewById(R.id.profileImage);
+        profile = (ImageView) findViewById(R.id.profileImage);
 
         Button profileEditBtn = (Button) findViewById(R.id.profile_edit);
 
@@ -52,30 +53,26 @@ public class ProfileActivity extends MainActivity{
 
         databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
 
-
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     userInfo = snapshot.getValue(UserInfo.class);
-                    name.setText(userInfo.getName());
-                    gender.setText(userInfo.getGender());
-                    age.setText(userInfo.getAge().toString());
-
-                    UserInfo userInfo=snapshot.getValue(UserInfo.class);
                     String imageUrl=userInfo.getPhotoUrl();
                     Uri imageUri=Uri.parse(imageUrl);
                     Glide.with(getApplicationContext())
                             .load(imageUri)
                             .into(profile);
-                 
+                    name.setText(userInfo.getName());
+                    gender.setText(userInfo.getGender());
+                    Integer intAge = userInfo.getAge();
+                    age.setText(intAge.toString());
                 }
                 else Log.d(TAG, "onDataChange: 데이터없음");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -108,21 +105,3 @@ public class ProfileActivity extends MainActivity{
     }
 }
 
-// 프로필 이미지 삽입 다른 코드
-/*
-        StorageReference profileRef=storageRef.child("profile.jpg/"+user.getUid());
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext())
-                        .load(uri)
-                        .into(profile);
-                //profile.setImageURI(uri);
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "프로필 안뜸!", Toast.LENGTH_SHORT).show();
-            }
-        }); */

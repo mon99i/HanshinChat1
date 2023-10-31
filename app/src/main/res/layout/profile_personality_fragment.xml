@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/personality_checkbox_layout"
+                android:id="@+id/personality_checkbox_layout_fragment"
                 android:layout_width="360dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp"

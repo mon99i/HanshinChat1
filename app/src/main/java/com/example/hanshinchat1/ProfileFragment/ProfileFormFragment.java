@@ -17,11 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFormFragment extends Fragment {
-
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4;
     private RadioButton selectedRadioButton;
-
     DatabaseReference myRef;
     FirebaseUser user;
     public ProfileFormFragment(){}
@@ -31,12 +29,12 @@ public class ProfileFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_form_fragment, container, false);
 
-        radioGroup = view.findViewById(R.id.form_radio_group);
+        radioGroup = view.findViewById(R.id.form_radio_group_fragment);
 
-        radioButton1 = view.findViewById(R.id.form_radio_btn_1);
-        radioButton2 = view.findViewById(R.id.form_radio_btn_2);
-        radioButton3 = view.findViewById(R.id.form_radio_btn_3);
-        radioButton4 = view.findViewById(R.id.form_radio_btn_4);
+        radioButton1 = view.findViewById(R.id.form_radio_btn_1_fragment);
+        radioButton2 = view.findViewById(R.id.form_radio_btn_2_fragment);
+        radioButton3 = view.findViewById(R.id.form_radio_btn_3_fragment);
+        radioButton4 = view.findViewById(R.id.form_radio_btn_4_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -60,11 +58,17 @@ public class ProfileFormFragment extends Fragment {
         radioButton2.setOnClickListener(radioButtonClickListener);
         radioButton3.setOnClickListener(radioButtonClickListener);
         radioButton4.setOnClickListener(radioButtonClickListener);
+
         return view;
     }
     public void updateDB() {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         String selectedForm = selectedRadioButton.getText().toString();
         userRef.child("form").setValue(selectedForm);
+    }
+
+    public String editDB() {
+        String selectedForm = selectedRadioButton.getText().toString();
+        return selectedForm;
     }
 }

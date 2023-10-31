@@ -19,26 +19,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ProfileGenderFragment extends Fragment {
-
     private AppCompatRadioButton ProfileMale, ProfileFemale;
     private RadioGroup GenderRadioGroup;
-
     DatabaseReference myRef;
     FirebaseUser user;
-
-    public ProfileGenderFragment() {
-
-    }
-
+    public ProfileGenderFragment() {}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_gender_fragment, container, false);
 
-        ProfileMale = view.findViewById(R.id.gender_male);
-        ProfileFemale = view.findViewById(R.id.gender_female);
-        GenderRadioGroup = view.findViewById(R.id.gender_radio_group);;
+        ProfileMale = view.findViewById(R.id.gender_male_fragment);
+        ProfileFemale = view.findViewById(R.id.gender_female_fragment);
+        GenderRadioGroup = view.findViewById(R.id.gender_radio_group_fragment);;
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -58,6 +52,19 @@ public class ProfileGenderFragment extends Fragment {
         }
         else {
             Toast.makeText(getContext(), "성별을 선택하세요", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public String editDB() {
+        if (ProfileMale.isChecked()) {
+            String strGender = "남자";
+            return strGender;
+        } else if (ProfileFemale.isChecked()) {
+            String strGender = "여자";
+            return strGender;
+        }
+        else {
+            Toast.makeText(getContext(), "성별을 선택하세요", Toast.LENGTH_SHORT).show();
+            return null;
         }
     }
 }

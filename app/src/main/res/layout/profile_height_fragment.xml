@@ -10,7 +10,7 @@
         android:textSize="25sp"
         android:textColor="@color/black"/>
     <NumberPicker
-        android:id="@+id/height_number_picker"
+        android:id="@+id/height_number_picker_fragment"
         android:layout_width="100dp"
         android:layout_height="200dp"
         android:layout_gravity="center"

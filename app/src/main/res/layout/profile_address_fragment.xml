@@ -17,14 +17,14 @@
         android:layout_marginTop="50dp">
 
         <NumberPicker
-            android:id="@+id/first_address_number_picker"
+            android:id="@+id/first_address_number_picker_fragment"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:descendantFocusability="blocksDescendants"
             android:layout_marginEnd="8dp" />
 
         <NumberPicker
-            android:id="@+id/second_address_number_picker"
+            android:id="@+id/second_address_number_picker_fragment"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:descendantFocusability="blocksDescendants" />
