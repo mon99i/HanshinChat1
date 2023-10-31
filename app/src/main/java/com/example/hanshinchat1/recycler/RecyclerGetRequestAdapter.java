@@ -44,11 +44,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetRequestAdapter.ViewHolder> {
 
+
+    private Map<String,Room> myRoom;
     private ArrayList<UserInfo> getRequestUsers;
-    private ArrayList<Room> getRequestRooms;
-    private HashMap<String,ArrayList<String>> getRoomRequestUids;
+
+    private ArrayList<String>  getRequestUids;
+    private ArrayList<String>  getMatchKeys;
+    private ArrayList<Match> getMatches;
+
+
     private Context context;
     private static final String TAG = "RecyclerGetRequestAdapter";
 
@@ -59,19 +67,19 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
 
         setUpAlUsers();
     }*/
-    public RecyclerGetRequestAdapter(Context context, ArrayList<String> getUserRequestUids,HashMap<String,ArrayList<String>> getRoomRequestUids) {
+    public RecyclerGetRequestAdapter(Context context, ArrayList<String> getRequestUids,ArrayList<String> getMatchKeys,ArrayList<Match> getMatches) {
         super();
         this.context = context;
+
+        myRoom=new HashMap<>();
         getRequestUsers=new ArrayList<>();
-        getRequestRooms=new ArrayList<>();
-        setUpAlUsers(getUserRequestUids,getRoomRequestUids);
-        if(!getRoomRequestUids.isEmpty()){
-        }
-
-        Map<String, Match> map = new HashMap<>();
 
 
+        this.getRequestUids=getRequestUids;
+        this.getMatchKeys=getMatchKeys;
+        this.getMatches=getMatches;
 
+        setUpAlUsers();
        /* ArrayList<Map.Entry<String, Match>> entryList = new ArrayList<>(map.entrySet());
         if(entryList.get(position).getKey()==myRoomKey)
             holder
@@ -80,6 +88,50 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
             Match value = entry.getValue();
             // key와 value를 처리합니다.
         }*/
+    }
+
+    private void setUpAlUsers() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getRequestUsers.clear();
+                for (String uid : getRequestUids) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        if (uid.equals(item.getKey())) {
+                            getRequestUsers.add(item.getValue(UserInfo.class));
+                        }
+                    }
+                }
+                notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host")
+                .equalTo(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myRoom.clear();
+                for(DataSnapshot item:snapshot.getChildren()){
+                    myRoom.put(item.getKey(),item.getValue(Room.class));
+                }
+                notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setUpAlUsers(ArrayList<String> getUserRequestUids, HashMap<String, ArrayList<String>> getRoomRequestUids) {
@@ -140,84 +192,171 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
         return new RecyclerGetRequestAdapter.ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerGetRequestAdapter.ViewHolder holder, int position) {
-
-
         UserInfo userInfo = getRequestUsers.get(position);
-        Log.d(TAG, "onBindViewHolder: " + position + " " + getRequestUsers.size() + " " + userInfo);
+        String matchKey= getMatchKeys.get(position);
+        Match match=getMatches.get(position);
+
+        Log.d(TAG, "onBindViewHolder: "+matchKey+myRoom);
+        if(myRoom.containsKey(matchKey)){
+            holder.getRequestTxt.setText("["+myRoom.get(matchKey).getCategory()+"] 방에 새로운 매칭이 성사됬어요");
+        }else{
+            holder.getRequestTxt.setText(userInfo.getName() + "님이 대화를 요청했어요.");
+        }
+
+        holder.getRequestDate.setText(match.getRequest_date());
+
+
         Uri imageUri = Uri.parse(userInfo.getPhotoUrl());
         Glide.with(context).load(imageUri).into(holder.getRequestProfile);
 
-        holder.getRequestTxt.setText(userInfo.getName() + "님이 대화를 요청했어요.");
-        //holder.getRequestDate.setText
 
         holder.background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showUserInfoDialog(context, userInfo);
+                showUserInfoDialog(context, userInfo,matchKey);
             }
         });
 
     }
 
-    private void showUserInfoDialog(Context context, UserInfo userInfo) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.decision_user_dialog, null);
+    private void showUserInfoDialog(Context context, UserInfo userInfo,String matchKey) {
+        if(myRoom.containsKey(matchKey)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
 
-        Button acceptUserBtn = view.findViewById(R.id.acceptUserBtn);
-        Button refuseUserBtn = view.findViewById(R.id.refuseUserBtn);
-        TextView decisionUserName = view.findViewById(R.id.decisionUserName);
-        ViewPager2 decisionViewPager = view.findViewById(R.id.decisionViewPager);
+            ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
+            Button matchBtn=view.findViewById(R.id.matchBtn);
+            TextView roomTitle=view.findViewById(R.id.roomTitle);
 
-
-        decisionUserName.setText(userInfo.getName());
-        RecommendViewPagerAdapter adapter = new RecommendViewPagerAdapter((FragmentActivity) context, userInfo, true);
-        decisionViewPager.setAdapter(adapter);
-
-        builder.setView(view);
-        AlertDialog dialog = builder.create();
-        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-        dialog.show();
+            CircleIndicator3 indicator = view.findViewById(R.id.indicator);
+            indicator.setViewPager(recommendViewPager);
+            indicator.createIndicators(2, 0);
+            recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
 
-        acceptUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                matchRef.child(userInfo.getUid()).child("approved").setValue(true)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                createChatRoom(userInfo);
-                                getRequestUsers.remove(userInfo);
-                                notifyDataSetChanged();
-                                dialog.dismiss();
+            roomTitle.setText("[" + myRoom.get(matchKey).getCategory() + "] " + myRoom.get(matchKey).getTitle());
+
+            FirebaseDatabase.getInstance().getReference().child("users").child(myRoom.get(matchKey).getHost())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
+
+                                Log.d("RoomActivity", hostUserInfo.toString());
+
+                                recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
+                                recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                                    //                        @Override
+//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+//                            if (positionOffsetPixels == 0) {
+//                                recommendViewPager.setCurrentItem(position);
+//                            }
+//                        }
+//
+                                    @Override
+                                    public void onPageSelected(int position) {
+                                        super.onPageSelected(position);
+                                        indicator.animatePageSelected(position % 2);
+
+                                    }
+                                });
+
+                            } else {
+                                Log.d("RoomActivity", "아무것도 없나봐...");
+
+                                // 해당 MatchRoom 데이터가 없을 경우 처리
                             }
-                        });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
 
-            }
-        });
+            builder.setView(view);
+            AlertDialog dialog = builder.create();
+            //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+            dialog.show();
 
-        refuseUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                matchRef.child(userInfo.getUid()).child("approved").setValue(false)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                getRequestUsers.remove(userInfo);
-                                notifyDataSetChanged();
-                                dialog.dismiss();
-                            }
-                        });
-            }
-        });
+
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.decision_user_dialog, null);
+
+            Button acceptUserBtn = view.findViewById(R.id.acceptUserBtn);
+            Button refuseUserBtn = view.findViewById(R.id.refuseUserBtn);
+            TextView decisionUserName = view.findViewById(R.id.decisionUserName);
+            ViewPager2 decisionViewPager = view.findViewById(R.id.decisionViewPager);
+
+
+            decisionUserName.setText(userInfo.getName());
+            RecommendViewPagerAdapter adapter = new RecommendViewPagerAdapter((FragmentActivity) context, userInfo, true);
+            decisionViewPager.setAdapter(adapter);
+
+            builder.setView(view);
+            AlertDialog dialog = builder.create();
+            //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+            dialog.show();
+
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches").child("users")
+                            .child(user.getUid()).child(userInfo.getUid());
+
+            acceptUserBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    matchRef.child("approved").setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            createChatRoom(userInfo);
+                            getRequestUsers.remove(userInfo);
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }
+                    });
+              /*      matchRef.child(userInfo.getUid()).child("approved").setValue(true)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    createChatRoom(userInfo);
+                                    getRequestUsers.remove(userInfo);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss();
+                                }
+                            });*/
+
+
+                }
+            });
+
+            refuseUserBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    matchRef.child(userInfo.getUid()).child("approved").setValue(false)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    getRequestUsers.remove(userInfo);
+                                    notifyDataSetChanged();
+                                    dialog.dismiss();
+                                }
+                            });
+                }
+            });
+        }
 
     }
 

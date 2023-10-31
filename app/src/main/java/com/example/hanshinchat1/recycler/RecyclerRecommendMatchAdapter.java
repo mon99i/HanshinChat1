@@ -35,6 +35,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -255,7 +258,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
     private void requestChat(UserInfo userInfo) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference usersMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
+    /*    DatabaseReference usersMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
                 .child("users").child(userInfo.getUid()).child("request").child(user.getUid());
         usersMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -268,6 +271,32 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
                     Log.d(TAG, "onDataChange: 요청완료");
                     dialog.dismiss();
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+*/
+
+        DatabaseReference myMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
+                .child("users").child(userInfo.getUid()).child(user.getUid());
+        myMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toast.makeText(context, "이미 요청한 상대입니다", Toast.LENGTH_SHORT).show();
+                }else{
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                    LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+                    String currentTimeString = currentTime.format(dateTimeFormatter);
+                    Match match=new Match(true,currentTimeString,null);
+                    myMatchRef.setValue(match);
+                    Toast.makeText(context, "요청 완료", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+
             }
 
             @Override

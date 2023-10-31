@@ -1,7 +1,5 @@
 package com.example.hanshinchat1;
 
-import static com.example.hanshinchat1.CustomDialog.dialog;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -30,8 +27,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.hanshinchat1.Room.RoomInfoActivity;
-import com.example.hanshinchat1.board.BoardActivity;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,24 +41,31 @@ import java.util.ArrayList;
 
 public class RoomActivity extends MainActivity {
 
-    private ArrayList<MatchRoom> matchRoomsList;
+
+    private static final String TAG="RoomActivity";
+
+    private ArrayList<Room> matchRoomsList;
     private ArrayList<String> matchKeyList;
 
-    Dialog findRoomDialog, findRoomDialog2;
-    Dialog makeRoomDialog;
-    Dialog makeRoom1Dialog;
-    Dialog makeRoom2Dialog;
-    Dialog makeRoom3Dialog;
-    RecyclerView recycler_matchRooms;
-    RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
-    Context context=this;
+    private Dialog findRoomDialog, findRoomDialog2;
+    private Dialog makeRoomDialog;
+    private Dialog makeRoom1Dialog;
+    private Dialog makeRoom2Dialog;
+    private Dialog makeRoom3Dialog;
 
-    private boolean isDepartmentFilterEnabled = false;
+    private CheckBox departmentCheckbox;
+    private Button makeRoom;
+    private Button findRoom;
+    private Button findRoom2;
 
-    private String selectedCategory = "전체";
+    private RecyclerView recycler_matchRooms;
+    private RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
+
+    //private boolean isDepartmentFilterEnabled = false;
+    private boolean checkBoxChecked = false;
+    private String selectedCategory=null;
     public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
-//    private Context context;
 
 
     @Override
@@ -78,15 +80,24 @@ public class RoomActivity extends MainActivity {
         clickBoard();
         clickProfile();
 
-        CheckBox departmentCheckbox = findViewById(R.id.department_checkbox);
+        initializeView();
+        initializeListener();
+
+    }
+    private void initializeView() {
         matchRoomsList = new ArrayList<>();
         matchKeyList = new ArrayList<>();
 
-
-        Button makeRoom = findViewById(R.id.make_room);
-        Button findRoom = findViewById(R.id.find_room);
-        Button findRoom2 = findViewById(R.id.find_room2);
         recycler_matchRooms=findViewById(R.id.recycler_matchRooms);
+        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this);
+        recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));
+        recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
+
+        departmentCheckbox = findViewById(R.id.department_checkbox);
+        makeRoom = findViewById(R.id.make_room);
+        findRoom = findViewById(R.id.find_room);
+        findRoom2 = findViewById(R.id.find_room2);
+
 
         makeRoomDialog = new Dialog(RoomActivity.this);
         makeRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
@@ -100,9 +111,53 @@ public class RoomActivity extends MainActivity {
         findRoomDialog2.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         findRoomDialog2.setContentView(R.layout.find_room2_dialog);
 
-        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(context);
-        setUpRecycler();
+    }
+
+    private void initializeListener() {
         departmentCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                checkBoxChecked=isChecked;
+                recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
+                Log.d(TAG, "onCheckedChanged: "+checkBoxChecked);
+                /*if(checkBoxChecked){
+                    if(selectedCategory!=null){ // 체크on, 카테고리on
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
+                        recyclerMatchRoomsAdapter.removeMatchRoomsByCategory(selectedCategory);
+
+                    }
+                    else { // 체크on, 카테고리off
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
+
+                    }
+
+                    recyclerMatchRoomsAdapter.excludeSameDepartment();
+
+                }
+                else {
+                    //recyclerMatchRoomsAdapter.setUpRooms(selectedCategory);
+                    if(selectedCategory==null){
+                        recyclerMatchRoomsAdapter.setUpRooms(null);
+                    }else{
+                        recyclerMatchRoomsAdapter.setUpRooms(selectedCategory);
+                    }
+                 *//*   if(selectedCategory!=null){ // 체크off, 카테고리on
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(selectedCategory);
+
+                    }
+                    else { // 체크off, 카테고리off
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(null);
+
+                    }*//*
+                }*/
+            }
+        });
+
+      /*  departmentCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -111,32 +166,32 @@ public class RoomActivity extends MainActivity {
                         recyclerMatchRoomsAdapter.loadAllMatchRooms();
                         recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
                         recyclerMatchRoomsAdapter.removeMatchRoomsByCategory(selectedCategory);
-                        setUpRecycler();
+
                     }
                     else { // 체크on, 카테고리off
                         recyclerMatchRoomsAdapter.loadAllMatchRooms();
                         recyclerMatchRoomsAdapter.filterMatchRoomsByDepartment();
-                        setUpRecycler();
+
                     }
                 }
                 else {
                     isDepartmentFilterEnabled = false;
-                        if(selectedCategory!=null){ // 체크off, 카테고리on
-                            recyclerMatchRoomsAdapter.loadAllMatchRooms();
-                            recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(selectedCategory);
-                            setUpRecycler();
-                        }
-                        else { // 체크off, 카테고리off
-                            recyclerMatchRoomsAdapter.loadAllMatchRooms();
-                            recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(null);
-                            setUpRecycler();
-                        }
+                    if(selectedCategory!=null){ // 체크off, 카테고리on
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(selectedCategory);
+
+                    }
+                    else { // 체크off, 카테고리off
+                        recyclerMatchRoomsAdapter.loadAllMatchRooms();
+                        recyclerMatchRoomsAdapter.filterMatchRoomsByCategory(null);
+
+                    }
                 }
             }
         });
+*/
 
-
-        recyclerMatchRoomsAdapter.setOnItemClickListener(new RecyclerMatchRoomsAdapter.OnItemClickListener() {
+    /*    recyclerMatchRoomsAdapter.setOnItemClickListener(new RecyclerMatchRoomsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 //                String matchkey = matchkeyList.get(position);
@@ -150,7 +205,7 @@ public class RoomActivity extends MainActivity {
                 showRecommendUserDialog(matchRoom);
 
             }
-        });
+        });*/
 
         makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +252,8 @@ public class RoomActivity extends MainActivity {
             }
         });
 
+
+/*
         findRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,8 +270,71 @@ public class RoomActivity extends MainActivity {
                 });
             }
         });
+*/
+
 
         findRoom2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findRoomDialog2.show();
+
+                Button category0Btn = findRoomDialog2.findViewById(R.id.category_all);
+                Button category1Btn = findRoomDialog2.findViewById(R.id.category1);
+                Button category2Btn = findRoomDialog2.findViewById(R.id.category2);
+                Button category3Btn = findRoomDialog2.findViewById(R.id.category3);
+                Button category4Btn = findRoomDialog2.findViewById(R.id.category4);
+
+                category0Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedCategory=null;
+                        recyclerMatchRoomsAdapter.setUpRooms(null,checkBoxChecked);
+                        findRoomDialog2.dismiss();
+                    }
+                });
+                category1Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedCategory="과팅";
+                        recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
+                        findRoomDialog2.dismiss();
+
+                    }
+                });
+                category2Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedCategory="미팅";
+                        recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
+                        findRoomDialog2.dismiss();
+
+                    }
+                });
+                category3Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedCategory="밥팅";
+                        recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
+                        findRoomDialog2.dismiss();
+                    }
+                });
+                category4Btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedCategory="기타";
+                        recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
+                       /* if(checkBoxChecked){
+                            recyclerMatchRoomsAdapter.excludeSameDepartment();
+                        }*/
+                        findRoomDialog2.dismiss();
+                    }
+                });
+            }
+        });
+
+
+
+     /*   findRoom2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findRoomDialog2.show();
@@ -300,10 +420,12 @@ public class RoomActivity extends MainActivity {
                     }
                 });
             }
-        });
+        });*/
     }
 
-    private void showRecommendUserDialog(MatchRoom matchRoom){
+
+
+    /*private void showRecommendUserDialog(MatchRoom matchRoom){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
@@ -364,13 +486,8 @@ public class RoomActivity extends MainActivity {
                 }
             });
         } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
-
-    private void setUpRecycler() {
-        recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));
-        recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
-    }
 
 
     private void makeRoom1() {
@@ -400,27 +517,30 @@ public class RoomActivity extends MainActivity {
         department_Spinner.setAdapter(department_adapter);
         gender_Spinner.setAdapter(gender_adapter);
 
+
+        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this);
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                RoomInfo roomInfo =new RoomInfo();
-                roomInfo.setHost(user.getUid());
-                roomInfo.setNum(participants_Spinner.getSelectedItem().toString());
-                roomInfo.setDepartment(department_Spinner.getSelectedItem().toString());
-                roomInfo.setGender(gender_Spinner.getSelectedItem().toString());
-                roomInfo.setTitle(edt_roomTitle.getText().toString());
-                roomInfo.setCategory(selectedCategory);
+                Room room =new Room();
+                room.setHost(user.getUid());
+                room.setNum(participants_Spinner.getSelectedItem().toString());
+                room.setDepartment(department_Spinner.getSelectedItem().toString());
+                room.setGender(gender_Spinner.getSelectedItem().toString());
+                room.setTitle(edt_roomTitle.getText().toString());
+                room.setCategory(selectedCategory);
 
-                MatchRoom matchRoom=new MatchRoom(roomInfo,null);
-
-                myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        makeRoom1Dialog.dismiss();
+                     /*   makeRoom1Dialog.dismiss();
                         Intent intent = new Intent(getApplicationContext(),RoomActivity.class);
                         startActivity(intent);
-                        finish();
+                        finish();*/
+                        makeRoom1Dialog.dismiss();
+                        recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
+                        departmentCheckbox.setChecked(false);
                     }
                 });
             }
@@ -445,15 +565,14 @@ public class RoomActivity extends MainActivity {
             @Override
             public void onClick(View v) {
 
-                RoomInfo roomInfo =new RoomInfo();
-                roomInfo.setHost(user.getUid());
-                roomInfo.setGender(gender_Spinner.getSelectedItem().toString());
-                roomInfo.setTitle(edt_roomTitle.getText().toString());
-                roomInfo.setCategory(selectedCategory);
+                Room room =new Room();
+                room.setHost(user.getUid());
+                room.setGender(gender_Spinner.getSelectedItem().toString());
+                room.setTitle(edt_roomTitle.getText().toString());
+                room.setCategory(selectedCategory);
 
-                MatchRoom matchRoom=new MatchRoom(roomInfo,null);
 
-                myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom2Dialog.dismiss();
@@ -485,15 +604,14 @@ public class RoomActivity extends MainActivity {
             @Override
             public void onClick(View v) {
 
-                RoomInfo roomInfo =new RoomInfo();
-                roomInfo.setHost(user.getUid());
-                roomInfo.setGender(gender_Spinner.getSelectedItem().toString());
-                roomInfo.setTitle(edt_roomTitle.getText().toString());
-                roomInfo.setCategory(selectedCategory);
+                Room room =new Room();
+                room.setHost(user.getUid());
+                room.setGender(gender_Spinner.getSelectedItem().toString());
+                room.setTitle(edt_roomTitle.getText().toString());
+                room.setCategory(selectedCategory);
 
-                MatchRoom matchRoom=new MatchRoom(roomInfo,null);
 
-                myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom2Dialog.dismiss();
@@ -532,16 +650,15 @@ public class RoomActivity extends MainActivity {
             @Override
             public void onClick(View v) {
 
-                RoomInfo roomInfo =new RoomInfo();
-                roomInfo.setHost(user.getUid());
-                roomInfo.setNum(participants_Spinner.getSelectedItem().toString());
-                roomInfo.setGender(gender_Spinner.getSelectedItem().toString());
-                roomInfo.setTitle(edt_roomTitle.getText().toString());
-                roomInfo.setCategory(selectedCategory);
+                Room room =new Room();
+                room.setHost(user.getUid());
+                room.setNum(participants_Spinner.getSelectedItem().toString());
+                room.setGender(gender_Spinner.getSelectedItem().toString());
+                room.setTitle(edt_roomTitle.getText().toString());
+                room.setCategory(selectedCategory);
 
-                MatchRoom matchRoom=new MatchRoom(roomInfo,null);
 
-                myRef.child("matchRooms").push().setValue(matchRoom).addOnCompleteListener(new OnCompleteListener<Void>() {
+                myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom3Dialog.dismiss();

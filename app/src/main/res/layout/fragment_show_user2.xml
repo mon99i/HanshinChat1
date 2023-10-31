@@ -262,7 +262,7 @@
                 android:id="@+id/noneRecommendIdeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"

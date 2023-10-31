@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/room_cardview">
+    android:id="@+id/room_background">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/room_cardview1"

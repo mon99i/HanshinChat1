@@ -105,11 +105,11 @@ public class ProfileEditActivity extends MainActivity {
         }
 
         editImage.setOnClickListener(v -> showEditImageDialog());
-        editName.setOnClickListener(v -> showEditTextDialog("이름을 입력해주세요", editName));
+     /*   editName.setOnClickListener(v -> showEditTextDialog("이름을 입력해주세요", editName));
         editAge.setOnClickListener(v -> showEditTextDialog("나이를 입력해주세요", editAge));
         editGender.setOnClickListener(v -> showEditGenderDialog("성별을 선택해주세요"));
         editGrade.setOnClickListener(v -> showEditTextDialog("학년을 입력해주세요", editGrade));
-        editStudentId.setOnClickListener(v -> showEditTextDialog("학번을 입력해주세요", editStudentId));
+        editStudentId.setOnClickListener(v -> showEditTextDialog("학번을 입력해주세요", editStudentId));*/
 
         myRef.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -211,11 +211,11 @@ public class ProfileEditActivity extends MainActivity {
     }
 
 // 성별
-    private void showEditGenderDialog(String title) {
+  /*  private void showEditGenderDialog(String title) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         View EditLayout = getLayoutInflater().inflate(R.layout.edit_profile_gender, null);
 
-        Button btnMale = EditLayout.findViewById(R.id.male);
+        Button btnMale = eLayout.findViewById(R.id.male);
         Button btnFemale = EditLayout.findViewById(R.id.female);
 
         alertDialog.setView(EditLayout);
@@ -231,7 +231,7 @@ public class ProfileEditActivity extends MainActivity {
             dialog.dismiss();
         });
         dialog.show();
-    }
+    }*/
 
     // 프로필 이미지
     private void showEditImageDialog() {
@@ -373,7 +373,7 @@ public class ProfileEditActivity extends MainActivity {
 
 
 // 이름 나이 학년 학과
-    private void showEditTextDialog(String title, final TextView textView) {
+   /* private void showEditTextDialog(String title, final TextView textView) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
         View EditTextLayout = getLayoutInflater().inflate(R.layout.edit_profile_edit_text, null);
@@ -402,5 +402,5 @@ public class ProfileEditActivity extends MainActivity {
         });
 
         dialog.show();
-    }
+    }*/
 }

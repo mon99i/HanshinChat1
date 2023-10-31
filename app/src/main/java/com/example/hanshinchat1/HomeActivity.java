@@ -94,7 +94,8 @@ public class HomeActivity extends MainActivity {
         clickChat();
         clickBoard();
         clickProfile();
-        checkMatchRequest();
+
+        //checkMatchRequest();
 
         initializeView();
         initializeListener();
@@ -143,11 +144,81 @@ public class HomeActivity extends MainActivity {
 
 
 
+    private void getMyRoom(){
+
+    }
     private void checkNewRequest(){
-        ArrayList<String > myRoomKeys=new ArrayList<>();
+        ArrayList<String> matchKey=new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Query query=FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
+
+
+        ArrayList<String> newRequestUids=new ArrayList<>();
+        ArrayList<String> newMatchKeys=new ArrayList<>();
+        ArrayList<Match> newMatches=new ArrayList<>();
+
+        FirebaseDatabase.getInstance().getReference().child("matches")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        newRequestUids.clear();
+                        newMatchKeys.clear();
+                        newMatches.clear();
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot roomSnapshot) {
+                                if(roomSnapshot.exists()){        //내가만든방이있다면 해당 방 매칭기록 조회
+                                    for(DataSnapshot item:roomSnapshot.getChildren()){
+                                        String myRoomKey=item.getKey();
+                                        for(DataSnapshot subSnapshot:snapshot.child("rooms").child(myRoomKey).getChildren()){
+                                            Match match=subSnapshot.getValue(Match.class);
+                                            if(match.getRequest()==true){
+                                                newRequestUids.add(subSnapshot.getKey());
+                                                newMatchKeys.add(myRoomKey);
+                                                newMatches.add(match);
+
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                                for(DataSnapshot subSnapshot:snapshot.child("users").child(user.getUid()).getChildren()){
+                                    Match match=subSnapshot.getValue(Match.class);
+                                    if(match.getRequest()==true){
+                                        newRequestUids.add(subSnapshot.getKey());
+                                        newMatchKeys.add(user.getUid());
+                                        newMatches.add(match);
+
+                                    }
+                                }
+                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
+
+                                if(newMatches.size()>0){
+                                    showNewRequestDialog();
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+       /* ArrayList<String > myRoomKeys=new ArrayList<>();
         ArrayList<String> newUserRequestUids = new ArrayList<>();
         HashMap<String,ArrayList<String>> newRoomRequestUids=new HashMap<>();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         Query query=FirebaseDatabase.getInstance().getReference().child("rooms");
         FirebaseDatabase.getInstance().getReference().child("matches")
@@ -155,7 +226,7 @@ public class HomeActivity extends MainActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
-                            newUserRequestUids.clear();
+                            *//*newUserRequestUids.clear();
                             newRoomRequestUids.clear();
                             Match match=snapshot.getValue(Match.class);
                             Map<String, State> users=match.getUsers();
@@ -210,7 +281,7 @@ public class HomeActivity extends MainActivity {
                                 public void onCancelled(@NonNull DatabaseError error) {
 
                                 }
-                            });
+                            });*//*
                         }
 
                     }
@@ -219,7 +290,7 @@ public class HomeActivity extends MainActivity {
 
                     }
                 });
-
+*/
 
     }
 

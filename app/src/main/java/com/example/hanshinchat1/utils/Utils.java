@@ -24,7 +24,7 @@ import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RecommendMatchActivity;
 import com.example.hanshinchat1.Room;
 import com.example.hanshinchat1.SetIdealActivity;
-import com.example.hanshinchat1.State;
+
 import com.example.hanshinchat1.UserInfo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,19 +50,91 @@ public class Utils {
     private static final String TAG = "Utils";
 
     public static void goToGetRequestActivity(Context context) {
-        ArrayList<String> myRoomKeys = new ArrayList<>();
+      /*  ArrayList<String> myRoomKeys = new ArrayList<>();
         ArrayList<String> getUserRequestUids = new ArrayList<>();
-        HashMap<String, ArrayList<String>> getRoomRequestUids = new HashMap<>();
+        HashMap<String, ArrayList<String>> getRoomRequestUids = new HashMap<>();*/
+
+
+        ArrayList<String> getRequestUids = new ArrayList<>();
+        ArrayList<String> getMatchKeys = new ArrayList<>();
+        ArrayList<Match> getMatches = new ArrayList<>();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference().child("rooms");
+        Query query=FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
         DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches");
-
         matchRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    getUserRequestUids.clear();
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        getRequestUids.clear();
+                        getMatchKeys.clear();
+                        getMatches.clear();
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot roomSnapshot) {
+                                if (roomSnapshot.exists()) {        //내가만든방이있다면 해당 방 매칭기록 조회
+                                    for (DataSnapshot item : roomSnapshot.getChildren()) {
+                                        String myRoomKey = item.getKey();
+                                        for (DataSnapshot subSnapshot : snapshot.child("rooms").child(myRoomKey).getChildren()) {
+                                            Match match = subSnapshot.getValue(Match.class);
+                                            if (match.getApproved() ==null) {
+                                                getRequestUids.add(subSnapshot.getKey());
+                                                getMatchKeys.add(myRoomKey);
+                                                getMatches.add(match);
+
+                                            }
+                                            matchRef.child("rooms").child(myRoomKey).child(subSnapshot.getKey()).child("request").setValue(false);
+                                        }
+
+                                    }
+
+                                }
+                                for (DataSnapshot subSnapshot : snapshot.child("users").child(user.getUid()).getChildren()) {
+                                    Match match = subSnapshot.getValue(Match.class);
+                                    if (match.getApproved() == null) {
+                                        getRequestUids.add(subSnapshot.getKey());
+                                        getMatchKeys.add(user.getUid());
+                                        getMatches.add(match);
+
+                                    }
+                                    matchRef.child("users").child(user.getUid()).child(subSnapshot.getKey()).child("request").setValue(false);
+                                }
+
+                                Log.d(TAG, "onDataChange: "+getRequestUids.size()+" "+getMatchKeys.size()+" "+getMatches.size());
+                                Intent intent = new Intent(context, GetRequestActivity.class);
+                                intent.putExtra("getRequestUids", getRequestUids);
+                                intent.putExtra("getMatchKeys", getMatchKeys);
+                                intent.putExtra("getMatches", getMatches);
+                                context.startActivity(intent);
+                                ((AppCompatActivity) context).finish();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+ /*   FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    Query query = FirebaseDatabase.getInstance().getReference().child("rooms");
+    DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches");
+
+        matchRef.addListenerForSingleValueEvent(new
+
+    ValueEventListener() {
+        @Override
+        public void onDataChange (@NonNull DataSnapshot snapshot){
+            if (snapshot.exists()) {
+                    *//*getUserRequestUids.clear();
                     getRoomRequestUids.clear();
                     Match match = snapshot.getValue(Match.class);
                     Map<String, State> users = match.getUsers();
@@ -121,17 +193,17 @@ public class Utils {
 
                         }
                     });
+*//*
 
+            } else {
+                Intent intent = new Intent(context, GetRequestActivity.class);
+                intent.putExtra("getUserRequestUids", getUserRequestUids);
+                intent.putExtra("getRoomRequestUids", getRoomRequestUids);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            }
 
-                } else {
-                    Intent intent = new Intent(context, GetRequestActivity.class);
-                    intent.putExtra("getUserRequestUids", getUserRequestUids);
-                    intent.putExtra("getRoomRequestUids",  getRoomRequestUids);
-                    context.startActivity(intent);
-                    ((AppCompatActivity) context).finish();
-                }
-
-                      /*  for(String myRoomKey:myRoomKeys){
+                      *//*  for(String myRoomKey:myRoomKeys){
                             State state=snapshot.child("rooms").child(myRoomKey).getValue(State.class);
                             for(Map.Entry<String,Boolean> map:state.getRequest().entrySet()){
                                 String uid=map.getKey();
@@ -142,19 +214,19 @@ public class Utils {
                                 }
                             }
 
-                        }*/
+                        }*//*
 
 
-            }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        @Override
+        public void onCancelled (@NonNull DatabaseError error){
 
-            }
-        });
+        }
+    });*/
 
 
-    }
+
 
   /*  private static void checkMyRoom(Context context){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

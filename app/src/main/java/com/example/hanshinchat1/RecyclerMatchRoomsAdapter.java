@@ -2,14 +2,12 @@ package com.example.hanshinchat1;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,9 +20,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.hanshinchat1.Room.RoomInfoActivity;
-import com.example.hanshinchat1.board.ListViewItem;
-import com.example.hanshinchat1.utils.FBAuth;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,8 +28,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -43,8 +44,9 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     private Context context;
     private final static String TAG = "매칭요청실패";
 
-    private ArrayList<MatchRoom> matchRoomsList;
-    private ArrayList<String> matchKeyList;
+    private ArrayList<String> roomKeyList;
+    private ArrayList<Room> roomList;
+    private Map<String,Room> roomMap;
 
     private ArrayList<MatchRoom> filteredList;
     private boolean isDepartmentFilterEnabled = false;
@@ -54,22 +56,109 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
     private UserInfo userInfo;
 
+    private  RecyclerView recyclerView;
     public RecyclerMatchRoomsAdapter(Context context) {
         this.context = context;
-        matchRoomsList = new ArrayList<>();
-        matchKeyList = new ArrayList();
-        filteredList = new ArrayList<>();
+        roomList = new ArrayList<>();
+        roomKeyList = new ArrayList();
+        //filteredList = new ArrayList<>();
+        recyclerView = ((RoomActivity) context).findViewById(R.id.recycler_matchRooms);
+        setUpRooms(null,false);
+        //loadAllMatchRooms();
+    }
+    public void setUpRooms(String category,boolean checkBoxChecked) {
+        DatabaseReference matchRoomsRef = FirebaseDatabase.getInstance().getReference().child("rooms");
+        matchRoomsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                roomList.clear();
+                roomKeyList.clear();
+                if(category==null){
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        Room room = item.getValue(Room.class);
+                        roomList.add(room);
+                        roomKeyList.add(item.getKey());
 
-        loadAllMatchRooms();
+
+                    }
+                }else {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        Room room = item.getValue(Room.class);
+                        if(room.getCategory().equals(category)){
+                            roomList.add(room);
+                            roomKeyList.add(item.getKey());
+                        }
+
+                    }
+
+                }
+
+                Collections.reverse(roomKeyList);
+                Collections.reverse(roomList);
+
+
+                if(checkBoxChecked){
+                    excludeSameDepartment();
+                }else{
+                    notifyDataSetChanged();
+                    recyclerView.scrollToPosition(0);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
-    public void loadAllMatchRooms() {
+    public void excludeSameDepartment() {
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserInfo userInfo=snapshot.getValue(UserInfo.class);
+                        Map<String,Room> roomMap=new HashMap<>();
+                        for(int i=0;i<roomList.size();i++){
+                            roomMap.put(roomKeyList.get(i),roomList.get(i));
+                        }
+                        for(Map.Entry<String,Room> map:roomMap.entrySet()){
+                            String department=map.getValue().getDepartment();
+                            if(department!=null&&department.equals(userInfo.getDepartment())){
+                                roomKeyList.remove(map.getKey());
+                                roomList.remove(map.getValue());
+                            }
+                        }
+                           /*  for (int i = roomList.size() - 1; i >= 0; i--) {
+                            RoomInfo roomInfo = roomList.get(i).getRoomInfo();
+                            Log.d(TAG, "onDataChange: " + roomInfo.getDepartment());
+                            if (roomInfo.getDepartment() != null) {
+                                Log.d(TAG, "onDataChange: " + roomInfo.getTitle() + " " + roomInfo.getDepartment());
+                                roomKeyList.remove(i);
+                                roomList.remove(i);
+                            }
+                        }*/
+
+                        notifyDataSetChanged();
+                        recyclerView.scrollToPosition(0);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+    }
+
+
+
+   /* public void loadAllMatchRooms() {
         DatabaseReference matchRoomsRef = FirebaseDatabase.getInstance().getReference().child("matchRooms");
         matchRoomsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                matchRoomsList.clear();
-                matchKeyList.clear();
+                roomList.clear();
+                roomKeyList.clear();
                 filteredList.clear();
                 for (DataSnapshot item : snapshot.getChildren()) {
                     MatchRoom matchRoom = item.getValue(MatchRoom.class);
@@ -100,7 +189,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             }
         });
     }
-
+*/
 
         /*//다시 만나지않기, 같은과 만나지않기, 등 필터링 구현예시
         FirebaseDatabase.getInstance().getReference().child("matchRooms").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,11 +234,12 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerMatchRoomsAdapter.ViewHolder holder, int position) {
-        MatchRoom matchRoom = matchRoomsList.get(position);
-        final int currentPosition = holder.getAdapterPosition();
-        holder.txt_roomTitle.setText(matchRoom.getRoomInfo().getTitle());
+        String roomKey=roomKeyList.get(position);
+        Room room = roomList.get(position);
+        //final int currentPosition = holder.getAdapterPosition();
+        holder.txt_roomTitle.setText(room.getTitle());
 
-        String categoryTxt = matchRoom.getRoomInfo().getCategory();
+        String categoryTxt = room.getCategory();
         int imageResourceId;
 
         if ("미팅".equals(categoryTxt)) {
@@ -162,29 +252,30 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             imageResourceId = R.drawable.icon4;
         }
         holder.roomCategory.setImageResource(imageResourceId);
-        holder.txt_roomGender.setText(matchRoom.getRoomInfo().getGender());
-        holder.txt_roomDepartment.setText(matchRoom.getRoomInfo().getDepartment());
-        holder.txt_roomMember.setText(matchRoom.getRoomInfo().getNum());
+        holder.txt_roomGender.setText(room.getGender());
+        holder.txt_roomDepartment.setText(room.getDepartment());
+        holder.txt_roomMember.setText(room.getNum());
 
-        holder.room_cardview.setOnClickListener(new View.OnClickListener() {
+        holder.room_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentPosition = holder.getAdapterPosition();
+                showRecommendUserDialog(roomKey,room);
+             /*   int currentPosition = holder.getAdapterPosition();
                 if (currentPosition != RecyclerView.NO_POSITION) {
-                    MatchRoom currentMatchRoom = matchRoomsList.get(currentPosition);
+                    MatchRoom currentMatchRoom = roomList.get(currentPosition);
                     showRecommendUserDialog(currentPosition);
 
 //                showRecommendUserDialog(matchRoomsList.get(currentPosition));
 
                     Log.d("RoomActivity", matchRoom.getRoomInfo().getHost());
 
-                }
+                }*/
             }
         });
 
     }
 
-    public void setSelectedCategory(String category) {
+   /* public void setSelectedCategory(String category) {
         selectedCategory = category;
 
         // 방 목록 다시 로드
@@ -237,16 +328,16 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     }
     private void removeCompareDepartment(UserInfo userInfo) {
 
-        for (MatchRoom matchRoom : matchRoomsList) {
+        for (MatchRoom matchRoom : roomList) {
             String department = matchRoom.getRoomInfo().getDepartment();
             if (department == null && department.equals(userInfo.getDepartment())) {
                 filteredList.add(matchRoom);
             }
         }
-        matchRoomsList.removeAll(filteredList);
+        roomList.removeAll(filteredList);
         notifyDataSetChanged();
     }
-    public void setDepartmentFilterEnabled(boolean enabled) {
+  *//*  public void setDepartmentFilterEnabled(boolean enabled) {
         isDepartmentFilterEnabled = enabled;
 
         if (enabled) {
@@ -257,6 +348,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             notifyDataSetChanged();
         }
     }
+    *//*
     public void filterMatchRoomsByDepartment() {
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -272,8 +364,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     }
                 });
 
-    }
-    private void compareDepartment(UserInfo userInfo) {
+    }*/
+/*    private void compareDepartment(UserInfo userInfo) {
 
         filteredList = new ArrayList<>();
 
@@ -287,19 +379,23 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         matchRoomsList.clear();
         matchRoomsList.addAll(filteredList);
         notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public int getItemCount() {
-        return matchRoomsList.size();
+        return roomList.size();
     }
+
+
+/*
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+*/
 
 
-    private void showRecommendUserDialog(int currentPosition){
+    private void showRecommendUserDialog(String roomKey,Room room){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
@@ -314,25 +410,21 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
 
-        MatchRoom matchRoom = matchRoomsList.get(currentPosition);
 
-        Log.d("RoomActivity", matchRoom.getRoomInfo().getHost());
-        roomTitle.setText("[" + matchRoom.getRoomInfo().getCategory() + "] " + matchRoom.getRoomInfo().getTitle());
+        roomTitle.setText("[" + room.getCategory() + "] " + room.getTitle());
 
-        String matchRoomId = matchRoom.getRoomInfo().getHost(); // MatchRoom의 고유 ID
-        DatabaseReference matchRoomRef = FirebaseDatabase.getInstance().getReference().child("users").child(matchRoomId);
+        FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
 
-        matchRoomRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    UserInfo hostUserInfo = dataSnapshot.getValue(UserInfo.class);
+                                    Log.d("RoomActivity", hostUserInfo.toString());
 
-                    Log.d("RoomActivity", hostUserInfo.toString());
-
-                        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
-                        recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//                        @Override
+                                    recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
+                                    recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                                        //                        @Override
 //                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 //                            if (positionOffsetPixels == 0) {
@@ -340,29 +432,30 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 //                            }
 //                        }
 //
-                        @Override
-                        public void onPageSelected(int position) {
-                            super.onPageSelected(position);
-                            indicator.animatePageSelected(position % 2);
+                                        @Override
+                                        public void onPageSelected(int position) {
+                                            super.onPageSelected(position);
+                                            indicator.animatePageSelected(position % 2);
 
-                        }
-                    });
+                                        }
+                                    });
 
-                } else {
-                    Log.d("RoomActivity", "아무것도 없나봐...");
+                                } else {
+                                    Log.d("RoomActivity", "아무것도 없나봐...");
 
-                    // 해당 MatchRoom 데이터가 없을 경우 처리
-                }
-            }
+                                    // 해당 MatchRoom 데이터가 없을 경우 처리
+                                }
+                            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // 데이터베이스 에러 처리
-            }
-        });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
 
         builder.setView(view);
-        AlertDialog dialog = builder.create();
+        dialog = builder.create();
         //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
@@ -378,21 +471,16 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 //                }
 //                requestMatch(recommendViewPager.getVerticalScrollbarPosition());
 //                if (currentPosition != RecyclerView.NO_POSITION) {
-                    requestMatch(currentPosition);
+                    requestMatch(roomKey,room);
 //                }
             }
         });
 
     }
 
-    private void requestMatch(int position) {
-        MatchRoom matchRoom = matchRoomsList.get(position);
-        String matchKey = matchKeyList.get(position);
-
-        String hostUid = matchRoom.getRoomInfo().getHost();
-        Log.d("ListActivity", hostUid);
-        String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("ListActivity", currentUid);
+    private void requestMatch(String roomKey,Room room) {
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        String hostUid =room.getHost();
 
 //        DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
 //                .child("matchInfo").child(currentUid);
@@ -402,9 +490,31 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 //        if(myUid.equals(writerUid))
 //        if (!currentUid.equals(hostUid) && matchRoom != null) { //방만든애가 자기가 만든 방에 요청 안되게
-        if (!currentUid.equals(hostUid)) {
-            DatabaseReference matchInfoRef = FirebaseDatabase.getInstance().getReference().child("matchRooms").child(matchKey)
-                    .child("matchInfo").child(currentUid);
+        if (!user.getUid().equals(hostUid)) {
+            DatabaseReference myMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
+                    .child("rooms").child(roomKey).child(user.getUid());
+            myMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                Toast.makeText(context, "이미 요청한 방입니다", Toast.LENGTH_SHORT).show();
+                            }else {
+                                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                                LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+                                String currentTimeString = currentTime.format(dateTimeFormatter);
+                                Match match = new Match(true, currentTimeString, null);
+                                myMatchRef.setValue(match);
+                                Toast.makeText(context, "요청 완료", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                   /* .child("matchInfo").child(currentUid);
             matchInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {  //매칭정보가 없을때 매칭요청가능하게, 이미 요청내역이 있을 경우 요청불가.
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -419,20 +529,20 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            });*/
         } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
     }
 
 
-    private OnItemClickListener mListener;
+/*    private OnItemClickListener mListener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
-    }
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout room_cardview;
+        private LinearLayout room_background;
         TextView txt_roomTitle;
         ImageView roomCategory;
         TextView txt_roomGender;
@@ -448,11 +558,11 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
             txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
 
-            room_cardview = itemView.findViewById(R.id.room_cardview);
+            room_background = itemView.findViewById(R.id.room_background);
         }
 
 
-        private void requestMatch(int position) {
+       /* private void requestMatch(int position) {
             MatchRoom matchRoom = matchRoomsList.get(position);
             String matchKey = matchKeyList.get(position);
 
@@ -479,6 +589,6 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     }
                 });
             } else Toast.makeText(context, "내가 만든방입니다.", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 }
