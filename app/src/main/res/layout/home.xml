@@ -103,38 +103,11 @@
                     android:background="@drawable/background_ideal_list_layout2"/>
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_margin="10dp">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/baseline_question_mark_24"
-                        android:textColor="#434959"
-                        android:textStyle="bold"
-                        android:backgroundTint="#F8F8FF"
-                        android:text="소개팅 시뮬레이션"/>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#F8F8FF"
-                        android:drawableEnd="@drawable/baseline_moving_24"
-                        android:text="좋아요 확인 "
-                        android:textColor="#434959"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
                     android:background="#eaeaea"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginVertical="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -183,7 +156,6 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/match_button_style"
                 android:text="MBTI 매칭" />
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/aroundMatchingBtn"

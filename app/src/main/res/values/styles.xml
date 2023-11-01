@@ -19,6 +19,9 @@
         <item name="android:progressDrawable">@drawable/progressbar_style</item>
     </style>
 
+    <style name="RoundedDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/make_room_dialog_background</item>
+    </style>
 
 
 

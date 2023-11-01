@@ -16,6 +16,7 @@ public class SimulationResult extends AppCompatActivity {
         setContentView(R.layout.simulation_result);
 
         Button exitBtn = findViewById(R.id.simulation_exit);
+        Button replayBtn = findViewById(R.id.simulation_replay);
         TextView textViewResultMessage = findViewById(R.id.result_message);
         TextView textViewTotalScore = findViewById(R.id.simul_result);
 
@@ -45,6 +46,17 @@ public class SimulationResult extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        replayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimulationScoreManager.resetScore();
+
+                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
     }

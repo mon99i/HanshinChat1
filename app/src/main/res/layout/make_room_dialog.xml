@@ -3,67 +3,78 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="240dp"
+    android:layout_height="290dp"
     android:orientation="vertical"
     tools:context=".RoomActivity"
     android:gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/make_room_cancel"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="190dp"
+            android:clickable="true"
+            android:src="@drawable/baseline_close_24" />
+    </LinearLayout>
 
     <TextView
-        android:drawablePadding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="10dp"
         android:text="생성할 방 종류를 선택해주세요."
         android:gravity="center" />
 
     <LinearLayout
-        android:layout_width="240dp"
-        android:layout_height="120dp"
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal">
-
-        <Button
+<!--        <Button-->
+<!--            android:id="@+id/make_category1"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:text="과팅"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:backgroundTint="#C8FAFF" />-->
+        <ImageButton
             android:id="@+id/make_category1"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="과팅"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA" />
+            android:background="@drawable/icon2"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/make_category2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="미팅"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA"/>
+            android:background="@drawable/icon1"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="240dp"
-        android:layout_height="120dp"
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/make_category3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="밥팅"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA"/>
+            android:background="@drawable/icon3"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/make_category4"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="기타"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA"/>
+            android:background="@drawable/icon4"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,12 +53,9 @@ public class RoomActivity extends MainActivity {
     private Dialog makeRoomDialog;
     private Dialog makeRoom1Dialog;
     private Dialog makeRoom2Dialog;
-    private Dialog makeRoom3Dialog;
-
     private CheckBox departmentCheckbox;
     private Button makeRoom;
     private Button findRoom;
-    private Button findRoom2;
 
     private RecyclerView recycler_matchRooms;
     private RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
@@ -64,7 +63,8 @@ public class RoomActivity extends MainActivity {
     //private boolean isDepartmentFilterEnabled = false;
     private boolean checkBoxChecked = false;
     private String selectedCategory=null;
-    public static String[] participants = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
+    public static String[] participants1 = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
+    public static String[] participants2 = {"2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
 
 
@@ -96,20 +96,14 @@ public class RoomActivity extends MainActivity {
         departmentCheckbox = findViewById(R.id.department_checkbox);
         makeRoom = findViewById(R.id.make_room);
         findRoom = findViewById(R.id.find_room);
-        findRoom2 = findViewById(R.id.find_room2);
 
-
-        makeRoomDialog = new Dialog(RoomActivity.this);
-        makeRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
+        makeRoomDialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoomDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoomDialog.setContentView(R.layout.make_room_dialog);
 
-        findRoomDialog = new Dialog(RoomActivity.this);
+        findRoomDialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
         findRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         findRoomDialog.setContentView(R.layout.find_room_dialog);
-
-        findRoomDialog2 = new Dialog(RoomActivity.this);
-        findRoomDialog2.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
-        findRoomDialog2.setContentView(R.layout.find_room2_dialog);
 
     }
 
@@ -212,10 +206,11 @@ public class RoomActivity extends MainActivity {
             public void onClick(View v) {
                 makeRoomDialog.show();
 
-                Button makeCategory1Btn = makeRoomDialog.findViewById(R.id.make_category1);
-                Button makeCategory2Btn = makeRoomDialog.findViewById(R.id.make_category2);
-                Button makeCategory3Btn = makeRoomDialog.findViewById(R.id.make_category3);
-                Button makeCategory4Btn = makeRoomDialog.findViewById(R.id.make_category4);
+                ImageButton makeCategory1Btn = makeRoomDialog.findViewById(R.id.make_category1);
+                ImageButton makeCategory2Btn = makeRoomDialog.findViewById(R.id.make_category2);
+                ImageButton makeCategory3Btn = makeRoomDialog.findViewById(R.id.make_category3);
+                ImageButton makeCategory4Btn = makeRoomDialog.findViewById(R.id.make_category4);
+                ImageView cancelBtn = makeRoomDialog.findViewById(R.id.make_room_cancel);
 
 
                 makeCategory1Btn.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +244,12 @@ public class RoomActivity extends MainActivity {
                         makeRoom4();
                     }
                 });
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        makeRoomDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -273,23 +274,24 @@ public class RoomActivity extends MainActivity {
 */
 
 
-        findRoom2.setOnClickListener(new View.OnClickListener() {
+        findRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findRoomDialog2.show();
+                findRoomDialog.show();
 
-                Button category0Btn = findRoomDialog2.findViewById(R.id.category_all);
-                Button category1Btn = findRoomDialog2.findViewById(R.id.category1);
-                Button category2Btn = findRoomDialog2.findViewById(R.id.category2);
-                Button category3Btn = findRoomDialog2.findViewById(R.id.category3);
-                Button category4Btn = findRoomDialog2.findViewById(R.id.category4);
+                Button category0Btn = findRoomDialog.findViewById(R.id.category_all);
+                ImageView category1Btn = findRoomDialog.findViewById(R.id.category1);
+                ImageView category2Btn = findRoomDialog.findViewById(R.id.category2);
+                ImageView category3Btn = findRoomDialog.findViewById(R.id.category3);
+                ImageView category4Btn = findRoomDialog.findViewById(R.id.category4);
+                ImageView cancelBtn = makeRoomDialog.findViewById(R.id.make_room_cancel);
 
                 category0Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         selectedCategory=null;
                         recyclerMatchRoomsAdapter.setUpRooms(null,checkBoxChecked);
-                        findRoomDialog2.dismiss();
+                        findRoomDialog.dismiss();
                     }
                 });
                 category1Btn.setOnClickListener(new View.OnClickListener() {
@@ -297,7 +299,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
                         selectedCategory="과팅";
                         recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
-                        findRoomDialog2.dismiss();
+                        findRoomDialog.dismiss();
 
                     }
                 });
@@ -306,7 +308,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
                         selectedCategory="미팅";
                         recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
-                        findRoomDialog2.dismiss();
+                        findRoomDialog.dismiss();
 
                     }
                 });
@@ -315,7 +317,7 @@ public class RoomActivity extends MainActivity {
                     public void onClick(View v) {
                         selectedCategory="밥팅";
                         recyclerMatchRoomsAdapter.setUpRooms(selectedCategory,checkBoxChecked);
-                        findRoomDialog2.dismiss();
+                        findRoomDialog.dismiss();
                     }
                 });
                 category4Btn.setOnClickListener(new View.OnClickListener() {
@@ -326,7 +328,13 @@ public class RoomActivity extends MainActivity {
                        /* if(checkBoxChecked){
                             recyclerMatchRoomsAdapter.excludeSameDepartment();
                         }*/
-                        findRoomDialog2.dismiss();
+                        findRoomDialog.dismiss();
+                    }
+                });
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        findRoomDialog.dismiss();
                     }
                 });
             }
@@ -491,31 +499,34 @@ public class RoomActivity extends MainActivity {
 
 
     private void makeRoom1() {
-        makeRoom1Dialog = new Dialog(RoomActivity.this);
+        makeRoom1Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
         makeRoom1Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom1Dialog.setContentView(R.layout.make_room1);
         makeRoom1Dialog.show();
 
         EditText edt_roomTitle = makeRoom1Dialog.findViewById(R.id.edt_roomTitle);
         Button btn_makeRoom = makeRoom1Dialog.findViewById(R.id.btn_makeRoom);
+        ImageView cancelBtn = makeRoom1Dialog.findViewById(R.id.make_room_cancel);
         Spinner participants_Spinner = makeRoom1Dialog.findViewById(R.id.participants_spinner);
-        Spinner department_Spinner = makeRoom1Dialog.findViewById(R.id.department_spinner);
-        Spinner gender_Spinner = makeRoom1Dialog.findViewById(R.id.gender_spinner);
+        ImageView category = makeRoom1Dialog.findViewById(R.id.room_category);
+        category.setBackgroundResource(R.drawable.icon2);
+        //Spinner department_Spinner = makeRoom1Dialog.findViewById(R.id.department_spinner);
+        //Spinner gender_Spinner = makeRoom1Dialog.findViewById(R.id.gender_spinner);
         String selectedCategory = "과팅";
         Resources res = getResources();
-        String[] department = res.getStringArray(R.array.학과);
+        //String[] department = res.getStringArray(R.array.학과);
 
-        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants);
-        ArrayAdapter<String> department_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, department);
-        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
+        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants2);
+        //ArrayAdapter<String> department_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, department);
+        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        department_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //department_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         participants_Spinner.setAdapter(participants_adapter);
-        department_Spinner.setAdapter(department_adapter);
-        gender_Spinner.setAdapter(gender_adapter);
+        //department_Spinner.setAdapter(department_adapter);
+        //gender_Spinner.setAdapter(gender_adapter);
 
 
         recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this);
@@ -526,8 +537,8 @@ public class RoomActivity extends MainActivity {
                 Room room =new Room();
                 room.setHost(user.getUid());
                 room.setNum(participants_Spinner.getSelectedItem().toString());
-                room.setDepartment(department_Spinner.getSelectedItem().toString());
-                room.setGender(gender_Spinner.getSelectedItem().toString());
+                //room.setDepartment(department_Spinner.getSelectedItem().toString());
+                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(selectedCategory);
 
@@ -545,21 +556,30 @@ public class RoomActivity extends MainActivity {
                 });
             }
         });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeRoom1Dialog.dismiss();
+            }
+        });
     }
     private void makeRoom2() {
-        makeRoom2Dialog = new Dialog(RoomActivity.this);
+        makeRoom2Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
         makeRoom2Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom2Dialog.setContentView(R.layout.make_room2);
         makeRoom2Dialog.show();
 
         EditText edt_roomTitle = makeRoom2Dialog.findViewById(R.id.edt_roomTitle);
         Button btn_makeRoom = makeRoom2Dialog.findViewById(R.id.btn_makeRoom);
-        Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
+        ImageView cancelBtn = makeRoom2Dialog.findViewById(R.id.make_room_cancel);
+        ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
+        category.setBackgroundResource(R.drawable.icon1);
+        //Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
         String selectedCategory = "미팅";
-        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
+        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
-        gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender_Spinner.setAdapter(gender_adapter);
+        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -567,7 +587,7 @@ public class RoomActivity extends MainActivity {
 
                 Room room =new Room();
                 room.setHost(user.getUid());
-                room.setGender(gender_Spinner.getSelectedItem().toString());
+                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(selectedCategory);
 
@@ -583,22 +603,31 @@ public class RoomActivity extends MainActivity {
                 });
             }
         });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeRoom2Dialog.dismiss();
+            }
+        });
     }
 
     private void makeRoom3() {
-        makeRoom2Dialog = new Dialog(RoomActivity.this);
+        makeRoom2Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
         makeRoom2Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom2Dialog.setContentView(R.layout.make_room2);
         makeRoom2Dialog.show();
 
         EditText edt_roomTitle = makeRoom2Dialog.findViewById(R.id.edt_roomTitle);
         Button btn_makeRoom = makeRoom2Dialog.findViewById(R.id.btn_makeRoom);
-        Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
+        ImageView cancelBtn = makeRoom2Dialog.findViewById(R.id.make_room_cancel);
+        ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
+        category.setBackgroundResource(R.drawable.icon3);
+        //Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
         String selectedCategory = "밥팅";
         ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
-        gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender_Spinner.setAdapter(gender_adapter);
+        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -606,7 +635,7 @@ public class RoomActivity extends MainActivity {
 
                 Room room =new Room();
                 room.setHost(user.getUid());
-                room.setGender(gender_Spinner.getSelectedItem().toString());
+                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(selectedCategory);
 
@@ -620,31 +649,40 @@ public class RoomActivity extends MainActivity {
                         finish();
                     }
                 });
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeRoom2Dialog.dismiss();
             }
         });
     }
 
 
     private void makeRoom4() {
-        makeRoom3Dialog = new Dialog(RoomActivity.this);
-        makeRoom3Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        makeRoom3Dialog.setContentView(R.layout.make_room3);
-        makeRoom3Dialog.show();
+        makeRoom1Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoom1Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        makeRoom1Dialog.setContentView(R.layout.make_room1);
+        makeRoom1Dialog.show();
 
-        EditText edt_roomTitle = makeRoom3Dialog.findViewById(R.id.edt_roomTitle);
-        Button btn_makeRoom = makeRoom3Dialog.findViewById(R.id.btn_makeRoom);
-        Spinner participants_Spinner = makeRoom3Dialog.findViewById(R.id.participants_spinner);
-        Spinner gender_Spinner = makeRoom3Dialog.findViewById(R.id.gender_spinner);
+        EditText edt_roomTitle = makeRoom1Dialog.findViewById(R.id.edt_roomTitle);
+        Button btn_makeRoom = makeRoom1Dialog.findViewById(R.id.btn_makeRoom);
+        ImageView cancelBtn = makeRoom1Dialog.findViewById(R.id.make_room_cancel);
+        ImageView category = makeRoom1Dialog.findViewById(R.id.room_category);
+        category.setBackgroundResource(R.drawable.icon4);
+        Spinner participants_Spinner = makeRoom1Dialog.findViewById(R.id.participants_spinner);
+        //Spinner gender_Spinner = makeRoom3Dialog.findViewById(R.id.gender_spinner);
         String selectedCategory = "기타";
 
-        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants);
-        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
+        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants1);
+        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         participants_Spinner.setAdapter(participants_adapter);
-        gender_Spinner.setAdapter(gender_adapter);
+        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -653,7 +691,7 @@ public class RoomActivity extends MainActivity {
                 Room room =new Room();
                 room.setHost(user.getUid());
                 room.setNum(participants_Spinner.getSelectedItem().toString());
-                room.setGender(gender_Spinner.getSelectedItem().toString());
+                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(selectedCategory);
 
@@ -661,12 +699,18 @@ public class RoomActivity extends MainActivity {
                 myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        makeRoom3Dialog.dismiss();
+                        makeRoom1Dialog.dismiss();
                         Intent intent = new Intent(getApplicationContext(),RoomActivity.class);
                         startActivity(intent);
                         finish();
                     }
                 });
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeRoom1Dialog.dismiss();
             }
         });
 

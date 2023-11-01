@@ -33,12 +33,25 @@
         android:textSize="15dp"
         android:gravity="center"/>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/simulation_replay"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="230dp"
+            android:background="@drawable/match_button_style"
+            android:text="한 번 더 도전!"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/simulation_exit"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="230dp"
         android:background="@drawable/match_button_style"
-        android:text="시뮬레이션 종료"/>
+        android:text="나가기"/>
+    </LinearLayout>
 </LinearLayout>
