@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.Room;
+package com.example.hanshinchat1.Room1;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -57,8 +57,8 @@
 
         <ImageView
             android:layout_marginTop="10dp"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:layout_width="250dp"
+            android:layout_height="170dp"
             android:src="@drawable/simulation4"
             android:layout_gravity="center"/>
 
@@ -87,7 +87,7 @@
                 <RadioButton
                     android:id="@+id/answer1_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="괜찮아요. 저도 온 지 얼마 안 됐어요."
@@ -98,7 +98,7 @@
                 <RadioButton
                     android:id="@+id/answer2_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="사람이 그럴 수도 있죠"
@@ -109,7 +109,7 @@
                 <RadioButton
                     android:id="@+id/answer3_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="미안해하실 것 까진 아니에요."
@@ -120,7 +120,7 @@
                 <RadioButton
                     android:id="@+id/answer4_btn"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="오시느라 힘드셨죠?"
@@ -133,7 +133,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/next_btn"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/match_button_style"

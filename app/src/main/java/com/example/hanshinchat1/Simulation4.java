@@ -24,7 +24,6 @@ public class Simulation4 extends MainActivity {
         answer2 = (RadioButton) findViewById(R.id.answer2_btn);
         answer3 = (RadioButton) findViewById(R.id.answer3_btn);
         answer4 = (RadioButton) findViewById(R.id.answer4_btn);
-
         nextBtn = (Button) findViewById(R.id.next_btn);
         nextBtn.setEnabled(false);
         backBtn = (ImageButton) findViewById(R.id.back_btn);

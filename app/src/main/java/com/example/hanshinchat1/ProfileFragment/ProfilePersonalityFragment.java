@@ -1,6 +1,7 @@
 package com.example.hanshinchat1.ProfileFragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ProfilePersonalityFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
     private ArrayList<String> selectedPersonality = new ArrayList<>();
-
     private static final int MAX_PERSONALITY = 3;
-
 
     @Nullable
     @Override
@@ -39,8 +37,7 @@ public class ProfilePersonalityFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         String[] personalityArray = getResources().getStringArray(R.array.성격);
 
-        LinearLayout checkBoxLayout = view.findViewById(R.id.personality_checkbox_layout);
-
+        LinearLayout checkBoxLayout = view.findViewById(R.id.personality_checkbox_layout_fragment);
         LinearLayout currentLinearLayout = null;
         LinearLayout.LayoutParams checkBoxParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -51,13 +48,11 @@ public class ProfilePersonalityFragment extends Fragment {
 
         for (int i = 0; i < personalityArray.length; i++) {
             final String currentPersonality = personalityArray[i];
-
             if (i % 4 == 0) {
                 currentLinearLayout = new LinearLayout(getContext());
                 currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 checkBoxLayout.addView(currentLinearLayout);
             }
-
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(currentPersonality);
             checkBox.setLayoutParams(checkBoxParams);
@@ -87,5 +82,15 @@ public class ProfilePersonalityFragment extends Fragment {
     public void updateDB() {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         userRef.child("personality").setValue(selectedPersonality);
+    }
+
+    public String editDB() {
+        if (selectedPersonality.isEmpty()) {
+            Toast.makeText(getContext(), "성격을 선택해주세요", Toast.LENGTH_SHORT).show();
+            return null;
+        } else {
+            String newPersonality = TextUtils.join(", ", selectedPersonality);
+            return newPersonality;
+        }
     }
 }

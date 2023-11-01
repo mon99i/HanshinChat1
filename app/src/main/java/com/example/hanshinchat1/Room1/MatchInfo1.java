@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.Room;
+package com.example.hanshinchat1.Room1;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

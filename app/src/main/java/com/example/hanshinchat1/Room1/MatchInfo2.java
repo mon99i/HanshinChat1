@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.Room;
+package com.example.hanshinchat1.Room1;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,11 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.databinding.DataBindingUtil;
-
 import androidx.fragment.app.Fragment;
-
-import com.example.hanshinchat1.databinding.BoardBinding;
 
 import com.example.hanshinchat1.R;
 

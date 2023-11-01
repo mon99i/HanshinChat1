@@ -262,7 +262,7 @@
                 android:id="@+id/noneRecommendIdeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -278,7 +278,6 @@
                     android:layout_marginTop="5dp"
                     android:text="이상형을 설정하지 않았어요"
                     android:textSize="12dp"
-                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"

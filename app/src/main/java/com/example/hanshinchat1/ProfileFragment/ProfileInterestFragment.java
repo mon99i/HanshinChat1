@@ -1,6 +1,7 @@
 package com.example.hanshinchat1.ProfileFragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 public class ProfileInterestFragment extends Fragment {
     DatabaseReference myRef;
     FirebaseUser user;
-
     private ArrayList<String> selectedInterests = new ArrayList<>();
     private static final int MAX_INTERESTS = 5;
 
@@ -37,8 +37,7 @@ public class ProfileInterestFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         String[] interestArray = getResources().getStringArray(R.array.관심사);
-        LinearLayout checkBoxLayout = view.findViewById(R.id.interest_checkbox_layout);
-
+        LinearLayout checkBoxLayout = view.findViewById(R.id.interest_checkbox_layout_fragment);
         LinearLayout currentLinearLayout = null;
         LinearLayout.LayoutParams checkBoxParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -55,7 +54,6 @@ public class ProfileInterestFragment extends Fragment {
                 currentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 checkBoxLayout.addView(currentLinearLayout);
             }
-
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(currentInterest);
             checkBox.setLayoutParams(checkBoxParams);
@@ -80,7 +78,6 @@ public class ProfileInterestFragment extends Fragment {
             });
             currentLinearLayout.addView(checkBox);
         }
-
         return view;
     }
 
@@ -91,6 +88,16 @@ public class ProfileInterestFragment extends Fragment {
         else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("interest").setValue(selectedInterests);
+        }
+    }
+
+    public String editDB() {
+        if (selectedInterests.isEmpty()) {
+            Toast.makeText(getContext(), "관심사를 선택해주세요", Toast.LENGTH_SHORT).show();
+            return null;
+        } else {
+            String newInterest = TextUtils.join(", ", selectedInterests);
+            return newInterest;
         }
     }
 }

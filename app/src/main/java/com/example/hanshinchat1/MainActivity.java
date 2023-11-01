@@ -106,6 +106,9 @@ public abstract class MainActivity extends AppCompatActivity {
         }
 
     }
+    
+    
+
 
     protected void checkWarning() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

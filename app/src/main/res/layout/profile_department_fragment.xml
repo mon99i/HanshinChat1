@@ -10,7 +10,7 @@
         android:textSize="25sp"
         android:textColor="@color/black"/>
     <Spinner
-        android:id="@+id/department_spinner"
+        android:id="@+id/department_spinner_fragment"
         android:spinnerMode="dialog"
         android:entries="@array/학과"
         android:layout_marginTop="50dp"

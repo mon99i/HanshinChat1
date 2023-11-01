@@ -2,7 +2,6 @@ package com.example.hanshinchat1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -19,6 +18,8 @@ import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileCompleteFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDrinkingFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionFemaleFragment;
+import com.example.hanshinchat1.ProfileFragment.ProfileFashionMaleFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
@@ -42,10 +43,8 @@ import com.example.hanshinchat1.fragment.IdealReligionFragment;
 import com.example.hanshinchat1.fragment.IdealSmokingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.example.hanshinchat1.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -76,12 +75,16 @@ public class SetProfileActivity extends AppCompatActivity {
     private ProfileIdealTypeFragment idealTypeFragment;
     private ProfileCompleteFragment completeFragment;
 
+    private ProfileFashionMaleFragment fashionMaleFragment;
+
+    private ProfileFashionFemaleFragment fashionFemaleFragment;
+
     private MainActivity mainActivity;
 
     private UserInfo userInfo;
     private TextView progressTextView;
     private int currentStep = 1;
-    private int totalSteps = 18;
+    private int totalSteps = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,95 +94,6 @@ public class SetProfileActivity extends AppCompatActivity {
         initializeView();
         checkProfile();
         initializeListener();
-
-  /*      if (user != null) {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserInfo userInfo = dataSnapshot.getValue(UserInfo.class);
-                    if (userInfo != null) {
-                        checkProfile(userInfo);
-                    } else {
-                        // userInfo가 null인 경우 처리
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // 처리 실패 시 동작
-                }
-            });
-        } else {
-            // Firebase 사용자가 로그인되지 않은 경우 처리
-        }*/
-       /* setProfileNextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment=fragmentManager.findFragmentById(R.id.set_profile_frame);
-                if (fragment instanceof ProfileNameFragment) {
-                    ((ProfileNameFragment) fragment).setName();
-                    nextFragment = genderFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileGenderFragment) {
-                    ((ProfileGenderFragment) genderFragment).setGender();
-                    nextFragment = ageFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileAgeFragment) {
-                    ((ProfileAgeFragment) ageFragment).setAge();
-                    nextFragment = gradeFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileGradeFragment) {
-                    ((ProfileGradeFragment) gradeFragment).setGrade();
-                    nextFragment = studentIdFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileStudentIdFragment) {
-                    ((ProfileStudentIdFragment) studentIdFragment).setStudentId();
-                    nextFragment = departmentFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileDepartmentFragment) {
-                    ((ProfileDepartmentFragment) departmentFragment).setDepartment();
-                    nextFragment = heightFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileHeightFragment) {
-                    ((ProfileHeightFragment) heightFragment).setHeight();
-                    nextFragment = formFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileFormFragment) {
-                    ((ProfileFormFragment) formFragment).setForm();
-                    nextFragment = addressFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileAddressFragment) {
-                    ((ProfileAddressFragment) addressFragment).setAddress();
-                    nextFragment = religionFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileReligionFragment) {
-                    ((ProfileReligionFragment) religionFragment).setReligion();
-                    nextFragment = smokingFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileSmokingFragment) {
-                    ((ProfileSmokingFragment) smokingFragment).setSmoking();
-                    nextFragment = drinkingFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileDrinkingFragment) {
-                    ((ProfileDrinkingFragment) drinkingFragment).setDrinking();
-                    nextFragment = interestFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileInterestFragment) {
-                    ((ProfileInterestFragment) interestFragment).setInterest();
-                    nextFragment = personalityFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfilePersonalityFragment) {
-                    ((ProfilePersonalityFragment) personalityFragment).setPersonality();
-                    nextFragment = mbtiFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileMbtiFragment) {
-                    ((ProfileMbtiFragment) mbtiFragment).setMbti();
-                    nextFragment = idealTypeFragment;
-                } else if (fragmentManager.findFragmentById(R.id.set_profile_frame) instanceof ProfileIdealTypeFragment) {
-                    ((ProfileIdealTypeFragment) idealTypeFragment).setIdealType();
-                    nextFragment = completeFragment;
-                } else {
-                    ((ProfileCompleteFragment) completeFragment).setComplete();
-
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.set_profile_frame, nextFragment).commitAllowingStateLoss();
-                setProfileProgressBar.setProgress(nextProgress());
-                setProfileTextView.setText(nextText());
-            }
-        });*/
-
     }
 
     private void initializeView() {
@@ -200,16 +114,16 @@ public class SetProfileActivity extends AppCompatActivity {
         mbtiFragment = new ProfileMbtiFragment();
         idealTypeFragment = new ProfileIdealTypeFragment();
         completeFragment = new ProfileCompleteFragment();
+        fashionMaleFragment = new ProfileFashionMaleFragment();
+        fashionFemaleFragment = new ProfileFashionFemaleFragment();
 
         setProfileNextBtn = findViewById(R.id.set_profile_next_btn);
         setProfileProgressBar = findViewById(R.id.set_profile_progress);
-
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-
         setProfileProgressBar = findViewById(R.id.set_profile_progress);
         setProfileProgressBar.setProgress(0);
-        setProfileProgressBar.setMax(18);
+        setProfileProgressBar.setMax(19);
         progressTextView = findViewById(R.id.progress_text_view);
         progressTextView.setText(currentStep + "/" + totalSteps);
     }
@@ -251,6 +165,10 @@ public class SetProfileActivity extends AppCompatActivity {
                     ((ProfileMbtiFragment) fragment).updateDB();
                 } else if (fragment instanceof ProfileIdealTypeFragment) {
                     ((ProfileIdealTypeFragment) fragment).updateDB();
+                } else if (fragment instanceof ProfileFashionMaleFragment) {
+                    ((ProfileFashionMaleFragment) fragment).updateDB();
+                } else if (fragment instanceof ProfileFashionFemaleFragment) {
+                    ((ProfileFashionFemaleFragment) fragment).updateDB();
                 } else if (fragment instanceof ProfileCompleteFragment){
                     ((ProfileCompleteFragment) fragment).updateDB();
                 } else {
@@ -261,44 +179,40 @@ public class SetProfileActivity extends AppCompatActivity {
                 checkProfile();
             }
         });
-
-
     }
 
     private void checkProfile() {
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                        Class<?> nextFragmentClass = getNextProfileFragment(userInfo);
-                        if (nextFragmentClass != null) {
-                            try {
-                                Fragment nextFragment = (Fragment) nextFragmentClass.newInstance();
-                                transaction = fragmentManager.beginTransaction();
-                                transaction.replace(R.id.set_profile_frame, nextFragment).commitAllowingStateLoss();
-                                updateProgressBar(nextFragment);
-                            } catch (InstantiationException | IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
-                            finish();
+            .addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                    Class<?> nextFragmentClass = getNextProfileFragment(userInfo);
+                    if (nextFragmentClass != null) {
+                        try {
+                            Fragment nextFragment = (Fragment) nextFragmentClass.newInstance();
+                            transaction = fragmentManager.beginTransaction();
+                            transaction.replace(R.id.set_profile_frame, nextFragment).commitAllowingStateLoss();
+                            updateProgressBar(nextFragment);
+                        } catch (InstantiationException | IllegalAccessException e) {
+                            e.printStackTrace();
                         }
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
     }
 
     private void updateProgressBar(Fragment fragment) {
         int progress = 0;
         currentStep = 1;
-        totalSteps = 18;
+        totalSteps = 19;
         if (fragment instanceof ProfileNameFragment) {
             progress = 2; currentStep = 2;
         } else if (fragment instanceof ProfileGenderFragment) {
@@ -331,8 +245,12 @@ public class SetProfileActivity extends AppCompatActivity {
             progress = 16; currentStep = 16;
         } else if (fragment instanceof ProfileIdealTypeFragment) {
             progress = 17; currentStep = 17;
-        } else if (fragment instanceof ProfileCompleteFragment) {
+        } else if (fragment instanceof ProfileFashionMaleFragment) {
             progress = 18; currentStep = 18;
+        } else if (fragment instanceof ProfileFashionFemaleFragment) {
+            progress = 18; currentStep = 18;
+        } else if (fragment instanceof ProfileCompleteFragment) {
+            progress = 19; currentStep = 19;
         }
         setProfileProgressBar.setProgress(progress);
         progressTextView.setText(currentStep + "/" + totalSteps);
@@ -370,6 +288,12 @@ public class SetProfileActivity extends AppCompatActivity {
             return ProfilePersonalityFragment.class;
         } else if (userInfo.getMbti() == null) {
             return ProfileMbtiFragment.class;
+        } else if (userInfo.getFashion() == null) {
+            if(userInfo.getGender().equals("남자")){
+                return ProfileFashionMaleFragment.class;
+            } else if(userInfo.getGender().equals("여자")){
+                return ProfileFashionFemaleFragment.class;
+            }
         } else if (userInfo.getCreationTime() == null) {
             return ProfileCompleteFragment.class;
         }

@@ -110,6 +110,9 @@
             android:name=".ProfileEditActivity"
             android:exported="false"></activity>
         <activity
+            android:name=".ProfileEditActivity2"
+            android:exported="false"></activity>
+        <activity
             android:name=".SetIdealActivity"
             android:exported="false"></activity>
         <activity
@@ -122,11 +125,10 @@
             android:name=".Match1.MbtiMatchActivity2"
             android:exported="false" />
         <activity
-            android:name=".Room.RoomInfoActivity"
+            android:name=".Room1.RoomInfoActivity"
             android:exported="false" />
         <activity
             android:name=".report.ReportActivity"
             android:exported="false" />
     </application>
-
 </manifest>

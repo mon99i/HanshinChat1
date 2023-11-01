@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_profile_fashion"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:padding="22dp">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_male_fragment1"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/profile_fashion_male_selector1"
+            android:button="@null" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_male_fragment2"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:background="@drawable/profile_fashion_male_selector2"
+            android:button="@null" />
+
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:text="캐주얼"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:text="스트릿"
+            android:gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_male_fragment3"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/profile_fashion_male_selector3"
+            android:button="@null" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_male_fragment4"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_fashion_male_selector4"
+            android:button="@null" />
+
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:text="댄디"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:text="스포티"
+            android:gravity="center"/>
+    </GridLayout>
+</FrameLayout>

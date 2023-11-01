@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
 public class Simulation1 extends MainActivity {
-
     private Button nextBtn;
     private ImageButton backBtn, homeBtn;
     private RadioGroup genderRadioGroup;
@@ -21,7 +20,6 @@ public class Simulation1 extends MainActivity {
         nextBtn.setEnabled(false);
         backBtn = (ImageButton) findViewById(R.id.back_btn);
         homeBtn = (ImageButton) findViewById(R.id.home_btn);
-
         genderRadioGroup = (RadioGroup) findViewById(R.id.gender);
         genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

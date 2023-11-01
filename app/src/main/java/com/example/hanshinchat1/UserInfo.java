@@ -174,8 +174,23 @@ public class UserInfo implements Serializable{
     public void setIdealTypeSecond(String idealTypeSecond) {
         this.idealTypeSecond = idealTypeSecond;
     }
+    public String getFashion() {
+        return fashion;
+    }
 
-    public UserInfo(Integer like, String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl, String lastSignInTime, String creationTime) {
+    public void setFashion(String fashion) {
+        this.fashion = fashion;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public UserInfo(Integer like, String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl, String lastSignInTime, String creationTime, String fashion) {
         this.like = like;
         this.uid = uid;
         this.name = name;
@@ -198,16 +213,8 @@ public class UserInfo implements Serializable{
         this.photoUrl = photoUrl;
         this.lastSignInTime = lastSignInTime;
         this.creationTime = creationTime;
+        this.fashion = fashion;
     }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
 
     private Integer like;
     private String uid;
@@ -232,5 +239,7 @@ public class UserInfo implements Serializable{
 
     private String lastSignInTime;
     private String creationTime;
+
+    private String fashion;
 
 }

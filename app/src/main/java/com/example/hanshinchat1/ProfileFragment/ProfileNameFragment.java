@@ -18,22 +18,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ProfileNameFragment extends Fragment {
-
     private EditText name;
     DatabaseReference myRef;
     FirebaseUser user;
-
-    public ProfileNameFragment() {
-
-    }
+    public ProfileNameFragment() {}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_name_fragment, container, false);
-
-        name = (EditText) view.findViewById(R.id.name);
-
+        name = (EditText) view.findViewById(R.id.name_fragment);
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -48,6 +42,16 @@ public class ProfileNameFragment extends Fragment {
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
             userRef.child("name").setValue(strName);
+        }
+    }
+
+    public String editDB() {
+        String newName = name.getText().toString();
+        if (newName.isEmpty() || name == null) {
+            Toast.makeText(getContext(), "이름을 입력하세요", Toast.LENGTH_SHORT).show();
+            return null;
+        } else {
+            return newName;
         }
     }
 }

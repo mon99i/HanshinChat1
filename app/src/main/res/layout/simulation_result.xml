@@ -38,7 +38,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/match_button_style"
         android:text="시뮬레이션 종료"/>
 </LinearLayout>

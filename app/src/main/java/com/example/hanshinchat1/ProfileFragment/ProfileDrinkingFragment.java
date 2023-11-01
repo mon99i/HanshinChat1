@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.hanshinchat1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,13 +15,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileDrinkingFragment extends Fragment {
-
     DatabaseReference myRef;
     FirebaseUser user;
-
     private RadioGroup radioGroup;
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
-
     private RadioButton selectedRadioButton;
 
     @Nullable
@@ -31,23 +26,21 @@ public class ProfileDrinkingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_drinking_fragment, container, false);
 
-        radioGroup = view.findViewById(R.id.drinking_radio_group);
-        radioButton1 = view.findViewById(R.id.drinking_radio_btn_1);
-        radioButton2 = view.findViewById(R.id.drinking_radio_btn_2);
-        radioButton3 = view.findViewById(R.id.drinking_radio_btn_3);
-        radioButton4 = view.findViewById(R.id.drinking_radio_btn_4);
-        radioButton5 = view.findViewById(R.id.drinking_radio_btn_5);
+        radioGroup = view.findViewById(R.id.drinking_radio_group_fragment);
+        radioButton1 = view.findViewById(R.id.drinking_radio_btn_1_fragment);
+        radioButton2 = view.findViewById(R.id.drinking_radio_btn_2_fragment);
+        radioButton3 = view.findViewById(R.id.drinking_radio_btn_3_fragment);
+        radioButton4 = view.findViewById(R.id.drinking_radio_btn_4_fragment);
+        radioButton5 = view.findViewById(R.id.drinking_radio_btn_5_fragment);
 
         myRef = FirebaseDatabase.getInstance().getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         radioButton1.setChecked(true);
         selectedRadioButton = radioButton1;
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 selectedRadioButton = view.findViewById(selectedRadioButtonId);
             }
@@ -80,5 +73,10 @@ public class ProfileDrinkingFragment extends Fragment {
         DatabaseReference userRef = myRef.child("users").child(user.getUid());
         String selectedDriking = selectedRadioButton.getText().toString();
         userRef.child("drinking").setValue(selectedDriking);
+    }
+
+    public String editDB() {
+        String selectedDrinking = selectedRadioButton.getText().toString();
+        return selectedDrinking;
     }
 }

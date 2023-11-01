@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
-import com.example.hanshinchat1.SetProfile10AddressActivity;
-import com.google.firebase.database.DatabaseReference;
+
 
 /**
  * A simple {@link Fragment} subclass.
