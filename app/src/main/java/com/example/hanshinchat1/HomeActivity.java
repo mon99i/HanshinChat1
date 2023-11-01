@@ -92,9 +92,10 @@ public class HomeActivity extends MainActivity {
         simulationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Simulation1.class);
+                Intent intent = new Intent(getApplicationContext(), Simulation0.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
     }

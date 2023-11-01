@@ -84,6 +84,7 @@ public class Simulation11 extends MainActivity {
                 Intent intent = new Intent(getApplicationContext(), Simulation10.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
         homeBtn.setOnClickListener(new View.OnClickListener() {

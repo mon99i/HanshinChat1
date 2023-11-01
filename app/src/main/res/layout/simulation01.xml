@@ -98,8 +98,9 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/next_btn"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/match_button_style"
                 android:text="다음" />
             </LinearLayout>

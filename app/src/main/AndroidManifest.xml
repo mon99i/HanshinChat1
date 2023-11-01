@@ -48,6 +48,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SetProfileActivity" android:exported="false" />
+        <activity android:name=".Simulation0" android:exported="false" />
         <activity android:name=".Simulation1" android:exported="false" />
         <activity android:name=".Simulation2" android:exported="false" />
         <activity android:name=".Simulation3" android:exported="false" />
@@ -126,6 +127,9 @@
             android:exported="false" />
         <activity
             android:name=".Room1.RoomInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".report.ReportActivity"
             android:exported="false" />
     </application>
 </manifest>

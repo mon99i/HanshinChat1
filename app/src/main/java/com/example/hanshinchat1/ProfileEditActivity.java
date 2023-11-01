@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,6 +95,7 @@ public class ProfileEditActivity extends MainActivity {
     private TextView editName, editGender, editInterest, editPersonality, editAge, editStudentId, editDepartment,
             editHeight, editReligion, editAddress, editSmoking, editDrinking, editForm, editGrade, editMbti, editFashion;
     private ImageView editImage;
+    private ImageButton backBtn;
 
     private ArrayList<String> interestList;
     private ArrayList<String> newInterestList;
@@ -130,11 +132,6 @@ public class ProfileEditActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
 
         initializeView();
 
@@ -258,6 +255,15 @@ public class ProfileEditActivity extends MainActivity {
                 } else if (gender.equals("여자")) {
                     showEditFragment(REQUEST_CODE_EDIT_FASHION_FEMALE);
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -708,6 +714,7 @@ public class ProfileEditActivity extends MainActivity {
 
         editCompleteBtn = findViewById(R.id.edit_profile_edit);
         cancelCompleteBtn = findViewById(R.id.edit_profile_cancel);
+        backBtn = findViewById(R.id.edit_profile_back_btn);
 
         nameFragment = new ProfileNameFragment();
         genderFragment = new ProfileGenderFragment();
@@ -730,5 +737,6 @@ public class ProfileEditActivity extends MainActivity {
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
+
     }
 }

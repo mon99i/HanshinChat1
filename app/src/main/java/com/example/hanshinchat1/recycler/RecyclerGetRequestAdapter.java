@@ -27,8 +27,6 @@ import com.example.hanshinchat1.Match;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.Room;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.fragment.ShowUserFragment1;
-import com.example.hanshinchat1.fragment.ShowUserFragment2;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,7 +47,7 @@ import me.relex.circleindicator.CircleIndicator3;
 public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetRequestAdapter.ViewHolder> {
 
 
-    private Map<String,Room> myRoom;
+    private Map<String, Room> myRoom;
     private ArrayList<UserInfo> getRequestUsers;
 
     private ArrayList<String>  getRequestUids;

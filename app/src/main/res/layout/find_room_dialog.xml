@@ -3,33 +3,81 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="240dp"
+    android:layout_height="290dp"
     android:orientation="vertical"
     tools:context=".RoomActivity"
-    android:gravity="center"
-    android:layout_gravity="center">
-
-    <TextView
-        android:drawableStart="@drawable/baseline_room_black_24_xml"
-        android:drawablePadding="10dp"
-        android:id="@+id/room_name_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="방 이름으로 검색하기"
-        android:gravity="center"/>
-
+    android:gravity="center">
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
-            android:id="@+id/findRoomSearchBtn"
+            android:id="@+id/category_all"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:backgroundTint="#E6E6FA"
+            android:text="전체"
+            android:textSize="11dp"
+            android:layout_marginLeft="130dp"
+            android:textColor="@color/black" />
+        <ImageView
+            android:id="@+id/make_room_cancel"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:clickable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/baseline_close_24" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="찾고 싶은 방을 선택해주세요."
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/category1"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="검색"
-            android:backgroundTint="#BFA0ED" />
+            android:layout_height="100dp"
+            android:text="과팅"
+            android:background="@drawable/icon2"/>
+
+        <ImageButton
+            android:id="@+id/category2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="미팅"
+            android:background="@drawable/icon1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/category3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="밥팅"
+            android:background="@drawable/icon3"/>
+
+        <ImageButton
+            android:id="@+id/category4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="기타"
+            android:background="@drawable/icon4"/>
     </LinearLayout>
 
 </LinearLayout>

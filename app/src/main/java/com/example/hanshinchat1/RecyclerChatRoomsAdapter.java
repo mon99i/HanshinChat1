@@ -107,8 +107,6 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
                             Uri imageUri=Uri.parse(imageUrl);
                             Glide.with(context).load(imageUri).into(holder.profile);
-
-
                         }
                     }
 

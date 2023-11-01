@@ -28,37 +28,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/make_room"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:backgroundTint="#E6E6FA"
             android:text="방 만들기"
             android:textSize="13dp"
-            android:layout_margin="3dp"
+            android:layout_marginRight="10dp"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/find_room"
             android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:backgroundTint="#E6E6FA"
-            android:text="방 찾기"
-            android:textSize="13dp"
-            android:layout_margin="3dp"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/find_room2"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:backgroundTint="#E6E6FA"
             android:text="카테고리 찾기"
             android:textSize="13dp"
-            android:layout_margin="3dp"
+            android:layout_marginRight="150dp"
             android:textColor="@color/black" />
 
 
@@ -71,8 +61,8 @@
             android:id="@+id/department_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="같은 과 만나지 않기"
-            android:textSize="12sp"
+            android:text="같은 학과 만나지 않기"
+            android:textSize="13sp"
             android:layout_marginLeft="10dp" />
     </LinearLayout>
 

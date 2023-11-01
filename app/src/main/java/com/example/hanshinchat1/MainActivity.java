@@ -17,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.hanshinchat1.board.BoardEditActivity;
 import com.example.hanshinchat1.board.ListActivity;
 
+import com.example.hanshinchat1.report.warning;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -93,8 +95,8 @@ public abstract class MainActivity extends AppCompatActivity {
 
             //임시
             if (email != null) {
-                checkProfileExist();
-
+//                checkProfileExist();
+                checkWarning();
             } else {
                 Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
                 deleteUser();
@@ -107,6 +109,47 @@ public abstract class MainActivity extends AppCompatActivity {
     
     
 
+
+    protected void checkWarning() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            DatabaseReference userWarningsRef = FirebaseDatabase.getInstance().getReference().child("warnings").child(user.getUid());
+
+            userWarningsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        warning userWarning = dataSnapshot.getValue(warning.class);
+                        int warningCount = userWarning.getWarningCount();
+
+                        if (warningCount >= 3) {
+                            signOut();
+                            showWarningDialog();
+                        } else {
+                            checkProfileExist();
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // 에러 처리
+                }
+            });
+        }
+    }
+
+    private void showWarningDialog() {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this)
+                .setTitle("로그인 실패")
+                .setMessage("경고 3회로 계정이 일시정지 되었습니다.");
+
+        mBuilder.show();
+
+    }
 
 //    protected void checkProfileExist() {   //프로필 존재유무 확인
 //        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
@@ -377,9 +420,9 @@ public abstract class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     mAuth.signOut();
 
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
                     Toast.makeText(getApplicationContext(), R.string.success_logout, Toast.LENGTH_SHORT).show();
 
                 });
