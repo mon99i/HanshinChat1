@@ -236,7 +236,6 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
             recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
 
-
             roomTitle.setText("[" + myRoom.get(matchKey).getCategory() + "] " + myRoom.get(matchKey).getTitle());
 
             FirebaseDatabase.getInstance().getReference().child("users").child(myRoom.get(matchKey).getHost())
