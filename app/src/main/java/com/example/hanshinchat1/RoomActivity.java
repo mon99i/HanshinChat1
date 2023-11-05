@@ -193,7 +193,7 @@ public class RoomActivity extends MainActivity {
                 ImageView category2Btn = findRoomDialog.findViewById(R.id.category2);
                 ImageView category3Btn = findRoomDialog.findViewById(R.id.category3);
                 ImageView category4Btn = findRoomDialog.findViewById(R.id.category4);
-                ImageView cancelBtn = makeRoomDialog.findViewById(R.id.make_room_cancel);
+                ImageView cancelBtn = findRoomDialog.findViewById(R.id.find_room_cancel);
 
                 category0Btn.setOnClickListener(new View.OnClickListener() {
                     @Override

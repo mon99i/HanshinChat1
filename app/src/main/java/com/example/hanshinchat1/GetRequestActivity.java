@@ -16,7 +16,7 @@ import com.example.hanshinchat1.recycler.RecyclerGetRequestAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GetRequestActivity extends AppCompatActivity {
+public class GetRequestActivity extends MainActivity {
 
     ImageButton getRequestBackBtn;
     RecyclerView recycler_get_request;
@@ -32,6 +32,12 @@ public class GetRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_request);
+
+        clickHome();
+        clickRoom();
+        clickChat();
+        clickBoard();
+        clickProfile();
 
         initializeView();
         initializeListener();

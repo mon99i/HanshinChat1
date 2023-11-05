@@ -441,16 +441,17 @@
             android:id="@+id/edit_profile_edit"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:layout_margin="5dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/match_button_style"
-            android:text="수정" />
+            android:text="완료" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_profile_cancel"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
             android:background="@drawable/match_button_style"
             android:text="취소" />

@@ -52,6 +52,8 @@ public class SetIdealActivity extends MainActivity {
     ImageButton idealCancelBtn2;
     ImageButton idealCancelBtn3;
 
+    ImageButton backBtn;
+
 
     private Map<String, String> idealMap = new LinkedHashMap<String, String>() {{
         put("age", "나이");
@@ -79,9 +81,22 @@ public class SetIdealActivity extends MainActivity {
         clickBoard();
         clickProfile();
 
+        clickBackBtn();
         initializeView();
         setupPriority();
         initializeListener();
+    }
+
+    private void clickBackBtn() {
+        backBtn = findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
