@@ -266,68 +266,68 @@ public abstract class MainActivity extends AppCompatActivity {
         });
     }
 
-//    protected void clickHome() {
-//        ImageButton homeBtn = findViewById(R.id.home);
-//        homeBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
+    protected void clickHome() {
+        ImageButton homeBtn = findViewById(R.id.home);
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
-//    protected void clickRoom() {
-//        ImageButton roomBtn = findViewById(R.id.room);
-//        roomBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//    }
+    protected void clickRoom() {
+        ImageButton roomBtn = findViewById(R.id.room);
+        roomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-//    protected void clickChat() {
-//        ImageButton chatBtn = findViewById(R.id.chat);
-//        chatBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
-//                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
+    }
+
+    protected void clickChat() {
+        ImageButton chatBtn = findViewById(R.id.chat);
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
+                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
 
-//    protected void clickBoard() {
-//        ImageButton boardBtn = findViewById(R.id.post);
-//        boardBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
+    protected void clickBoard() {
+        ImageButton boardBtn = findViewById(R.id.post);
+        boardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
-//    protected void clickProfile() {
-//        ImageButton profileBtn = findViewById(R.id.info);
-//        profileBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
+    protected void clickProfile() {
+        ImageButton profileBtn = findViewById(R.id.info);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
     @Override
     public void onStart() {

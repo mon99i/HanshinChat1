@@ -82,7 +82,7 @@ public class RoomActivity extends MainActivity {
     }
     private void initializeView() {
         recycler_matchRooms=findViewById(R.id.recycler_matchRooms);
-        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this);
+//        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this, view);
         recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));
         recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
 
