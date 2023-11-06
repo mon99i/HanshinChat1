@@ -22,8 +22,9 @@
     <string name="set_profile_idealType">이상형 순위를 선택해주세요.</string>
     <string name="set_profile_mbti">MBTI 유형을 선택해주세요.</string>
     <string name="set_profile_complete">프로필 입력이 완료되었어요!\n\n이제 상대를 찾으러 가볼까요?</string>
+    <string name="set_profile_ideal">* 이상형 순위를 설정하면 이상형 매칭을 이용할 수 있어요. \n지금 입력하시겠어요?</string>
     <string name="set_profile_form">체형을 선택해주세요.</string>
-    <string name="set_profile_grade">학년을 선택해주세요.</string>
+    <string name="set_profile_grade">학년을 입력해주세요.</string>
     <string name="set_profile_fashion">패션 스타일을 선택해주세요.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
