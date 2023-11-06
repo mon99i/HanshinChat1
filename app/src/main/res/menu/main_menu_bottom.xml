@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/menu_room"
+        android:icon="@drawable/search_heart"
+        android:title="방" />
+
+    <item
+        android:id="@+id/menu_chat"
+        android:icon="@drawable/messages"
+        android:title="채팅방" />
+
+    <item
+        android:id="@+id/menu_board"
+        android:icon="@drawable/comment_alt"
+        android:title="게시판" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/user"
+        android:title="프로필" />
+
+</menu>

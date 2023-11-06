@@ -1,21 +1,20 @@
-package com.example.hanshinchat1.board;
+package com.example.hanshinchat1.MainMenu;
 
-import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.board.ListViewAdapter;
+import com.example.hanshinchat1.board.ListViewItem;
+import com.example.hanshinchat1.board.MyPageAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ListActivity extends MainActivity {
+public class MainBoardFragment extends Fragment {
 
     private ArrayList<ListViewItem> boardDataList;
     private ArrayList<String> boardKeyList;
@@ -41,16 +40,21 @@ public class ListActivity extends MainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainboard);
+    }
 
-        boardtab = findViewById(R.id.board_tab);
-        viewPager = findViewById(R.id.boardViewPager);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.boardfragment, container, false);
+
+
+        boardtab = view.findViewById(R.id.board_tab);
+        viewPager = view.findViewById(R.id.boardViewPager);
 
         boardtab.addTab(boardtab.newTab().setText("자유 게시판"));
         boardtab.addTab(boardtab.newTab().setText("연애상담 게시판"));
         boardtab.setTabGravity(boardtab.GRAVITY_FILL);
 
-        myPageAdapter = new MyPageAdapter(getSupportFragmentManager(), 2);
+        myPageAdapter = new MyPageAdapter(getChildFragmentManager(), 2);
         viewPager.setAdapter(myPageAdapter);
 
         boardtab.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
@@ -121,6 +125,8 @@ public class ListActivity extends MainActivity {
 
 //        FBData();
 
+        return view;
+
     }
 
     private void FBData() {
@@ -157,4 +163,3 @@ public class ListActivity extends MainActivity {
         myRef.addValueEventListener(postListener);
     };
 }
-

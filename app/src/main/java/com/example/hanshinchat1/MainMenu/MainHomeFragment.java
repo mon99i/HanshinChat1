@@ -1,21 +1,29 @@
-package com.example.hanshinchat1;
+package com.example.hanshinchat1.MainMenu;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+
+import com.example.hanshinchat1.HomeActivity;
+import com.example.hanshinchat1.Match;
+import com.example.hanshinchat1.QuestionImageViewerDialog;
+import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.Simulation0;
 import com.example.hanshinchat1.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,16 +32,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-//import com.example.hanshinchat1.Match.MBTIMatchActivity;
+public class MainHomeFragment extends Fragment {
 
-public class HomeActivity extends MainActivity {
 
 
     private final String CHANNEL_ID = "my_notification_chanel";
@@ -50,7 +56,7 @@ public class HomeActivity extends MainActivity {
     private Button topUserMatchingBtn;
     private ImageButton getRequestBtn;
 
-    private Context context = this;
+   //private Context context = this;
 
     private int previousPhraseIndex = -1;
     private String[] phrases;
@@ -59,21 +65,33 @@ public class HomeActivity extends MainActivity {
     private ImageButton simulationBtn, questionBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.homefragment, container, false);
+
 
         checkNewRequest();
 
         //checkMatchRequest();
 
-        initializeView();
+        idealMatchingBtn = view.findViewById(R.id.idealMatchingBtn);
+        mbtiMatchingBtn = view.findViewById(R.id.mbtiMatchingBtn);
+        aroundMatchingBtn = view.findViewById(R.id.aroundMatchingBtn);
+        recentRegisterMatchingBtn = view.findViewById(R.id.recentRegisterMatchingBtn);
+        recentContectMatchingBtn = view.findViewById(R.id.recentConnectMatchingBtn);
+        topUserMatchingBtn = view.findViewById(R.id.topUserMatchingBtn);
+        getRequestBtn = view.findViewById(R.id.getRequestBtn);
+
         initializeListener();
 
         // 상단 앱 관련 팁 기능
         phrases = getResources().getStringArray(R.array.random_speaker);
         phrasesList = Arrays.asList(phrases);
-        speakerBtn = findViewById(R.id.home_speaker);
+        speakerBtn = view.findViewById(R.id.home_speaker);
         speakerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,27 +100,26 @@ public class HomeActivity extends MainActivity {
         });
 
 
-
         // 소개팅 시뮬레이션 기능
-        simulationBtn = (ImageButton) findViewById(R.id.simulation);
+        simulationBtn = (ImageButton) view.findViewById(R.id.simulation);
         simulationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Simulation0.class);
+                Intent intent = new Intent(getActivity(), Simulation0.class);
                 startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 
-        questionBtn = (ImageButton) findViewById(R.id.question);
+        questionBtn = (ImageButton) view.findViewById(R.id.question);
         questionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QuestionImageViewerDialog imageViewerDialog = new QuestionImageViewerDialog(HomeActivity.this);
+                QuestionImageViewerDialog imageViewerDialog = new QuestionImageViewerDialog(getContext());
                 imageViewerDialog.show();
             }
         });
+
+        return view;
     }
 
     // 앱 관련 팁
@@ -131,7 +148,7 @@ public class HomeActivity extends MainActivity {
     private void checkNewRequest(){
         ArrayList<String> matchKey=new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query=FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
+        Query query= FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
 
 
         ArrayList<String> newRequestUids=new ArrayList<>();
@@ -173,9 +190,10 @@ public class HomeActivity extends MainActivity {
 
                                     }
                                 }
-//                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
+                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
 
                                 if(newMatches.size()>0){
+                                    Log.d("왜???", "onDataChange: " +newMatches.size());
                                     showNewRequestDialog();
                                 }
 
@@ -279,6 +297,13 @@ public class HomeActivity extends MainActivity {
 
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // onResume 시 다이얼로그를 생성하고 표시
+//        showNewRequestDialog();
+    }
 
 
 
@@ -287,13 +312,12 @@ public class HomeActivity extends MainActivity {
 
     //채팅요청이 왔다는 다이얼로그
     private void showNewRequestDialog() {
-        if (!isFinishing()) {
-            LayoutInflater inflater = LayoutInflater.from(this);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             View view = inflater.inflate(R.layout.new_request_dialog, null);
             ConstraintLayout layout = view.findViewById(R.id.alert_layout);
 
             // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setView(view);
             final AlertDialog alertDialog = builder.create();
 
@@ -309,7 +333,7 @@ public class HomeActivity extends MainActivity {
                 @Override
                 public void onClick(View v) {
                     //창 누르면 확인했으므로 다시 안뜨게
-                    Utils.goToGetRequestActivity(context);
+                    Utils.goToGetRequestActivity(getContext());
 
                     alertDialog.dismiss();
                     //showUserInfoDialog(context,chatRequestUsers);
@@ -317,21 +341,9 @@ public class HomeActivity extends MainActivity {
                 }
             });
 
-        }
-
 
     }
 
-
-    private void initializeView() {
-        idealMatchingBtn = findViewById(R.id.idealMatchingBtn);
-        mbtiMatchingBtn = findViewById(R.id.mbtiMatchingBtn);
-        aroundMatchingBtn = findViewById(R.id.aroundMatchingBtn);
-        recentRegisterMatchingBtn = findViewById(R.id.recentRegisterMatchingBtn);
-        recentContectMatchingBtn = findViewById(R.id.recentConnectMatchingBtn);
-        topUserMatchingBtn = findViewById(R.id.topUserMatchingBtn);
-        getRequestBtn = findViewById(R.id.getRequestBtn);
-    }
 
     private void initializeListener() {
 
@@ -342,7 +354,7 @@ public class HomeActivity extends MainActivity {
                 //수정필요
                 /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_up);
                 idealMatchingBtn.startAnimation(animation);*/
-                Utils.checkIdealExists(context);
+                Utils.checkIdealExists(getContext());
 
             }
         });
@@ -353,14 +365,14 @@ public class HomeActivity extends MainActivity {
             public void onClick(View v) {
             /*    Intent intent = new Intent(getApplicationContext(), com.example.hanshinchat1.Match.MainActivity.class);
                 startActivity(intent);*/
-                Utils.MyUid(context);
+                Utils.MyUid(getContext());
             }
         });
 
         aroundMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.arroundMatching(context);
+                Utils.arroundMatching(getContext());
 
             }
         });
@@ -368,7 +380,7 @@ public class HomeActivity extends MainActivity {
         recentRegisterMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.recentRegisterMatching(context);
+                Utils.recentRegisterMatching(getContext());
            /*     AlertDialog.Builder famDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 
                 famDialog.setMessage("동일한 지역에 거주하는 상대를 검색합니다.")
@@ -395,7 +407,7 @@ public class HomeActivity extends MainActivity {
         recentContectMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.recentConnectMatching(context);
+                Utils.recentConnectMatching(getContext());
                 //Utils.recentRegisterMatching();
                /* AlertDialog.Builder tumDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
 
@@ -422,7 +434,7 @@ public class HomeActivity extends MainActivity {
         topUserMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.mostLikedMatching(context);
+                Utils.mostLikedMatching(getContext());
 
             }
         });
@@ -431,7 +443,7 @@ public class HomeActivity extends MainActivity {
         getRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.goToGetRequestActivity(context);
+                Utils.goToGetRequestActivity(getContext());
             }
         });
 
@@ -541,3 +553,4 @@ public class HomeActivity extends MainActivity {
     }*/
 
 }
+

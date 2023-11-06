@@ -13,11 +13,11 @@ public class    ListViewItem {
 
     public ListViewItem() {}
 
-    public ListViewItem(String titleArea, String contentArea, String time, String name) {
+    public ListViewItem(String titleArea, String contentArea, String time, String uid) {
         this.titleArea = titleArea;
         this.contentArea = contentArea;
         this.time = time;
-        this.name = name;
+        this.uid = uid;
     }
 
     public ListViewItem(String titleArea, String contentArea, String time, String name, String uid) {

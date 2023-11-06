@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class SetIdealActivity extends MainActivity {
     ImageButton idealCancelBtn1;
     ImageButton idealCancelBtn2;
     ImageButton idealCancelBtn3;
+    Button saveIdealBtn;
 
 
     private Map<String, String> idealMap = new LinkedHashMap<String, String>() {{
@@ -73,15 +75,19 @@ public class SetIdealActivity extends MainActivity {
 
         setContentView(R.layout.activity_set_ideal);
 
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
-
         initializeView();
         setupPriority();
         initializeListener();
+
+        saveIdealBtn = findViewById(R.id.saveIdealBtn);
+        saveIdealBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
+                startActivity(intent);
+            }
+        });
     }
 
 

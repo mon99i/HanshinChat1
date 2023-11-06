@@ -234,9 +234,9 @@ public abstract class MainActivity extends AppCompatActivity {
                         else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
                             Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
                             userRef.child("lastSignInTime").setValue(currentTime);
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                            intent.putExtra("openFragment", "fragmentHome");
                             startActivity(intent);
-                            finish();
                             //userInfo.setLastSignInTime();
                             //FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).se
                         }
@@ -420,9 +420,9 @@ public abstract class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     mAuth.signOut();
 
-//                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                     Toast.makeText(getApplicationContext(), R.string.success_logout, Toast.LENGTH_SHORT).show();
 
                 });
@@ -454,68 +454,68 @@ public abstract class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected void clickHome() {
-        ImageButton homeBtn = findViewById(R.id.home);
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+//    protected void clickHome() {
+//        ImageButton homeBtn = findViewById(R.id.home);
+//        homeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
 
-    protected void clickRoom() {
-        ImageButton roomBtn = findViewById(R.id.room);
-        roomBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//    protected void clickRoom() {
+//        ImageButton roomBtn = findViewById(R.id.room);
+//        roomBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//
+//    }
 
-    }
-
-    protected void clickChat() {
-        ImageButton chatBtn = findViewById(R.id.chat);
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
-                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+//    protected void clickChat() {
+//        ImageButton chatBtn = findViewById(R.id.chat);
+//        chatBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Intent intent = new Intent(getApplicationContext(), ChatActivity.class); chatRoomActivity 안되면 이걸로
+//                Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
 
 
-    protected void clickBoard() {
-        ImageButton boardBtn = findViewById(R.id.post);
-        boardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+//    protected void clickBoard() {
+//        ImageButton boardBtn = findViewById(R.id.post);
+//        boardBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
 
-    protected void clickProfile() {
-        ImageButton profileBtn = findViewById(R.id.info);
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+//    protected void clickProfile() {
+//        ImageButton profileBtn = findViewById(R.id.info);
+//        profileBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
 
     @Override
     public void onStart() {
@@ -529,7 +529,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로버튼 전페이지
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
         startActivity(intent);
         finish();
         //signOut();

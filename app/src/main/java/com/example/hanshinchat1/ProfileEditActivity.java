@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.hanshinchat1.MainMenu.MainProfileFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
@@ -261,9 +262,9 @@ public class ProfileEditActivity extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -365,18 +366,18 @@ public class ProfileEditActivity extends MainActivity {
 
                 userRef.setValue(updatedUserInfo);
 
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
 
         cancelCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
     }

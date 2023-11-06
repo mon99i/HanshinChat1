@@ -27,10 +27,6 @@ public class ChatRoomActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        clickHome();
-        clickBoard();
-        clickProfile();
-        clickRoom();
         initializeView();
         initializeListener();
         setupRecycler();

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.hanshinchat1.MainMenu.MainRoomFragment;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,13 +56,16 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 
     private  RecyclerView recyclerView;
-    public RecyclerMatchRoomsAdapter(Context context) {
+
+
+    public RecyclerMatchRoomsAdapter(Context context, View view) {
         this.context = context;
         roomList = new ArrayList<>();
         roomKeyList = new ArrayList();
 
         setUpRooms(null,false);
-        recyclerView = ((RoomActivity) context).findViewById(R.id.recycler_matchRooms);
+//        recyclerView = ((RoomActivity) context).findViewById(R.id.recycler_matchRooms);
+        recyclerView = view.findViewById(R.id.recycler_matchRooms);
 
     }
     public void setUpRooms(String category,boolean checkBoxChecked) {
@@ -98,7 +103,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     excludeSameDepartment();
                 }else{
                     notifyDataSetChanged();
-                    recyclerView.scrollToPosition(0);
+//                    recyclerView.scrollToPosition(0);
                 }
 
             }
@@ -136,7 +141,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 
                         notifyDataSetChanged();
-                        recyclerView.scrollToPosition(0);
+//                        recyclerView.scrollToPosition(0);
                     }
 
                     @Override
@@ -212,6 +217,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
         roomTitle.setText("[" + room.getCategory() + "] " + room.getTitle());
 
+        Log.d("RoomActivity", room.getHost());
         FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -219,11 +225,11 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                                 if (snapshot.exists()) {
                                     UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
 
-                                    Log.d("RoomActivity", hostUserInfo.toString());
+                                        Log.d("RoomActivity", hostUserInfo.toString());
 
-                                    recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
-                                    recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                                        //                        @Override
+                                        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
+                                        recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                                            //                        @Override
 //                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 //                            if (positionOffsetPixels == 0) {
@@ -231,13 +237,14 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 //                            }
 //                        }
 //
-                                        @Override
-                                        public void onPageSelected(int position) {
-                                            super.onPageSelected(position);
-                                            indicator.animatePageSelected(position % 2);
+                                            @Override
+                                            public void onPageSelected(int position) {
+                                                super.onPageSelected(position);
+                                                indicator.animatePageSelected(position % 2);
 
-                                        }
-                                    });
+                                            }
+                                        });
+
 
                                 } else {
                                     Log.d("RoomActivity", "아무것도 없나봐...");
