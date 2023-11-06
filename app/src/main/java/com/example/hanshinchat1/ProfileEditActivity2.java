@@ -20,7 +20,6 @@ import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileHeightFragment;
-import com.example.hanshinchat1.ProfileFragment.ProfileIdealTypeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileInterestFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileMbtiFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileNameFragment;
@@ -52,7 +51,6 @@ public class ProfileEditActivity2 extends MainActivity {
     private ProfileInterestFragment interestFragment;
     private ProfilePersonalityFragment personalityFragment;
     private ProfileMbtiFragment mbtiFragment;
-    private ProfileIdealTypeFragment idealTypeFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -378,7 +376,7 @@ public class ProfileEditActivity2 extends MainActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileEditActivity.class);
                 startActivity(intent);
                 finish();
             }

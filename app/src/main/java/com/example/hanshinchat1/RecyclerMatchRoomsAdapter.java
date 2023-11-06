@@ -205,6 +205,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
 
         ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
+
+        ImageView cancelBtn = view.findViewById(R.id.cancel_image_view);
         Button matchBtn=view.findViewById(R.id.matchBtn);
         matchBtn.setText("매칭신청");
         TextView roomTitle=view.findViewById(R.id.roomTitle);
@@ -273,6 +275,13 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
                     requestMatch(roomKey,room);
 
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
 

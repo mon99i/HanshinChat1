@@ -49,7 +49,8 @@ public class ListActivity extends MainActivity {
         boardtab.addTab(boardtab.newTab().setText("자유 게시판"));
         boardtab.addTab(boardtab.newTab().setText("연애상담 게시판"));
         boardtab.setTabGravity(boardtab.GRAVITY_FILL);
-
+        boardtab.setSelectedTabIndicatorColor(getResources().getColor(R.color.gray));
+        boardtab.setTabTextColors(getResources().getColor(R.color.gray), getResources().getColor(R.color.black));
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager(), 2);
         viewPager.setAdapter(myPageAdapter);
 

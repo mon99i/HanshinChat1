@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
-import com.example.hanshinchat1.ProfileFragment.ProfileCompleteFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDrinkingFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileFashionFemaleFragment;
@@ -24,7 +23,6 @@ import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileHeightFragment;
-import com.example.hanshinchat1.ProfileFragment.ProfileIdealTypeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileInterestFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileMbtiFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileNameFragment;
@@ -32,15 +30,6 @@ import com.example.hanshinchat1.ProfileFragment.ProfilePersonalityFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileReligionFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileSmokingFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileStudentIdFragment;
-import com.example.hanshinchat1.fragment.IdealAddressFragment;
-import com.example.hanshinchat1.fragment.IdealAgeFragment;
-import com.example.hanshinchat1.fragment.IdealDrinkingFragment;
-import com.example.hanshinchat1.fragment.IdealFormFragment;
-import com.example.hanshinchat1.fragment.IdealHeightFragment;
-import com.example.hanshinchat1.fragment.IdealInterestFragment;
-import com.example.hanshinchat1.fragment.IdealPersonalityFragment;
-import com.example.hanshinchat1.fragment.IdealReligionFragment;
-import com.example.hanshinchat1.fragment.IdealSmokingFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -72,25 +61,25 @@ public class SetProfileActivity extends AppCompatActivity {
     private ProfileInterestFragment interestFragment;
     private ProfilePersonalityFragment personalityFragment;
     private ProfileMbtiFragment mbtiFragment;
-    private ProfileIdealTypeFragment idealTypeFragment;
-    private ProfileCompleteFragment completeFragment;
 
     private ProfileFashionMaleFragment fashionMaleFragment;
 
     private ProfileFashionFemaleFragment fashionFemaleFragment;
 
     private MainActivity mainActivity;
+    private SetProfileCompleteActivity completeActivity;
 
     private UserInfo userInfo;
     private TextView progressTextView;
     private int currentStep = 1;
-    private int totalSteps = 19;
+    private int totalSteps = 18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_profile_fragment);
 
+        checkProfile();
         initializeView();
         checkProfile();
         initializeListener();
@@ -112,10 +101,9 @@ public class SetProfileActivity extends AppCompatActivity {
         interestFragment = new ProfileInterestFragment();
         personalityFragment = new ProfilePersonalityFragment();
         mbtiFragment = new ProfileMbtiFragment();
-        idealTypeFragment = new ProfileIdealTypeFragment();
-        completeFragment = new ProfileCompleteFragment();
         fashionMaleFragment = new ProfileFashionMaleFragment();
         fashionFemaleFragment = new ProfileFashionFemaleFragment();
+        completeActivity = new SetProfileCompleteActivity();
 
         setProfileNextBtn = findViewById(R.id.set_profile_next_btn);
         setProfileProgressBar = findViewById(R.id.set_profile_progress);
@@ -163,18 +151,10 @@ public class SetProfileActivity extends AppCompatActivity {
                     ((ProfilePersonalityFragment) fragment).updateDB();
                 } else if (fragment instanceof ProfileMbtiFragment) {
                     ((ProfileMbtiFragment) fragment).updateDB();
-                } else if (fragment instanceof ProfileIdealTypeFragment) {
-                    ((ProfileIdealTypeFragment) fragment).updateDB();
                 } else if (fragment instanceof ProfileFashionMaleFragment) {
                     ((ProfileFashionMaleFragment) fragment).updateDB();
                 } else if (fragment instanceof ProfileFashionFemaleFragment) {
                     ((ProfileFashionFemaleFragment) fragment).updateDB();
-                } else if (fragment instanceof ProfileCompleteFragment){
-                    ((ProfileCompleteFragment) fragment).updateDB();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
                 checkProfile();
             }
@@ -197,6 +177,10 @@ public class SetProfileActivity extends AppCompatActivity {
                         } catch (InstantiationException | IllegalAccessException e) {
                             e.printStackTrace();
                         }
+                    } else if(userInfo.getCreationTime()==null){
+                        Intent intent = new Intent(getApplicationContext(), SetProfileCompleteActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
@@ -212,7 +196,7 @@ public class SetProfileActivity extends AppCompatActivity {
     private void updateProgressBar(Fragment fragment) {
         int progress = 0;
         currentStep = 1;
-        totalSteps = 19;
+        totalSteps = 18;
         if (fragment instanceof ProfileNameFragment) {
             progress = 2; currentStep = 2;
         } else if (fragment instanceof ProfileGenderFragment) {
@@ -243,14 +227,10 @@ public class SetProfileActivity extends AppCompatActivity {
             progress = 15; currentStep = 15;
         } else if (fragment instanceof ProfileMbtiFragment) {
             progress = 16; currentStep = 16;
-        } else if (fragment instanceof ProfileIdealTypeFragment) {
-            progress = 17; currentStep = 17;
         } else if (fragment instanceof ProfileFashionMaleFragment) {
-            progress = 18; currentStep = 18;
+            progress = 17; currentStep = 17;
         } else if (fragment instanceof ProfileFashionFemaleFragment) {
-            progress = 18; currentStep = 18;
-        } else if (fragment instanceof ProfileCompleteFragment) {
-            progress = 19; currentStep = 19;
+            progress = 17; currentStep = 17;
         }
         setProfileProgressBar.setProgress(progress);
         progressTextView.setText(currentStep + "/" + totalSteps);
@@ -294,8 +274,6 @@ public class SetProfileActivity extends AppCompatActivity {
             } else if(userInfo.getGender().equals("여자")){
                 return ProfileFashionFemaleFragment.class;
             }
-        } else if (userInfo.getCreationTime() == null) {
-            return ProfileCompleteFragment.class;
         }
         // 모든 프로필 정보가 입력되었을 때 null 반환
         return null;

@@ -295,6 +295,7 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
             Button refuseUserBtn = view.findViewById(R.id.refuseUserBtn);
             TextView decisionUserName = view.findViewById(R.id.decisionUserName);
             ViewPager2 decisionViewPager = view.findViewById(R.id.decisionViewPager);
+            ImageView cancelBtn = view.findViewById(R.id.cancel_image_view);
 
 
             decisionUserName.setText(userInfo.getName());
@@ -351,6 +352,13 @@ public class RecyclerGetRequestAdapter extends RecyclerView.Adapter<RecyclerGetR
                                     dialog.dismiss();
                                 }
                             });
+                }
+            });
+
+            cancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
                 }
             });
         }

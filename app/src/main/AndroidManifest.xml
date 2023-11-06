@@ -123,6 +123,9 @@
             android:name=".SetIdeal2Activity"
             android:exported="false" />
         <activity
+            android:name=".SetProfileCompleteActivity"
+            android:exported="false"></activity>
+        <activity
             android:name=".RecommendMatchActivity"
             android:exported="false" />
         <activity

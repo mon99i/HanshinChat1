@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,7 +42,6 @@ import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileHeightFragment;
-import com.example.hanshinchat1.ProfileFragment.ProfileIdealTypeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileInterestFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileMbtiFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileNameFragment;
@@ -125,7 +123,6 @@ public class ProfileEditActivity extends MainActivity {
     private ProfileInterestFragment interestFragment;
     private ProfilePersonalityFragment personalityFragment;
     private ProfileMbtiFragment mbtiFragment;
-    private ProfileIdealTypeFragment idealTypeFragment;
     private ProfileFashionMaleFragment fashionMaleFragment;
     private ProfileFashionFemaleFragment fashionFemaleFragment;
 
@@ -732,7 +729,6 @@ public class ProfileEditActivity extends MainActivity {
         interestFragment = new ProfileInterestFragment();
         personalityFragment = new ProfilePersonalityFragment();
         mbtiFragment = new ProfileMbtiFragment();
-        idealTypeFragment = new ProfileIdealTypeFragment();
         fashionMaleFragment = new ProfileFashionMaleFragment();
         fashionFemaleFragment = new ProfileFashionFemaleFragment();
 
