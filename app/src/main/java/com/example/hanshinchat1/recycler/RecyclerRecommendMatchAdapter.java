@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -180,12 +181,12 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
     private void showRecommendUserDialog(UserInfo userInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recommend_user_dialog, null);
+        View view = inflater.inflate(R.layout.show_match_dialog, null);
 
-        ViewPager2 recommendViewPager = view.findViewById(R.id.decisionViewPager);
-        Button requestChatBtn = view.findViewById(R.id.acceptUserBtn);
+        ViewPager2 recommendViewPager = view.findViewById(R.id.showMatchViewPager);
         CheckBox recommendLikeBox = view.findViewById(R.id.recommendLikeBox);
-        TextView recommendUserName = view.findViewById(R.id.decisionUserName);
+        TextView recommendUserName = view.findViewById(R.id.showMatchTxt);
+        Button requestMatchBtn=view.findViewById(R.id.requestMatchBtn);
 
         CircleIndicator3 indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(recommendViewPager);
@@ -193,7 +194,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
         recommendUserName.setText(userInfo.getName());
-        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo, true));
+        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo, false));
         recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             //                        @Override
 //                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -222,7 +223,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         dialog.show();
 
 
-        requestChatBtn.setOnClickListener(new View.OnClickListener() {
+        requestMatchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestChat(userInfo);

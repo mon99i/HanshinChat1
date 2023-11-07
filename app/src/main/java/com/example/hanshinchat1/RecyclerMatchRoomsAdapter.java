@@ -181,7 +181,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         holder.room_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showRecommendUserDialog(roomKey,room);
+                showUserDialog(roomKey,room);
 
             }
         });
@@ -194,20 +194,20 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
     }
 
 
-    private void showRecommendUserDialog(String roomKey,Room room){
+    private void showUserDialog(String roomKey,Room room){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recommend_room_user_dialog, null);
+        View view = inflater.inflate(R.layout.show_match_dialog, null);
 
-        ViewPager2 recommendViewPager=view.findViewById(R.id.decisionViewPager);
-        Button matchBtn=view.findViewById(R.id.matchBtn);
+        ViewPager2 showMatchViewPager=view.findViewById(R.id.showMatchViewPager);
+        Button matchBtn=view.findViewById(R.id.requestMatchBtn);
         matchBtn.setText("매칭신청");
-        TextView roomTitle=view.findViewById(R.id.roomTitle);
+        TextView roomTitle=view.findViewById(R.id.showMatchTxt);
 
         CircleIndicator3 indicator = view.findViewById(R.id.indicator);
-        indicator.setViewPager(recommendViewPager);
+        indicator.setViewPager(showMatchViewPager);
         indicator.createIndicators(2, 0);
-        recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        showMatchViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
 
         roomTitle.setText("[" + room.getCategory() + "] " + room.getTitle());
@@ -221,8 +221,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
                                     Log.d("RoomActivity", hostUserInfo.toString());
 
-                                    recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, false));
-                                    recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                                    showMatchViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, true));
+                                    showMatchViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                                         //                        @Override
 //                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
@@ -326,6 +326,13 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
 
             room_background = itemView.findViewById(R.id.room_background);
+
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showRecommendUserDialog(roomKeyList.get(getAbsoluteAdapterPosition()),roomList.get(getAbsoluteAdapterPosition()));
+                }
+            });*/
         }
 
     }

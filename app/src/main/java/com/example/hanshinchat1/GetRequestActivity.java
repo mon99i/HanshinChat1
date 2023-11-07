@@ -42,17 +42,17 @@ public class GetRequestActivity extends AppCompatActivity {
         noneRequestUserlayout=findViewById(R.id.noneRequestUserLayout);
         getRequestBackBtn=findViewById(R.id.getRequestBackBtn);
         recycler_get_request=findViewById(R.id.recycler_get_request);
-        getRequestUids= (ArrayList<String>)getIntent().getSerializableExtra("getRequestUids");
-        getMatchKeys=(ArrayList<String>)getIntent().getSerializableExtra("getMatchKeys");
+        /*getRequestUids= (ArrayList<String>)getIntent().getSerializableExtra("getRequestUids");
+        getMatchKeys=(ArrayList<String>)getIntent().getSerializableExtra("getMatchKeys");*/
         getMatches=(ArrayList<Match>)getIntent().getSerializableExtra("getMatches");
 
         //getRoomRequestUids= (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("getRoomRequestUids");
-        if(getMatchKeys.isEmpty()){
+        if(getMatches.isEmpty()){
             noneRequestUserlayout.setVisibility(View.VISIBLE);
         }
 
         recycler_get_request.setLayoutManager(new LinearLayoutManager(this));
-        recycler_get_request.setAdapter(new RecyclerGetRequestAdapter(this,getRequestUids,getMatchKeys,getMatches));
+        recycler_get_request.setAdapter(new RecyclerGetRequestAdapter(this,getMatches));
 
     }
 

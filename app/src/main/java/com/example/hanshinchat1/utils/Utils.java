@@ -65,8 +65,10 @@ public class Utils {
                                         for (DataSnapshot subSnapshot : snapshot.child("rooms").child(myRoomKey).getChildren()) {
                                             Match match = subSnapshot.getValue(Match.class);
                                             if (match.getApproved() ==null) {
-                                                getRequestUids.add(subSnapshot.getKey());
-                                                getMatchKeys.add(myRoomKey);
+                                                match.setMatch_key(myRoomKey);
+                                                match.setSender_uid(subSnapshot.getKey());
+                                                /*getRequestUids.add(subSnapshot.getKey());
+                                                getMatchKeys.add(myRoomKey);*/
                                                 getMatches.add(match);
 
                                             }
@@ -79,8 +81,10 @@ public class Utils {
                                 for (DataSnapshot subSnapshot : snapshot.child("users").child(user.getUid()).getChildren()) {
                                     Match match = subSnapshot.getValue(Match.class);
                                     if (match.getApproved() == null) {
-                                        getRequestUids.add(subSnapshot.getKey());
-                                        getMatchKeys.add(user.getUid());
+                                        match.setMatch_key(user.getUid());
+                                        match.setSender_uid(subSnapshot.getKey());
+                                    /*    getRequestUids.add(subSnapshot.getKey());
+                                        getMatchKeys.add(user.getUid());*/
                                         getMatches.add(match);
 
                                     }
@@ -88,9 +92,8 @@ public class Utils {
                                 }
 
                                 Log.d(TAG, "onDataChange: "+getRequestUids.size()+" "+getMatchKeys.size()+" "+getMatches.size());
+
                                 Intent intent = new Intent(context, GetRequestActivity.class);
-                                intent.putExtra("getRequestUids", getRequestUids);
-                                intent.putExtra("getMatchKeys", getMatchKeys);
                                 intent.putExtra("getMatches", getMatches);
                                 context.startActivity(intent);
                                 ((AppCompatActivity) context).finish();

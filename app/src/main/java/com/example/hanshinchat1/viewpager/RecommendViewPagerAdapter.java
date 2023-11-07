@@ -15,8 +15,7 @@ import com.example.hanshinchat1.MatchRoom;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RoomInfo;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.fragment.ShowRoomUserFragment1;
-import com.example.hanshinchat1.fragment.ShowRoomUserFragment2;
+
 import com.example.hanshinchat1.fragment.ShowUserFragment1;
 import com.example.hanshinchat1.fragment.ShowUserFragment2;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,25 +48,15 @@ public class RecommendViewPagerAdapter extends FragmentStateAdapter {
     }
 */
 
-    public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, UserInfo userInfo, boolean isRoomUser) {
+    public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, UserInfo userInfo, boolean isRoom) {
         super(fragmentActivity);
 //        this.userInfo=userInfo;
-        if(isRoomUser) {
-            fragments.add(new ShowUserFragment1(userInfo));
-            fragments.add(new ShowUserFragment2(userInfo));
-        } else {
-            fragments.add(new ShowRoomUserFragment1(userInfo));
-            fragments.add(new ShowRoomUserFragment2(userInfo));
-        }
+        fragments.add(new ShowUserFragment1(userInfo,isRoom));
+        fragments.add(new ShowUserFragment2(userInfo));
+
     }
 
 
-    public RecommendViewPagerAdapter(FragmentActivity fragmentActivity, MatchRoom matchRoom) {
-        super(fragmentActivity);
-        this.matchRoom=matchRoom;
-        fragments.add(new ShowRoomUserFragment1(matchRoom));
-        fragments.add(new ShowRoomUserFragment2(matchRoom));
-    }
 
   /*  public RecommendViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);

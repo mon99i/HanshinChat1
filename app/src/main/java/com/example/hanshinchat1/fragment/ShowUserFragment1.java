@@ -35,15 +35,13 @@ public class ShowUserFragment1 extends Fragment {
 
 
     private ScrollView scroll1;
-    public UserInfo userInfo;
-    public MatchRoom matchRoom;
-    public ShowUserFragment1(UserInfo userInfo) {
-        // Required empty public constructor
-        this.userInfo=userInfo;
-    }
+    private UserInfo userInfo;
+    private boolean isRoom;
 
-    public ShowUserFragment1(MatchRoom matchRoom) {
-        this.matchRoom=matchRoom;
+
+    public ShowUserFragment1(UserInfo userInfo, boolean isRoom) {
+        this.userInfo=userInfo;
+        this.isRoom=isRoom;
     }
 
     /**
@@ -55,8 +53,8 @@ public class ShowUserFragment1 extends Fragment {
      * @return A new instance of fragment recommendUserFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowUserFragment1 newInstance(String param1, String param2, UserInfo userInfo) {
-        ShowUserFragment1 fragment = new ShowUserFragment1(userInfo);
+    public static ShowUserFragment1 newInstance(String param1, String param2, UserInfo userInfo,boolean isRoom) {
+        ShowUserFragment1 fragment = new ShowUserFragment1(userInfo,isRoom);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,7 +78,7 @@ public class ShowUserFragment1 extends Fragment {
         View view=inflater.inflate(R.layout.fragment_show_user1, container, false);
 
         ImageView recommendUserImage=view.findViewById(R.id.recommendUserImage);
-        TextView recommendAgeAddress=view.findViewById(R.id.recommendAgeAddress);
+        TextView recommendNameAgeAddress=view.findViewById(R.id.recommendAgeAddress);
         TextView recommendUserHeight=view.findViewById(R.id.recommendUserHeight);
         TextView recommendUserForm=view.findViewById(R.id.recommendUserForm);
         TextView recommendUserDepartment=view.findViewById(R.id.recommendUserDepartment);
@@ -92,7 +90,10 @@ public class ShowUserFragment1 extends Fragment {
         String imageUrl = userInfo.getPhotoUrl();
         Uri imageUri = Uri.parse(imageUrl);
         Glide.with(getActivity()).load(imageUri).into(recommendUserImage);
-        recommendAgeAddress.setText(userInfo.getAge()+"세,  "+userInfo.getAddress());
+        if(isRoom){
+            recommendNameAgeAddress.setText(userInfo.getName()+",  "+userInfo.getAge()+"세,  "+userInfo.getAddress());
+        }else     recommendNameAgeAddress.setText(userInfo.getAge()+"세,  "+userInfo.getAddress());
+
         recommendUserHeight.setText(userInfo.getHeight()+"cm");
         recommendUserForm.setText(userInfo.getForm());
         recommendUserDepartment.setText(userInfo.getDepartment());

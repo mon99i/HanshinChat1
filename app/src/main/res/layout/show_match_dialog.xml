@@ -19,51 +19,76 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eaeaea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showMatchViewPager" />
+
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/decisionViewPager"
+        android:id="@+id/showMatchViewPager"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/matchBtn"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/requestMatchBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="@+id/decisionViewPager"
+        app:layout_constraintBottom_toBottomOf="@+id/showMatchViewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:ci_drawable="@drawable/indicator_selected" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/matchBtn"
-        android:layout_width="match_parent"
+        android:id="@+id/requestMatchBtn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/background_ideal_list_layout"
         android:backgroundTint="#BEB6F2"
-        android:text="매칭신청"
+        android:text="대화신청"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/recommendLikeBox" />
+
 
     <TextView
-        android:id="@+id/roomTitle"
+        android:id="@+id/showMatchTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="20dp"
         android:textColor="#252525"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <CheckBox
+        android:id="@+id/recommendLikeBox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/background_like_radiobtn"
+        android:button="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/requestMatchBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/requestMatchBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

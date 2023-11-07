@@ -225,7 +225,8 @@ public abstract class MainActivity extends AppCompatActivity {
                                 userInfo.getGrade() == null||userInfo.getStudentId() == null||userInfo.getDepartment() == null||
                                 userInfo.getHeight() == null||userInfo.getForm() == null||userInfo.getAddress() == null||
                                 userInfo.getReligion() == null||userInfo.getSmoking() == null||userInfo.getDrinking() == null||
-                                userInfo.getInterest() == null||userInfo.getPersonality() == null||userInfo.getMbti() == null||userInfo.getCreationTime() ==null)
+                                userInfo.getInterest() == null||userInfo.getPersonality() == null||userInfo.getMbti() == null||
+                                userInfo.getFashion()==null||userInfo.getCreationTime() ==null)
                         {
                             Intent intent=new Intent(getApplicationContext(),SetProfileActivity.class);
                             startActivity(intent);

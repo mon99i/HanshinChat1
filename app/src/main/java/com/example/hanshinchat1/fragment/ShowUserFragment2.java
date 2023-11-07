@@ -41,8 +41,8 @@ public class ShowUserFragment2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserInfo userInfo;
-    public MatchRoom matchRoom;
+    private UserInfo userInfo;
+
 
     private TextView recommendIdealTxt1;
     private TextView recommendIdealTxt2;
@@ -59,9 +59,6 @@ public class ShowUserFragment2 extends Fragment {
         this.userInfo = userInfo;
     }
 
-    public ShowUserFragment2(MatchRoom matchRoom) {
-        this.matchRoom = matchRoom;
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -94,7 +91,7 @@ public class ShowUserFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_user2, container, false);
-        TextView recommendUserStyle = view.findViewById(R.id.recommendUserStyle);
+        TextView recommendUserFashion= view.findViewById(R.id.recommendUserFashion);
         TextView recommendUserMBTI = view.findViewById(R.id.recommendUserMBTI);
         FlexboxLayout recommendPersonality = view.findViewById(R.id.recommendPersonality);
         FlexboxLayout recommendInterest = view.findViewById(R.id.recommendInterest);
@@ -109,7 +106,7 @@ public class ShowUserFragment2 extends Fragment {
         recommendIdeal3 = view.findViewById(R.id.recommendIdeal3);
 
 
-        //recommendUserStyle.setText(userInfo.getStyle()+" 에요");
+        recommendUserFashion.setText(userInfo.getFashion()+" 룩 즐겨입어요");
         recommendUserMBTI.setText(userInfo.getMbti() + " 에요");
 
         ArrayList<String> personalities = userInfo.getPersonality();
