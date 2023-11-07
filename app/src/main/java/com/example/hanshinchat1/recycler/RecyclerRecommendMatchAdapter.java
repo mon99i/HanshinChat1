@@ -183,6 +183,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.show_match_dialog, null);
 
+        ImageView cancelBtn = view.findViewById(R.id.cancel_image_view);
         ViewPager2 recommendViewPager = view.findViewById(R.id.showMatchViewPager);
         CheckBox recommendLikeBox = view.findViewById(R.id.recommendLikeBox);
         TextView recommendUserName = view.findViewById(R.id.showMatchTxt);
@@ -230,6 +231,12 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
             }
         });
 
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
         DatabaseReference likeRef = FirebaseDatabase.getInstance().getReference().child("users").child(userInfo.getUid()).child("like");
         recommendLikeBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

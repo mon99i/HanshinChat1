@@ -162,7 +162,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/match_button_style"
-            android:text="이상형 수정" />
+            android:text="이상형 설정" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/setting"

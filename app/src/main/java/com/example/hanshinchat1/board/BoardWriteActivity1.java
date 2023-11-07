@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.hanshinchat1.MainActivity;
+import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.utils.FBAuth;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,7 +51,8 @@ public class BoardWriteActivity1 extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 4);
                 startActivity(intent);
             }
         });
@@ -70,9 +72,11 @@ public class BoardWriteActivity1 extends MainActivity {
                     DatabaseReference myRef = database.getReference("board");
 
                     String key = myRef.push().getKey();
-                    myRef.child(key).setValue(new ListViewItem(writeTitle.getText().toString(), writeContent.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
+                    myRef.child(key).setValue(new ListViewItem(writeTitle.getText().toString(),
+                            writeContent.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
 
-                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                    intent.putExtra("show_fragment", 4);
                     startActivity(intent);
 
                     if (isImageUpload == true) {
@@ -93,12 +97,6 @@ public class BoardWriteActivity1 extends MainActivity {
 
             }
         });
-
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
 
     }
 

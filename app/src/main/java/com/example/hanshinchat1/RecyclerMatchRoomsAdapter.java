@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.hanshinchat1.MainMenu.MainRoomFragment;
 import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,7 +63,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
         setUpRooms(null,false);
         recyclerView = ((RoomActivity) context).findViewById(R.id.recycler_matchRooms);
-
+        //recyclerView = view.findViewById(R.id.recycler_matchRooms);
     }
     public void setUpRooms(String category,boolean checkBoxChecked) {
         DatabaseReference matchRoomsRef = FirebaseDatabase.getInstance().getReference().child("rooms");
@@ -98,7 +100,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     excludeSameDepartment();
                 }else{
                     notifyDataSetChanged();
-                    recyclerView.scrollToPosition(0);
+//                    recyclerView.scrollToPosition(0);
                 }
 
             }
@@ -136,7 +138,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 
                         notifyDataSetChanged();
-                        recyclerView.scrollToPosition(0);
+//                        recyclerView.scrollToPosition(0);
                     }
 
                     @Override
@@ -200,6 +202,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         View view = inflater.inflate(R.layout.show_match_dialog, null);
 
         ViewPager2 showMatchViewPager=view.findViewById(R.id.showMatchViewPager);
+        ImageView cancelBtn = view.findViewById(R.id.cancel_image_view);
         Button matchBtn=view.findViewById(R.id.requestMatchBtn);
         matchBtn.setText("매칭신청");
         TextView roomTitle=view.findViewById(R.id.showMatchTxt);
@@ -266,6 +269,13 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
                     requestMatch(roomKey,room);
 
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
 

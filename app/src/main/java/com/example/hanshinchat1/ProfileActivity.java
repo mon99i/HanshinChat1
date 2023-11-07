@@ -33,11 +33,11 @@ public class ProfileActivity extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
+//        clickHome();
+//        clickRoom();
+//        clickChat();
+//        clickBoard();
+//        clickProfile();
 
         profile = (ImageView) findViewById(R.id.profileImage);
 

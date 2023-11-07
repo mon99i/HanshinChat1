@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F8F8FF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
+            android:textColor="#252525"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:text="홈"/>
+
+
+        <ImageButton
+            android:id="@+id/getRequestBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/requestchat"
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eaeaea" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/home_speaker"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:drawableStart="@drawable/speaker"
+                android:text="맞춤 매칭을 이용해보세요!"
+                android:textAlignment="viewStart"
+                android:textColor="#434959"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:backgroundTint="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/background_ideal_list_layout2"
+                    android:padding="20dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소개팅 시뮬레이션"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textColor="#434959" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="당신의 소개팅 점수는?"
+                        android:textSize="15sp"
+                        android:textColor="#434959"
+                        android:layout_marginBottom="10dp" />
+
+                    <ImageButton
+                        android:id="@+id/simulation"
+                        android:src="@drawable/meeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/background_ideal_list_layout2"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:background="#eaeaea"
+                    android:layout_marginVertical="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center"
+                        android:drawableStart="@drawable/baseline_recommend_24"
+                        android:drawablePadding="10dp"
+                        android:padding="10dp"
+                        android:text="맞춤 매칭"
+                        android:textColor="#434959"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/question"
+                        android:src="@drawable/question_mark"
+                        android:background="@color/white"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="140dp"
+                        android:layout_marginTop="18dp"
+                        android:scaleType="centerCrop"/>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/idealMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="이상형 매칭" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/mbtiMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="MBTI 매칭" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/aroundMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="주변 친구 매칭" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:background="#eaeaea"
+                    android:layout_marginVertical="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:drawableStart="@drawable/star"
+                        android:drawablePadding="10dp"
+                        android:padding="10dp"
+                        android:text="추천 친구"
+                        android:textColor="#434959"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/recentRegisterMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="새로 가입한 친구" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/recentConnectMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="오늘 접속한 친구" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/topUserMatchingBtn"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="좋아요를 많이 받은 친구" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="#eaeaea"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

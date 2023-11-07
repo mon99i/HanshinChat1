@@ -9,15 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MainActivity;
+import com.example.hanshinchat1.MainMenu.MainBoardFragment;
+import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
-import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.comment.commentLVAdapter;
 import com.example.hanshinchat1.comment.commentModel;
 import com.example.hanshinchat1.databinding.BoardBinding;
@@ -28,15 +28,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class BoardActivity extends MainActivity {
+public class BoardActivity1 extends MainActivity {
 
 
     private ArrayList<commentModel> commentDataList;
@@ -52,10 +50,15 @@ public class BoardActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.board);
 
+        key = getIntent().getStringExtra("key");
+        getBoardData(key);
+        getImageData(key);
+
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 4);
                 startActivity(intent);
             }
         });
@@ -67,9 +70,6 @@ public class BoardActivity extends MainActivity {
 
             }
         });
-        key = getIntent().getStringExtra("key");
-        getBoardData(key);
-        getImageData(key);
 
         binding.commentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,12 +92,6 @@ public class BoardActivity extends MainActivity {
 
         getCommentData(key);
 
-//        clickMenu();
-//        clickHome();
-//        clickRoom();
-//        clickChat();
-//        clickBoard();
-//        clickProfile();
 
     }
 
@@ -175,7 +169,7 @@ public class BoardActivity extends MainActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
-                    Glide.with(BoardActivity.this)
+                    Glide.with(BoardActivity1.this)
                             .load(task.getResult())
                             .into(imageViewFB);
                 } else {
@@ -189,7 +183,6 @@ public class BoardActivity extends MainActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("board");
 
-        ImageView boardSetting = binding.boardSetting;
         ValueEventListener postListener = new ValueEventListener() {
 
             @Override
@@ -202,8 +195,7 @@ public class BoardActivity extends MainActivity {
                     binding.titleArea.setText(dataModel != null ? dataModel.getTitle() : "");
                     binding.contentArea.setText(dataModel != null ? dataModel.getContent() : "");
                     binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
-                    binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
-//                    binding.nameArea.setText(data != null ? data.getName() : "");
+                    binding.nameArea.setText(dataModel != null ? dataModel.getUid() : "");
 
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();
@@ -225,5 +217,9 @@ public class BoardActivity extends MainActivity {
 
         };
         myRef.child(key).addValueEventListener(postListener);
+    }
+
+    private void findName(String uid) {
+
     }
 }

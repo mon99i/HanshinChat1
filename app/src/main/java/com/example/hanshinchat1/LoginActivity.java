@@ -39,17 +39,6 @@ public class LoginActivity extends MainActivity{
 
     private boolean showOneTapUI = true;
 
-    /* private FirebaseAuth mAuth;   //파이어베이스 인증 객체
-   // 구글api클라이언트
-
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
-    private GoogleSignInAccount gsa;  // 구글 계정
-    private FirebaseAuth.AuthStateListener authStateListener;
-
-*/
-
-
 
     //테스트용으로 만든것뿐 나중에 없앨것
     private EditText edt_Id;
@@ -66,6 +55,8 @@ public class LoginActivity extends MainActivity{
         initializeListener();
         checkProfileExist();
 
+            //테스트용으로 만든것뿐 나중에 없앨것
+        exInitialize();
 
         //테스트용으로 만든것뿐 나중에 없앨것
         edt_Id=findViewById(R.id.edt_id);
@@ -108,21 +99,6 @@ public class LoginActivity extends MainActivity{
         googleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 기존에 로그인 했던 계정을 확인한다.
-               /*gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
-
-                if (gsa != null) {// 로그인 되있는 경우               아마 자동로그인
-                    Toast.makeText(LoginActivity.this, R.string.status_login, Toast.LENGTH_SHORT).show();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    signIn();
-
-                }*/
-
-
                 signIn();
             }
         });
@@ -149,18 +125,14 @@ public class LoginActivity extends MainActivity{
    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
             }
         }
@@ -168,7 +140,7 @@ public class LoginActivity extends MainActivity{
     // [END onactivityresult]
 
     // [START auth_with_google]
-    private void firebaseAuthWithGoogle(String idToken) {    //구글로긴누르고 여러가지 구글계정 나옴
+    private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
 
         mAuth.signInWithCredential(credential)
@@ -191,9 +163,30 @@ public class LoginActivity extends MainActivity{
     }
     // [END auth_with_google]
 
+            //테스트용으로 만든것뿐 나중에 없앨것
+    private void exInitialize(){
+        edt_Id=findViewById(R.id.edt_id);
+        edt_password=findViewById(R.id.edt_password);
+        exRegisterBtn=findViewById(R.id.exRegisterBtn);
+        exLoginBtn=findViewById(R.id.exLoginBtn);
+
+        exRegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exCreateUser(edt_Id.getText().toString(),edt_password.getText().toString());
+            }
+        });
+        exLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                exLogin(edt_Id.getText().toString(),edt_password.getText().toString());
+
+            }
 
 
-
+        });
+    }
 
     private void exCreateUser(String id,String password){
         Log.d(TAG, "exCreateUserAndSignIn: "+id+password);
@@ -232,115 +225,4 @@ public class LoginActivity extends MainActivity{
                     }
                 });
     }
-
-
-
-    /* if(user !=null) {
-
-     *//*      FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).
-                   addValueEventListener(new ValueEventListener() {
-                       @Override
-                       public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           if(snapshot.exists()){
-                               UserInfo currentUser=snapshot.getValue(UserInfo.class);
-                               currentUser.setLastSignInTime(user.getMetadata().getLastSignInTimestamp());
-                           }else{
-
-                           }
-
-                       }
-
-                       @Override
-                       public void onCancelled(@NonNull DatabaseError error) {
-
-                       }
-                   })*//*
-           Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-           startActivity(intent);
-           finish();
-           Log.d(TAG, "말같지도않은" + user.getUid());
-       }*/
-
-
-   /* private void updateUI(FirebaseUser user) {
-
-        //DatabaseReference usersRef= myRef.child("users").child(user.getUid());
-        if(checkHanshin(user)==true){
-            checkProfileExist();
-
-                FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            // 사용자의 프로필이 이미 존재하므로 HomeActivity로 이동   수정필요
-                            //dataSnapshot.getValue(UserInfo.class).equals(null);
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "프로필 설정을 안하셨군요!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), SetProfile1PhotoActivity.class);
-                            startActivity(intent);
-                            // 사용자의 프로필이 존재하지 않으므로 SetProfileActivity로 이동
-                            // 추가적인 구현이 필요한 경우 여기에 작성
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // 에러 처리
-                        Toast.makeText(getApplicationContext(), "개같은 에러!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        }
-
-        else{
-            Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
-            signOut();
-        }
-
-    }
-
-
-    protected boolean checkHanshin(FirebaseUser user) {
-        if (user != null) {
-
-            String email = user.getEmail();
-
-            if (email != null) {
-//            if (email != null && email.endsWith("@hs.ac.kr")) {
-                //Toast.makeText(getApplicationContext(), "한신대 학생 확인!", Toast.LENGTH_SHORT).show();
-                // 이메일이 hs@ac.kr과 일치하는 경우 처리할 작업 수행
-                return true;
-            } else {
-                //Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
-                // 이메일이 hs@ac.kr과 일치하지 않는 경우 처리할 작업 수행
-                return false;
-            }
-
-        }
-        else return false;
-
-    }*/
-
-    /* 로그아웃 *//*
-    public void signOut() {
-
-
-
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, task -> {
-                    mAuth.signOut();
-                    Toast.makeText(LoginActivity.this, R.string.success_logout, Toast.LENGTH_SHORT).show();
-                    // ...
-                });
-        gsa = null;
-    }*/
-
-
-    // [START onactivityresult]
-
-
 }

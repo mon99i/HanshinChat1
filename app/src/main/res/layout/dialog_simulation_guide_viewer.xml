@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="390dp"
+    android:layout_height="450dp">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="390dp"
+        android:layout_height="450dp" />
+
+    <LinearLayout
+        android:id="@+id/indicatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
+
+        <View
+            android:id="@+id/indicator1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/question_indicator_unselected" />
+
+        <View
+            android:id="@+id/indicator2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/question_indicator_unselected" />
+
+        <View
+            android:id="@+id/indicator3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/question_indicator_unselected" />
+
+    </LinearLayout>
+</RelativeLayout>

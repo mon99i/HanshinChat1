@@ -81,7 +81,10 @@
             android:name=".AddChatRoomActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".board.BoardActivity"
+            android:name=".board.BoardActivity1"
+            android:exported="false"></activity>
+        <activity
+            android:name=".board.BoardActivity2"
             android:exported="false"></activity>
         <activity
             android:name=".ProfileActivity"
@@ -120,6 +123,9 @@
             android:name=".SetIdeal2Activity"
             android:exported="false" />
         <activity
+            android:name=".SetProfileCompleteActivity"
+            android:exported="false"></activity>
+        <activity
             android:name=".RecommendMatchActivity"
             android:exported="false" />
         <activity
@@ -130,6 +136,9 @@
             android:exported="false" />
         <activity
             android:name=".report.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenuActivity"
             android:exported="false" />
     </application>
 </manifest>

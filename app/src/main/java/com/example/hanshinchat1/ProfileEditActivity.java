@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.hanshinchat1.MainMenu.MainProfileFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
@@ -42,7 +42,6 @@ import com.example.hanshinchat1.ProfileFragment.ProfileFormFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGenderFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileGradeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileHeightFragment;
-import com.example.hanshinchat1.ProfileFragment.ProfileIdealTypeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileInterestFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileMbtiFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileNameFragment;
@@ -124,7 +123,6 @@ public class ProfileEditActivity extends MainActivity {
     private ProfileInterestFragment interestFragment;
     private ProfilePersonalityFragment personalityFragment;
     private ProfileMbtiFragment mbtiFragment;
-    private ProfileIdealTypeFragment idealTypeFragment;
     private ProfileFashionMaleFragment fashionMaleFragment;
     private ProfileFashionFemaleFragment fashionFemaleFragment;
 
@@ -261,9 +259,9 @@ public class ProfileEditActivity extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -365,18 +363,18 @@ public class ProfileEditActivity extends MainActivity {
 
                 userRef.setValue(updatedUserInfo);
 
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
 
         cancelCompleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -731,7 +729,6 @@ public class ProfileEditActivity extends MainActivity {
         interestFragment = new ProfileInterestFragment();
         personalityFragment = new ProfilePersonalityFragment();
         mbtiFragment = new ProfileMbtiFragment();
-        idealTypeFragment = new ProfileIdealTypeFragment();
         fashionMaleFragment = new ProfileFashionMaleFragment();
         fashionFemaleFragment = new ProfileFashionFemaleFragment();
 

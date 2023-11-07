@@ -115,7 +115,7 @@ public class ReportActivity extends MainActivity {
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    // 에러 처리
+
                 }
             });
         }

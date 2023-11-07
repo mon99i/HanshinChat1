@@ -22,7 +22,7 @@
             android:layout_marginLeft="130dp"
             android:textColor="@color/black" />
         <ImageView
-            android:id="@+id/make_room_cancel"
+            android:id="@+id/find_room_cancel"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:clickable="true"

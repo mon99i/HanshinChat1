@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -55,7 +56,7 @@ public class HomeActivity extends MainActivity {
     private String[] phrases;
     private List<String> phrasesList;
     private Button speakerBtn;
-    private ImageButton simulationBtn;
+    private ImageButton simulationBtn, questionBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +64,6 @@ public class HomeActivity extends MainActivity {
         setContentView(R.layout.home);
 
         checkNewRequest();
-
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
 
         //checkMatchRequest();
 
@@ -87,6 +82,7 @@ public class HomeActivity extends MainActivity {
         });
 
 
+
         // 소개팅 시뮬레이션 기능
         simulationBtn = (ImageButton) findViewById(R.id.simulation);
         simulationBtn.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +92,15 @@ public class HomeActivity extends MainActivity {
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        });
+
+        questionBtn = (ImageButton) findViewById(R.id.question);
+        questionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuestionImageViewerDialog imageViewerDialog = new QuestionImageViewerDialog(HomeActivity.this);
+                imageViewerDialog.show();
             }
         });
     }
@@ -168,7 +173,7 @@ public class HomeActivity extends MainActivity {
 
                                     }
                                 }
-                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
+//                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
 
                                 if(newMatches.size()>0){
                                     showNewRequestDialog();

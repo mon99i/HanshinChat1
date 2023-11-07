@@ -20,9 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hanshinchat1.MainMenu.MainChatFragment;
+import com.example.hanshinchat1.MainMenu.MainHomeFragment;
+import com.example.hanshinchat1.MainMenu.MainRoomFragment;
 import com.example.hanshinchat1.recycler.VerticalDecoration;
 import com.example.hanshinchat1.utils.Utils;
 import com.google.android.gms.tasks.OnCanceledListener;
@@ -89,7 +94,10 @@ public class ChattingActivity extends MainActivity {
         chatting_btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChattingActivity.this, ChatRoomActivity.class));
+
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 3);
+                startActivity(intent);
             }
         });
 

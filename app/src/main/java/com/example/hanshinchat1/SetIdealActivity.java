@@ -1,28 +1,13 @@
 package com.example.hanshinchat1;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,11 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SetIdealActivity extends MainActivity {
@@ -51,6 +32,8 @@ public class SetIdealActivity extends MainActivity {
     ImageButton idealCancelBtn1;
     ImageButton idealCancelBtn2;
     ImageButton idealCancelBtn3;
+
+    ImageButton backBtn;
 
 
     private Map<String, String> idealMap = new LinkedHashMap<String, String>() {{
@@ -73,15 +56,23 @@ public class SetIdealActivity extends MainActivity {
 
         setContentView(R.layout.activity_set_ideal);
 
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
+        clickBackBtn();
 
         initializeView();
         setupPriority();
         initializeListener();
+    }
+
+    private void clickBackBtn() {
+        backBtn = findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
