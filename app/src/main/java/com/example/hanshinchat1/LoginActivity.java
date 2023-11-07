@@ -38,6 +38,13 @@ public class LoginActivity extends MainActivity{
     private Button logoutBtn;
 
     private boolean showOneTapUI = true;
+
+//    //테스트용으로 만든것뿐 나중에 없앨것
+//    private EditText edt_Id;
+//    private EditText edt_password;
+//    private Button exRegisterBtn;
+//    private Button exLoginBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +54,8 @@ public class LoginActivity extends MainActivity{
         initializeListener();
         checkProfileExist();
 
+//    //테스트용으로 만든것뿐 나중에 없앨것
+//        exInitialize();
     }
 
 
@@ -129,4 +138,66 @@ public class LoginActivity extends MainActivity{
                 });
     }
     // [END auth_with_google]
+
+//        //테스트용으로 만든것뿐 나중에 없앨것
+//    private void exInitialize(){
+//        edt_Id=findViewById(R.id.edt_id);
+//        edt_password=findViewById(R.id.edt_password);
+//        exRegisterBtn=findViewById(R.id.exRegisterBtn);
+//        exLoginBtn=findViewById(R.id.exLoginBtn);
+//
+//        exRegisterBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                exCreateUser(edt_Id.getText().toString(),edt_password.getText().toString());
+//            }
+//        });
+//        exLoginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                exLogin(edt_Id.getText().toString(),edt_password.getText().toString());
+//
+//            }
+//
+//
+//        });
+//    }
+//    private void exCreateUser(String id,String password){
+//        Log.d(TAG, "exCreateUserAndSignIn: "+id+password);
+//        mAuth.createUserWithEmailAndPassword(id, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Toast.makeText(getApplicationContext(), "일반 유저 회원가입성공", Toast.LENGTH_SHORT).show();
+//                            Log.d(TAG, "일반 유저 회원가입성공");
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Toast.makeText(getApplicationContext(), "이미 있는 아이디", Toast.LENGTH_SHORT).show();
+//                            Log.w(TAG, "일반 유저 회원가입실패", task.getException());
+//                        }
+//                    }
+//                });
+//
+//    }
+//
+//    private void exLogin(String id,String password){
+//        mAuth.signInWithEmailAndPassword(id, password)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithEmail:success");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            checkHanshin();
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+//                        }
+//                    }
+//                });
+//    }
 }
