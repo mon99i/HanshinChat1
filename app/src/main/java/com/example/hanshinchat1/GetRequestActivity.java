@@ -34,12 +34,6 @@ public class GetRequestActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_request);
 
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
-
         initializeView();
         initializeListener();
 
@@ -55,6 +49,7 @@ public class GetRequestActivity extends MainActivity {
 
         //getRoomRequestUids= (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra("getRoomRequestUids");
         if(getMatchKeys.isEmpty()){
+
             noneRequestUserlayout.setVisibility(View.VISIBLE);
         }
 
@@ -67,9 +62,9 @@ public class GetRequestActivity extends MainActivity {
         getRequestBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), MainMenuActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 1);
                 startActivity(intent);
-                finish();
             }
         });
     }

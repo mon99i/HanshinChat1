@@ -76,7 +76,7 @@ public class MainHomeFragment extends Fragment {
 
         checkNewRequest();
 
-        //checkMatchRequest();
+//        checkMatchRequest();
 
         idealMatchingBtn = view.findViewById(R.id.idealMatchingBtn);
         mbtiMatchingBtn = view.findViewById(R.id.mbtiMatchingBtn);
@@ -302,7 +302,7 @@ public class MainHomeFragment extends Fragment {
         super.onResume();
 
         // onResume 시 다이얼로그를 생성하고 표시
-//        showNewRequestDialog();
+        showNewRequestDialog();
     }
 
 
@@ -336,7 +336,7 @@ public class MainHomeFragment extends Fragment {
                     Utils.goToGetRequestActivity(getContext());
 
                     alertDialog.dismiss();
-                    //showUserInfoDialog(context,chatRequestUsers);
+//                    showUserInfoDialog(context,chatRequestUsers);
 
                 }
             });
