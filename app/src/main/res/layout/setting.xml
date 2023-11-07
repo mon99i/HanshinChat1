@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SettingActivity"
-    android:gravity="center">
+    tools:context=".SettingActivity">
 
     <LinearLayout
         android:id="@+id/top_view"
@@ -17,12 +16,19 @@
         android:gravity="center_vertical"
         android:background="#F8F8FF">
 
+        <ImageButton
+            android:id="@+id/edit_profile_back_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/baseline_arrow_back" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#252525"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:textSize="20dp"
             android:text="설정"/>
 
@@ -30,7 +36,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="600dp"
         android:orientation="vertical"
         android:padding="10dp"
         android:layout_margin="10dp"
@@ -115,49 +121,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_home_black_24_xml"/>
-        <ImageButton
-            android:id="@+id/room"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_room_black_24_xml"/>
-        <ImageButton
-            android:id="@+id/chat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_chat_black_24_xml"/>
-        <ImageButton
-            android:id="@+id/post"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_board_black_24_xml"/>
-        <ImageButton
-            android:id="@+id/info"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/baseline_profile_black_24_xml"/>
-
-    </LinearLayout>
 
 </LinearLayout>

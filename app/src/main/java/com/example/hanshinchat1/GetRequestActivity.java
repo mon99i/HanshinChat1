@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.example.hanshinchat1.MainMenu.MainHomeFragment;
 import com.example.hanshinchat1.recycler.RecyclerGetRequestAdapter;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class GetRequestActivity extends MainActivity {
         getRequestBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), HomeActivity.class);
+                Intent intent=new Intent(getApplicationContext(), MainMenuActivity.class);
                 startActivity(intent);
                 finish();
             }

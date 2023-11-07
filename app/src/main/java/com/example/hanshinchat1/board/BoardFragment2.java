@@ -51,7 +51,7 @@ public class BoardFragment2 extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), BoardActivity.class);
+                Intent intent = new Intent(getActivity(), BoardActivity2.class);
                 intent.putExtra("key", boardKeyList.get(position));
                 startActivity(intent);
 

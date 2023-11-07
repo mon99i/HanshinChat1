@@ -1,15 +1,13 @@
-package com.example.hanshinchat1;
+package com.example.hanshinchat1.MainMenu;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,33 +17,29 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
+import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.RecyclerMatchRoomsAdapter;
+import com.example.hanshinchat1.Room;
+//import com.example.hanshinchat1.RoomActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+public class MainRoomFragment extends Fragment {
 
-public class RoomActivity extends MainActivity {
-
-
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private static final String TAG="RoomActivity";
-    private Context context=this;
+//    private Context context=this;
     private Dialog findRoomDialog, findRoomDialog2;
     private Dialog makeRoomDialog;
     private Dialog makeRoom1Dialog;
@@ -56,6 +50,7 @@ public class RoomActivity extends MainActivity {
 
     private RecyclerView recycler_matchRooms;
     private RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
+    private  RecyclerView recyclerView;
 
     private boolean checkBoxChecked = false;
     private String selectedCategory=null;
@@ -63,39 +58,45 @@ public class RoomActivity extends MainActivity {
     public static String[] participants2 = {"2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] gender = {"남자", "여자"};
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.roomfragment, container, false);
+//        recyclerView = view.findViewById(R.id.recycler_matchRooms);
 
-        setContentView(R.layout.room);
+//        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(getContext());
+//        recyclerView.setAdapter(recyclerMatchRoomsAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        clickHome();
-        clickRoom();
-        clickChat();
-        clickBoard();
-        clickProfile();
-
-        initializeView();
+        getView();
+        initializeView(view);
         initializeListener();
 
+
+        return view;
+
     }
-    private void initializeView() {
-        recycler_matchRooms=findViewById(R.id.recycler_matchRooms);
-//        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(this, view);
-        recycler_matchRooms.setLayoutManager(new LinearLayoutManager(this));
+    private void initializeView(View view) {
+        recycler_matchRooms=view.findViewById(R.id.recycler_matchRooms);
+        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(getContext(), view);
+        recycler_matchRooms.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
 
-        departmentCheckbox = findViewById(R.id.department_checkbox);
-        makeRoom = findViewById(R.id.make_room);
-        findRoom = findViewById(R.id.find_room);
+        departmentCheckbox = view.findViewById(R.id.department_checkbox);
+        makeRoom = view.findViewById(R.id.make_room);
+        findRoom = view.findViewById(R.id.find_room);
 
-        makeRoomDialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoomDialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoomDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoomDialog.setContentView(R.layout.make_room_dialog);
 
-        findRoomDialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
-        findRoomDialog.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
+        findRoomDialog = new Dialog(getContext(), R.style.RoundedDialog);
+        findRoomDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         findRoomDialog.setContentView(R.layout.find_room_dialog);
 
     }
@@ -193,7 +194,7 @@ public class RoomActivity extends MainActivity {
                 ImageView category2Btn = findRoomDialog.findViewById(R.id.category2);
                 ImageView category3Btn = findRoomDialog.findViewById(R.id.category3);
                 ImageView category4Btn = findRoomDialog.findViewById(R.id.category4);
-                ImageView cancelBtn = findRoomDialog.findViewById(R.id.find_room_cancel);
+                ImageView cancelBtn = makeRoomDialog.findViewById(R.id.make_room_cancel);
 
                 category0Btn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -252,7 +253,7 @@ public class RoomActivity extends MainActivity {
 
     }
     private void makeRoom1() {
-        makeRoom1Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoom1Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom1Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom1Dialog.setContentView(R.layout.make_room1);
         makeRoom1Dialog.show();
@@ -269,7 +270,7 @@ public class RoomActivity extends MainActivity {
         Resources res = getResources();
         //String[] department = res.getStringArray(R.array.학과);
 
-        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants2);
+        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants2);
         //ArrayAdapter<String> department_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, department);
         //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
@@ -318,7 +319,7 @@ public class RoomActivity extends MainActivity {
         });
     }
     private void makeRoom2() {
-        makeRoom2Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoom2Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom2Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom2Dialog.setContentView(R.layout.make_room2);
         makeRoom2Dialog.show();
@@ -367,7 +368,7 @@ public class RoomActivity extends MainActivity {
     }
 
     private void makeRoom3() {
-        makeRoom2Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoom2Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom2Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom2Dialog.setContentView(R.layout.make_room2);
         makeRoom2Dialog.show();
@@ -379,7 +380,7 @@ public class RoomActivity extends MainActivity {
         category.setBackgroundResource(R.drawable.icon3);
         //Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "밥팅";
-        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
+        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, gender);
 
         //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //gender_Spinner.setAdapter(gender_adapter);
@@ -417,7 +418,7 @@ public class RoomActivity extends MainActivity {
 
 
     private void makeRoom4() {
-        makeRoom1Dialog = new Dialog(RoomActivity.this, R.style.RoundedDialog);
+        makeRoom1Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom1Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         makeRoom1Dialog.setContentView(R.layout.make_room1);
         makeRoom1Dialog.show();
@@ -431,7 +432,7 @@ public class RoomActivity extends MainActivity {
         //Spinner gender_Spinner = makeRoom3Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "기타";
 
-        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, participants1);
+        ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants1);
         //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -37,17 +37,17 @@ public class Simulation0 extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 1);
                 startActivity(intent);
-                finish();
             }
         });
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 1);
                 startActivity(intent);
-                finish();
             }
         });
     }

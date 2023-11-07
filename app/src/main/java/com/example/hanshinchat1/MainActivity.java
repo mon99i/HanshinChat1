@@ -173,9 +173,9 @@ public abstract class MainActivity extends AppCompatActivity {
                         else { //모든 프로필 완료했을때, HomeActivity에서 넘어갈 setProfilActivity가 없을때 접속시간을 저장
                             Log.d(TAG, "onDataChange: 모든 프로필설정 완료.");
                             userRef.child("lastSignInTime").setValue(currentTime);
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                            intent.putExtra("openFragment", "fragmentHome");
                             startActivity(intent);
-                            finish();
                             //userInfo.setLastSignInTime();
                             //FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).se
                         }
@@ -341,7 +341,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로버튼 전페이지
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
         startActivity(intent);
         finish();
         //signOut();
