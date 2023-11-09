@@ -56,13 +56,13 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 
     private  RecyclerView recyclerView;
-    public RecyclerMatchRoomsAdapter(Context context) {
+    public RecyclerMatchRoomsAdapter(Context context,RecyclerView recyclerView) {
         this.context = context;
         roomList = new ArrayList<>();
         roomKeyList = new ArrayList();
 
         setUpRooms(null,false);
-        recyclerView = ((RoomActivity) context).findViewById(R.id.recycler_matchRooms);
+        this.recyclerView = recyclerView;
         //recyclerView = view.findViewById(R.id.recycler_matchRooms);
     }
     public void setUpRooms(String category,boolean checkBoxChecked) {
@@ -100,7 +100,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
                     excludeSameDepartment();
                 }else{
                     notifyDataSetChanged();
-//                    recyclerView.scrollToPosition(0);
+                    recyclerView.scrollToPosition(0);
                 }
 
             }
@@ -138,7 +138,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
 
                         notifyDataSetChanged();
-//                        recyclerView.scrollToPosition(0);
+                        recyclerView.scrollToPosition(0);
                     }
 
                     @Override

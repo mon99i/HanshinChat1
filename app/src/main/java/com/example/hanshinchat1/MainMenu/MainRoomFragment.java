@@ -50,7 +50,6 @@ public class MainRoomFragment extends Fragment {
 
     private RecyclerView recycler_matchRooms;
     private RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
-    private  RecyclerView recyclerView;
 
     private boolean checkBoxChecked = false;
     private String selectedCategory=null;
@@ -83,7 +82,7 @@ public class MainRoomFragment extends Fragment {
     }
     private void initializeView(View view) {
         recycler_matchRooms=view.findViewById(R.id.recycler_matchRooms);
-        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(getContext(), view);
+        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(getContext(),recycler_matchRooms);
         recycler_matchRooms.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
 

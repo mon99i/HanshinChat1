@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/acceptMatchBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cancel_image_view" />
 
 
     <TextView
@@ -48,10 +48,10 @@
         android:text="TextView"
         android:textSize="20dp"
         android:textColor="#252525"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/cancel_image_view" />
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/indicator"
