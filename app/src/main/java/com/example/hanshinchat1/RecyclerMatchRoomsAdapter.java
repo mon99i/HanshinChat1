@@ -166,9 +166,25 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             imageResourceId = R.drawable.icon4;
         }
         holder.roomCategory.setImageResource(imageResourceId);
-        holder.txt_roomGender.setText(room.getGender());
-        holder.txt_roomDepartment.setText(room.getDepartment());
         holder.txt_roomMember.setText(room.getNum());
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
+                    if (hostUserInfo != null) {
+                        holder.txt_roomGender.setText(hostUserInfo.getGender());
+                        holder.txt_roomDepartment.setText(hostUserInfo.getDepartment());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         holder.room_background.setOnClickListener(new View.OnClickListener() {
             @Override
