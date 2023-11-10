@@ -1,13 +1,19 @@
 package com.example.hanshinchat1;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,9 +74,9 @@ public class SetIdealActivity extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -198,13 +204,20 @@ public class SetIdealActivity extends MainActivity {
     }
 
     private void showPriorityDialog(int priority,Map<String,String> idealMap) {
-       /*CustomDialog.getInstance(this).priorityDialog(priority);
-        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
-        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);*/
-        CustomDialog dialog = new CustomDialog(this);
-        dialog.priorityDialog(priority,idealMap).show();
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        View view=inflater.inflate(R.layout.ideal_prioity_dialog, null);
+        RecyclerView recyclerView=view.findViewById(R.id.recycler_idealPriority);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        recyclerView.setAdapter(new RecyclerIdealAdapter(this,priority,idealMap,dialog));
+
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
     }
 
 
@@ -260,26 +273,4 @@ public class SetIdealActivity extends MainActivity {
     }
 
 
-    /*private void showDialog2(int priority) {
-
-        //먼저 dialog xml을 생성함
-        LayoutInflater inflater = getLayoutInflater();
-        View customLayout = inflater.inflate(R.layout.ideal_prioity_dialog, null);
-
-        //가져온 dialog xml로 부터 리사이클러뷰 초기화
-        recyclerView = customLayout.findViewById(R.id.recycler_idealPriority);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(customLayout);
-
-        final AlertDialog dialog = builder.create();
-        recyclerView.setAdapter(new RecyclerIdealAdapter(this, priority,idealMap));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-        dialog.show();
-
-
-    }*/
 }

@@ -296,6 +296,7 @@ public class MainHomeFragment extends Fragment {
 
 
 
+/*
 
     @Override
     public void onResume() {
@@ -304,6 +305,7 @@ public class MainHomeFragment extends Fragment {
         // onResume 시 다이얼로그를 생성하고 표시
         showNewRequestDialog();
     }
+*/
 
 
 

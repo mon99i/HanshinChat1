@@ -30,6 +30,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatRoomsAdapter.ViewHolder> {
@@ -60,6 +61,10 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             chatRooms.add(data.getValue(ChatRoom.class));    //my uid가 true인 방 객체를, 채팅룸 ArrayList에 추가
                             chatRoomKeys.add(data.getKey());                 //my uid가 true인 방 uid를, 채팅룸 키 ArrayList에 추가
                         }
+
+                        Collections.reverse(chatRooms);
+                        Collections.reverse(chatRoomKeys);
+
                         notifyDataSetChanged();
 
                     }

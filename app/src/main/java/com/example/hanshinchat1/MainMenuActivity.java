@@ -69,6 +69,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     break;
                 case R.id.menu_room:
                     transaction.replace(R.id.menu_frame_layout, fragmentRoom).commitAllowingStateLoss();
+                    //transaction.commit();
                     break;
                 case R.id.menu_chat:
                     transaction.replace(R.id.menu_frame_layout, fragmentChat).commitAllowingStateLoss();

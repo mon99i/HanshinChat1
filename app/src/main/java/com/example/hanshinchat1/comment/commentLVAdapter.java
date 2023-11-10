@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.hanshinchat1.R;
-import com.example.hanshinchat1.board.ListViewItem;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,6 @@
 package com.example.hanshinchat1;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -32,28 +33,19 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
     private final static String TAG = "idealAdpater";
     private Context context;
     private int priority;
+    private AlertDialog dialog;
 
     public static ArrayList<String> idealList = new ArrayList<>(
             Arrays.asList("나이", "거주지", "학과", "키", "체형", "흡연", "음주", "성격", "관심사", "종교")
     );
-    private Map<String, String> idealMap = new LinkedHashMap<String, String>() {{
-        put("age", "나이");
-        put("address", "거주지");
-        put("department", "학과");
-        put("form", "체형");
-        put("drinking", "음주");
-        put("height", "키");
-        put("interest", "관심사");
-        put("personality", "성격");
-        put("religion", "종교");
-        put("smoking", "흡연");
-    }};
+    private Map<String, String> idealMap;
     private ArrayList<String>   idealKeys = new ArrayList<>();
     private ArrayList<String>   idealValues= new ArrayList<>();
 
 
-    public RecyclerIdealAdapter(Context context, int priority, Map<String, String> idealMap) {
+    public RecyclerIdealAdapter(Context context, int priority, Map<String, String> idealMap, AlertDialog dialog) {
         this.context = context;
+        this.dialog=dialog;
         this.priority = priority;
         this.idealMap = idealMap;
         setupIdealList();
@@ -168,8 +160,7 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
-                        CustomDialog.dialog.dismiss();
+                    dialog.dismiss();
                     }
                 }, 300);
 

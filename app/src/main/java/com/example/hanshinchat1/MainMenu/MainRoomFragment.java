@@ -72,10 +72,10 @@ public class MainRoomFragment extends Fragment {
 //        recyclerView.setAdapter(recyclerMatchRoomsAdapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getView();
+        //getView();
         initializeView(view);
         initializeListener();
-
+        Log.d(TAG, "oncreateView에서 " + selectedCategory+" "+checkBoxChecked);
 
         return view;
 
