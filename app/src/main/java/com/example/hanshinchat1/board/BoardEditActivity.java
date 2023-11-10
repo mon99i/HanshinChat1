@@ -1,21 +1,17 @@
 package com.example.hanshinchat1.board;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
-import com.example.hanshinchat1.databinding.BoardBinding;
 import com.example.hanshinchat1.utils.FBAuth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,8 +53,6 @@ public class BoardEditActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 editBoardData(key);
-//                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-//                startActivity(intent);
             }
         });
     }
@@ -72,17 +66,12 @@ public class BoardEditActivity extends MainActivity {
                                 FBAuth.getTime(),
                                 writerUid));
         finish();
-
     }
+
     private void getImageData(String key) {
 
-        // Reference to an image file in Cloud Storage
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(key + ".png");
-
-        // ImageView in your Activity
-//        ImageView imageViewFB = binding.imageArea;
-//        if(binding.imageArea != null) {
-        if(image != null) {
+        if (image != null) {
             storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
@@ -110,11 +99,7 @@ public class BoardEditActivity extends MainActivity {
 
                 ListViewItem dataModel = dataSnapshot.getValue(ListViewItem.class);
 
-                if(dataModel != null) {
-//                    EditText titleArea = findViewById(R.id.writeTitleArea);
-//                    EditText contentArea = findViewById(R.id.writeContentArea);
-//                    binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
-
+                if (dataModel != null) {
                     titleArea.setText(dataModel.getTitle());
                     contentArea.setText(dataModel.getContent());
                     writerUid = dataModel.getUid();
@@ -123,7 +108,6 @@ public class BoardEditActivity extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
                 Log.w("BoardEditActivity", "loadPost:onCancelled", databaseError.toException());
             }
 

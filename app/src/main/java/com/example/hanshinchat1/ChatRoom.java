@@ -6,9 +6,7 @@ import java.util.Map;
 
 public class ChatRoom implements Serializable {
     public Map<String, Boolean> users;
-
-
-    public  Map<String, Message> messages;
+    public Map<String, Message> messages;
 
     public ChatRoom() {
         users = new HashMap<>();

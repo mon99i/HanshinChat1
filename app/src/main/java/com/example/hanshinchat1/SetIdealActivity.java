@@ -34,7 +34,6 @@ public class SetIdealActivity extends MainActivity {
     TextView secondChoiceTxt;
     TextView thirdPriorityTxt;
     TextView thirdChoiceTxt;
-
     ImageButton idealCancelBtn1;
     ImageButton idealCancelBtn2;
     ImageButton idealCancelBtn3;

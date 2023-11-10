@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/room_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/room_background">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/room_cardview1"
@@ -12,35 +12,36 @@
         android:layout_height="70dp"
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="2.5dp"
-        app:cardCornerRadius="15dp"
-        android:background="@drawable/match_textview">
+        android:background="@drawable/match_textview"
+        app:cardCornerRadius="15dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp">
+
             <ImageView
                 android:id="@+id/roomCategory"
-                android:src="@drawable/likes"
                 android:layout_width="60dp"
-                android:layout_height="60dp" />
+                android:layout_height="60dp"
+                android:src="@drawable/likes" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="317dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_roomTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:padding="5dp"
                 android:text="제목"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:padding="5dp"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

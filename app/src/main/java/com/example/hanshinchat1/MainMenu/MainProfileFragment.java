@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -52,14 +51,13 @@ public class MainProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.profilefragment, container, false);
 
 
-
         profile = (ImageView) view.findViewById(R.id.profileImage);
 
         Button profileEditBtn = (Button) view.findViewById(R.id.profile_edit);
 
         settingBtn = (Button) view.findViewById(R.id.setting);
 
-        ideal_edit_btn=view.findViewById(R.id.ideal_edit_btn);
+        ideal_edit_btn = view.findViewById(R.id.ideal_edit_btn);
 
         name = view.findViewById(R.id.name);
         gender = view.findViewById(R.id.gender);
@@ -72,8 +70,8 @@ public class MainProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     userInfo = snapshot.getValue(UserInfo.class);
-                    String imageUrl=userInfo.getPhotoUrl();
-                    Uri imageUri=Uri.parse(imageUrl);
+                    String imageUrl = userInfo.getPhotoUrl();
+                    Uri imageUri = Uri.parse(imageUrl);
                     Glide.with(getContext())
                             .load(imageUri)
                             .into(profile);
@@ -81,8 +79,7 @@ public class MainProfileFragment extends Fragment {
                     gender.setText(userInfo.getGender());
                     Integer intAge = userInfo.getAge();
                     age.setText(intAge.toString());
-                }
-                else Log.d(TAG, "onDataChange: 데이터없음");
+                } else Log.d(TAG, "onDataChange: 데이터없음");
             }
 
             @Override

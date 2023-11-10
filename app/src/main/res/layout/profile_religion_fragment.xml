@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="400dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_profile_religion"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
     <RadioGroup
         android:id="@+id/religion_radio_group_fragment"
         android:layout_width="match_parent"
@@ -16,8 +18,7 @@
         android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
-        <GridLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
@@ -28,11 +29,11 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/radio_button_border"
+                android:button="@null"
                 android:gravity="center"
                 android:text="무교"
-                android:textSize="16sp"
-                android:button="@null"
-                android:background="@drawable/radio_button_border" />
+                android:textSize="16sp" />
 
 
             <RadioButton
@@ -40,44 +41,44 @@
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/radio_button_border"
+                android:button="@null"
                 android:gravity="center"
                 android:text="불교"
-                android:textSize="16sp"
-                android:button="@null"
-                android:background="@drawable/radio_button_border" />
+                android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/religion_radio_btn_3_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/radio_button_border"
+                android:button="@null"
                 android:gravity="center"
                 android:text="개신교"
-                android:textSize="16sp"
-                android:button="@null"
-                android:background="@drawable/radio_button_border" />
+                android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/religion_radio_btn_4_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/radio_button_border"
+                android:button="@null"
                 android:gravity="center"
                 android:text="천주교"
-                android:textSize="16sp"
-                android:button="@null"
-                android:background="@drawable/radio_button_border" />
+                android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/religion_radio_btn_5_fragment"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
+                android:background="@drawable/radio_button_border"
+                android:button="@null"
                 android:gravity="center"
                 android:text="기타"
-                android:textSize="16sp"
-                android:button="@null"
-                android:background="@drawable/radio_button_border" />
+                android:textSize="16sp" />
 
         </GridLayout>
     </RadioGroup>

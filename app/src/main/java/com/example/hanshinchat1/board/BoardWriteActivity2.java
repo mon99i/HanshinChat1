@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.hanshinchat1.MainActivity;
-import com.example.hanshinchat1.MainMenu.MainBoardFragment;
 import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.utils.FBAuth;
@@ -100,11 +99,9 @@ public class BoardWriteActivity2 extends MainActivity {
         });
 
 
-
     }
 
     private void imageUpload(String key) {
-        // Get the data from an ImageView as bytes
         StorageReference storageRef = storage.getReference();
         StorageReference mountainsRef = storageRef.child(key + ".png");
 
@@ -121,20 +118,18 @@ public class BoardWriteActivity2 extends MainActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == 100) {
+        if (resultCode == RESULT_OK && requestCode == 100) {
             image.setImageURI(data.getData());
 
         }

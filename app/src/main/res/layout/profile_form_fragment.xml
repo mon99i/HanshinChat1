@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="400dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_profile_form"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
     <RadioGroup
         android:id="@+id/form_radio_group_fragment"
         android:layout_width="match_parent"
@@ -19,10 +21,10 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:columnCount="2"
-            android:rowCount="2"
             android:layout_gravity="center"
-            android:padding="22dp">
+            android:columnCount="2"
+            android:padding="22dp"
+            android:rowCount="2">
 
             <RadioButton
                 android:id="@+id/form_radio_btn_1_fragment"

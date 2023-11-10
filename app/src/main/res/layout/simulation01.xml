@@ -20,89 +20,89 @@
         <ImageButton
             android:id="@+id/home_btn"
             android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="310dp"
-            android:background="@drawable/baseline_home_black_24_xml" />
+            android:layout_height="30dp"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/home" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:background="@color/black"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/simulation_background"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@drawable/simulation_background">
+        android:padding="20dp">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="20dp"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressBackgroundTint="#FFFFFF"
-        android:progressTint="#FF69B4"
-        android:max="10"
-        android:progress="0"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="당신의 소개팅 상대는?"
-            android:padding="10dp"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginTop="50dp"/>
+            android:layout_height="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:max="10"
+            android:progress="0"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/gender"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="당신의 소개팅 상대는?"
+                android:textSize="20sp" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/set_profile_gender_male"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/set_profile_gender_male_selector"
-                android:button="@null"
-                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/set_profile_gender_female"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/set_profile_gender_female_selector"
-                android:button="@null"
-                android:layout_weight="1"/>
-        </RadioGroup>
+                <RadioGroup
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next_btn"
-                android:layout_width="300dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/match_button_style"
-                android:text="다음" />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/set_profile_gender_male"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/set_profile_gender_male_selector"
+                        android:button="@null" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/set_profile_gender_female"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/set_profile_gender_female_selector"
+                        android:button="@null" />
+                </RadioGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/next_btn"
+                    android:layout_width="300dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="다음" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

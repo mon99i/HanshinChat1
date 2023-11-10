@@ -29,6 +29,7 @@ public class BoardFragment1 extends Fragment {
     private ListView listView;
     private ListViewAdapter boardAdapter;
     private ImageView writePageBtn;
+
     public BoardFragment1() {
 
     }
@@ -64,7 +65,6 @@ public class BoardFragment1 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BoardWriteActivity1.class);
                 startActivity(intent);
-//                finish();
             }
         });
 
@@ -108,5 +108,7 @@ public class BoardFragment1 extends Fragment {
 
         };
         myRef.addValueEventListener(postListener);
-    };
+    }
+
+    ;
 }

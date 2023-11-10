@@ -101,7 +101,6 @@ public class BoardWriteActivity1 extends MainActivity {
     }
 
     private void imageUpload(String key) {
-        // Get the data from an ImageView as bytes
         StorageReference storageRef = storage.getReference();
         StorageReference mountainsRef = storageRef.child(key + ".png");
 
@@ -118,24 +117,20 @@ public class BoardWriteActivity1 extends MainActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == 100) {
+        if (resultCode == RESULT_OK && requestCode == 100) {
             image.setImageURI(data.getData());
 
         }
     }
-
-
 }

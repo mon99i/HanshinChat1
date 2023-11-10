@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="20dp"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,8 +29,7 @@
             android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
-            <GridLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="2"
@@ -43,11 +40,11 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/radio_button_border"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="무교"
-                    android:textSize="16sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
+                    android:textSize="16sp" />
 
 
                 <RadioButton
@@ -55,44 +52,44 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/radio_button_border"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="불교"
-                    android:textSize="16sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/fragment_religion_radio_btn_3"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/radio_button_border"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="개신교"
-                    android:textSize="16sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/fragment_religion_radio_btn_4"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/radio_button_border"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="천주교"
-                    android:textSize="16sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/fragment_religion_radio_btn_5"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
+                    android:background="@drawable/radio_button_border"
+                    android:button="@null"
                     android:gravity="center"
                     android:text="기타"
-                    android:textSize="16sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
+                    android:textSize="16sp" />
 
             </GridLayout>
         </RadioGroup>

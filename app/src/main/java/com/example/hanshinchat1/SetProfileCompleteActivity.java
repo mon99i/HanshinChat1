@@ -26,6 +26,7 @@ public class SetProfileCompleteActivity extends AppCompatActivity {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
     private Button now, later;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +41,10 @@ public class SetProfileCompleteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference userRef = myRef.child("users").child(user.getUid());
-                String currentTime=localDateTime.format(dateTimeFormatter);
-                Map<String, Object> childUpdates= new HashMap<>();
-                childUpdates.put("/creationTime/",currentTime);      //계정생성 시간
-                childUpdates.put("/lastSignInTime/",currentTime);    //마지막 로그인시간
+                String currentTime = localDateTime.format(dateTimeFormatter);
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/creationTime/", currentTime);      //계정생성 시간
+                childUpdates.put("/lastSignInTime/", currentTime);    //마지막 로그인시간
                 userRef.updateChildren(childUpdates);
 
                 Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
@@ -56,13 +57,13 @@ public class SetProfileCompleteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference userRef = myRef.child("users").child(user.getUid());
-                String currentTime=localDateTime.format(dateTimeFormatter);
-                Map<String, Object> childUpdates= new HashMap<>();
-                childUpdates.put("/creationTime/",currentTime);      //계정생성 시간
-                childUpdates.put("/lastSignInTime/",currentTime);    //마지막 로그인시간
+                String currentTime = localDateTime.format(dateTimeFormatter);
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/creationTime/", currentTime);      //계정생성 시간
+                childUpdates.put("/lastSignInTime/", currentTime);    //마지막 로그인시간
                 userRef.updateChildren(childUpdates);
 
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
                 startActivity(intent);
                 finish();
             }

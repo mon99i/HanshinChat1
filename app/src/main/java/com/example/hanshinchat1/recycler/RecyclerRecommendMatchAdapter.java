@@ -4,11 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -26,7 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.Match;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
+import com.example.hanshinchat1.RecommendViewPagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -123,12 +120,6 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
 }*/
 
-    public RecyclerRecommendMatchAdapter(Context context, ArrayList<UserInfo> recommendUsers) {
-        this.context = context;
-        this.recommendUsers = recommendUsers;
-
-    }
-
     public RecyclerRecommendMatchAdapter(Context context, String recommendType, ArrayList<UserInfo> firstIdealUsers,
                                          ArrayList<UserInfo> secondIdealUsers, ArrayList<UserInfo> thirdIdealUsers) {
         this.context = context;
@@ -157,10 +148,8 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         Uri imageUri = Uri.parse(recommendUsers.get(position).getPhotoUrl());
         Glide.with(context).load(imageUri).into(holder.recommendMatchImage);
 
-
         holder.recommendMatchName.setText(recommendUsers.get(position).getName());
         holder.recommendMatchAge.setText(recommendUsers.get(position).getAge() + "세");
-
 
         setRecommendTypeImage(holder, position);
 
@@ -170,8 +159,6 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
             public void onClick(View v) {
 
                 showRecommendUserDialog(recommendUsers.get(currentPosition));
-//                Intent intent = new Intent(context, MbtiMatchActivity2.class);
-//                context.startActivity(intent);
             }
         });
 
@@ -187,7 +174,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         ViewPager2 recommendViewPager = view.findViewById(R.id.showMatchViewPager);
         CheckBox recommendLikeBox = view.findViewById(R.id.recommendLikeBox);
         TextView recommendUserName = view.findViewById(R.id.showMatchTxt);
-        Button requestMatchBtn=view.findViewById(R.id.requestMatchBtn);
+        Button requestMatchBtn = view.findViewById(R.id.requestMatchBtn);
 
         CircleIndicator3 indicator = view.findViewById(R.id.indicator);
         indicator.setViewPager(recommendViewPager);
@@ -195,7 +182,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         recommendViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
         recommendUserName.setText(userInfo.getName());
-        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context,userInfo, false));
+        recommendViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, userInfo, false));
         recommendViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             //                        @Override
 //                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -210,16 +197,13 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
                 super.onPageSelected(position);
                 indicator.animatePageSelected(position % 2);
                 if (position == 0) {
-                    // indicator.setBackgroundColor(R.drawable.indicator_selected); // 선택된 페이지의 이미지
                 } else {
-                    // indicator.setBackgroundColor(R.drawable.indicator_default); // 나머지 페이지의 이미지
                 }
             }
         });
 
         builder.setView(view);
         dialog = builder.create();
-        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
 
@@ -266,40 +250,18 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
 
     private void requestChat(UserInfo userInfo) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    /*    DatabaseReference usersMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
-                .child("users").child(userInfo.getUid()).child("request").child(user.getUid());
-        usersMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {                //match상태가 request true/false, approved false 인 상태
-                    Toast.makeText(context, "이미 요청한 상대입니다", Toast.LENGTH_SHORT).show();
-                } else {
-                    usersMatchRef.setValue(true);
-                    Toast.makeText(context, "요청 완료", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "onDataChange: 요청완료");
-                    dialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-*/
-
         DatabaseReference myMatchRef = FirebaseDatabase.getInstance().getReference().child("matches")
                 .child("users").child(userInfo.getUid()).child(user.getUid());
         myMatchRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     Toast.makeText(context, "이미 요청한 상대입니다", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
                     LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
                     String currentTimeString = currentTime.format(dateTimeFormatter);
-                    Match match=new Match(true,currentTimeString,null);
+                    Match match = new Match(true, currentTimeString, null);
                     myMatchRef.setValue(match);
                     Toast.makeText(context, "요청 완료", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -352,7 +314,6 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
         private ImageView recommendMatchImage;
         private TextView recommendMatchName;
         private TextView recommendMatchAge;
-
         private ImageView crownImage;
         private ImageView heartImage1;
         private ImageView onLineImage;

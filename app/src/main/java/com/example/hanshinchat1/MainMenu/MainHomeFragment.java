@@ -1,7 +1,6 @@
 package com.example.hanshinchat1.MainMenu;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,11 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import com.example.hanshinchat1.HomeActivity;
 import com.example.hanshinchat1.Match;
 import com.example.hanshinchat1.QuestionImageViewerDialog;
 import com.example.hanshinchat1.R;
-import com.example.hanshinchat1.Simulation0;
+import com.example.hanshinchat1.simulation.Simulation0;
 import com.example.hanshinchat1.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,14 +38,7 @@ import java.util.Random;
 
 public class MainHomeFragment extends Fragment {
 
-
-
-    private final String CHANNEL_ID = "my_notification_chanel";
-    static final int NOTIFICATION_ID = 1001;
-    private static final String TEXT_REPLY = "text_reply";
-
     private static final String TAG = "채널생성실패";
-
     private Button idealMatchingBtn;
     private Button mbtiMatchingBtn;
     private Button aroundMatchingBtn;
@@ -55,9 +46,6 @@ public class MainHomeFragment extends Fragment {
     private Button recentContectMatchingBtn;
     private Button topUserMatchingBtn;
     private ImageButton getRequestBtn;
-
-   //private Context context = this;
-
     private int previousPhraseIndex = -1;
     private String[] phrases;
     private List<String> phrasesList;
@@ -75,8 +63,6 @@ public class MainHomeFragment extends Fragment {
 
 
         checkNewRequest();
-
-//        checkMatchRequest();
 
         idealMatchingBtn = view.findViewById(R.id.idealMatchingBtn);
         mbtiMatchingBtn = view.findViewById(R.id.mbtiMatchingBtn);
@@ -140,20 +126,15 @@ public class MainHomeFragment extends Fragment {
         speakerBtn.setText(randomPhrase);
     }
 
-
-
-    private void getMyRoom(){
-
-    }
-    private void checkNewRequest(){
-        ArrayList<String> matchKey=new ArrayList<>();
+    private void checkNewRequest() {
+        ArrayList<String> matchKey = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query= FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
+        Query query = FirebaseDatabase.getInstance().getReference().child("rooms").orderByChild("host").equalTo(user.getUid());
 
 
-        ArrayList<String> newRequestUids=new ArrayList<>();
-        ArrayList<String> newMatchKeys=new ArrayList<>();
-        ArrayList<Match> newMatches=new ArrayList<>();
+        ArrayList<String> newRequestUids = new ArrayList<>();
+        ArrayList<String> newMatchKeys = new ArrayList<>();
+        ArrayList<Match> newMatches = new ArrayList<>();
 
         FirebaseDatabase.getInstance().getReference().child("matches")
                 .addValueEventListener(new ValueEventListener() {
@@ -165,12 +146,12 @@ public class MainHomeFragment extends Fragment {
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot roomSnapshot) {
-                                if(roomSnapshot.exists()){        //내가만든방이있다면 해당 방 매칭기록 조회
-                                    for(DataSnapshot item:roomSnapshot.getChildren()){
-                                        String myRoomKey=item.getKey();
-                                        for(DataSnapshot subSnapshot:snapshot.child("rooms").child(myRoomKey).getChildren()){
-                                            Match match=subSnapshot.getValue(Match.class);
-                                            if(match.getRequest()==true){
+                                if (roomSnapshot.exists()) {        //내가만든방이있다면 해당 방 매칭기록 조회
+                                    for (DataSnapshot item : roomSnapshot.getChildren()) {
+                                        String myRoomKey = item.getKey();
+                                        for (DataSnapshot subSnapshot : snapshot.child("rooms").child(myRoomKey).getChildren()) {
+                                            Match match = subSnapshot.getValue(Match.class);
+                                            if (match.getRequest() == true) {
                                                 newRequestUids.add(subSnapshot.getKey());
                                                 newMatchKeys.add(myRoomKey);
                                                 newMatches.add(match);
@@ -181,19 +162,19 @@ public class MainHomeFragment extends Fragment {
                                     }
 
                                 }
-                                for(DataSnapshot subSnapshot:snapshot.child("users").child(user.getUid()).getChildren()){
-                                    Match match=subSnapshot.getValue(Match.class);
-                                    if(match.getRequest()==true){
+                                for (DataSnapshot subSnapshot : snapshot.child("users").child(user.getUid()).getChildren()) {
+                                    Match match = subSnapshot.getValue(Match.class);
+                                    if (match.getRequest() == true) {
                                         newRequestUids.add(subSnapshot.getKey());
                                         newMatchKeys.add(user.getUid());
                                         newMatches.add(match);
 
                                     }
                                 }
-                                Log.d(TAG, "onDataChange: "+newRequestUids.size()+" "+newMatchKeys.size()+" "+newMatches.size());
+                                Log.d(TAG, "onDataChange: " + newRequestUids.size() + " " + newMatchKeys.size() + " " + newMatches.size());
 
-                                if(newMatches.size()>0){
-                                    Log.d("왜???", "onDataChange: " +newMatches.size());
+                                if (newMatches.size() > 0) {
+                                    Log.d("왜???", "onDataChange: " + newMatches.size());
                                     showNewRequestDialog();
                                 }
 
@@ -308,54 +289,41 @@ public class MainHomeFragment extends Fragment {
 */
 
 
-
-
-
-
     //채팅요청이 왔다는 다이얼로그
     private void showNewRequestDialog() {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            View view = inflater.inflate(R.layout.new_request_dialog, null);
-            ConstraintLayout layout = view.findViewById(R.id.alert_layout);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View view = inflater.inflate(R.layout.new_request_dialog, null);
+        ConstraintLayout layout = view.findViewById(R.id.alert_layout);
 
-            // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setView(view);
-            final AlertDialog alertDialog = builder.create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
 
-            alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
-            //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
 
-            // 다이얼로그 표시
-            alertDialog.show();
+        // 다이얼로그 표시
+        alertDialog.show();
 
-            layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //창 누르면 확인했으므로 다시 안뜨게
-                    Utils.goToGetRequestActivity(getContext());
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //창 누르면 확인했으므로 다시 안뜨게
+                Utils.goToGetRequestActivity(getContext());
 
-                    alertDialog.dismiss();
-//                    showUserInfoDialog(context,chatRequestUsers);
-
-                }
-            });
+                alertDialog.dismiss();
+            }
+        });
 
 
     }
 
 
     private void initializeListener() {
-
-        //모두 로그만 뜸 , 유저뜨는거 구현해야함
         idealMatchingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //수정필요
-                /*Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_up);
-                idealMatchingBtn.startAnimation(animation);*/
                 Utils.checkIdealExists(getContext());
 
             }
@@ -383,26 +351,6 @@ public class MainHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utils.recentRegisterMatching(getContext());
-           /*     AlertDialog.Builder famDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
-
-                famDialog.setMessage("동일한 지역에 거주하는 상대를 검색합니다.")
-                        .setTitle("내 주변 친구 매칭")
-                        .setPositiveButton("검색", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // 검색 눌렀을 때 기능 구현
-                            }
-                        })
-                        .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.i("Dialog", "취소");
-                                Toast.makeText(v.getContext(), "취소", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setCancelable(false)
-                        .show();*/
-
             }
         });
 
@@ -410,26 +358,6 @@ public class MainHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utils.recentConnectMatching(getContext());
-                //Utils.recentRegisterMatching();
-               /* AlertDialog.Builder tumDialog = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
-
-                tumDialog.setMessage("상위 5% 사용자를 검색합니다.\n\n*사용자 순위는 프로필의 좋아요 갯수를 합산해 매겨집니다.")
-                        .setTitle("상위 5% 매칭")
-                        .setPositiveButton("검색", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // 검색 눌렀을 때 기능 구현
-                            }
-                        })
-                        .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.i("Dialog", "취소");
-                                Toast.makeText(v.getContext(), "취소", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setCancelable(false)
-                        .show();*/
             }
         });
 
@@ -437,7 +365,6 @@ public class MainHomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utils.mostLikedMatching(getContext());
-
             }
         });
 
@@ -451,7 +378,6 @@ public class MainHomeFragment extends Fragment {
 
 
     }
-
 
 
     //나중에쓸수있음
@@ -515,44 +441,6 @@ public class MainHomeFragment extends Fragment {
         }
 
     }
-
-
-
-
 */
-
-
-
-
-   /* private void deleteUerInfo() {
-        // [START delete_user]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.delete();
-        myRef.child("users").child(user.getUid()).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
-                        Toast.makeText(getApplicationContext(), "유저정보 삭제 성공!!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(intent);
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "유저정보 삭제 실패!!", Toast.LENGTH_SHORT).show();
-                        // Intent intent=new Intent(SetProfileActivity.this,MainActivity.class);
-                        //  startActivity(intent);
-
-                        // Write failed
-                        // ...
-                    }
-                });
-    }*/
-
 }
 

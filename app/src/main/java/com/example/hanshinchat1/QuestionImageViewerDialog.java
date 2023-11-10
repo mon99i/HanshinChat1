@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import androidx.viewpager.widget.ViewPager;
 
 public class QuestionImageViewerDialog extends Dialog {

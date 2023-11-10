@@ -1,18 +1,14 @@
 package com.example.hanshinchat1;
 
-import static com.example.hanshinchat1.HomeActivity.NOTIFICATION_ID;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.core.app.NotificationManagerCompat;
-
 public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action=intent.getAction();
-        if("ACTION_ACCEPT".equals(action)){
+        String action = intent.getAction();
+        if ("ACTION_ACCEPT".equals(action)) {
             updateMatchingStatus(true);
 
         } else if ("ACTION_DECLINE".equals(action)) {
@@ -30,6 +26,4 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         // 여기서 매칭 상태를 변경하거나 특정 작업 수행
         // 예를 들어, 데이터베이스 업데이트 또는 특정 서비스 호출 등을 수행할 수 있습니다.
     }
-
-
 }

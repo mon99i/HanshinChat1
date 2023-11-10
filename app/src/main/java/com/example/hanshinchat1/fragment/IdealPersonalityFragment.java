@@ -1,18 +1,16 @@
 package com.example.hanshinchat1.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
@@ -38,6 +36,7 @@ public class IdealPersonalityFragment extends Fragment {
     private String[] personalityArray;
     private ArrayList<String> selectedValues;
     private static final int MAX_PERSONALITY = 3;
+
     public IdealPersonalityFragment() {
         // Required empty public constructor
     }
@@ -72,10 +71,9 @@ public class IdealPersonalityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_ideal_personality, container, false);
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_ideal_personality, container, false);
         personalityArray = getResources().getStringArray(R.array.성격);
-        selectedValues=new ArrayList<>();
+        selectedValues = new ArrayList<>();
 
         LinearLayout checkBoxLayout = view.findViewById(R.id.fragment_personality_checkbox_layout);
 

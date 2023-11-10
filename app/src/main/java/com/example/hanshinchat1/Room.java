@@ -24,10 +24,11 @@ public class Room implements Serializable {
         this.num = num;
         this.department = department;
         this.gender = gender;
-        this.host=host;
+        this.host = host;
     }
-    public Room(){};
 
+    public Room() {
+    }
     public String getTitle() {
         return title;
     }

@@ -31,7 +31,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.example.hanshinchat1.MainMenu.MainProfileFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAddressFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileAgeFragment;
 import com.example.hanshinchat1.ProfileFragment.ProfileDepartmentFragment;
@@ -353,8 +352,6 @@ public class ProfileEditActivity extends MainActivity {
                         newForm,
                         newGrade,
                         newMbti,
-                        userInfo.getIdealTypeFirst(),
-                        userInfo.getIdealTypeSecond(),
                         userInfo.getPhotoUrl(),
                         userInfo.getCreationTime(),
                         userInfo.getLastSignInTime(),
@@ -566,6 +563,7 @@ public class ProfileEditActivity extends MainActivity {
         intent.putExtra("requestCode", requestCode);
         startActivityForResult(intent, requestCode);
     }
+
     private void showEditImageDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -691,24 +689,25 @@ public class ProfileEditActivity extends MainActivity {
             break;
         }
     }
+
     private void initializeView() {
         editImage = (ImageView) findViewById(R.id.edit_image);
         editName = (TextView) findViewById(R.id.edit_name);
         editGender = (TextView) findViewById(R.id.edit_gender);
-        editAge = (TextView)findViewById(R.id.edit_age);
-        editGrade = (TextView)findViewById(R.id.edit_grade);
-        editStudentId = (TextView)findViewById(R.id.edit_student_id);
-        editDepartment = (TextView)findViewById(R.id.edit_department);
-        editHeight = (TextView)findViewById(R.id.edit_height);
-        editForm = (TextView)findViewById(R.id.edit_form);
-        editAddress = (TextView)findViewById(R.id.edit_address);
-        editReligion = (TextView)findViewById(R.id.edit_religion);
-        editSmoking = (TextView)findViewById(R.id.edit_smoking);
-        editDrinking = (TextView)findViewById(R.id.edit_drinking);
-        editInterest = (TextView)findViewById(R.id.interest);
-        editPersonality = (TextView)findViewById(R.id.personality);
-        editMbti = (TextView)findViewById(R.id.edit_mbti);
-        editFashion = (TextView)findViewById(R.id.edit_fashion);
+        editAge = (TextView) findViewById(R.id.edit_age);
+        editGrade = (TextView) findViewById(R.id.edit_grade);
+        editStudentId = (TextView) findViewById(R.id.edit_student_id);
+        editDepartment = (TextView) findViewById(R.id.edit_department);
+        editHeight = (TextView) findViewById(R.id.edit_height);
+        editForm = (TextView) findViewById(R.id.edit_form);
+        editAddress = (TextView) findViewById(R.id.edit_address);
+        editReligion = (TextView) findViewById(R.id.edit_religion);
+        editSmoking = (TextView) findViewById(R.id.edit_smoking);
+        editDrinking = (TextView) findViewById(R.id.edit_drinking);
+        editInterest = (TextView) findViewById(R.id.interest);
+        editPersonality = (TextView) findViewById(R.id.personality);
+        editMbti = (TextView) findViewById(R.id.edit_mbti);
+        editFashion = (TextView) findViewById(R.id.edit_fashion);
 
         editCompleteBtn = findViewById(R.id.edit_profile_edit);
         cancelCompleteBtn = findViewById(R.id.edit_profile_cancel);

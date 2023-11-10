@@ -1,7 +1,6 @@
 package com.example.hanshinchat1.report;
 
 public class reportInfo {
-
     private String name;
     private String username;
     private String writeReport;

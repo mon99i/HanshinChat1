@@ -111,16 +111,12 @@ public class LoginActivity extends MainActivity{
         });
     }
 
-
-
-
-    // [START signin]
     private void signIn() {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signin]
+
 
    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,16 +133,13 @@ public class LoginActivity extends MainActivity{
             }
         }
     }
-    // [END onactivityresult]
 
-    // [START auth_with_google]
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
 
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
                         Toast.makeText(getApplicationContext(), R.string.success_login, Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
@@ -154,14 +147,12 @@ public class LoginActivity extends MainActivity{
                         checkHanshin();
 
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Toast.makeText(getApplicationContext(), R.string.failed_login, Toast.LENGTH_SHORT).show();
 
                     }
                 });
     }
-    // [END auth_with_google]
 
             //테스트용으로 만든것뿐 나중에 없앨것
     private void exInitialize(){
@@ -179,12 +170,8 @@ public class LoginActivity extends MainActivity{
         exLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 exLogin(edt_Id.getText().toString(),edt_password.getText().toString());
-
             }
-
-
         });
     }
 
@@ -195,11 +182,9 @@ public class LoginActivity extends MainActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(), "일반 유저 회원가입성공", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "일반 유저 회원가입성공");
                         } else {
-                            // If sign in fails, display a message to the user.
                             Toast.makeText(getApplicationContext(), "이미 있는 아이디", Toast.LENGTH_SHORT).show();
                             Log.w(TAG, "일반 유저 회원가입실패", task.getException());
                         }
@@ -214,12 +199,10 @@ public class LoginActivity extends MainActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             checkHanshin();
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                         }
                     }

@@ -1,14 +1,13 @@
 package com.example.hanshinchat1.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
@@ -40,7 +39,7 @@ public class IdealSmokingFragment extends Fragment {
     private RadioButton selectedRadioButton;
 
     public IdealSmokingFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -73,9 +72,8 @@ public class IdealSmokingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        View view=inflater.inflate(R.layout.fragment_ideal_smoking, container, false);
+        View view = inflater.inflate(R.layout.fragment_ideal_smoking, container, false);
         radioGroup = view.findViewById(R.id.fragment_smoking_radio_group);
         radioButton1 = view.findViewById(R.id.fragment_smoking_radio_btn_1);
         radioButton2 = view.findViewById(R.id.fragment_smoking_radio_btn_2);
@@ -88,7 +86,7 @@ public class IdealSmokingFragment extends Fragment {
     }
 
 
-    private void initializeListener(){
+    private void initializeListener() {
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +95,7 @@ public class IdealSmokingFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedValue=radioButton1.getText().toString();
+                selectedValue = radioButton1.getText().toString();
                 sendValueToActivity(selectedValue);
             }
         });
@@ -110,7 +108,7 @@ public class IdealSmokingFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedValue=radioButton2.getText().toString();
+                selectedValue = radioButton2.getText().toString();
                 sendValueToActivity(selectedValue);
             }
         });
@@ -123,7 +121,7 @@ public class IdealSmokingFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedValue=radioButton3.getText().toString();
+                selectedValue = radioButton3.getText().toString();
                 sendValueToActivity(selectedValue);
             }
         });
@@ -136,21 +134,10 @@ public class IdealSmokingFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_checked);
-                selectedValue=radioButton4.getText().toString();
+                selectedValue = radioButton4.getText().toString();
                 sendValueToActivity(selectedValue);
             }
         });
-
-  /*      radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
-                selectedRadioButton = view.findViewById(selectedRadioButtonId);
-
-            }
-        });*/
-
-
     }
 
     private void sendValueToActivity(Object value) {

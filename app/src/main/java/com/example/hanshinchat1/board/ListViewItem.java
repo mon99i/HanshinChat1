@@ -1,17 +1,14 @@
 package com.example.hanshinchat1.board;
 
-import android.net.wifi.aware.PublishConfig;
-
-import com.example.hanshinchat1.utils.FBAuth;
-
-public class    ListViewItem {
+public class ListViewItem {
     private String contentArea;
     private String titleArea;
     private String time;
     private String uid;
     private String name;
 
-    public ListViewItem() {}
+    public ListViewItem() {
+    }
 
     public ListViewItem(String titleArea, String contentArea, String time, String uid) {
         this.titleArea = titleArea;
@@ -43,10 +40,11 @@ public class    ListViewItem {
     public void setContent(String contentArea) {
         this.contentArea = contentArea;
     }
+
     public String getTime() {
-//        return FBAuth.getTime();
         return time;
     }
+
     public void setTime(String time) {
         this.time = time;
     }
@@ -54,6 +52,7 @@ public class    ListViewItem {
     public String getUid() {
         return uid;
     }
+
     public void setUid(String uid) {
         this.uid = uid;
     }
@@ -61,6 +60,7 @@ public class    ListViewItem {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

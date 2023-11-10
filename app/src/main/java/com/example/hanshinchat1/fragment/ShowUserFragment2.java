@@ -2,11 +2,6 @@ package com.example.hanshinchat1.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.hanshinchat1.MatchRoom;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
 import com.google.android.flexbox.FlexboxLayout;
@@ -52,10 +50,10 @@ public class ShowUserFragment2 extends Fragment {
     private FlexboxLayout recommendIdeal3;
 
 
-
     private ScrollView scroll2;
+
     public ShowUserFragment2(UserInfo userInfo) {
-        // Required empty public constructor
+
         this.userInfo = userInfo;
     }
 
@@ -91,22 +89,22 @@ public class ShowUserFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_user2, container, false);
-        TextView recommendUserFashion= view.findViewById(R.id.recommendUserFashion);
+        TextView recommendUserFashion = view.findViewById(R.id.recommendUserFashion);
         TextView recommendUserMBTI = view.findViewById(R.id.recommendUserMBTI);
         FlexboxLayout recommendPersonality = view.findViewById(R.id.recommendPersonality);
         FlexboxLayout recommendInterest = view.findViewById(R.id.recommendInterest);
-        ConstraintLayout noneRecommendIdeal=view.findViewById(R.id.noneRecommendIdeal);
+        ConstraintLayout noneRecommendIdeal = view.findViewById(R.id.noneRecommendIdeal);
         scroll2 = view.findViewById(R.id.recommendUserScroll2);
 
-        recommendIdealTxt1=view.findViewById(R.id.recommendIdealTxt1);
-        recommendIdealTxt2=view.findViewById(R.id.recommendIdealTxt2);
-        recommendIdealTxt3=view.findViewById(R.id.recommendIdealTxt3);
+        recommendIdealTxt1 = view.findViewById(R.id.recommendIdealTxt1);
+        recommendIdealTxt2 = view.findViewById(R.id.recommendIdealTxt2);
+        recommendIdealTxt3 = view.findViewById(R.id.recommendIdealTxt3);
         recommendIdeal1 = view.findViewById(R.id.recommendIdeal1);
         recommendIdeal2 = view.findViewById(R.id.recommendIdeal2);
         recommendIdeal3 = view.findViewById(R.id.recommendIdeal3);
 
 
-        recommendUserFashion.setText(userInfo.getFashion()+" 룩 즐겨입어요");
+        recommendUserFashion.setText(userInfo.getFashion() + " 룩 즐겨입어요");
         recommendUserMBTI.setText(userInfo.getMbti() + " 에요");
 
         ArrayList<String> personalities = userInfo.getPersonality();
@@ -134,26 +132,17 @@ public class ShowUserFragment2 extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            int i=1;
-                            for(DataSnapshot item:snapshot.getChildren()){
-                                for(DataSnapshot subItem:item.getChildren()){
-                                    Log.d(TAG, "setRecommendIdeal: i2"+i);
-                                    setRecommendIdeal(subItem.getKey(),subItem.getValue(),i);
+                        if (snapshot.exists()) {
+                            int i = 1;
+                            for (DataSnapshot item : snapshot.getChildren()) {
+                                for (DataSnapshot subItem : item.getChildren()) {
+                                    Log.d(TAG, "setRecommendIdeal: i2" + i);
+                                    setRecommendIdeal(subItem.getKey(), subItem.getValue(), i);
                                 }
                                 i++;
 
                             }
-                        }else noneRecommendIdeal.setVisibility(View.VISIBLE);
-
-
-                    /*    setRecommendIdeal(ideal);
-                        TextView textView = new TextView(getActivity());
-                        textView.setText(i);
-                        textView.setBackgroundResource(R.drawable.background_ideal_list_layout2);
-                        textView.setTextColor(Color.parseColor("#434959"));
-                        textView.setPadding(15, 15, 15, 15);
-                        recommendInterest.addView(textView);*/
+                        } else noneRecommendIdeal.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -161,35 +150,34 @@ public class ShowUserFragment2 extends Fragment {
 
                     }
                 });
-
-        // Inflate the layout for this fragment
         return view;
     }
 
-    public TextView getRecommendIdealTxt(int i){
-        if(i==1){
+    public TextView getRecommendIdealTxt(int i) {
+        if (i == 1) {
             return recommendIdealTxt1;
-        }else if(i==2){
+        } else if (i == 2) {
             return recommendIdealTxt2;
-        }else return recommendIdealTxt3;
+        } else return recommendIdealTxt3;
 
     }
-    public FlexboxLayout getRecommendIdeal(int i){
-        if(i==1){
+
+    public FlexboxLayout getRecommendIdeal(int i) {
+        if (i == 1) {
             return recommendIdeal1;
-        }else if(i==2){
+        } else if (i == 2) {
             return recommendIdeal2;
-        }else return recommendIdeal3;
+        } else return recommendIdeal3;
 
     }
 
     private void setRecommendIdeal(String idealKey, Object idealValue, int i) {
-        ArrayList<Object> idealValues=new ArrayList<>();
-        if(idealValue instanceof ArrayList){
-             idealValues=(ArrayList<Object>)idealValue;
+        ArrayList<Object> idealValues = new ArrayList<>();
+        if (idealValue instanceof ArrayList) {
+            idealValues = (ArrayList<Object>) idealValue;
         }
-        String strIdealValue=idealValue.toString();
-        Log.d(TAG, "setRecommendIdeal: i3"+i);
+        String strIdealValue = idealValue.toString();
+        Log.d(TAG, "setRecommendIdeal: i3" + i);
         getRecommendIdealTxt(i).setVisibility(View.VISIBLE);
         getRecommendIdeal(i).setVisibility(View.VISIBLE);
         TextView textView = new TextView(getActivity());
@@ -197,41 +185,41 @@ public class ShowUserFragment2 extends Fragment {
         textView.setTextColor(Color.parseColor("#434959"));
         textView.setPadding(15, 15, 15, 15);
 
-        Log.d(TAG, "setRecommendIdeal: "+getRecommendIdealTxt(i));
-        Log.d(TAG, "setRecommendIdeal: "+getRecommendIdeal(i));
+        Log.d(TAG, "setRecommendIdeal: " + getRecommendIdealTxt(i));
+        Log.d(TAG, "setRecommendIdeal: " + getRecommendIdeal(i));
 
-        switch(idealKey){
-            case "address" :
+        switch (idealKey) {
+            case "address":
                 getRecommendIdealTxt(i).setText("거주지는");
                 textView.setText(strIdealValue);
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "age" :
-                String age1=idealValues.get(0).toString();
-                String age2=idealValues.get(idealValues.size()-1).toString();
+            case "age":
+                String age1 = idealValues.get(0).toString();
+                String age2 = idealValues.get(idealValues.size() - 1).toString();
                 getRecommendIdealTxt(i).setText("나이는");
-                textView.setText(age1+"세부터 "+age2+"세");
+                textView.setText(age1 + "세부터 " + age2 + "세");
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "drinking" :
+            case "drinking":
                 getRecommendIdealTxt(i).setText("음주는");
                 textView.setText(strIdealValue);
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "form" :
+            case "form":
                 getRecommendIdealTxt(i).setText("체형은");
                 textView.setText(strIdealValue);
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "height" :
-                String height1=idealValues.get(0).toString();
-                String height=idealValues.get(idealValues.size()-1).toString();
-                textView.setText(height1+"cm부터 "+height+"cm");
+            case "height":
+                String height1 = idealValues.get(0).toString();
+                String height = idealValues.get(idealValues.size() - 1).toString();
+                textView.setText(height1 + "cm부터 " + height + "cm");
                 getRecommendIdealTxt(i).setText("키는");
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "interest" :
-                for(Object object:idealValues){
+            case "interest":
+                for (Object object : idealValues) {
                     TextView textView2 = new TextView(getActivity());
                     textView2.setBackgroundResource(R.drawable.background_ideal_list_layout2);
                     textView2.setTextColor(Color.parseColor("#434959"));
@@ -241,8 +229,8 @@ public class ShowUserFragment2 extends Fragment {
                     getRecommendIdeal(i).addView(textView2);
                 }
                 break;
-            case "personality" :
-                for(Object object:idealValues){
+            case "personality":
+                for (Object object : idealValues) {
                     TextView textView3 = new TextView(getActivity());
                     textView3.setBackgroundResource(R.drawable.background_ideal_list_layout2);
                     textView3.setTextColor(Color.parseColor("#434959"));
@@ -252,22 +240,16 @@ public class ShowUserFragment2 extends Fragment {
                     getRecommendIdeal(i).addView(textView3);
                 }
                 break;
-            case "religion" :
+            case "religion":
                 getRecommendIdealTxt(i).setText("종교는");
                 textView.setText(strIdealValue);
                 getRecommendIdeal(i).addView(textView);
                 break;
-            case "smoking" :
+            case "smoking":
                 getRecommendIdealTxt(i).setText("흡연은");
                 textView.setText(strIdealValue);
                 getRecommendIdeal(i).addView(textView);
                 break;
         }
     }
-
-    public void resetScrollView() {
-        // 스크롤뷰를 초기화하는 코드
-        scroll2.scrollTo(0, 0); // 스크롤 위치를 초기화
-    }
-
 }

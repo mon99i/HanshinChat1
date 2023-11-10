@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SettingActivity;
-import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.utils.FBAuth;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -119,39 +118,9 @@ public class ReportActivity extends MainActivity {
                 }
             });
         }
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        String usernameInArea = usernameArea.getText().toString();
-//
-//        if(user != null) {
-//            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference()
-//                    .child("users")
-//                    .child(user.getUid());
-//
-//            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange( DataSnapshot snapshot) {
-//                    if(snapshot.exists()) {
-//                        UserInfo warningUser = snapshot.getValue(UserInfo.class);
-//                        if (warningUser != null) {
-//                            String usernameFromDB = warningUser.getName();
-//                            Toast.makeText(getApplicationContext(), "33", Toast.LENGTH_SHORT).show();
-//                            if (usernameFromDB.equals(usernameInArea)) {
-//                                giveWarning(usernameFromDB);
-//                                Toast.makeText(getApplicationContext(), "44", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled( DatabaseError error) {
-//
-//                }
-//            });
-//        }
     }
 
-    private void giveWarning(String userUid){
+    private void giveWarning(String userUid) {
 
         DatabaseReference userWarningsRef = FirebaseDatabase.getInstance().getReference().child("warnings");
 
@@ -174,7 +143,6 @@ public class ReportActivity extends MainActivity {
 
                 }
                 Toast.makeText(getApplicationContext(), "신고 성공", Toast.LENGTH_SHORT).show();
-
             }
 
 

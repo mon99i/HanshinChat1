@@ -61,7 +61,7 @@ public class SetProfilePhotoActivity extends MainActivity {
                     android.Manifest.permission.CAMERA}, REQUEST_PERMISSION);
         }
         addProfileBtn = findViewById(R.id.addProfileBtn);
-        saveBtn =findViewById(R.id.set_photo_next);
+        saveBtn = findViewById(R.id.set_photo_next);
         image = findViewById(R.id.image);
 
         addProfileBtn.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,6 @@ public class SetProfilePhotoActivity extends MainActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
 
-        //openCamera
         camerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +109,6 @@ public class SetProfilePhotoActivity extends MainActivity {
             }
         });
 
-        //openGallery
         galleryLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

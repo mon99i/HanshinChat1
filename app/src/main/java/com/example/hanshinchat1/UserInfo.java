@@ -3,9 +3,10 @@ package com.example.hanshinchat1;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserInfo implements Serializable{
+public class UserInfo implements Serializable {
 
-    public UserInfo(){}
+    public UserInfo() {
+    }
 
     public String getLastSignInTime() {
         return lastSignInTime;
@@ -159,21 +160,6 @@ public class UserInfo implements Serializable{
         this.mbti = mbti;
     }
 
-    public String getIdealTypeFirst() {
-        return idealTypeFirst;
-    }
-
-    public void setIdealTypeFirst(String idealTypeFirst) {
-        this.idealTypeFirst = idealTypeFirst;
-    }
-
-    public String getIdealTypeSecond() {
-        return idealTypeSecond;
-    }
-
-    public void setIdealTypeSecond(String idealTypeSecond) {
-        this.idealTypeSecond = idealTypeSecond;
-    }
     public String getFashion() {
         return fashion;
     }
@@ -190,7 +176,7 @@ public class UserInfo implements Serializable{
         this.photoUrl = photoUrl;
     }
 
-    public UserInfo(Integer like, String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String idealTypeFirst, String idealTypeSecond, String photoUrl, String lastSignInTime, String creationTime, String fashion) {
+    public UserInfo(Integer like, String uid, String name, String gender, Integer age, Integer studentId, String department, Integer height, String religion, String address, String smoking, String drinking, ArrayList<String> interest, ArrayList<String> personality, String form, Integer grade, String mbti, String photoUrl, String lastSignInTime, String creationTime, String fashion) {
         this.like = like;
         this.uid = uid;
         this.name = name;
@@ -208,8 +194,6 @@ public class UserInfo implements Serializable{
         this.form = form;
         this.grade = grade;
         this.mbti = mbti;
-        this.idealTypeFirst = idealTypeFirst;
-        this.idealTypeSecond = idealTypeSecond;
         this.photoUrl = photoUrl;
         this.lastSignInTime = lastSignInTime;
         this.creationTime = creationTime;
@@ -233,13 +217,9 @@ public class UserInfo implements Serializable{
     private String form;
     private Integer grade;
     private String mbti;
-    private String idealTypeFirst;
-    private String idealTypeSecond;
     private String photoUrl;
-
     private String lastSignInTime;
     private String creationTime;
-
     private String fashion;
 
 }

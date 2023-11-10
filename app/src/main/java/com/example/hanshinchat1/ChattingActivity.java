@@ -39,7 +39,7 @@ public class ChattingActivity extends MainActivity {
     private String chatRoomKey;
     private String myUid;
 
-    private static final String TAG="CattingActivity";
+    private static final String TAG = "CattingActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,10 +51,9 @@ public class ChattingActivity extends MainActivity {
         initializeListener();
         setupChatRooms();
 
-
     }
 
-    private void initializeProperty() {  //chatroomActivity에서 받아옴
+    private void initializeProperty() {
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         chatRoom = (ChatRoom) getIntent().getSerializableExtra("ChatRoom");
@@ -108,7 +107,7 @@ public class ChattingActivity extends MainActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
-                            Log.d(TAG, "onDataChange: "+data.getValue(ChatRoom.class)+" 받은 chatRoom:"+chatRoom);
+                            Log.d(TAG, "onDataChange: " + data.getValue(ChatRoom.class) + " 받은 chatRoom:" + chatRoom);
                             chatRoomKey = data.getKey();
                             setupRecycler();
 
@@ -191,7 +190,6 @@ public class ChattingActivity extends MainActivity {
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
     }
-
 
 
 }

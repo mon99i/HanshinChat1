@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ProfileActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:background="#F8F8FF"
         android:gravity="center_vertical"
-        android:background="#F8F8FF">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#252525"
-            android:textStyle="bold"
             android:layout_marginLeft="20dp"
+            android:text="프로필"
+            android:textColor="#252525"
             android:textSize="20dp"
-            android:text="프로필"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -45,8 +42,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:backgroundTint="#E6E6FA"
                     android:layout_margin="40dp"
+                    android:backgroundTint="#E6E6FA"
                     app:cardCornerRadius="50dp"
                     app:cardElevation="4dp">
 
@@ -69,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -79,13 +77,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -96,13 +95,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -113,27 +113,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
                     <ImageButton
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/like1">
-                    </ImageButton>
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/baseline_favorite_24" />
 
                     <TextView
                         android:id="@+id/like"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -142,8 +141,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:background="#eaeaea"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="#eaeaea" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profile_edit"

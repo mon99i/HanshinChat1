@@ -1,14 +1,13 @@
 package com.example.hanshinchat1.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
@@ -39,9 +38,8 @@ public class IdealDrinkingFragment extends Fragment {
     private String selectedValue;
 
 
-
     public IdealDrinkingFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -74,9 +72,8 @@ public class IdealDrinkingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        View view= inflater.inflate(R.layout.fragment_ideal_drinking, container, false);
+        View view = inflater.inflate(R.layout.fragment_ideal_drinking, container, false);
 
 
         radioGroup = view.findViewById(R.id.fragment_drinking_radio_group);
@@ -92,12 +89,12 @@ public class IdealDrinkingFragment extends Fragment {
     }
 
 
-    private void initializeListener(){
+    private void initializeListener() {
 
         radioButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedValue=radioButton1.getText().toString();
+                selectedValue = radioButton1.getText().toString();
                 radioButton1.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -110,7 +107,7 @@ public class IdealDrinkingFragment extends Fragment {
         radioButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedValue=radioButton2.getText().toString();
+                selectedValue = radioButton2.getText().toString();
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -123,7 +120,7 @@ public class IdealDrinkingFragment extends Fragment {
         radioButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedValue=radioButton3.getText().toString();
+                selectedValue = radioButton3.getText().toString();
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_checked);
@@ -136,7 +133,7 @@ public class IdealDrinkingFragment extends Fragment {
         radioButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedValue=radioButton4.getText().toString();
+                selectedValue = radioButton4.getText().toString();
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -149,7 +146,7 @@ public class IdealDrinkingFragment extends Fragment {
         radioButton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedValue=radioButton4.getText().toString();
+                selectedValue = radioButton4.getText().toString();
                 radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
@@ -158,16 +155,6 @@ public class IdealDrinkingFragment extends Fragment {
                 sendValueToActivity(selectedValue);
             }
         });
-
-     /*   radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
-                selectedRadioButton = findViewById(selectedRadioButtonId);
-
-            }
-        });*/
     }
 
 

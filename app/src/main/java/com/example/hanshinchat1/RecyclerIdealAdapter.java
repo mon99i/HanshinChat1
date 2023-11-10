@@ -11,7 +11,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +48,6 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
         this.priority = priority;
         this.idealMap = idealMap;
         setupIdealList();
-        //setupIdealList2();
 
     }
 
@@ -67,10 +65,10 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
                     idealValues.add(idealMap.get(key));
                 }  //일단 맵에있는 모든 address, 거주지를 list에 저장
 
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot item : snapshot.getChildren()) {
                         for (DataSnapshot subItem : item.getChildren()) {
-                            String key=subItem.getKey();
+                            String key = subItem.getKey();
                             idealKeys.remove(key);
                             idealValues.remove(idealMap.get(key));
 
@@ -91,52 +89,6 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
 
 
     }
-
-/*
-    private void setupIdealList2() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference priorityRef = FirebaseDatabase.getInstance().getReference().child("ideals")
-                .child(user.getUid());
-        priorityRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                idealKeys.clear();
-                idealValues.clear();
-                if (snapshot.exists()) {
-                    Ideal ideal = snapshot.getValue(Ideal.class);
-                    for (String priority1 : ideal.getPriority1().keySet()) {
-                        idealMap.remove(priority1);
-                        Log.d(TAG, "onDataChange: priority1remove성공" + idealMap);
-
-                    }
-                    for (String priority2 : ideal.getPriority2().keySet()) {
-                        idealMap.remove(priority2);
-                        Log.d(TAG, "onDataChange: priority2remove성공" + idealMap);
-                    }
-                    for (String priority3 : ideal.getPriority3().keySet()) {
-                        idealMap.remove(priority3);
-                        Log.d(TAG, "onDataChange: priority3remove성공" + idealMap);
-                    }
-                }
-                for (String key : idealMap.keySet()) {
-                    idealKeys.add(key);
-                    idealValues.add(idealMap.get(key));
-                }
-
-                notifyDataSetChanged();
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-*/
 
     @NonNull
     @Override
@@ -171,13 +123,6 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
 
-
-
-               /* ((AppCompatActivity) context).finish();
-
-                if (alertDialog != null && alertDialog.isShowing()) {
-                    alertDialog.dismiss(); // AlertDialog 닫기
-                }*/
             }
         });
 
@@ -198,6 +143,6 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
             textView = itemView.findViewById(R.id.rowPriorityTxt);
             radioButton = itemView.findViewById(R.id.rowPriority_rdoBtn);
         }
-        // ViewHolder 클래스 정의 및 뷰 객체 관리
+
     }
 }

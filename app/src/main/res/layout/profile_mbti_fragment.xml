@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_profile_mbti"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="390dp"
@@ -23,43 +23,43 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="내향형/외향형"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="내향형/외향형" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/mbti_e_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="E"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/mbti_i_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="I"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </RadioGroup>
@@ -78,24 +78,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="직관적/감각적"/>
+                    android:text="직관적/감각적" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/mbti_n_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="N"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/mbti_s_fragment"
@@ -125,35 +125,35 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="감정적/이성적"/>
+                    android:text="감정적/이성적" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/mbti_f_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="F"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/mbti_t_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="T"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </RadioGroup>
@@ -172,35 +172,35 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="즉흥적/계획적"/>
+                    android:text="즉흥적/계획적" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/mbti_p_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="P"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
 
                     <RadioButton
                         android:id="@+id/mbti_j_fragment"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
                         android:gravity="center"
                         android:text="J"
-                        android:textSize="16sp"
-                        android:button="@null"
-                        android:background="@drawable/radio_button_border" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </RadioGroup>

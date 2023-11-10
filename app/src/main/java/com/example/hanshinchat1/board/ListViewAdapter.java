@@ -41,22 +41,12 @@ public final class ListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        View view = convertView;
-//        if (convertView == null) {
-//            view = LayoutInflater.from(parent != null ? parent.getContext() : null).inflate(layout.listview_item, parent, false);
-//        }
-//
-//        Intrinsics.checkNotNull(view);
-//        return view;
-//        final int pos = position;
-//        final Context context = parent.getContext();
+
 
         // 버그 생기면 지우면 됨
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = inflater.inflate(layout.listview_item, parent, false);
             convertView = inflater.inflate(layout.board_list_cardview, parent, false);
-
         }
 
 
@@ -74,25 +64,3 @@ public final class ListViewAdapter extends BaseAdapter {
         return convertView;
     }
 }
-
-
-//    public void addItem(String title, String content) {
-//        ListViewItem item = new ListViewItem(title, content, time);
-//        item.setTitle(title);
-//        item.setContent(content);
-//
-//
-//        boardList.add(item);
-//    }
-
-//    @NotNull
-//    public final List getList() {
-//        return this.List;
-//    }
-//
-//    public ListViewAdapter(@NotNull List List) {
-//        super();
-//        Intrinsics.checkNotNullParameter(List, "List");
-//        this.List = List;
-//    }
-//}
