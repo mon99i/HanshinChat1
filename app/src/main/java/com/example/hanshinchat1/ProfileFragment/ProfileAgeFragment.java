@@ -34,6 +34,8 @@ public class ProfileAgeFragment extends Fragment {
         String strAge = age.getText().toString();
         Integer intAge = Integer.valueOf(strAge);
         if (strAge.isEmpty()) {
+            age.setError("나이를 입력하세요.");
+        } else if(strAge.length()!=2) {
             age.setError("올바른 나이를 입력하세요.");
         } else {
             DatabaseReference userRef = myRef.child("users").child(user.getUid());
@@ -44,6 +46,9 @@ public class ProfileAgeFragment extends Fragment {
     public String editDB() {
         String strAge = age.getText().toString();
         if (strAge.isEmpty()) {
+            age.setError("나이를 입력하세요.");
+            return null;
+        } else if(strAge.length()!=2) {
             age.setError("올바른 나이를 입력하세요.");
             return null;
         } else {

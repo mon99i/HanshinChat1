@@ -136,7 +136,7 @@ public class ReportActivity extends MainActivity {
                     userWarningsRef.setValue(newWarning);
 
                 }
-                Toast.makeText(getApplicationContext(), "신고 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "신고를 완료했습니다.", Toast.LENGTH_SHORT).show();
             }
 
 

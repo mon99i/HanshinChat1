@@ -83,13 +83,13 @@ public class MainProfileFragment extends Fragment {
                     gender.setText(userInfo.getGender());
                     Integer intAge = userInfo.getAge();
                     age.setText(intAge.toString());
-                    Integer intLike=userInfo.getLike();
-                    if(intLike==null){
+                    Integer intlike=userInfo.getLike();
+                    if(intlike==null){
                         like.setText("0");
-                    }else{
-                        like.setText(intLike.toString());
                     }
-
+                    else{
+                        like.setText(intlike.toString());
+                    }
                 } else Log.d(TAG, "onDataChange: 데이터없음");
             }
 
