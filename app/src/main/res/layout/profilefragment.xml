@@ -122,10 +122,10 @@
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/baseline_favorite_24" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="좋아요 " />
 
                     <TextView
                         android:id="@+id/like"
@@ -133,6 +133,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:textColor="@android:color/black" />
+                    <ImageButton
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/baseline_favorite_24" />
+
                 </LinearLayout>
 
             </LinearLayout>

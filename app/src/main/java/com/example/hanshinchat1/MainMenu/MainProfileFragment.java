@@ -34,7 +34,7 @@ public class MainProfileFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private static final String TAG = "ProfileActivity";
 
-    private TextView name, gender, age;
+    private TextView name, gender, age,like;
     private DatabaseReference databaseReference;
     private UserInfo userInfo;
     private ImageView profile;
@@ -62,6 +62,7 @@ public class MainProfileFragment extends Fragment {
         name = view.findViewById(R.id.name);
         gender = view.findViewById(R.id.gender);
         age = view.findViewById(R.id.age);
+        like=view.findViewById(R.id.like);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
 
@@ -79,6 +80,8 @@ public class MainProfileFragment extends Fragment {
                     gender.setText(userInfo.getGender());
                     Integer intAge = userInfo.getAge();
                     age.setText(intAge.toString());
+                    Integer intlike=userInfo.getLike();
+                    like.setText(intlike.toString());
                 } else Log.d(TAG, "onDataChange: 데이터없음");
             }
 

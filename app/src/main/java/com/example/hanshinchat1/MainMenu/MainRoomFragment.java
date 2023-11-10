@@ -60,10 +60,11 @@ public class MainRoomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.roomfragment, container, false);
-        getView();
+        //getView();
         initializeView(view);
         initializeListener();
 
+        Log.d(TAG, "checkBoxChecked+selectedCategory: "+checkBoxChecked+" "+selectedCategory);
         return view;
 
     }
@@ -384,10 +385,10 @@ public class MainRoomFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom1Dialog.dismiss();
-                        selectedCategory = null;
-                        if (checkBoxChecked == false) {
+                        selectedCategory=null;
+                        if(checkBoxChecked==false){
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        } else departmentCheckbox.setChecked(false);
+                        }else departmentCheckbox.setChecked(false);
                     }
                 });
             }

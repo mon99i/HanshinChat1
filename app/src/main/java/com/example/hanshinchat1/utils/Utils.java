@@ -38,13 +38,6 @@ public class Utils {
     private static final String TAG = "Utils";
 
     public static void goToGetRequestActivity(Context context) {
-      /*  ArrayList<String> myRoomKeys = new ArrayList<>();
-        ArrayList<String> getUserRequestUids = new ArrayList<>();
-        HashMap<String, ArrayList<String>> getRoomRequestUids = new HashMap<>();*/
-
-
-        ArrayList<String> getRequestUids = new ArrayList<>();
-        ArrayList<String> getMatchKeys = new ArrayList<>();
         ArrayList<Match> getMatches = new ArrayList<>();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -53,8 +46,6 @@ public class Utils {
         matchRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        getRequestUids.clear();
-                        getMatchKeys.clear();
                         getMatches.clear();
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -67,8 +58,6 @@ public class Utils {
                                             if (match.getApproved() ==null) {
                                                 match.setMatch_key(myRoomKey);
                                                 match.setSender_uid(subSnapshot.getKey());
-                                                /*getRequestUids.add(subSnapshot.getKey());
-                                                getMatchKeys.add(myRoomKey);*/
                                                 getMatches.add(match);
 
                                             }
@@ -83,15 +72,13 @@ public class Utils {
                                     if (match.getApproved() == null) {
                                         match.setMatch_key(user.getUid());
                                         match.setSender_uid(subSnapshot.getKey());
-                                    /*    getRequestUids.add(subSnapshot.getKey());
-                                        getMatchKeys.add(user.getUid());*/
                                         getMatches.add(match);
 
                                     }
                                     matchRef.child("users").child(user.getUid()).child(subSnapshot.getKey()).child("request").setValue(false);
                                 }
 
-                                Log.d(TAG, "onDataChange: "+getRequestUids.size()+" "+getMatchKeys.size()+" "+getMatches.size());
+                                Log.d(TAG, "onDataChange: "+getMatches.size());
 
                                 Intent intent = new Intent(context, GetRequestActivity.class);
                                 intent.putExtra("getMatches", getMatches);
