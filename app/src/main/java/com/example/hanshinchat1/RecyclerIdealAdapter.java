@@ -10,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,8 +47,8 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
         put("religion", "종교");
         put("smoking", "흡연");
     }};
-    private ArrayList<String>   idealKeys = new ArrayList<>();
-    private ArrayList<String>   idealValues= new ArrayList<>();
+    private ArrayList<String> idealKeys = new ArrayList<>();
+    private ArrayList<String> idealValues = new ArrayList<>();
 
 
     public RecyclerIdealAdapter(Context context, int priority, Map<String, String> idealMap) {
@@ -75,10 +74,10 @@ public class RecyclerIdealAdapter extends RecyclerView.Adapter<RecyclerIdealAdap
                     idealValues.add(idealMap.get(key));
                 }  //일단 맵에있는 모든 address, 거주지를 list에 저장
 
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     for (DataSnapshot item : snapshot.getChildren()) {
                         for (DataSnapshot subItem : item.getChildren()) {
-                            String key=subItem.getKey();
+                            String key = subItem.getKey();
                             idealKeys.remove(key);
                             idealValues.remove(idealMap.get(key));
 

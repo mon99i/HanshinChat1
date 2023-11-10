@@ -3,17 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="400dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_profile_department"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
     <Spinner
         android:id="@+id/department_spinner_fragment"
-        android:spinnerMode="dialog"
-        android:entries="@array/학과"
-        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:entries="@array/학과"
+        android:spinnerMode="dialog" />
 </FrameLayout>

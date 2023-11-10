@@ -3,73 +3,76 @@
     android:layout_width="match_parent"
     android:layout_height="500dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_profile_fashion"
-        android:textSize="25sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:columnCount="2"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:padding="22dp">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:columnCount="2"
+        android:padding="22dp">
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/fashion_female_fragment1"
-                android:layout_width="165dp"
-                android:layout_height="165dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/profile_fashion_female_selector1"
-                android:button="@null" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_female_fragment1"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/profile_fashion_female_selector1"
+            android:button="@null" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/fashion_female_fragment2"
-                android:layout_width="165dp"
-                android:layout_height="165dp"
-                android:background="@drawable/profile_fashion_female_selector2"
-                android:button="@null" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_female_fragment2"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:background="@drawable/profile_fashion_female_selector2"
+            android:button="@null" />
 
-            <TextView
-                android:layout_width="165dp"
-                android:layout_height="20dp"
-                android:text="캐주얼"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="165dp"
-                android:layout_height="20dp"
-                android:text="스트릿"
-                android:gravity="center"/>
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="캐주얼" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/fashion_female_fragment3"
-                android:layout_width="165dp"
-                android:layout_height="165dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/profile_fashion_female_selector3"
-                android:button="@null" />
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="스트릿" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/fashion_female_fragment4"
-                android:layout_width="165dp"
-                android:layout_height="165dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/profile_fashion_female_selector4"
-                android:button="@null" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_female_fragment3"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/profile_fashion_female_selector3"
+            android:button="@null" />
 
-            <TextView
-                android:layout_width="165dp"
-                android:layout_height="20dp"
-                android:text="로맨틱"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="165dp"
-                android:layout_height="20dp"
-                android:text="스포티"
-                android:gravity="center"/>
-        </GridLayout>
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fashion_female_fragment4"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_fashion_female_selector4"
+            android:button="@null" />
+
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="로맨틱" />
+
+        <TextView
+            android:layout_width="165dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="스포티" />
+    </GridLayout>
 </FrameLayout>

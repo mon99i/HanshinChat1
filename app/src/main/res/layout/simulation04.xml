@@ -16,128 +16,129 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/baseline_arrow_back" />
+
         <ImageButton
             android:id="@+id/home_btn"
             android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="310dp"
-            android:background="@drawable/baseline_home_black_24_xml" />
+            android:layout_height="30dp"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/home" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:background="@color/black"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/simulation_background"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@drawable/simulation_background">
+        android:padding="20dp">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="20dp"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressBackgroundTint="#FFFFFF"
-        android:progressTint="#FF69B4"
-        android:max="10"
-        android:progress="3"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="250dp"
-            android:layout_height="170dp"
-            android:src="@drawable/simulation4"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="결국 나는 늦지 않았지만, 상대가 늦어버렸다.\n미안해하는 상대에게 뭐라고 말하지?"
-            android:layout_marginTop="10dp"
-            android:textSize="15dp"
-            android:layout_gravity="center"/>
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:max="10"
+            android:progress="3"
+            android:progressBackgroundTint="#FFFFFF"
+            android:progressTint="#FF69B4" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/question_radio_group"
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/simulation4" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:gravity="center">
-
-                <RadioButton
-                    android:id="@+id/answer1_btn"
-                    android:layout_width="300dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="괜찮아요. 저도 온 지 얼마 안 됐어요."
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/answer2_btn"
-                    android:layout_width="300dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="사람이 그럴 수도 있죠"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/answer3_btn"
-                    android:layout_width="300dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="미안해하실 것 까진 아니에요."
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-                <RadioButton
-                    android:id="@+id/answer4_btn"
-                    android:layout_width="300dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="5dp"
-                    android:gravity="center"
-                    android:text="오시느라 힘드셨죠?"
-                    android:textSize="14sp"
-                    android:button="@null"
-                    android:background="@drawable/radio_button_border" />
-
-            </RadioGroup>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/next_btn"
-                android:layout_width="300dp"
-                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/match_button_style"
-                android:text="다음"/>
+                android:layout_marginTop="10dp"
+                android:text="결국 나는 늦지 않았지만, 상대가 늦어버렸다.\n미안해하는 상대에게 뭐라고 말하지?"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/question_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <RadioButton
+                        android:id="@+id/answer1_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="괜찮아요. 저도 온 지 얼마 안 됐어요."
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/answer2_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="사람이 그럴 수도 있죠"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/answer3_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="미안해하실 것 까진 아니에요."
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/answer4_btn"
+                        android:layout_width="300dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/radio_button_border"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="오시느라 힘드셨죠?"
+                        android:textSize="14sp" />
+
+                </RadioGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/next_btn"
+                    android:layout_width="300dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/match_button_style"
+                    android:text="다음" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

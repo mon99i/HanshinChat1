@@ -163,34 +163,35 @@ public class SetProfileActivity extends AppCompatActivity {
 
     private void checkProfile() {
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
-            .addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                    Class<?> nextFragmentClass = getNextProfileFragment(userInfo);
-                    if (nextFragmentClass != null) {
-                        try {
-                            Fragment nextFragment = (Fragment) nextFragmentClass.newInstance();
-                            transaction = fragmentManager.beginTransaction();
-                            transaction.replace(R.id.set_profile_frame, nextFragment).commitAllowingStateLoss();
-                            updateProgressBar(nextFragment);
-                        } catch (InstantiationException | IllegalAccessException e) {
-                            e.printStackTrace();
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                        Class<?> nextFragmentClass = getNextProfileFragment(userInfo);
+                        if (nextFragmentClass != null) {
+                            try {
+                                Fragment nextFragment = (Fragment) nextFragmentClass.newInstance();
+                                transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.set_profile_frame, nextFragment).commitAllowingStateLoss();
+                                updateProgressBar(nextFragment);
+                            } catch (InstantiationException | IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        } else if (userInfo.getCreationTime() == null) {
+                            Intent intent = new Intent(getApplicationContext(), SetProfileCompleteActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
-                    } else if(userInfo.getCreationTime()==null){
-                        Intent intent = new Intent(getApplicationContext(), SetProfileCompleteActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(intent);
-                        finish();
                     }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
     }
 
     private void updateProgressBar(Fragment fragment) {
@@ -198,39 +199,56 @@ public class SetProfileActivity extends AppCompatActivity {
         currentStep = 1;
         totalSteps = 18;
         if (fragment instanceof ProfileNameFragment) {
-            progress = 2; currentStep = 2;
+            progress = 2;
+            currentStep = 2;
         } else if (fragment instanceof ProfileGenderFragment) {
-            progress = 3; currentStep = 3;
+            progress = 3;
+            currentStep = 3;
         } else if (fragment instanceof ProfileAgeFragment) {
-            progress = 4; currentStep = 4;
+            progress = 4;
+            currentStep = 4;
         } else if (fragment instanceof ProfileGradeFragment) {
-            progress = 5; currentStep = 5;
+            progress = 5;
+            currentStep = 5;
         } else if (fragment instanceof ProfileStudentIdFragment) {
-            progress = 6; currentStep = 6;
+            progress = 6;
+            currentStep = 6;
         } else if (fragment instanceof ProfileDepartmentFragment) {
-            progress = 7; currentStep = 7;
+            progress = 7;
+            currentStep = 7;
         } else if (fragment instanceof ProfileHeightFragment) {
-            progress = 8; currentStep = 8;
+            progress = 8;
+            currentStep = 8;
         } else if (fragment instanceof ProfileFormFragment) {
-            progress = 9; currentStep = 9;
+            progress = 9;
+            currentStep = 9;
         } else if (fragment instanceof ProfileAddressFragment) {
-            progress = 10; currentStep = 10;
+            progress = 10;
+            currentStep = 10;
         } else if (fragment instanceof ProfileReligionFragment) {
-            progress = 11; currentStep = 11;
+            progress = 11;
+            currentStep = 11;
         } else if (fragment instanceof ProfileSmokingFragment) {
-            progress = 12; currentStep = 12;
+            progress = 12;
+            currentStep = 12;
         } else if (fragment instanceof ProfileDrinkingFragment) {
-            progress = 13; currentStep = 13;
+            progress = 13;
+            currentStep = 13;
         } else if (fragment instanceof ProfileInterestFragment) {
-            progress = 14; currentStep = 14;
+            progress = 14;
+            currentStep = 14;
         } else if (fragment instanceof ProfilePersonalityFragment) {
-            progress = 15; currentStep = 15;
+            progress = 15;
+            currentStep = 15;
         } else if (fragment instanceof ProfileMbtiFragment) {
-            progress = 16; currentStep = 16;
+            progress = 16;
+            currentStep = 16;
         } else if (fragment instanceof ProfileFashionMaleFragment) {
-            progress = 17; currentStep = 17;
+            progress = 17;
+            currentStep = 17;
         } else if (fragment instanceof ProfileFashionFemaleFragment) {
-            progress = 17; currentStep = 17;
+            progress = 17;
+            currentStep = 17;
         }
         setProfileProgressBar.setProgress(progress);
         progressTextView.setText(currentStep + "/" + totalSteps);
@@ -269,9 +287,9 @@ public class SetProfileActivity extends AppCompatActivity {
         } else if (userInfo.getMbti() == null) {
             return ProfileMbtiFragment.class;
         } else if (userInfo.getFashion() == null) {
-            if(userInfo.getGender().equals("남자")){
+            if (userInfo.getGender().equals("남자")) {
                 return ProfileFashionMaleFragment.class;
-            } else if(userInfo.getGender().equals("여자")){
+            } else if (userInfo.getGender().equals("여자")) {
                 return ProfileFashionFemaleFragment.class;
             }
         }

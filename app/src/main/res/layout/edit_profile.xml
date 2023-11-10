@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileEditActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ProfileEditActivity">
 
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:background="#F8F8FF"
         android:gravity="center_vertical"
-        android:background="#F8F8FF">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/edit_profile_back_btn"
@@ -25,31 +25,31 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#252525"
-            android:textStyle="bold"
             android:layout_marginLeft="5dp"
+            android:text="프로필 편집"
+            android:textColor="#252525"
             android:textSize="20dp"
-            android:text="프로필 편집"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="600dp">
+        android:layout_width="match_parent"
+        android:layout_height="550dp">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:backgroundTint="#E6E6FA"
-                android:layout_margin="20dp"
                 android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:backgroundTint="#E6E6FA"
                 app:cardCornerRadius="50dp"
                 app:cardElevation="4dp">
 
@@ -57,20 +57,22 @@
                     android:id="@+id/edit_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
                     android:clickable="true"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/baseline_person_24" />
             </androidx.cardview.widget.CardView>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -78,17 +80,19 @@
 
                 <TextView
                     android:id="@+id/edit_name"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,17 +105,19 @@
 
                 <TextView
                     android:id="@+id/edit_gender"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,19 +127,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="나이 " />
+
                 <TextView
                     android:id="@+id/edit_age"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,17 +155,19 @@
 
                 <TextView
                     android:id="@+id/edit_grade"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,40 +177,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="학번 " />
+
                 <TextView
                     android:id="@+id/edit_student_id"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="학과 " />
+
                 <TextView
                     android:id="@+id/edit_department"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -212,17 +230,19 @@
 
                 <TextView
                     android:id="@+id/edit_height"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -231,21 +251,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="종교 "/>
+                    android:text="종교 " />
 
                 <TextView
-                android:id="@+id/edit_religion"
-                android:layout_marginLeft="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/black"/>
+                    android:id="@+id/edit_religion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,17 +280,19 @@
 
                 <TextView
                     android:id="@+id/edit_address"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -278,19 +302,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="흡연 " />
+
                 <TextView
                     android:id="@+id/edit_smoking"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -303,17 +330,18 @@
 
                 <TextView
                     android:id="@+id/edit_drinking"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#eaeaea"
-            android:layout_marginBottom="8dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -327,17 +355,19 @@
 
                 <TextView
                     android:id="@+id/edit_form"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -350,17 +380,19 @@
 
                 <TextView
                     android:id="@+id/edit_fashion"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -373,17 +405,19 @@
 
                 <TextView
                     android:id="@+id/edit_mbti"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -396,17 +430,19 @@
 
                 <TextView
                     android:id="@+id/interest"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="#eaeaea" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -419,30 +455,33 @@
 
                 <TextView
                     android:id="@+id/personality"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#eaeaea"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="#eaeaea" />
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:layout_height="100dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_profile_edit"
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/match_button_style"
             android:text="완료" />
 
@@ -450,9 +489,9 @@
             android:id="@+id/edit_profile_cancel"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/match_button_style"
             android:text="취소" />
     </LinearLayout>

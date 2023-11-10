@@ -1,7 +1,6 @@
 package com.example.hanshinchat1.MainMenu;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.RecyclerMatchRoomsAdapter;
 import com.example.hanshinchat1.Room;
-//import com.example.hanshinchat1.RoomActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,8 +36,7 @@ public class MainRoomFragment extends Fragment {
 
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private static final String TAG="RoomActivity";
-//    private Context context=this;
+    private static final String TAG = "RoomActivity";
     private Dialog findRoomDialog, findRoomDialog2;
     private Dialog makeRoomDialog;
     private Dialog makeRoom1Dialog;
@@ -47,15 +44,12 @@ public class MainRoomFragment extends Fragment {
     private CheckBox departmentCheckbox;
     private Button makeRoom;
     private Button findRoom;
-
     private RecyclerView recycler_matchRooms;
     private RecyclerMatchRoomsAdapter recyclerMatchRoomsAdapter;
-
     private boolean checkBoxChecked = false;
-    private String selectedCategory=null;
+    private String selectedCategory = null;
     public static String[] participants1 = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] participants2 = {"2명", "3명", "4명", "5명", "6명", "7명", "8명"};
-    public static String[] gender = {"남자", "여자"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,23 +60,17 @@ public class MainRoomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.roomfragment, container, false);
-//        recyclerView = view.findViewById(R.id.recycler_matchRooms);
-
-//        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(getContext());
-//        recyclerView.setAdapter(recyclerMatchRoomsAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         getView();
         initializeView(view);
         initializeListener();
 
-
         return view;
 
     }
+
     private void initializeView(View view) {
-        recycler_matchRooms=view.findViewById(R.id.recycler_matchRooms);
-        recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(getContext(),recycler_matchRooms);
+        recycler_matchRooms = view.findViewById(R.id.recycler_matchRooms);
+        recyclerMatchRoomsAdapter = new RecyclerMatchRoomsAdapter(getContext(), recycler_matchRooms);
         recycler_matchRooms.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
 
@@ -97,7 +85,6 @@ public class MainRoomFragment extends Fragment {
         findRoomDialog = new Dialog(getContext(), R.style.RoundedDialog);
         findRoomDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         findRoomDialog.setContentView(R.layout.find_room_dialog);
-
     }
 
     private void initializeListener() {
@@ -106,7 +93,7 @@ public class MainRoomFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 checkBoxChecked = isChecked;
                 recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                Log.d(TAG, "onCheckedChanged: " + selectedCategory+" "+checkBoxChecked);
+                Log.d(TAG, "onCheckedChanged: " + selectedCategory + " " + checkBoxChecked);
             }
         });
 
@@ -162,27 +149,6 @@ public class MainRoomFragment extends Fragment {
             }
         });
 
-
-/*
-        findRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findRoomDialog.show();
-
-                Button findRoomSearchBtn = findRoomDialog.findViewById(R.id.findRoomSearchBtn);
-                findRoomSearchBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //검색 눌렀을 때 기능 구현
-
-                        findRoomDialog.dismiss();
-                    }
-                });
-            }
-        });
-*/
-
-
         findRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,9 +200,6 @@ public class MainRoomFragment extends Fragment {
                     public void onClick(View v) {
                         selectedCategory = "기타";
                         recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                       /* if(checkBoxChecked){
-                            recyclerMatchRoomsAdapter.excludeSameDepartment();
-                        }*/
                         findRoomDialog.dismiss();
                     }
                 });
@@ -251,6 +214,7 @@ public class MainRoomFragment extends Fragment {
 
 
     }
+
     private void makeRoom1() {
         makeRoom1Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom1Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -263,49 +227,31 @@ public class MainRoomFragment extends Fragment {
         Spinner participants_Spinner = makeRoom1Dialog.findViewById(R.id.participants_spinner);
         ImageView category = makeRoom1Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon2);
-        //Spinner department_Spinner = makeRoom1Dialog.findViewById(R.id.department_spinner);
-        //Spinner gender_Spinner = makeRoom1Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "과팅";
         Resources res = getResources();
-        //String[] department = res.getStringArray(R.array.학과);
 
         ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants2);
-        //ArrayAdapter<String> department_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, department);
-        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
-
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //department_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         participants_Spinner.setAdapter(participants_adapter);
-        //department_Spinner.setAdapter(department_adapter);
-        //gender_Spinner.setAdapter(gender_adapter);
-
-
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Room room =new Room();
+                Room room = new Room();
                 room.setHost(user.getUid());
                 room.setNum(participants_Spinner.getSelectedItem().toString());
-                //room.setDepartment(department_Spinner.getSelectedItem().toString());
-                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(categoryType);
 
                 myRef.child("rooms").push().setValue(room).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                     /*    recyclerMatchRoomsAdapter=new RecyclerMatchRoomsAdapter(context);
-                        recycler_matchRooms.setAdapter(recyclerMatchRoomsAdapter);
-                        departmentCheckbox.setChecked(false);*/
                         makeRoom1Dialog.dismiss();
-                        selectedCategory=null;
-                        if(checkBoxChecked==false){
+                        selectedCategory = null;
+                        if (checkBoxChecked == false) {
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        }else departmentCheckbox.setChecked(false);
+                        } else departmentCheckbox.setChecked(false);
                     }
                 });
             }
@@ -317,6 +263,7 @@ public class MainRoomFragment extends Fragment {
             }
         });
     }
+
     private void makeRoom2() {
         makeRoom2Dialog = new Dialog(getContext(), R.style.RoundedDialog);
         makeRoom2Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -328,20 +275,14 @@ public class MainRoomFragment extends Fragment {
         ImageView cancelBtn = makeRoom2Dialog.findViewById(R.id.make_room_cancel);
         ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon1);
-        //Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "미팅";
-        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
-
-        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Room room =new Room();
+                Room room = new Room();
                 room.setHost(user.getUid());
-                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(categoryType);
 
@@ -350,10 +291,10 @@ public class MainRoomFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom2Dialog.dismiss();
-                        selectedCategory=null;
-                        if(checkBoxChecked==false){
+                        selectedCategory = null;
+                        if (checkBoxChecked == false) {
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        }else departmentCheckbox.setChecked(false);
+                        } else departmentCheckbox.setChecked(false);
                     }
                 });
             }
@@ -377,20 +318,14 @@ public class MainRoomFragment extends Fragment {
         ImageView cancelBtn = makeRoom2Dialog.findViewById(R.id.make_room_cancel);
         ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon3);
-        //Spinner gender_Spinner = makeRoom2Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "밥팅";
-        ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, gender);
-
-        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Room room =new Room();
+                Room room = new Room();
                 room.setHost(user.getUid());
-                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(categoryType);
 
@@ -399,10 +334,10 @@ public class MainRoomFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom2Dialog.dismiss();
-                        selectedCategory=null;
-                        if(checkBoxChecked==false){
+                        selectedCategory = null;
+                        if (checkBoxChecked == false) {
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        }else departmentCheckbox.setChecked(false);
+                        } else departmentCheckbox.setChecked(false);
                     }
                 });
             }
@@ -428,26 +363,19 @@ public class MainRoomFragment extends Fragment {
         ImageView category = makeRoom1Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon4);
         Spinner participants_Spinner = makeRoom1Dialog.findViewById(R.id.participants_spinner);
-        //Spinner gender_Spinner = makeRoom3Dialog.findViewById(R.id.gender_spinner);
         String categoryType = "기타";
-
         ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants1);
-        //ArrayAdapter<String> gender_adapter = new ArrayAdapter<>(RoomActivity.this, android.R.layout.simple_spinner_item, gender);
 
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //gender_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         participants_Spinner.setAdapter(participants_adapter);
-        //gender_Spinner.setAdapter(gender_adapter);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Room room =new Room();
+                Room room = new Room();
                 room.setHost(user.getUid());
                 room.setNum(participants_Spinner.getSelectedItem().toString());
-                //room.setGender(gender_Spinner.getSelectedItem().toString());
                 room.setTitle(edt_roomTitle.getText().toString());
                 room.setCategory(categoryType);
 
@@ -456,10 +384,10 @@ public class MainRoomFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom1Dialog.dismiss();
-                        selectedCategory=null;
-                        if(checkBoxChecked==false){
+                        selectedCategory = null;
+                        if (checkBoxChecked == false) {
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        }else departmentCheckbox.setChecked(false);
+                        } else departmentCheckbox.setChecked(false);
                     }
                 });
             }

@@ -4,30 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:background="#F8F8FF"
         android:gravity="center_vertical"
-        android:background="#F8F8FF">
+        android:orientation="horizontal">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#252525"
-            android:textStyle="bold"
             android:layout_marginLeft="20dp"
+            android:text="채팅"
+            android:textColor="#252525"
             android:textSize="20dp"
-            android:text="채팅"/>
-
+            android:textStyle="bold" />
 
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"

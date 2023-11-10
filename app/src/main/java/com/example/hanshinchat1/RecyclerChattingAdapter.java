@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -65,7 +64,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
             public void onDataChange(DataSnapshot snapshot) {
                 messages.clear();
                 messageKeys.clear();
-                if(!snapshot.exists()){
+                if (!snapshot.exists()) {
                     showLetsChatDialog();
                 }
                 for (DataSnapshot data : snapshot.getChildren()) {
@@ -88,32 +87,31 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
         });
     }
 
-    private void showLetsChatDialog(){
-            LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.lets_chat_dialog, null);
+    private void showLetsChatDialog() {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.lets_chat_dialog, null);
 
-            // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setView(view);
-            final AlertDialog alertDialog = builder.create();
+        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
 
-            alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
-            //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
 
-            // 다이얼로그 표시
-            alertDialog.show();
+        // 다이얼로그 표시
+        alertDialog.show();
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (alertDialog != null && alertDialog.isShowing()) {
-                        alertDialog.dismiss(); // AlertDialog 닫기
-                    }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (alertDialog != null && alertDialog.isShowing()) {
+                    alertDialog.dismiss(); // AlertDialog 닫기
                 }
-            }, 2000);
+            }
+        }, 2000);
 
     }
 
@@ -141,8 +139,7 @@ public class RecyclerChattingAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        /*final int currentPosition=holder.getAbsoluteAdapterPosition();*/
-        Log.d(TAG, "onBindViewHolder: "+position);
+        Log.d(TAG, "onBindViewHolder: " + position);
         if (messages.get(position).getSenderUid().equals(myUid)) {
             ((MyMessageViewHolder) holder).bind(position);
         } else {

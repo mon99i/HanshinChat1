@@ -29,6 +29,7 @@ public class BoardFragment2 extends Fragment {
     private ListView listView;
     private ListViewAdapter boardAdapter;
     private ImageView writePageBtn;
+
     public BoardFragment2() {
 
     }
@@ -64,7 +65,6 @@ public class BoardFragment2 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BoardWriteActivity2.class);
                 startActivity(intent);
-//                finish();
             }
         });
 
@@ -97,7 +97,6 @@ public class BoardFragment2 extends Fragment {
                 Collections.reverse(boardDataList);
                 boardAdapter.notifyDataSetChanged();
                 Log.w("ListActivity", boardDataList.toString());
-
             }
 
             @Override
@@ -105,8 +104,7 @@ public class BoardFragment2 extends Fragment {
                 // Getting Post failed, log a message
                 Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
             }
-
         };
         myRef.addValueEventListener(postListener);
-    };
+    }
 }

@@ -1,40 +1,26 @@
 package com.example.hanshinchat1.recycler;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.example.hanshinchat1.ChatRoom;
-import com.example.hanshinchat1.ChattingActivity;
 import com.example.hanshinchat1.Match;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.Room;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.viewpager.RecommendViewPagerAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -44,8 +30,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import me.relex.circleindicator.CircleIndicator3;
 
 public class RecyclerGetRequestAdapter2 extends RecyclerView.Adapter<RecyclerGetRequestAdapter2.ViewHolder> {
     private static final String TAG="RecyclerGetRequestAdapter2";

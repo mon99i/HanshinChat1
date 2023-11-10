@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/set_profile_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,42 +11,43 @@
 
         <ProgressBar
             android:id="@+id/set_profile_progress"
+            style="@style/ThinProgressBar"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_margin="10dp"
-            style="@style/ThinProgressBar"
-            android:progress="0"
             android:max="18"
-            android:visibility="visible"/>
+            android:progress="0"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/progress_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="0/18"
             android:layout_marginRight="10dp"
-            android:textSize="13sp"
-            android:textColor="#000000"/>
+            android:text="0/18"
+            android:textColor="#000000"
+            android:textSize="13sp" />
 
         <FrameLayout
             android:id="@+id/set_profile_frame"
             android:layout_width="wrap_content"
-            android:layout_height="500dp"/>
+            android:layout_height="500dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/set_profile_next_btn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:textSize="15sp"
-            android:text="다음"
-            android:layout_marginLeft="200dp"
-            android:textColor="@color/black"
-            android:backgroundTint="#E6E6FA" />
+            <Button
+                android:id="@+id/set_profile_next_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="200dp"
+                android:backgroundTint="#E6E6FA"
+                android:text="다음"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

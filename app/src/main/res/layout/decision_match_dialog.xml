@@ -46,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="20dp"
         android:textColor="#252525"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/cancel_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,10 +58,10 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
+        app:ci_drawable="@drawable/indicator_selected"
         app:layout_constraintBottom_toBottomOf="@+id/decisionMatchViewPager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:ci_drawable="@drawable/indicator_selected" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/acceptMatchBtn"

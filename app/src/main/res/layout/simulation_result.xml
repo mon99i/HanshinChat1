@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/simulation_background"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/simulation_background">
+    android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="소개팅 결과"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="40sp"
-        android:textAlignment="center" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/simul_result"
@@ -21,22 +21,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:textSize="40sp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="40sp" />
 
     <TextView
-        android:layout_marginTop="50dp"
         android:id="@+id/result_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:text=""
-        android:textSize="15dp"
-        android:gravity="center"/>
+        android:textSize="15dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/simulation_replay"
             android:layout_width="140dp"
@@ -44,14 +45,15 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="230dp"
             android:background="@drawable/match_button_style"
-            android:text="한 번 더 도전!"/>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/simulation_exit"
-        android:layout_width="140dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="230dp"
-        android:background="@drawable/match_button_style"
-        android:text="나가기"/>
+            android:text="한 번 더 도전!" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/simulation_exit"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="230dp"
+            android:background="@drawable/match_button_style"
+            android:text="나가기" />
     </LinearLayout>
 </LinearLayout>

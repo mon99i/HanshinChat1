@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MainActivity;
-import com.example.hanshinchat1.MainMenu.MainBoardFragment;
 import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.comment.commentLVAdapter;
@@ -35,7 +34,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class BoardActivity2 extends MainActivity {
-
 
     private ArrayList<commentModel> commentDataList;
     private commentLVAdapter commentAdapter;
@@ -90,17 +88,9 @@ public class BoardActivity2 extends MainActivity {
         commentLv.setAdapter(commentAdapter);
 
         getCommentData(key);
-
-//        clickMenu();
-//        clickHome();
-//        clickRoom();
-//        clickChat();
-//        clickBoard();
-//        clickProfile();
-
     }
 
-    private void getCommentData(String key){
+    private void getCommentData(String key) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         commentRef = database.getReference("comment");
 
@@ -161,12 +151,9 @@ public class BoardActivity2 extends MainActivity {
             }
         });
     }
+
     private void getImageData(String key) {
-
-        // Reference to an image file in Cloud Storage
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(key + ".png");
-
-        // ImageView in your Activity
         ImageView imageViewFB = binding.imageArea;
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -178,12 +165,12 @@ public class BoardActivity2 extends MainActivity {
                             .load(task.getResult())
                             .into(imageViewFB);
                 } else {
-//                    binding.imageArea.setVisibility(View.INVISIBLE);
                     imageViewFB.setVisibility(View.GONE);
                 }
             }
         });
     }
+
     private void getBoardData(String key) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("board2");
@@ -197,17 +184,16 @@ public class BoardActivity2 extends MainActivity {
                 ListViewItem dataModel = dataSnapshot.getValue(ListViewItem.class);
 
 
-                if(dataModel != null) {
+                if (dataModel != null) {
                     binding.titleArea.setText(dataModel != null ? dataModel.getTitle() : "");
                     binding.contentArea.setText(dataModel != null ? dataModel.getContent() : "");
                     binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
                     binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
-//                    binding.nameArea.setText(data != null ? data.getName() : "");
 
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();
 
-                    if(myUid.equals(writerUid)) {
+                    if (myUid.equals(writerUid)) {
                         binding.boardSetting.setVisibility(View.VISIBLE);
                     } else {
 
@@ -218,7 +204,6 @@ public class BoardActivity2 extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
                 Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
             }
 

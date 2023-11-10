@@ -1,35 +1,18 @@
 package com.example.hanshinchat1;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hanshinchat1.MainMenu.MainChatFragment;
-import com.example.hanshinchat1.MainMenu.MainHomeFragment;
-import com.example.hanshinchat1.MainMenu.MainRoomFragment;
-import com.example.hanshinchat1.recycler.VerticalDecoration;
-import com.example.hanshinchat1.utils.Utils;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,8 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.TimeZone;
 
 public class ChattingActivity extends MainActivity {
 
@@ -58,7 +39,7 @@ public class ChattingActivity extends MainActivity {
     private String chatRoomKey;
     private String myUid;
 
-    private static final String TAG="CattingActivity";
+    private static final String TAG = "CattingActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,10 +51,9 @@ public class ChattingActivity extends MainActivity {
         initializeListener();
         setupChatRooms();
 
-
     }
 
-    private void initializeProperty() {  //chatroomActivity에서 받아옴
+    private void initializeProperty() {
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         chatRoom = (ChatRoom) getIntent().getSerializableExtra("ChatRoom");
@@ -127,7 +107,7 @@ public class ChattingActivity extends MainActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot data : snapshot.getChildren()) {
-                            Log.d(TAG, "onDataChange: "+data.getValue(ChatRoom.class)+" 받은 chatRoom:"+chatRoom);
+                            Log.d(TAG, "onDataChange: " + data.getValue(ChatRoom.class) + " 받은 chatRoom:" + chatRoom);
                             chatRoomKey = data.getKey();
                             setupRecycler();
 
@@ -210,7 +190,6 @@ public class ChattingActivity extends MainActivity {
         recycler_chatting.setAdapter(new RecyclerChattingAdapter(this, chatRoomKey, opponentUser.getUid()));
 
     }
-
 
 
 }

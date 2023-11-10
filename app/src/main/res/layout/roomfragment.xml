@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoomActivity"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:background="#F8F8FF"
         android:gravity="center_vertical"
-        android:background="#F8F8FF">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#252525"
-            android:textStyle="bold"
             android:layout_marginLeft="20dp"
+            android:text="방 목록"
+            android:textColor="#252525"
             android:textSize="20dp"
-            android:text="방 목록"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -35,21 +33,21 @@
             android:id="@+id/make_room"
             android:layout_width="100dp"
             android:layout_height="40dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="#E6E6FA"
             android:text="방 만들기"
-            android:textSize="13dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/find_room"
             android:layout_width="120dp"
             android:layout_height="40dp"
+            android:layout_marginRight="150dp"
             android:backgroundTint="#E6E6FA"
             android:text="카테고리 찾기"
-            android:textSize="13dp"
-            android:layout_marginRight="150dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="13dp" />
 
 
     </LinearLayout>
@@ -57,26 +55,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp">
+
         <CheckBox
             android:id="@+id/department_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="같은 학과 만나지 않기"
-            android:textSize="13sp"
-            android:layout_marginLeft="10dp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_matchRooms"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

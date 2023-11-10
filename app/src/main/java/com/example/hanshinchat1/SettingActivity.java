@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.hanshinchat1.board.ListActivity;
 import com.example.hanshinchat1.report.ReportActivity;
 
 public class SettingActivity extends MainActivity {
@@ -15,16 +14,16 @@ public class SettingActivity extends MainActivity {
     Button reportBtn;
     Button deleteBtn;
     Button logoutBtn2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
-
         backBtn = findViewById(R.id.edit_profile_back_btn);
         reportBtn = findViewById(R.id.reportBtn);
-        deleteBtn=(Button)findViewById(R.id.deleteBtn);
-        logoutBtn2=(Button)findViewById(R.id.logoutBtn);
+        deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        logoutBtn2 = (Button) findViewById(R.id.logoutBtn);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

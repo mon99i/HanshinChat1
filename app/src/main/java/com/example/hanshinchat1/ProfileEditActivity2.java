@@ -98,7 +98,7 @@ public class ProfileEditActivity2 extends MainActivity {
                 });
                 break;
             case 3:
-                ProfileInterestFragment interestFragment= new ProfileInterestFragment();
+                ProfileInterestFragment interestFragment = new ProfileInterestFragment();
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.edit_profile_frame, interestFragment);
                 transaction.commit();

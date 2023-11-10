@@ -1,10 +1,8 @@
 package com.example.hanshinchat1;
+
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +33,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
     private ArrayList<String> chatRoomKeys;
     private String myUid;
 
-    private static final String TAG="RecyclerChatRoomsAdapter";
+    private static final String TAG = "RecyclerChatRoomsAdapter";
 
     public RecyclerChatRoomsAdapter(Context context) {    //어댑터 생성자
         this.context = context;
@@ -49,7 +44,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
     }
 
     private void setupAllUserList() {       //현재 user가 채팅하는 목록나열?
-       FirebaseDatabase.getInstance().getReference().child("chatRooms")
+        FirebaseDatabase.getInstance().getReference().child("chatRooms")
                 .orderByChild("users/" + myUid).equalTo(true)     //현재 유저가 이용중인 채팅룸, 즉 myUid 가 true인 채팅룸 나열
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -104,8 +99,8 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
 
                             holder.opponentUser = data.getValue(UserInfo.class);
                             holder.txt_nickname.setText(data.getValue(UserInfo.class).getName());
-                            String imageUrl=data.getValue(UserInfo.class).getPhotoUrl();
-                            Uri imageUri=Uri.parse(imageUrl);
+                            String imageUrl = data.getValue(UserInfo.class).getPhotoUrl();
+                            Uri imageUri = Uri.parse(imageUrl);
                             Glide.with(context).load(imageUri).into(holder.profile);
                         }
                     }
@@ -116,16 +111,10 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                 });
 
 
-
-
-
         holder.background.setOnClickListener(new View.OnClickListener() {  //홀더누르면 각각의 채팅방으로 이동
             @Override
             public void onClick(View view) {
                 try {
-
-                   /* holder.background.setBackgroundColor(Color.parseColor("#E6E6FA"));*/
-                    //holder.background.setBackground("#E6E6FA");
                     Intent intent = new Intent(context, ChattingActivity.class);
                     intent.putExtra("ChatRoom", chatRooms.get(currentPosition));
                     intent.putExtra("Opponent", holder.opponentUser);
@@ -178,9 +167,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
     private String getLastMessageTimeString(String lastTimeString) {    //현재 앱을 실행시킨 시간을 기준으로 하고있음 수정필요.
         try {
 
-
             LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-            //LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
 
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
             int messageMonth = Integer.parseInt(lastTimeString.substring(4, 6));
@@ -246,7 +233,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
             txt_message = itemView.findViewById(R.id.room_txt_message);
             txt_date = itemView.findViewById(R.id.room_txt_date);
             txt_chatCount = itemView.findViewById(R.id.room_txt_chatCount);
-            profile=itemView.findViewById(R.id.room_profile);
+            profile = itemView.findViewById(R.id.room_profile);
         }
     }
 }

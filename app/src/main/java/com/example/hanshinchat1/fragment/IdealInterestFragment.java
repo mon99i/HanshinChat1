@@ -1,9 +1,6 @@
 package com.example.hanshinchat1.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
@@ -34,7 +33,6 @@ public class IdealInterestFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
 
 
     private static final String TAG = "InterestFragment";
@@ -77,16 +75,12 @@ public class IdealInterestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        View view=inflater.inflate(R.layout.fragment_ideal_interest, container, false);
+        View view = inflater.inflate(R.layout.fragment_ideal_interest, container, false);
         LinearLayout checkBoxLayout = view.findViewById(R.id.interest_checkbox_fragment);
 
         interestArray = getResources().getStringArray(R.array.관심사);
-        selectedInterests=new ArrayList<>();
-
-     /*   initializeView();
-        initializeListener();*/
+        selectedInterests = new ArrayList<>();
 
         LinearLayout currentLinearLayout = null;
         LinearLayout.LayoutParams checkBoxParams = new LinearLayout.LayoutParams(
@@ -127,7 +121,7 @@ public class IdealInterestFragment extends Fragment {
                         selectedInterests.remove(currentInterest);
                     }
                     sendValueToActivity(selectedInterests);
-                    Log.d(TAG, "onCheckedChanged: "+selectedInterests);
+                    Log.d(TAG, "onCheckedChanged: " + selectedInterests);
                 }
             });
 
@@ -135,15 +129,6 @@ public class IdealInterestFragment extends Fragment {
         }
 
         return view;
-    }
-
-
-    private void initializeView(){
-
-    }
-
-    private void initializeListener(){
-
     }
 
     private void sendValueToActivity(Object value) {

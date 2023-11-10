@@ -28,7 +28,6 @@ public class SetIdealActivity extends MainActivity {
     TextView secondChoiceTxt;
     TextView thirdPriorityTxt;
     TextView thirdChoiceTxt;
-
     ImageButton idealCancelBtn1;
     ImageButton idealCancelBtn2;
     ImageButton idealCancelBtn3;
@@ -68,7 +67,8 @@ public class SetIdealActivity extends MainActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                intent.putExtra("show_fragment", 5);
                 startActivity(intent);
                 finish();
             }
