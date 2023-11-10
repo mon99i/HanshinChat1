@@ -49,20 +49,20 @@
                 android:gravity="right">
 
                 <TextView
-                    android:id="@+id/txt_roomDepartment"
+                    android:id="@+id/txt_roomMember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:text="학과"
+                    android:text="인원"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/txt_roomMember"
+                    android:id="@+id/txt_roomDepartment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="3dp"
-                    android:text="인원"
+                    android:text="학과"
                     android:textSize="15sp" />
 
                 <TextView
