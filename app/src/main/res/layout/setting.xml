@@ -41,21 +41,6 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_gravity="center"
-            android:background="#E6E6FA"
-            android:text="아는 사람 만나지 않기"
-            android:textAlignment="center" />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="3px"
-            android:layout_marginTop="50px"
-            android:layout_marginBottom="50px"
-            android:background="#000000" />
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="100px"
