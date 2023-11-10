@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.fragment;
+package com.example.hanshinchat1.idealFragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,13 +12,12 @@ import androidx.fragment.app.Fragment;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdeal2Activity;
 
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link IdealFormFragment#newInstance} factory method to
+ * Use the {@link IdealReligionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IdealFormFragment extends Fragment {
+public class IdealReligionFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,17 +28,17 @@ public class IdealFormFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private RadioGroup radioGroup;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
+    private RadioButton radioButton3;
+    private RadioButton radioButton4;
+    private RadioButton radioButton5;
 
-    RadioGroup radioGroup;
-    RadioButton radioButton1;
-    RadioButton radioButton2;
-    RadioButton radioButton3;
-    RadioButton radioButton4;
+    private String selectedValue;
+    private RadioButton selectedRadioButton;
 
-    String selectedForm;
-    RadioButton selectedRadioButton;
-
-    public IdealFormFragment() {
+    public IdealReligionFragment() {
 
     }
 
@@ -49,11 +48,11 @@ public class IdealFormFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IdealFormFragment.
+     * @return A new instance of fragment IdealReligionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IdealFormFragment newInstance(String param1, String param2) {
-        IdealFormFragment fragment = new IdealFormFragment();
+    public static IdealReligionFragment newInstance(String param1, String param2) {
+        IdealReligionFragment fragment = new IdealReligionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,19 +72,18 @@ public class IdealFormFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_ideal_form, container, false);
-        radioGroup = view.findViewById(R.id.fragment_form_radio_group);
-        radioButton1 = view.findViewById(R.id.fragment_form_radio_btn_1);
-        radioButton2 = view.findViewById(R.id.fragment_form_radio_btn_2);
-        radioButton3 = view.findViewById(R.id.fragment_form_radio_btn_3);
-        radioButton4 = view.findViewById(R.id.fragment_form_radio_btn_4);
+        View view = inflater.inflate(R.layout.fragment_ideal_religion, container, false);
+        radioGroup = view.findViewById(R.id.fragment_religion_radio_group);
+        radioButton1 = view.findViewById(R.id.fragment_religion_radio_btn_1);
+        radioButton2 = view.findViewById(R.id.fragment_religion_radio_btn_2);
+        radioButton3 = view.findViewById(R.id.fragment_religion_radio_btn_3);
+        radioButton4 = view.findViewById(R.id.fragment_religion_radio_btn_4);
+        radioButton5 = view.findViewById(R.id.fragment_religion_radio_btn_5);
 
         initializeListener();
-
-
         return view;
     }
+
 
     private void initializeListener() {
         radioButton1.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +94,9 @@ public class IdealFormFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedForm = radioButton1.getText().toString();
-                sendValueToActivity(selectedForm);
+                radioButton5.setBackgroundResource(R.drawable.radio_button_unchecked);
+                selectedValue = radioButton1.getText().toString();
+                sendValueToActivity(selectedValue);
             }
         });
 
@@ -109,8 +108,9 @@ public class IdealFormFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedForm = radioButton2.getText().toString();
-                sendValueToActivity(selectedForm);
+                radioButton5.setBackgroundResource(R.drawable.radio_button_unchecked);
+                selectedValue = radioButton2.getText().toString();
+                sendValueToActivity(selectedValue);
             }
         });
 
@@ -122,8 +122,9 @@ public class IdealFormFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_checked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
-                selectedForm = radioButton3.getText().toString();
-                sendValueToActivity(selectedForm);
+                radioButton5.setBackgroundResource(R.drawable.radio_button_unchecked);
+                selectedValue = radioButton3.getText().toString();
+                sendValueToActivity(selectedValue);
             }
         });
 
@@ -135,11 +136,27 @@ public class IdealFormFragment extends Fragment {
                 radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
                 radioButton4.setBackgroundResource(R.drawable.radio_button_checked);
-                selectedForm = radioButton4.getText().toString();
-                sendValueToActivity(selectedForm);
+                radioButton5.setBackgroundResource(R.drawable.radio_button_unchecked);
+                selectedValue = radioButton4.getText().toString();
+                sendValueToActivity(selectedValue);
+            }
+        });
+
+        radioButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedRadioButton = radioButton5;
+                radioButton1.setBackgroundResource(R.drawable.radio_button_unchecked);
+                radioButton2.setBackgroundResource(R.drawable.radio_button_unchecked);
+                radioButton3.setBackgroundResource(R.drawable.radio_button_unchecked);
+                radioButton4.setBackgroundResource(R.drawable.radio_button_unchecked);
+                radioButton5.setBackgroundResource(R.drawable.radio_button_checked);
+                selectedValue = radioButton5.getText().toString();
+                sendValueToActivity(selectedValue);
             }
         });
     }
+
 
     private void sendValueToActivity(Object value) {
         if (getActivity() != null && getActivity() instanceof SetIdeal2Activity) {
@@ -147,6 +164,4 @@ public class IdealFormFragment extends Fragment {
             activity.onValueReceived(value); // 액티비티의 메서드를 호출하여 값을 전달
         }
     }
-
-
 }

@@ -3,6 +3,7 @@ package com.example.hanshinchat1.MainMenu;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,8 @@ public class MainRoomFragment extends Fragment {
     private String selectedCategory = null;
     public static String[] participants1 = {"1명", "2명", "3명", "4명", "5명", "6명", "7명", "8명"};
     public static String[] participants2 = {"2명", "3명", "4명", "5명", "6명", "7명", "8명"};
+
+    private InputFilter[] filterArray = new InputFilter[1];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -230,6 +233,8 @@ public class MainRoomFragment extends Fragment {
         category.setBackgroundResource(R.drawable.icon2);
         String categoryType = "과팅";
         Resources res = getResources();
+        filterArray[0] = new InputFilter.LengthFilter(12);
+        edt_roomTitle.setFilters(filterArray);
 
         ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants2);
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -277,6 +282,8 @@ public class MainRoomFragment extends Fragment {
         ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon1);
         String categoryType = "미팅";
+        filterArray[0] = new InputFilter.LengthFilter(12);
+        edt_roomTitle.setFilters(filterArray);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,6 +327,8 @@ public class MainRoomFragment extends Fragment {
         ImageView category = makeRoom2Dialog.findViewById(R.id.room_category);
         category.setBackgroundResource(R.drawable.icon3);
         String categoryType = "밥팅";
+        filterArray[0] = new InputFilter.LengthFilter(12);
+        edt_roomTitle.setFilters(filterArray);
 
         btn_makeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,6 +374,8 @@ public class MainRoomFragment extends Fragment {
         category.setBackgroundResource(R.drawable.icon4);
         Spinner participants_Spinner = makeRoom1Dialog.findViewById(R.id.participants_spinner);
         String categoryType = "기타";
+        filterArray[0] = new InputFilter.LengthFilter(12);
+        edt_roomTitle.setFilters(filterArray);
         ArrayAdapter<String> participants_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, participants1);
 
         participants_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

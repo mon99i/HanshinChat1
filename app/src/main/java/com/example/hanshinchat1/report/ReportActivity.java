@@ -65,19 +65,19 @@ public class ReportActivity extends MainActivity {
                 String username = usernameArea.getText().toString().trim();
                 String writeReport = writeReportArea.getText().toString().trim();
 
-                if (name.isEmpty() || username.isEmpty() || writeReport.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요!", Toast.LENGTH_SHORT).show();
-
+                if (name.isEmpty() || username.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "모든 항목을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                } else if (rg_report.getCheckedRadioButtonId()==-1) {
+                    Toast.makeText(getApplicationContext(), "신고 항목을 선택해주세요!", Toast.LENGTH_SHORT).show();
+                } else if (rb_3.isChecked() && writeReport.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "추가 내용을 적어주세요!", Toast.LENGTH_SHORT).show();
                 } else {
-
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("report");
 
                     String key = myRef.push().getKey();
                     myRef.child(key).setValue(new reportInfo(nameArea.getText().toString(), usernameArea.getText().toString(),
                             writeReportArea.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
-
-                    Toast.makeText(getApplicationContext(), "33", Toast.LENGTH_SHORT).show();
                     findWarningUser(key, username);
 
                     Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
@@ -105,7 +105,6 @@ public class ReportActivity extends MainActivity {
                         // 사용자를 찾았을 때
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             String userId = userSnapshot.getKey();
-                            Toast.makeText(getApplicationContext(), "44", Toast.LENGTH_SHORT).show();
                             giveWarning(userId); // 경고를 부여
                             break; // 한 번 경고를 부여하면 종료
                         }
@@ -124,8 +123,6 @@ public class ReportActivity extends MainActivity {
 
         DatabaseReference userWarningsRef = FirebaseDatabase.getInstance().getReference().child("warnings");
 
-        Toast.makeText(getApplicationContext(), "11", Toast.LENGTH_SHORT).show();
-
         userWarningsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -134,15 +131,13 @@ public class ReportActivity extends MainActivity {
                     int currentWarnings = userWarning.getWarningCount();
                     userWarning.setWarningCount(currentWarnings + 1);
                     userWarningsRef.child(userUid).setValue(userWarning);
-                    Toast.makeText(getApplicationContext(), "22", Toast.LENGTH_SHORT).show();
-
 
                 } else {
                     warning newWarning = new warning(userUid, 1);
                     userWarningsRef.child(userUid).setValue(newWarning);
 
                 }
-                Toast.makeText(getApplicationContext(), "신고 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "신고를 완료했습니다.", Toast.LENGTH_SHORT).show();
             }
 
 

@@ -45,7 +45,9 @@ public class SetProfileCompleteActivity extends AppCompatActivity {
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/creationTime/", currentTime);      //계정생성 시간
                 childUpdates.put("/lastSignInTime/", currentTime);    //마지막 로그인시간
+                childUpdates.put("/like/", 0);
                 userRef.updateChildren(childUpdates);
+
 
                 Intent intent = new Intent(getApplicationContext(), SetIdealActivity.class);
                 startActivity(intent);

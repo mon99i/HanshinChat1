@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.fragment;
+package com.example.hanshinchat1.idealFragment;
 
 import android.os.Bundle;
 import android.view.Gravity;

@@ -40,6 +40,7 @@
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
                 android:text="제목"
+                android:maxLength="12"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

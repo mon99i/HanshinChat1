@@ -36,10 +36,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/set_profile_photo"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="반드시 본인의 얼굴이 드러나지 않아도 돼요!"
+            android:textSize="15sp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="180dp"
@@ -73,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="76dp"
         android:backgroundTint="#E6E6FA"
         android:text="다음"
         android:textColor="@color/black" />

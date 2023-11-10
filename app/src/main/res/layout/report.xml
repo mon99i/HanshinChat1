@@ -115,7 +115,7 @@
             <RadioGroup
                 android:id="@+id/rg_report"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/rb_1"
@@ -134,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="기타 (추가 설명란에 기입해주세요.)" />
+            </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"

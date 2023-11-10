@@ -1,4 +1,4 @@
-package com.example.hanshinchat1.fragment;
+package com.example.hanshinchat1.idealFragment;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link IdealAgeFragment#newInstance} factory method to
+ * Use the {@link IdealHeightFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IdealAgeFragment extends Fragment {
+public class IdealHeightFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,16 +31,17 @@ public class IdealAgeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+
+    private static final String TAG = "heigtFragment";
     private String mParam1;
     private String mParam2;
-    private static final String TAG = "ageFragment";
 
-    ArrayList<Integer> selectedValues;
+
+    ArrayList<Integer> selectedHeights;
     RangeSlider rangeSlider;
 
+    public IdealHeightFragment() {
 
-    public IdealAgeFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -49,11 +50,11 @@ public class IdealAgeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IdealAgeFragment.
+     * @return A new instance of fragment IdealHeightFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IdealAgeFragment newInstance(String param1, String param2) {
-        IdealAgeFragment fragment = new IdealAgeFragment();
+    public static IdealHeightFragment newInstance(String param1, String param2) {
+        IdealHeightFragment fragment = new IdealHeightFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,24 +74,24 @@ public class IdealAgeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ideal_age, container, false);
-        rangeSlider = view.findViewById(R.id.ageRangeSlider);
-        selectedValues = new ArrayList<>();
+        View view = inflater.inflate(R.layout.fragment_ideal_height, container, false);
+        rangeSlider = view.findViewById(R.id.heightRangeSlider);
+        selectedHeights = new ArrayList<>();
 
         initializeView();
 
         initializeListener();
 
         return view;
-    }
 
+    }
 
     private void initializeView() {
         //최초 Height 설정
         rangeSlider.setLabelBehavior(LabelFormatter.LABEL_VISIBLE);
-        rangeSlider.setMinSeparationValue(1f);
-        rangeSlider.setStepSize(1f);
-        rangeSlider.setValues(23f, 27f);
+        rangeSlider.setMinSeparationValue(5f);
+        rangeSlider.setStepSize(5f);
+        rangeSlider.setValues(160f, 180f);
         rangeSlider.setTrackActiveTintList(ColorStateList.valueOf(Color.parseColor("#BEB6F2")));
         rangeSlider.setThumbTintList(ColorStateList.valueOf(Color.parseColor("#BEB6F2")));
         rangeSlider.setThumbStrokeColor(ColorStateList.valueOf(Color.parseColor("#BEB6F2")));
@@ -102,10 +103,10 @@ public class IdealAgeFragment extends Fragment {
         int max = (int) maxValueIndex;
 
         for (int i = min; i < max; i++) {
-            selectedValues.add(i);
+            selectedHeights.add(i);
         }
 
-        sendValueToActivity(selectedValues);
+        sendValueToActivity(selectedHeights);
     }
 
 
@@ -113,17 +114,17 @@ public class IdealAgeFragment extends Fragment {
         rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-                selectedValues.clear();
+                selectedHeights.clear();
                 float minValueIndex = slider.getValues().get(0);// 인덱스는 0부터 시작하므로 1을 뺍니다.
                 float maxValueIndex = slider.getValues().get(1) + 1;
                 int min = (int) minValueIndex;
                 int max = (int) maxValueIndex;
 
                 for (int i = min; i < max; i++) {
-                    selectedValues.add(i);
+                    selectedHeights.add(i);
                 }
-                Log.d(TAG, "onValueChange: " + selectedValues);
-                sendValueToActivity(selectedValues);
+                Log.d(TAG, "onValueChange: " + selectedHeights);
+                sendValueToActivity(selectedHeights);
             }
         });
 
