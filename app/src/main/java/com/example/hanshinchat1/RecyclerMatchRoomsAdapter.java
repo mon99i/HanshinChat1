@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -168,9 +170,25 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             imageResourceId = R.drawable.icon4;
         }
         holder.roomCategory.setImageResource(imageResourceId);
-        holder.txt_roomGender.setText(room.getGender());
-        holder.txt_roomDepartment.setText(room.getDepartment());
         holder.txt_roomMember.setText(room.getNum());
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
+                    if (hostUserInfo != null) {
+                        holder.txt_roomGender.setText(hostUserInfo.getGender());
+                        holder.txt_roomDepartment.setText(hostUserInfo.getDepartment());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         holder.room_background.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +271,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         View view = inflater.inflate(R.layout.show_match_dialog, null);
 
         ViewPager2 showMatchViewPager = view.findViewById(R.id.showMatchViewPager);
+        CheckBox likeCheckBox=view.findViewById(R.id.recommendLikeBox);
         ImageView cancelBtn = view.findViewById(R.id.cancel_image_view);
         Button matchBtn = view.findViewById(R.id.requestMatchBtn);
         matchBtn.setText("매칭신청");
@@ -266,8 +285,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
         roomTitle.setText("[" + room.getCategory() + "] " + room.getTitle());
 
-        FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference hostRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost());
+        hostRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -311,6 +330,42 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
+
+
+        likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               hostRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot snapshot) {
+                       UserInfo userInfo=snapshot.getValue(UserInfo.class);
+                       Integer like=userInfo.getLike();
+                       if (isChecked) {
+                           if (like == null || like == 0) {
+                               hostRef.child("like").setValue(1);
+                           } else {
+                               like++;
+                               hostRef.child("like").setValue(like);;
+                           }
+                       } else {
+                           if (like == null || like == 0) {
+                               hostRef.child("like").setValue(1);
+                           } else {
+                               hostRef.child("like").setValue(like);;
+                           }
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+
+
+            }
+        });
+
 
 
         matchBtn.setOnClickListener(new View.OnClickListener() {

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,14 +31,16 @@ import java.util.List;
 
 public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatRoomsAdapter.ViewHolder> {
     private Context context;
+    private RequestManager glideRequestManager;
     private ArrayList<ChatRoom> chatRooms;
     private ArrayList<String> chatRoomKeys;
     private String myUid;
 
     private static final String TAG = "RecyclerChatRoomsAdapter";
 
-    public RecyclerChatRoomsAdapter(Context context) {    //어댑터 생성자
+    public RecyclerChatRoomsAdapter(Context context,RequestManager glideRequestManager) {    //어댑터 생성자
         this.context = context;
+        this.glideRequestManager=glideRequestManager;
         chatRooms = new ArrayList<>();
         chatRoomKeys = new ArrayList<>();
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -106,7 +109,7 @@ public class RecyclerChatRoomsAdapter extends RecyclerView.Adapter<RecyclerChatR
                             holder.txt_nickname.setText(data.getValue(UserInfo.class).getName());
                             String imageUrl = data.getValue(UserInfo.class).getPhotoUrl();
                             Uri imageUri = Uri.parse(imageUrl);
-                            Glide.with(context).load(imageUri).into(holder.profile);
+                            glideRequestManager.load(imageUri).into(holder.profile);
                         }
                     }
 

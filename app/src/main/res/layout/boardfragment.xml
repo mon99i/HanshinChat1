@@ -35,7 +35,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/board_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:tabBackground="@drawable/tab_background" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

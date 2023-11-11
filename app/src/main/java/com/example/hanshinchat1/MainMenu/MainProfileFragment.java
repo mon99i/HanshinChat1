@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.hanshinchat1.ProfileEditActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.SetIdealActivity;
@@ -34,12 +35,14 @@ public class MainProfileFragment extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private static final String TAG = "ProfileActivity";
 
-    private TextView name, gender, age;
+    private TextView name, gender, age,like;
     private DatabaseReference databaseReference;
     private UserInfo userInfo;
     private ImageView profile;
 
     Button ideal_edit_btn, settingBtn;
+
+    private RequestManager glideRequestManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MainProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profilefragment, container, false);
 
-
+        glideRequestManager = Glide.with(this);
         profile = (ImageView) view.findViewById(R.id.profileImage);
 
         Button profileEditBtn = (Button) view.findViewById(R.id.profile_edit);
@@ -62,6 +65,7 @@ public class MainProfileFragment extends Fragment {
         name = view.findViewById(R.id.name);
         gender = view.findViewById(R.id.gender);
         age = view.findViewById(R.id.age);
+        like=view.findViewById(R.id.like);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("userInfo");
 
@@ -72,13 +76,20 @@ public class MainProfileFragment extends Fragment {
                     userInfo = snapshot.getValue(UserInfo.class);
                     String imageUrl = userInfo.getPhotoUrl();
                     Uri imageUri = Uri.parse(imageUrl);
-                    Glide.with(getContext())
-                            .load(imageUri)
+
+                    glideRequestManager.load(imageUri)
                             .into(profile);
                     name.setText(userInfo.getName());
                     gender.setText(userInfo.getGender());
                     Integer intAge = userInfo.getAge();
                     age.setText(intAge.toString());
+                    Integer intlike=userInfo.getLike();
+                    if(intlike==null){
+                        like.setText("0");
+                    }
+                    else{
+                        like.setText(intlike.toString());
+                    }
                 } else Log.d(TAG, "onDataChange: 데이터없음");
             }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ public class RecommendMatchActivity extends AppCompatActivity {
     private final static String TAG = "recommendMatch";
 
     private ImageButton recommendMatchBackBtn;
-    private TextView noneRecommendTxt;
+    private LinearLayout noneRecommendLayout;
     private RecyclerView recyclerView;
     private TextView recommenTypeTxt;
     private String recommendType;
@@ -35,7 +36,7 @@ public class RecommendMatchActivity extends AppCompatActivity {
     }
 
     private void initializeView() {
-        noneRecommendTxt = findViewById(R.id.noneRecommendTxt);
+        noneRecommendLayout = findViewById(R.id.noneRecommendLayout);
         recommendMatchBackBtn = findViewById(R.id.recommendMatchBackBtn);
         recyclerView = findViewById(R.id.recycler_recommend_match);
 
@@ -56,19 +57,19 @@ public class RecommendMatchActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new GridSpaceDecoration(2, 100, 60));
         if (recommendType.equals("이상형 추천")) {
             if (firstIdealUsers.isEmpty() && secondIdealUsers.isEmpty() && thirdIdealUsers.isEmpty()) {
-                noneRecommendTxt.setVisibility(View.VISIBLE);
+                noneRecommendLayout.setVisibility(View.VISIBLE);
             } else {
                 recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this, recommendType, firstIdealUsers, secondIdealUsers, thirdIdealUsers));
             }
         } else if (recommendType.equals("MBTI 추천")) {
             if (recommendUsers.isEmpty()) {
-                noneRecommendTxt.setVisibility(View.VISIBLE);
+                noneRecommendLayout.setVisibility(View.VISIBLE);
             } else {
                 recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this, recommendUsers, recommendType));
             }
         } else {
             if (recommendUsers.isEmpty()) {
-                noneRecommendTxt.setVisibility(View.VISIBLE);
+                noneRecommendLayout.setVisibility(View.VISIBLE);
             } else {
                 recyclerView.setAdapter(new RecyclerRecommendMatchAdapter(this, recommendUsers, recommendType));
             }

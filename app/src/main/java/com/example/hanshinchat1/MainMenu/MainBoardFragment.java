@@ -1,7 +1,6 @@
 package com.example.hanshinchat1.MainMenu;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,8 @@ import com.example.hanshinchat1.board.ListViewAdapter;
 import com.example.hanshinchat1.board.ListViewItem;
 import com.example.hanshinchat1.board.MyPageAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainBoardFragment extends Fragment {
 
@@ -53,6 +46,8 @@ public class MainBoardFragment extends Fragment {
         boardtab.addTab(boardtab.newTab().setText("자유 게시판"));
         boardtab.addTab(boardtab.newTab().setText("연애상담 게시판"));
         boardtab.setTabGravity(boardtab.GRAVITY_FILL);
+        boardtab.setSelectedTabIndicatorColor(getResources().getColor(R.color.gray));
+        boardtab.setTabTextColors(getResources().getColor(R.color.gray), getResources().getColor(R.color.black));
 
         myPageAdapter = new MyPageAdapter(getChildFragmentManager(), 2);
         viewPager.setAdapter(myPageAdapter);

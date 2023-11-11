@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.hanshinchat1.fragment.ShowUserFragment1;
-import com.example.hanshinchat1.fragment.ShowUserFragment2;
+import com.example.hanshinchat1.idealFragment.ShowUserFragment1;
+import com.example.hanshinchat1.idealFragment.ShowUserFragment2;
 
 import java.util.ArrayList;
 

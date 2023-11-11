@@ -38,13 +38,6 @@ public class Utils {
     private static final String TAG = "Utils";
 
     public static void goToGetRequestActivity(Context context) {
-      /*  ArrayList<String> myRoomKeys = new ArrayList<>();
-        ArrayList<String> getUserRequestUids = new ArrayList<>();
-        HashMap<String, ArrayList<String>> getRoomRequestUids = new HashMap<>();*/
-
-
-        ArrayList<String> getRequestUids = new ArrayList<>();
-        ArrayList<String> getMatchKeys = new ArrayList<>();
         ArrayList<Match> getMatches = new ArrayList<>();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -53,8 +46,6 @@ public class Utils {
         matchRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        getRequestUids.clear();
-                        getMatchKeys.clear();
                         getMatches.clear();
                         query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -67,8 +58,6 @@ public class Utils {
                                             if (match.getApproved() ==null) {
                                                 match.setMatch_key(myRoomKey);
                                                 match.setSender_uid(subSnapshot.getKey());
-                                                /*getRequestUids.add(subSnapshot.getKey());
-                                                getMatchKeys.add(myRoomKey);*/
                                                 getMatches.add(match);
 
                                             }
@@ -83,15 +72,13 @@ public class Utils {
                                     if (match.getApproved() == null) {
                                         match.setMatch_key(user.getUid());
                                         match.setSender_uid(subSnapshot.getKey());
-                                    /*    getRequestUids.add(subSnapshot.getKey());
-                                        getMatchKeys.add(user.getUid());*/
                                         getMatches.add(match);
 
                                     }
                                     matchRef.child("users").child(user.getUid()).child(subSnapshot.getKey()).child("request").setValue(false);
                                 }
 
-                                Log.d(TAG, "onDataChange: "+getRequestUids.size()+" "+getMatchKeys.size()+" "+getMatches.size());
+                                Log.d(TAG, "onDataChange: "+getMatches.size());
 
                                 Intent intent = new Intent(context, GetRequestActivity.class);
                                 intent.putExtra("getMatches", getMatches);
@@ -114,281 +101,6 @@ public class Utils {
                 });
     }
 
-
- /*   FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    Query query = FirebaseDatabase.getInstance().getReference().child("rooms");
-    DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches");
-
-        matchRef.addListenerForSingleValueEvent(new
-
-    ValueEventListener() {
-        @Override
-        public void onDataChange (@NonNull DataSnapshot snapshot){
-            if (snapshot.exists()) {
-                    *//*getUserRequestUids.clear();
-                    getRoomRequestUids.clear();
-                    Match match = snapshot.getValue(Match.class);
-                    Map<String, State> users = match.getUsers();
-                    Map<String, State> rooms = match.getRooms();
-
-                    //
-                    query.orderByChild("host").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                //내가만든 방이있으면 그 방 매칭기록 조회
-                                myRoomKeys.clear();
-                                for (DataSnapshot item : snapshot.getChildren()) {
-                                    myRoomKeys.add(item.getKey());
-                                }
-
-                                for (String myRoomKey : myRoomKeys) {
-                                    State myRoomState = rooms.get(myRoomKey);
-                                    ArrayList<String> requestUids = new ArrayList<>();
-                                    for (Map.Entry<String, Boolean> map : myRoomState.getRequest().entrySet()) {
-                                        String uid = map.getKey();
-                                        Boolean request = map.getValue();
-                                        if (request != null) {
-                                            requestUids.add(uid);
-                                        }
-                                        matchRef.child("rooms").child(myRoomKey).child("request").child(uid).setValue(false);
-                                    }
-                                    getRoomRequestUids.put(myRoomKey, requestUids);
-                                }
-                            }
-
-
-                            //나한테 들어온 매칭 기록 조회
-                            State myMatchState = users.get(user.getUid());
-                            if (myMatchState != null) {
-                                for (Map.Entry<String, Boolean> map : myMatchState.getRequest().entrySet()) {
-                                    String uid = map.getKey();
-                                    Boolean request = map.getValue();
-                                    if (request != null) {
-                                        getUserRequestUids.add(uid);
-                                    }
-                                    matchRef.child("users").child(user.getUid()).child("request").child(uid).setValue(false);
-                                    Log.d(TAG, "onDataChange: " + getUserRequestUids);
-                                }
-                            }
-
-                            Intent intent = new Intent(context, GetRequestActivity.class);
-                            intent.putExtra("getUserRequestUids", getUserRequestUids);
-                            intent.putExtra(" getRoomRequestUids",  getRoomRequestUids);
-                            context.startActivity(intent);
-                            ((AppCompatActivity) context).finish();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-*//*
-
-            } else {
-                Intent intent = new Intent(context, GetRequestActivity.class);
-                intent.putExtra("getUserRequestUids", getUserRequestUids);
-                intent.putExtra("getRoomRequestUids", getRoomRequestUids);
-                context.startActivity(intent);
-                ((AppCompatActivity) context).finish();
-            }
-
-                      *//*  for(String myRoomKey:myRoomKeys){
-                            State state=snapshot.child("rooms").child(myRoomKey).getValue(State.class);
-                            for(Map.Entry<String,Boolean> map:state.getRequest().entrySet()){
-                                String uid=map.getKey();
-                                Boolean request=map.getValue();
-                                if(request==true){
-                                    newUserRequestUids.add(uid);
-                                    newRoomRequestKeys.add(myRoomKey);
-                                }
-                            }
-
-                        }*//*
-
-
-        }
-
-        @Override
-        public void onCancelled (@NonNull DatabaseError error){
-
-        }
-    });*/
-
-
-
-
-  /*  private static void checkMyRoom(Context context){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ArrayList<String> myRoomKeys = new ArrayList<>();
-        ArrayList<Room> myRooms = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("rooms")
-                .orderByChild("host").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            myRoomKeys.clear();
-                            myRooms.clear();
-                            for(DataSnapshot item:snapshot.getChildren()){
-                                myRoomKeys.add(item.getKey());
-                                myRooms.add(item.getValue(Room.class));
-                            }
-                            checkNewRequest(context,myRoomKeys);
-                        }
-                        checkNewRequest(null,null);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-    }*/
-
-
-/*
-    public static void goToGetRequestActivity2(Context context) {
-        ArrayList<String> getRequestUids = new ArrayList<>();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference matchRef = FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
-        matchRef.orderByChild("approved").equalTo(null).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                getRequestUids.clear();
-                for (DataSnapshot item : snapshot.getChildren()) {
-                    matchRef.child(item.getKey()).child("request").setValue(false);
-                    getRequestUids.add(item.getKey());
-                }
-                Intent intent = new Intent(context, GetRequestActivity.class);
-                intent.putExtra("getRequestUids", getRequestUids);
-                Log.d(TAG, "onDataChange: " + getRequestUids.size());
-                context.startActivity(intent);
-                ((AppCompatActivity) context).finish();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-*/
-
-   /* public static void checkNewRequest2(Context context){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference matchRef= FirebaseDatabase.getInstance().getReference().child("matches").child(user.getUid());
-        ArrayList<String> newRequestUids=new ArrayList<>();
-
-        //나한테 요청온 목록 모두 조회
-        matchRef.orderByChild("request").equalTo(true).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                newRequestUids.clear();
-                for(DataSnapshot item:snapshot.getChildren()){
-                    newRequestUids.add(item.getKey());
-                    //요청중 확인하지 않은 uid 조회
-                }
-                if(newRequestUids.size()>0){
-                    showNewRequestDialog(context);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    //채팅요청이 왔다는 다이얼로그
-    private static void showNewRequestDialog(Context context) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view= inflater.inflate(R.layout.new_request_dialog, null);
-        ConstraintLayout layout = view.findViewById(R.id.alert_layout);
-
-        // AlertDialog.Builder를 사용하여 커스텀 다이얼로그 생성
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setView(view);
-        final AlertDialog alertDialog = builder.create();
-
-        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
-        //alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        // 다이얼로그 표시
-        alertDialog.show();
-
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //창 누르면 확인했으므로 다시 안뜨게
-                goToGetRequestActivity(context);
-
-                alertDialog.dismiss();
-                //showUserInfoDialog(context,chatRequestUsers);
-
-            }
-        });
-
-
-    }*/
-
-    /*private static void showUserInfoDialog(Context context,ArrayList<UserInfo> chatRequestUsers) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.decision_user_dialog, null);
-
-        Button acceptUserBtn=view.findViewById(R.id.acceptUserBtn);
-        Button refuseUserBtn=view.findViewById(R.id.refuseUserBtn);
-        TextView decisionUserName=view.findViewById(R.id.decisionUserName);
-        ViewPager2 decisionViewPager=view.findViewById(R.id.decisionViewPager);
-
-        RecommendViewPagerAdapter adapter=new RecommendViewPagerAdapter((FragmentActivity) context,chatRequestUsers);
-        decisionViewPager.setAdapter(adapter);
-
-        builder.setView(view);
-        androidx.appcompat.app.AlertDialog dialog= builder.create();
-        //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-        dialog.show();
-
-
-        decisionViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                int currentPosition = position/2; // 현재 페이지의 인덱스
-                decisionUserName.setText(chatRequestUsers.get(currentPosition).getName());
-
-                if(position%2==0){
-                    ShowUserFragment1 fragment1 = (ShowUserFragment1) adapter.createFragment(position);
-                    fragment1.resetScrollView();
-                }else{
-                    ShowUserFragment2 fragment2 = (ShowUserFragment2) adapter.createFragment(position);
-                    fragment2.resetScrollView();
-                }
-            }
-        });
-
-        acceptUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: acceptbtn 클릭");
-            }
-        });
-
-        refuseUserBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick:   refuseUserBtn 클릭");
-            }
-        });
-
-
-    }*/
 
 
     public static void mostLikedMatching(Context context) {

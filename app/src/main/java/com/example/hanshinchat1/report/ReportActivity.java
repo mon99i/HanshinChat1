@@ -3,6 +3,7 @@ package com.example.hanshinchat1.report;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ReportActivity extends MainActivity {
-
+    private static final String TAG="ReportActivity";
     private EditText nameArea;
     private EditText usernameArea;
     private RadioGroup rg_report;
@@ -77,7 +78,6 @@ public class ReportActivity extends MainActivity {
                     myRef.child(key).setValue(new reportInfo(nameArea.getText().toString(), usernameArea.getText().toString(),
                             writeReportArea.getText().toString(), FBAuth.getTime(), FBAuth.getUid()));
 
-                    Toast.makeText(getApplicationContext(), "33", Toast.LENGTH_SHORT).show();
                     findWarningUser(key, username);
 
                     Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
@@ -91,7 +91,6 @@ public class ReportActivity extends MainActivity {
     }
 
     private void findWarningUser(String key, String usernameArea) {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -105,7 +104,6 @@ public class ReportActivity extends MainActivity {
                         // 사용자를 찾았을 때
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             String userId = userSnapshot.getKey();
-                            Toast.makeText(getApplicationContext(), "44", Toast.LENGTH_SHORT).show();
                             giveWarning(userId); // 경고를 부여
                             break; // 한 번 경고를 부여하면 종료
                         }
@@ -121,28 +119,24 @@ public class ReportActivity extends MainActivity {
     }
 
     private void giveWarning(String userUid) {
-
-        DatabaseReference userWarningsRef = FirebaseDatabase.getInstance().getReference().child("warnings");
-
-        Toast.makeText(getApplicationContext(), "11", Toast.LENGTH_SHORT).show();
-
+        Log.d(TAG, "giveWarning: ");
+        DatabaseReference userWarningsRef = FirebaseDatabase.getInstance().getReference().child("warnings").child(userUid);
         userWarningsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     warning userWarning = snapshot.getValue(warning.class);
                     int currentWarnings = userWarning.getWarningCount();
-                    userWarning.setWarningCount(currentWarnings + 1);
-                    userWarningsRef.child(userUid).setValue(userWarning);
-                    Toast.makeText(getApplicationContext(), "22", Toast.LENGTH_SHORT).show();
+                    userWarning.setWarningCount(++currentWarnings);
+                    userWarningsRef.setValue(userWarning);
 
 
                 } else {
                     warning newWarning = new warning(userUid, 1);
-                    userWarningsRef.child(userUid).setValue(newWarning);
+                    userWarningsRef.setValue(newWarning);
 
                 }
-                Toast.makeText(getApplicationContext(), "신고 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "신고를 완료했습니다.", Toast.LENGTH_SHORT).show();
             }
 
 
