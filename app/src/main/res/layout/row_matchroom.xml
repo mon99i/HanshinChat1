@@ -34,16 +34,6 @@
             android:layout_gravity="right"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt_roomTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="5dp"
-                android:text="제목"
-                android:maxLength="12"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
