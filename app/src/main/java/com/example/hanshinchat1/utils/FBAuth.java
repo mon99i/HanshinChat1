@@ -3,6 +3,9 @@ package com.example.hanshinchat1.utils;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -21,11 +24,11 @@ public class FBAuth {
     }
 
     public static String getTime() {
-        Date currentDateTime = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss ", Locale.KOREA);
-        String formattedDate = dateFormat.format(currentDateTime);
 
-        return formattedDate;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        String currentTimeString = currentTime.format(dateTimeFormatter);
 
+        return currentTimeString;
     }
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class commentLVAdapter extends BaseAdapter {
 
+    private TextView commentName;
     private TextView commentTitle;
     private TextView commentCreatedTime;
     private ArrayList<commentModel> commentList;
@@ -44,13 +45,17 @@ public class commentLVAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.comment_list_item, parent, false);
         }
 
+        commentName = (TextView) convertView.findViewById(R.id.commentNameArea);
         commentTitle = (TextView) convertView.findViewById(R.id.titleArea);
         commentCreatedTime = (TextView) convertView.findViewById(R.id.timeArea);
 
         commentModel item = commentList.get(position);
 
+//        commentName.setText();
         commentTitle.setText(item.getCommentTitle());
         commentCreatedTime.setText(item.getCommentCreatedtime());
+
+//
 
         return convertView;
     }

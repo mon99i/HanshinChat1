@@ -1,7 +1,9 @@
 package com.example.hanshinchat1.comment;
 
+
 public class commentModel {
 
+    private String commentUserUid;
     private String commentTitle;
     private String commentCreatedtime;
 
@@ -13,9 +15,10 @@ public class commentModel {
         this.commentCreatedtime = commentCreatedtime;
     }
 
-    public String getCommentTitle() {
-        return commentTitle;
-    }
+    public String getCommentUserUid() { return commentUserUid;}
+
+    public  void setCommentUserUid(String commentUserUid) { this.commentUserUid = commentUserUid; }
+    public String getCommentTitle() { return commentTitle; }
 
     public void setCommentTitle(String commentTitle) {
         this.commentTitle = commentTitle;
