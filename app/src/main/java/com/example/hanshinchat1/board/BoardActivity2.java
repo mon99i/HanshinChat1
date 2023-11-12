@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.hanshinchat1.MainActivity;
 import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
+import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.comment.commentLVAdapter;
 import com.example.hanshinchat1.comment.commentModel;
 import com.example.hanshinchat1.databinding.BoardBinding;
@@ -103,8 +104,9 @@ public class BoardActivity2 extends MainActivity {
                 for (DataSnapshot dataModel : dataSnapshot.getChildren()) {
                     commentModel item = dataModel.getValue(commentModel.class);
                     commentDataList.add(item);
-
                 }
+
+                getName(key);
                 commentAdapter.notifyDataSetChanged();
 
             }
@@ -123,6 +125,7 @@ public class BoardActivity2 extends MainActivity {
         commentRef.child(key).push().setValue(
                 new commentModel(binding.commentArea.getText().toString(), FBAuth.getTime()));
         binding.commentArea.setText("");
+
     }
 
     private void showDialog() {
@@ -183,17 +186,16 @@ public class BoardActivity2 extends MainActivity {
 
                 ListViewItem dataModel = dataSnapshot.getValue(ListViewItem.class);
 
-
-                if (dataModel != null) {
+                if(dataModel != null) {
                     binding.titleArea.setText(dataModel != null ? dataModel.getTitle() : "");
                     binding.contentArea.setText(dataModel != null ? dataModel.getContent() : "");
                     binding.timeArea.setText(dataModel != null ? dataModel.getTime() : "");
-                    binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
-
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();
 
-                    if (myUid.equals(writerUid)) {
+                    getName(writerUid);
+
+                    if(myUid.equals(writerUid)) {
                         binding.boardSetting.setVisibility(View.VISIBLE);
                     } else {
 
@@ -209,5 +211,57 @@ public class BoardActivity2 extends MainActivity {
 
         };
         myRef.child(key).addValueEventListener(postListener);
+    }
+
+    public void getName(String key) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("users");
+
+        ValueEventListener postListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                UserInfo dataModel = dataSnapshot.getValue(UserInfo.class);
+
+                if(dataModel != null) {
+                    binding.nameArea.setText(dataModel.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+            }
+
+        };
+        userRef.child(key).addValueEventListener(postListener);
+    }
+
+    public void getCommentName(String key) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("users");
+
+        ValueEventListener postListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                UserInfo dataModel = dataSnapshot.getValue(UserInfo.class);
+
+                if(dataModel != null) {
+//                    binding..setText(dataModel.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+            }
+
+        };
+        userRef.child(key).addValueEventListener(postListener);
     }
 }

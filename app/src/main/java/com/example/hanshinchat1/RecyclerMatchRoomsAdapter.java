@@ -2,6 +2,7 @@ package com.example.hanshinchat1;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -155,6 +156,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         Room room = roomList.get(position);
 
         holder.txt_roomTitle.setText(room.getTitle());
+
         String categoryTxt = room.getCategory();
         int imageResourceId;
 
@@ -210,6 +212,25 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             }
         });
 
+        if (user != null && room.getHost().equals(user.getUid())) {
+            holder.roomSetting.setVisibility(View.VISIBLE);
+            holder.roomSetting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showSettingDialog(roomKey, room);
+                }
+            });
+        } else {
+            holder.roomSetting.setVisibility(View.GONE);
+        }
+
+        holder.roomSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSettingDialog(roomKey, room);
+            }
+        });
+
     }
 
     @Override
@@ -217,6 +238,45 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         return roomList.size();
     }
 
+
+    private void showSettingDialog(String roomkey, Room room) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference roomRef = database.getReference("rooms");
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.room_edit_dialog, null);
+        ImageView cancelBtn = view.findViewById(R.id.make_room_cancel);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setView(view);
+        AlertDialog alertDialog = builder.show();
+
+        Button deleteRoomBtn = alertDialog.findViewById(R.id.deleteRoomBtn);
+        deleteRoomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                roomRef.child(roomkey).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
+                        if (error == null) {
+                            alertDialog.dismiss();
+                            notifyDataSetChanged();
+                            Intent intent = new Intent(context, MainMenuActivity.class);
+                            intent.putExtra("show_fragment", 2);
+                            context.startActivity(intent);
+                        } else {
+                            Toast.makeText(context, "삭제 실패", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
 
     private void showUserDialog(String roomKey, Room room,UserInfo hostUserInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -297,6 +357,8 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             }
         });
 
+
+
     }
 
     private void requestMatch(String roomKey, Room room) {
@@ -343,6 +405,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         TextView txt_roomGender;
         TextView txt_roomMember;
         TextView txt_roomDepartment;
+        ImageView roomSetting;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -353,6 +416,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             txt_roomGender = itemView.findViewById(R.id.txt_roomGender);
             txt_roomDepartment = itemView.findViewById(R.id.txt_roomDepartment);
 
+            roomSetting = itemView.findViewById(R.id.roomSetting);
             room_background = itemView.findViewById(R.id.room_background);
         }
 
