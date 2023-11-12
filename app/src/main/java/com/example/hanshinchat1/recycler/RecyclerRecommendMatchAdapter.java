@@ -196,9 +196,7 @@ public class RecyclerRecommendMatchAdapter extends RecyclerView.Adapter<Recycler
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 indicator.animatePageSelected(position % 2);
-                if (position == 0) {
-                } else {
-                }
+
             }
         });
 

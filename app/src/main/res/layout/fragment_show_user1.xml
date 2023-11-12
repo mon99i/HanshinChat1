@@ -56,7 +56,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/recommendUserDrinking" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
             <ImageView
@@ -92,9 +92,9 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/baseline_location_on_24"
-                app:layout_constraintBottom_toBottomOf="@+id/recommendAgeAddress"
-                app:layout_constraintStart_toEndOf="@+id/recommendAgeAddress"
-                app:layout_constraintTop_toTopOf="@+id/recommendAgeAddress" />
+                app:layout_constraintBottom_toBottomOf="@+id/recommendAgeGenderAddress"
+                app:layout_constraintStart_toEndOf="@+id/recommendAgeGenderAddress"
+                app:layout_constraintTop_toTopOf="@+id/recommendAgeGenderAddress" />
 
 
             <TextView
@@ -108,7 +108,7 @@
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <TextView
@@ -122,11 +122,11 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
             <TextView
-                android:id="@+id/recommendAgeAddress"
+                android:id="@+id/recommendAgeGenderAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -150,7 +150,7 @@
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -191,7 +191,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/recommendUserSmoking" />
 
             <TextView
@@ -204,8 +204,8 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
-                app:layout_constraintTop_toBottomOf="@+id/recommendAgeAddress" />
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
+                app:layout_constraintTop_toBottomOf="@+id/recommendAgeGenderAddress" />
 
             <TextView
                 android:id="@+id/textView30"
@@ -217,7 +217,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/recommendUserHeight" />
 
             <TextView
@@ -231,7 +231,7 @@
                 android:textColor="#434959"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
@@ -244,7 +244,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/recommendAgeAddress"
+                app:layout_constraintStart_toStartOf="@+id/recommendAgeGenderAddress"
                 app:layout_constraintTop_toBottomOf="@+id/recommendUserForm" />
 
 

@@ -193,8 +193,22 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         holder.room_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showUserDialog(roomKey, room);
+                DatabaseReference hostRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost());
+                hostRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            UserInfo userInfo=snapshot.getValue(UserInfo.class);
+                            showUserDialog(roomKey,room,userInfo);
+                        }
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 
@@ -258,8 +272,7 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         });
     }
 
-
-    private void showUserDialog(String roomKey, Room room) {
+    private void showUserDialog(String roomKey, Room room,UserInfo hostUserInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.show_match_dialog, null);
@@ -279,45 +292,16 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
 
         roomTitle.setText("[" + room.getCategory() + "] " + room.getTitle());
 
-        DatabaseReference hostRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost());
-        hostRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            UserInfo hostUserInfo = snapshot.getValue(UserInfo.class);
+        showMatchViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, true));
+        showMatchViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                indicator.animatePageSelected(position % 2);
 
-                            Log.d("RoomActivity", hostUserInfo.toString());
+            }
+        });
 
-                            showMatchViewPager.setAdapter(new RecommendViewPagerAdapter((FragmentActivity) context, hostUserInfo, true));
-                            showMatchViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                                //                        @Override
-//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-//                            if (positionOffsetPixels == 0) {
-//                                recommendViewPager.setCurrentItem(position);
-//                            }
-//                        }
-//
-                                @Override
-                                public void onPageSelected(int position) {
-                                    super.onPageSelected(position);
-                                    indicator.animatePageSelected(position % 2);
-
-                                }
-                            });
-
-                        } else {
-                            Log.d("RoomActivity", "아무것도 없나봐...");
-
-                            // 해당 MatchRoom 데이터가 없을 경우 처리
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
 
         builder.setView(view);
@@ -325,36 +309,25 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
         dialog.show();
 
-
+        DatabaseReference likeRef = FirebaseDatabase.getInstance().getReference().child("users").child(room.getHost()).child("like");
         likeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               hostRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       UserInfo userInfo=snapshot.getValue(UserInfo.class);
-                       Integer like=userInfo.getLike();
-                       if (isChecked) {
-                           if (like == null || like == 0) {
-                               hostRef.child("like").setValue(1);
-                           } else {
-                               like++;
-                               hostRef.child("like").setValue(like);;
-                           }
-                       } else {
-                           if (like == null || like == 0) {
-                               hostRef.child("like").setValue(1);
-                           } else {
-                               hostRef.child("like").setValue(like);;
-                           }
-                       }
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError error) {
-
-                   }
-               });
+                Integer like=hostUserInfo.getLike();
+                if (isChecked) {
+                    if (like == null || like == 0) {
+                        likeRef.setValue(1);
+                    } else {
+                        like++;
+                        likeRef.setValue(like);;
+                    }
+                } else {
+                    if (like == null || like == 0) {
+                        likeRef.setValue(1);
+                    } else {
+                        likeRef.setValue(like);;
+                    }
+                }
 
 
             }
