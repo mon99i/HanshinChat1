@@ -76,7 +76,7 @@ public class ShowUserFragment1 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show_user1, container, false);
 
         ImageView recommendUserImage = view.findViewById(R.id.recommendUserImage);
-        TextView recommendNameAgeAddress = view.findViewById(R.id.recommendAgeAddress);
+        TextView recommendNameAgeGenderAddress = view.findViewById(R.id.recommendAgeGenderAddress);
         TextView recommendUserHeight = view.findViewById(R.id.recommendUserHeight);
         TextView recommendUserForm = view.findViewById(R.id.recommendUserForm);
         TextView recommendUserDepartment = view.findViewById(R.id.recommendUserDepartment);
@@ -89,8 +89,8 @@ public class ShowUserFragment1 extends Fragment {
         Uri imageUri = Uri.parse(imageUrl);
         Glide.with(getActivity()).load(imageUri).into(recommendUserImage);
         if (isRoom) {
-            recommendNameAgeAddress.setText(userInfo.getName() + ",  " + userInfo.getAge() + "세,  " + userInfo.getAddress());
-        } else recommendNameAgeAddress.setText(userInfo.getAge() + "세,  " + userInfo.getAddress());
+            recommendNameAgeGenderAddress.setText(userInfo.getName() + ",  " + userInfo.getAge() + "세,  " + userInfo.getGender()+",  "+userInfo.getAddress());
+        } else recommendNameAgeGenderAddress.setText(userInfo.getAge() + "세,  " + userInfo.getGender()+",  "+userInfo.getAddress());
 
         recommendUserHeight.setText(userInfo.getHeight() + "cm");
         recommendUserForm.setText(userInfo.getForm());

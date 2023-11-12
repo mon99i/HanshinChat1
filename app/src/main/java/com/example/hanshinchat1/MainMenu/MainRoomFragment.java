@@ -20,6 +20,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,11 +64,11 @@ public class MainRoomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.roomfragment, container, false);
-        //getView();
+
         initializeView(view);
         initializeListener();
 
-        Log.d(TAG, "checkBoxChecked+selectedCategory: "+checkBoxChecked+" "+selectedCategory);
+        Log.d(TAG, "checkBoxChecked+selectedCategory: " + checkBoxChecked + " " + selectedCategory);
         return view;
 
     }
@@ -396,10 +397,10 @@ public class MainRoomFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         makeRoom1Dialog.dismiss();
-                        selectedCategory=null;
-                        if(checkBoxChecked==false){
+                        selectedCategory = null;
+                        if (checkBoxChecked == false) {
                             recyclerMatchRoomsAdapter.setUpRooms(selectedCategory, checkBoxChecked);
-                        }else departmentCheckbox.setChecked(false);
+                        } else departmentCheckbox.setChecked(false);
                     }
                 });
             }

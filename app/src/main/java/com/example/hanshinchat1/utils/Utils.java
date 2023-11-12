@@ -425,131 +425,7 @@ public class Utils {
                                             Log.d(TAG, "object object3순위 이상형있음 " + uid + " " + opponentInfoValue);
                                         }
                                     }
-                                    //priority1
-                            /*for (Map.Entry<String, Object> priority1 : ideal.getPriority1().entrySet()) {
-                                if (subItem.getKey().equals(priority1.getKey())) {
-                                    Object userValue = subItem.getValue();
-                                    Object priorityValue = priority1.getValue();
-                                    ArrayList<Object> userValues;
-                                    ArrayList<Object> priorityValues;
-                                    if (userValue instanceof ArrayList && priorityValue instanceof ArrayList) {
-                                        userValues = (ArrayList<Object>) userValue;
-                                        priorityValues = (ArrayList<Object>) priorityValue;
 
-                                        for (Object value : priorityValues) {
-                                            if (userValues.contains(value)) {
-                                                firstIdealUsers.add(userInfo);
-                                                Log.d(TAG, "둘다 리스트 1순위 이상형있음 " + uid + " " + value);
-                                            }
-                                        }
-                                    } else if (userValue instanceof ArrayList) {
-                                        userValues = (ArrayList<Object>) userValue;
-                                        if (userValues.contains(priorityValue)) {
-                                            firstIdealUsers.add(userInfo);
-                                            Log.d(TAG, "리스트 object 1순위 이상형있음 " + uid + " " + priorityValue);
-                                        }
-                                    } else if (priorityValue instanceof ArrayList) {
-                                        priorityValues = (ArrayList<Object>) priorityValue;
-                                        if (priorityValues.contains(userValue)) {
-                                            firstIdealUsers.add(userInfo);
-                                            Log.d(TAG, "object list 1순위 이상형있음 " + uid + " " + userValue);
-                                        }
-                                    } else if (userValue.equals(priorityValue)) {
-                                        firstIdealUsers.add(userInfo);
-                                        Log.d(TAG, "object object1순위 이상형있음 " + uid + " " + priorityValue);
-                                    }
-
-                                }
-
-                            }
-
-                            if (!firstIdealUsers.contains(userInfo)) {
-
-                                //priority2
-                                for (Map.Entry<String, Object> priority2 : ideal.getPriority2().entrySet()) {
-                                    if (subItem.getKey().equals(priority2.getKey())) {
-                                        Object userValue = subItem.getValue();
-                                        Object priorityValue = priority2.getValue();
-                                        ArrayList<Object> userValues;
-                                        ArrayList<Object> priorityValues;
-                                        if (userValue instanceof ArrayList && priorityValue instanceof ArrayList) {
-                                            userValues = (ArrayList<Object>) userValue;
-                                            priorityValues = (ArrayList<Object>) priorityValue;
-
-                                            for (Object value : priorityValues) {
-                                                if (userValues.contains(value)) {
-                                                    secondIdealUsers.add(userInfo);
-                                                    Log.d(TAG, "둘다 리스트 2순위 이상형있음 " + uid + " " + value);
-                                                }
-                                            }
-                                        } else if (userValue instanceof ArrayList) {
-                                            userValues = (ArrayList<Object>) userValue;
-                                            if (userValues.contains(priorityValue)) {
-                                                secondIdealUsers.add(userInfo);
-                                                Log.d(TAG, "리스트 object 2순위 이상형있음 " + uid + " " + priorityValue);
-                                            }
-                                        } else if (priorityValue instanceof ArrayList) {
-                                            priorityValues = (ArrayList<Object>) priorityValue;
-                                            if (priorityValues.contains(userValue)) {
-                                                secondIdealUsers.add(userInfo);
-                                                Log.d(TAG, "object list 2순위 이상형있음 " + uid + " " + userValue);
-                                            }
-                                        } else if (userValue.equals(priorityValue)) {
-                                            secondIdealUsers.add(userInfo);
-                                            Log.d(TAG, "object object2순위 이상형있음 " + uid + " " + priorityValue);
-                                        }
-
-                                    }
-
-                                }
-
-
-                            }
-
-
-                            if (!firstIdealUsers.contains(userInfo) && !secondIdealUsers.contains(userInfo)) {
-
-                                //priority3
-                                for (Map.Entry<String, Object> priority3 : ideal.getPriority3().entrySet()) {
-                                    if (subItem.getKey().equals(priority3.getKey())) {
-                                        Object userValue = subItem.getValue();
-                                        Object priorityValue = priority3.getValue();
-                                        ArrayList<Object> userValues;
-                                        ArrayList<Object> priorityValues;
-                                        if (userValue instanceof ArrayList && priorityValue instanceof ArrayList) {
-                                            userValues = (ArrayList<Object>) userValue;
-                                            priorityValues = (ArrayList<Object>) priorityValue;
-
-                                            for (Object value : priorityValues) {
-                                                if (userValues.contains(value)) {
-                                                    thirdIdealUsers.add(userInfo);
-                                                    Log.d(TAG, "둘다 리스트 3순위 이상형있음 " + uid + " " + value);
-                                                }
-                                            }
-                                        } else if (userValue instanceof ArrayList) {
-                                            userValues = (ArrayList<Object>) userValue;
-                                            if (userValues.contains(priorityValue)) {
-                                                thirdIdealUsers.add(userInfo);
-                                                Log.d(TAG, "리스트 object 3순위 이상형있음 " + uid + " " + priorityValue);
-                                            }
-                                        } else if (priorityValue instanceof ArrayList) {
-                                            priorityValues = (ArrayList<Object>) priorityValue;
-                                            if (priorityValues.contains(userValue)) {
-                                                thirdIdealUsers.add(userInfo);
-                                                Log.d(TAG, "object list 3순위 이상형있음 " + uid + " " + userValue);
-                                            }
-                                        } else if (userValue.equals(priorityValue)) {
-                                            thirdIdealUsers.add(userInfo);
-                                            Log.d(TAG, "object object3순위 이상형있음 " + uid + " " + priorityValue);
-                                        }
-
-                                    }
-
-
-                                }
-
-                            }
-*/
 
                                 }
 
@@ -557,19 +433,6 @@ public class Utils {
                         }
 
 
-         /*       for(UserInfo userInfo :firstIdealUsers){
-                    if(secondIdealUsers.contains(userInfo)){
-                        secondIdealUsers.remove(userInfo);
-                    }else if(thirdIdealUsers.contains(userInfo)){
-                        thirdIdealUsers.remove(userInfo);
-                        thirdIdealUsers.co
-                    }
-                }
-                for(UserInfo userInfo : secondIdealUsers){
-                    if(thirdIdealUsers.contains(userInfo)){
-                        thirdIdealUsers.remove(userInfo);
-                    }
-                }*/
                         checkIdealPriority(context, firstsSet, secondsSet, thirdsSet);
 
                     }
@@ -621,37 +484,7 @@ public class Utils {
         context.startActivity(intent);
         ((AppCompatActivity) context).finish();
 
-/*
 
-        for(UserInfo userInfo:firstIdealUsers){
-            idealUsers=new ArrayList<>();
-            if(secondIdealUsers.contains(userInfo)&&thirdIdealUsers.contains(userInfo)){
-               idealUsers.
-                idealConditionMap.put(1,idealUsers);
-                type="first";
-                secondIdealUsers.remove(userInfo);
-                thirdIdealUsers.remove(userInfo);
-            }else if(secondIdealUsers.contains(userInfo)){
-                type="second";
-                secondIdealUsers.remove(userInfo);
-            }else if(thirdIdealUsers.contains(userInfo)){
-                type="third";
-                thirdIdealUsers.remove(userInfo);
-            }else{
-                ty
-
-            }
-        }
-
-        for(UserInfo userInfo:secondIdealUsers){
-            if(thirdIdealUsers.contains(userInfo)){
-                type="fourth";
-                thirdIdealUsers.remove(userInfo);
-            }else{
-                type="fifth";
-            }
-        }
-*/
 
     }
 
@@ -680,27 +513,6 @@ public class Utils {
                 });
     }
 
-/*    public static ArrayList<UserInfo> getAllUserInfo() {   //나를 제외한 모든 유저
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ArrayList<UserInfo> allUserInfoList=new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("users")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            if (!item.getKey().equals(user.getUid())) {
-                                allUserInfoList.add(item.getValue(UserInfo.class));
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-        return allUserInfoList;
-    }*/
 
     public static void MyUid(Context context) {
 
@@ -859,24 +671,5 @@ public class Utils {
         });
     }
 
-/*    public static Boolean checkProfileOpen() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
-        myRef.child("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserInfo userInfo = snapshot.getValue(UserInfo.class);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-        return true;
-    }*/
 }

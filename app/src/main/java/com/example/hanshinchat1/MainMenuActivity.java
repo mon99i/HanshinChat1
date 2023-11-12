@@ -92,8 +92,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     transaction.replace(R.id.menu_frame_layout, fragmentHome).commitAllowingStateLoss();
                     break;
                 case R.id.menu_room:
-                    transaction.replace(R.id.menu_frame_layout, fragmentRoom).commitAllowingStateLoss();
-                    //transaction.commit();
+                    transaction.replace(R.id.menu_frame_layout,new MainRoomFragment()).commitAllowingStateLoss();
                     break;
                 case R.id.menu_chat:
                     transaction.replace(R.id.menu_frame_layout, fragmentChat).commitAllowingStateLoss();
@@ -176,29 +175,32 @@ public class MainMenuActivity extends AppCompatActivity {
 
     //채팅요청이 왔다는 다이얼로그
     private void showNewRequestDialog() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.new_request_dialog, null);
-        ConstraintLayout layout = view.findViewById(R.id.alert_layout);
+        if(isFinishing()){
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View view = inflater.inflate(R.layout.new_request_dialog, null);
+            ConstraintLayout layout = view.findViewById(R.id.alert_layout);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(view);
-        final AlertDialog alertDialog = builder.create();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(view);
+            final AlertDialog alertDialog = builder.create();
 
-        alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
-        alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
+            alertDialog.getWindow().setGravity(Gravity.TOP); //상단에 위치
+            alertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);  //밖에 배경 어둡지않게
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));  // 배경 투명하게
 
-        // 다이얼로그 표시
-        alertDialog.show();
+            // 다이얼로그 표시
+            alertDialog.show();
 
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //창 누르면 확인했으므로 다시 안뜨게
-                Utils.goToGetRequestActivity(context);
-                alertDialog.dismiss();
-            }
-        });
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //창 누르면 확인했으므로 다시 안뜨게
+                    Utils.goToGetRequestActivity(context);
+                    alertDialog.dismiss();
+                }
+            });
+        }
+
 
 
     }
