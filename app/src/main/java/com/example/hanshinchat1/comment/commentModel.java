@@ -10,7 +10,8 @@ public class commentModel {
     public commentModel() {
     }
 
-    public commentModel(String commentTitle, String commentCreatedtime) {
+    public commentModel(String commentUserUid, String commentTitle, String commentCreatedtime) {
+        this.commentUserUid = commentUserUid;
         this.commentTitle = commentTitle;
         this.commentCreatedtime = commentCreatedtime;
     }

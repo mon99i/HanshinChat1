@@ -210,12 +210,6 @@ public class RecyclerMatchRoomsAdapter extends RecyclerView.Adapter<RecyclerMatc
             holder.roomSetting.setVisibility(View.GONE);
         }
 
-        holder.roomSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSettingDialog(roomKey, room);
-            }
-        });
 
     }
 

@@ -84,7 +84,7 @@ public class BoardActivity1 extends MainActivity {
         });
 
         commentDataList = new ArrayList<>();
-        commentAdapter = new commentLVAdapter(commentDataList);
+        commentAdapter = new commentLVAdapter(this, commentDataList);
         commentLv = findViewById(R.id.commentLV);
         commentLv.setAdapter(commentAdapter);
 
@@ -114,7 +114,7 @@ public class BoardActivity1 extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity1", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
@@ -123,7 +123,7 @@ public class BoardActivity1 extends MainActivity {
 
     private void insertComment(String key) {
         commentRef.child(key).push().setValue(
-                new commentModel(binding.commentArea.getText().toString(), FBAuth.getTime()));
+                new commentModel(FBAuth.getUid(), binding.commentArea.getText().toString(), FBAuth.getTime()));
         binding.commentArea.setText("");
     }
 
@@ -167,6 +167,7 @@ public class BoardActivity1 extends MainActivity {
                             .load(task.getResult())
                             .into(imageViewFB);
                 } else {
+                    Log.e("BoardActivity1", "File does not exist: " + task.getException());
                     imageViewFB.setVisibility(View.GONE);
                 }
             }
@@ -206,7 +207,7 @@ public class BoardActivity1 extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity1", "loadPost:onCancelled", databaseError.toException());
             }
         };
         myRef.child(key).addValueEventListener(postListener);
@@ -225,39 +226,23 @@ public class BoardActivity1 extends MainActivity {
 
                 if(dataModel != null) {
                     binding.nameArea.setText(dataModel.getName());
+
+                    String imageUrl = dataModel.getPhotoUrl();
+                    Uri imageUri = Uri.parse(imageUrl);
+
+                    Glide.with(BoardActivity1.this).load(imageUri)
+                            .into(binding.userImage);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity1", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
         userRef.child(key).addValueEventListener(postListener);
     }
 
-//    private void findName(String uid) {
-//
-//        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-//
-//        usersRef.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()) {
-//
-//                    UserInfo dataModel = dataSnapshot.getValue(UserInfo.class);
-//
-//                    binding.nameArea.setText(dataModel != null ? dataModel.getName() : "");
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//
-//            }
-//        });
-//    }
 }

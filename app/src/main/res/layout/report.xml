@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="본인의 이름과 상대방의 이름을 정확히 적어주세요."
+            android:text="본인의 닉네임과 상대방의 닉네임을 정확히 적어주세요."
             android:textSize="10dp"
             android:textColor="@color/black"
             android:layout_marginLeft="10dp"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="본인 이름"
+            android:text="본인 닉네임"
             android:textSize="15dp"
             android:textColor="@color/black"
             android:layout_margin="10dp"
@@ -79,7 +79,7 @@
             android:orientation="vertical">
         <EditText
             android:id="@+id/name"
-            android:hint="이름"
+            android:hint="닉네임"
             android:padding="10dp"
             android:background="@null"
             android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="상대방 이름"
+                android:text="상대방 닉네임"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
@@ -105,9 +105,9 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:padding="10dp"
                     android:background="@null"
-                    android:hint="이름" />
+                    android:hint="닉네임" />
             </LinearLayout>
 
             <TextView

@@ -19,6 +19,7 @@ import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
 import com.example.hanshinchat1.comment.commentLVAdapter;
+import com.example.hanshinchat1.comment.commentLVAdapter2;
 import com.example.hanshinchat1.comment.commentModel;
 import com.example.hanshinchat1.databinding.BoardBinding;
 import com.example.hanshinchat1.utils.FBAuth;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 public class BoardActivity2 extends MainActivity {
 
     private ArrayList<commentModel> commentDataList;
-    private commentLVAdapter commentAdapter;
+    private commentLVAdapter2 commentAdapter;
     private BoardBinding binding;
     private ListView commentLv;
     private String key;
@@ -84,7 +85,7 @@ public class BoardActivity2 extends MainActivity {
         });
 
         commentDataList = new ArrayList<>();
-        commentAdapter = new commentLVAdapter(commentDataList);
+        commentAdapter = new commentLVAdapter2(this, commentDataList);
         commentLv = findViewById(R.id.commentLV);
         commentLv.setAdapter(commentAdapter);
 
@@ -104,9 +105,9 @@ public class BoardActivity2 extends MainActivity {
                 for (DataSnapshot dataModel : dataSnapshot.getChildren()) {
                     commentModel item = dataModel.getValue(commentModel.class);
                     commentDataList.add(item);
+
                 }
 
-                getName(key);
                 commentAdapter.notifyDataSetChanged();
 
             }
@@ -114,7 +115,7 @@ public class BoardActivity2 extends MainActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity2", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
@@ -123,7 +124,7 @@ public class BoardActivity2 extends MainActivity {
 
     private void insertComment(String key) {
         commentRef.child(key).push().setValue(
-                new commentModel(binding.commentArea.getText().toString(), FBAuth.getTime()));
+                new commentModel(FBAuth.getUid(), binding.commentArea.getText().toString(), FBAuth.getTime()));
         binding.commentArea.setText("");
 
     }
@@ -193,8 +194,6 @@ public class BoardActivity2 extends MainActivity {
                     String myUid = FBAuth.getUid();
                     String writerUid = dataModel.getUid();
 
-                    getName(writerUid);
-
                     if(myUid.equals(writerUid)) {
                         binding.boardSetting.setVisibility(View.VISIBLE);
                     } else {
@@ -206,7 +205,7 @@ public class BoardActivity2 extends MainActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity2", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
@@ -232,36 +231,11 @@ public class BoardActivity2 extends MainActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
+                Log.w("BoardActivity2", "loadPost:onCancelled", databaseError.toException());
             }
 
         };
         userRef.child(key).addValueEventListener(postListener);
     }
 
-    public void getCommentName(String key) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("users");
-
-        ValueEventListener postListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                UserInfo dataModel = dataSnapshot.getValue(UserInfo.class);
-
-                if(dataModel != null) {
-//                    binding..setText(dataModel.getName());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("ListActivity", "loadPost:onCancelled", databaseError.toException());
-            }
-
-        };
-        userRef.child(key).addValueEventListener(postListener);
-    }
 }

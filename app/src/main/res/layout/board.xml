@@ -82,6 +82,7 @@
                     android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/userImage"
                 android:src="@drawable/portrait"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
@@ -98,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:padding="3dp"
-                            android:text="이름" />
+                            android:text="글쓴이" />
 
                         <TextView
                             android:id="@+id/timeArea"

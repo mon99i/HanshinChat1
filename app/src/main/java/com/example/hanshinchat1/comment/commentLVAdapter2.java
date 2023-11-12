@@ -2,9 +2,7 @@ package com.example.hanshinchat1.comment;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.hanshinchat1.MainMenuActivity;
 import com.example.hanshinchat1.R;
 import com.example.hanshinchat1.UserInfo;
-import com.example.hanshinchat1.board.BoardActivity1;
-import com.example.hanshinchat1.utils.FBAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,18 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class commentLVAdapter extends BaseAdapter {
+public class commentLVAdapter2 extends BaseAdapter {
 
     private Context context;
-    private TextView commentName;
     private TextView commentTitle;
     private TextView commentCreatedTime;
     private ImageView commentDelete;
-    private ImageView commentUserImage;
     private ArrayList<commentModel> commentList;
 //    private ArrayList<String> commentKeyList;
 
-    public commentLVAdapter(Context context, ArrayList<commentModel> commentList) {
+    public commentLVAdapter2(Context context, ArrayList<commentModel> commentList) {
         this.context = context;
         this.commentList = commentList != null ? commentList : new ArrayList<>();
 //        this.commentKeyList = commentKeyList != null ? commentKeyList : new ArrayList<>();
@@ -71,17 +64,14 @@ public class commentLVAdapter extends BaseAdapter {
         }
 
 
-        commentName = (TextView) convertView.findViewById(R.id.commentNameArea);
         commentTitle = (TextView) convertView.findViewById(R.id.titleArea);
         commentCreatedTime = (TextView) convertView.findViewById(R.id.timeArea);
-        commentUserImage = convertView.findViewById(R.id.commentUserImage);
 
 
 //        commentDelete = (ImageView) convertView.findViewById(R.id.commentDelete);
         //        String commentKey = commentKeyList.get(position);
         commentModel item = commentList.get(position);
 
-        getCommentNameImage(item.getCommentUserUid());
 
         commentTitle.setText(item.getCommentTitle());
         commentCreatedTime.setText(item.getCommentCreatedtime());
@@ -135,35 +125,5 @@ public class commentLVAdapter extends BaseAdapter {
             }
         });
     }
-    public void getCommentNameImage(String key) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("users");
 
-        ValueEventListener postListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                UserInfo dataModel = dataSnapshot.getValue(UserInfo.class);
-
-                if(dataModel != null) {
-                    commentName.setText(dataModel.getName());
-
-                    String imageUrl = dataModel.getPhotoUrl();
-                    Uri imageUri = Uri.parse(imageUrl);
-
-                    Glide.with(context).load(imageUri)
-                            .into(commentUserImage);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("commentLVAdapter", "loadPost:onCancelled", databaseError.toException());
-            }
-
-        };
-        userRef.child(key).addValueEventListener(postListener);
-    }
 }
