@@ -175,7 +175,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     //채팅요청이 왔다는 다이얼로그
     private void showNewRequestDialog() {
-        if(isFinishing()){
+        if(!isFinishing()){
             LayoutInflater inflater = LayoutInflater.from(this);
             View view = inflater.inflate(R.layout.new_request_dialog, null);
             ConstraintLayout layout = view.findViewById(R.id.alert_layout);

@@ -49,11 +49,10 @@ public abstract class MainActivity extends AppCompatActivity {
         if (user != null) {
             String email = user.getEmail();
             if (email != null && email.endsWith("@hs.ac.kr")) {
-                Toast.makeText(getApplicationContext(), "한신대 학생 인증완료.", Toast.LENGTH_SHORT).show();
                 checkProfileExist();
                 checkWarning();
             } else {
-                Toast.makeText(getApplicationContext(), "한신대 학생이 아니므로 로그아웃 됩니다.!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "한신대학교 학생이 아니므로 \n로그인이 제한됩니다.", Toast.LENGTH_SHORT).show();
                 deleteUser();
             }
         }
@@ -74,8 +73,9 @@ public abstract class MainActivity extends AppCompatActivity {
                         int warningCount = userWarning.getWarningCount();
 
                         if (warningCount >= 3) {
-                            signOut();
                             showWarningDialog();
+                            signOut();
+
                         } else {
                             checkProfileExist();
 
@@ -148,7 +148,7 @@ public abstract class MainActivity extends AppCompatActivity {
                 }
             });
             Log.d(TAG, "checkProfileExist: " + user.getUid());
-        } else Toast.makeText(getApplicationContext(), "로그인 유저가 없음.", Toast.LENGTH_SHORT).show();
+        } else Log.d(TAG, "checkProfileExist: 로그인 정보가 없음");
 
     }
 
@@ -161,7 +161,7 @@ public abstract class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "유저정보 삭제 성공!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "프로필 정보가 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
                             signOut();
                         }
                     }
@@ -185,7 +185,6 @@ public abstract class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), R.string.success_logout, Toast.LENGTH_SHORT).show();
 
                 });
         gsa = null;
